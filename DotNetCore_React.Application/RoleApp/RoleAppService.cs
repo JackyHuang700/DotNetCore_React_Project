@@ -17,7 +17,7 @@ namespace DotNetCore_React.Application.RoleApp
 
         public List<RoleDto> GetAllList()
         {
-            //return 
+            return _repository.GetAllList();
         }
     }
 }

@@ -8,10 +8,15 @@ using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
+///
+using DotNetCore_React.Application;
+
+
 namespace DotNetCore_React
 {
     public class Startup
     {
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -22,6 +27,11 @@ namespace DotNetCore_React
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //取得連線字串
+            var sqlConnectionString = Configuration.GetConnectionString("DefaultConnection");
+            //添加數據
+
+
             services.AddMvc();
         }
 
