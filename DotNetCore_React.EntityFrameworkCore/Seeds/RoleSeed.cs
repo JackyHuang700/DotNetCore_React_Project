@@ -8,10 +8,9 @@ using System.Threading.Tasks;
 
 namespace DotNetCore_React.EntityFrameworkCore.Seeds
 {
-    public partial class SeedDataBase
+    public partial class SeedConfiguration
     {
-
-        public async Task RoleSeed()
+        private void RoleSeed()
         {
             if (!_context.Set<Role>().Any())
             {
@@ -30,7 +29,7 @@ namespace DotNetCore_React.EntityFrameworkCore.Seeds
                 };
 
                 _context.Set<Role>().Add(data1);
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
             }
         }
     }

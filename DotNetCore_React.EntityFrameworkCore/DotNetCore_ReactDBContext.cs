@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using DotNetCore_React.Domain.Entities;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace DotNetCore_React.EntityFrameworkCore
 {
