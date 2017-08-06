@@ -1,9 +1,0 @@
-C:\Users\rockr\Documents\GitHub\DotNetCore_React_Project\DotNetCore_React.EntityFrameworkCore\bin\Debug\netstandard2.0\DotNetCore_React.EntityFrameworkCore.deps.json
-C:\Users\rockr\Documents\GitHub\DotNetCore_React_Project\DotNetCore_React.EntityFrameworkCore\bin\Debug\netstandard2.0\DotNetCore_React.EntityFrameworkCore.dll
-C:\Users\rockr\Documents\GitHub\DotNetCore_React_Project\DotNetCore_React.EntityFrameworkCore\bin\Debug\netstandard2.0\DotNetCore_React.EntityFrameworkCore.pdb
-C:\Users\rockr\Documents\GitHub\DotNetCore_React_Project\DotNetCore_React.EntityFrameworkCore\bin\Debug\netstandard2.0\DotNetCore_React.Domain.dll
-C:\Users\rockr\Documents\GitHub\DotNetCore_React_Project\DotNetCore_React.EntityFrameworkCore\bin\Debug\netstandard2.0\DotNetCore_React.Domain.pdb
-C:\Users\rockr\Documents\GitHub\DotNetCore_React_Project\DotNetCore_React.EntityFrameworkCore\obj\Debug\netstandard2.0\DotNetCore_React.EntityFrameworkCore.csprojResolveAssemblyReference.cache
-C:\Users\rockr\Documents\GitHub\DotNetCore_React_Project\DotNetCore_React.EntityFrameworkCore\obj\Debug\netstandard2.0\DotNetCore_React.EntityFrameworkCore.AssemblyInfo.cs
-C:\Users\rockr\Documents\GitHub\DotNetCore_React_Project\DotNetCore_React.EntityFrameworkCore\obj\Debug\netstandard2.0\DotNetCore_React.EntityFrameworkCore.dll
-C:\Users\rockr\Documents\GitHub\DotNetCore_React_Project\DotNetCore_React.EntityFrameworkCore\obj\Debug\netstandard2.0\DotNetCore_React.EntityFrameworkCore.pdb
