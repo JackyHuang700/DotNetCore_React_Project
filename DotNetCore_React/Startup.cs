@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,6 +8,16 @@ using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+
+
+/// 
+using DotNetCore_React.Application;
+using DotNetCore_React.Domain;
+using DotNetCore_React.Domain.IRepositories;
+using Microsoft.EntityFrameworkCore;
+using DotNetCore_React.EntityFrameworkCore;
+using DotNetCore_React.EntityFrameworkCore.Repositories;
+using DotNetCore_React.EntityFrameworkCore.Seeds;
 
 namespace DotNetCore_React
 {
@@ -28,6 +38,15 @@ namespace DotNetCore_React
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            //获取数据库连接字符串
+            var sqlConnectionString = Configuration.GetConnectionString("DefaultConnection");
+
+            //添加数据上下文
+            services.AddDbContext<DotNetCore_ReactDBContext>(options => options.UseSqlServer(sqlConnectionString));
+
+            services.AddScoped<IRoleRepository, RoleRepository>();
+
             // Add framework services.
             services.AddMvc();
         }
@@ -63,6 +82,10 @@ namespace DotNetCore_React
                     name: "spa-fallback",
                     defaults: new { controller = "Home", action = "Index" });
             });
+
+
+            //Seed
+            new SeedDataBase(app.ApplicationServices);
         }
     }
 }

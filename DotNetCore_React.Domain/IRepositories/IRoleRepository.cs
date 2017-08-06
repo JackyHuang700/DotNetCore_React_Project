@@ -8,6 +8,6 @@ namespace DotNetCore_React.Domain.IRepositories
     public interface IRoleRepository : IRepository<Role>
     {
         //根據帳號獲取權限
-        List<Guid> GetAllMenuListByRole(Guid roleid);
+        //List<Guid> GetAllMenuListByRole(Guid roleid);
     } 
 }

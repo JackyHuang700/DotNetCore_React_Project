@@ -3,9 +3,11 @@ using DotNetCore_React.Domain.Entities;
 
 namespace DotNetCore_React.EntityFrameworkCore
 {
-    public class DotNetCore_ReactContxt: DbContext
+    public class DotNetCore_ReactDBContext : DbContext
     {
-        public DotNetCore_ReactContxt(DbContextOptions<DotNetCore_ReactContxt> options) : base(options) {
+
+        public DotNetCore_ReactDBContext(DbContextOptions<DotNetCore_ReactDBContext> options) : base(options)
+        {
 
         }
 

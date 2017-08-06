@@ -12,9 +12,9 @@ namespace DotNetCore_React.EntityFrameworkCore
         public abstract class DotNetCore_ReactRepositoryBase<TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey> where TEntity : Entity<TPrimaryKey>
         {
             //定義數據庫訪問上下對象
-            protected readonly DotNetCore_ReactContxt _dbContext;
+            protected readonly DotNetCore_ReactDBContext _dbContext;
 
-            public DotNetCore_ReactRepositoryBase(DotNetCore_ReactContxt dbContext)
+            public DotNetCore_ReactRepositoryBase(DotNetCore_ReactDBContext dbContext)
             {
                 _dbContext = dbContext;
             }
@@ -23,7 +23,7 @@ namespace DotNetCore_React.EntityFrameworkCore
 
         public abstract class DotNetCore_ReactRepositoryBase<TEntity> : DotNetCore_ReactRepositoryBase<TEntity, Guid> where TEntity : Entity
         {
-            public DotNetCore_ReactRepositoryBase(DotNetCore_ReactContxt dbContext) : base(dbContext)
+            public DotNetCore_ReactRepositoryBase(DotNetCore_ReactDBContext dbContext) : base(dbContext)
             { }
         }
     

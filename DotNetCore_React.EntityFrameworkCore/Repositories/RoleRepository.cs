@@ -7,13 +7,13 @@ namespace DotNetCore_React.EntityFrameworkCore.Repositories
 {
     public class RoleRepository : DotNetCore_ReactRepositoryBase<Role>, IRoleRepository
     {
-        public RoleRepository(DotNetCore_ReactContxt dbcontext) : base(dbcontext)
+        public RoleRepository(DotNetCore_ReactDBContext dbcontext) : base(dbcontext)
         {
         }
 
-        public List<Guid> GetAllMenuListByRole(Guid roleid)
-        {
-            throw new NotImplementedException();
-        }
+        //public List<Guid> GetAllMenuListByRole(Guid roleid)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }
