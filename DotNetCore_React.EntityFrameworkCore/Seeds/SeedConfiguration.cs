@@ -10,9 +10,6 @@ namespace DotNetCore_React.EntityFrameworkCore.Seeds
 {
     public partial class SeedConfiguration
     {
-        private static readonly string _jsonFile = "appsettings.json";
-        private static readonly string _connectionName = "DefaultConnection";
-
         protected readonly DotNetCore_ReactDBContext _context;
 
         public SeedConfiguration()
@@ -20,14 +17,27 @@ namespace DotNetCore_React.EntityFrameworkCore.Seeds
             _context = CreateDbContext();
         }
 
+        public SeedConfiguration(DotNetCore_ReactDBContext context)
+        {
+            _context = context;
+        }
+
         /// <summary>
         /// Add Seed Method If you need.
         /// </summary>
         public void Seed()
         {
+
+            _context.Database.EnsureCreated();
+
+
             //Seed Role
             RoleSeed();
         }
+
+
+        private static readonly string _jsonFile = "appsettings.json";
+        private static readonly string _connectionName = "DefaultConnection";
 
         /// <summary>
         /// Create DbContext
