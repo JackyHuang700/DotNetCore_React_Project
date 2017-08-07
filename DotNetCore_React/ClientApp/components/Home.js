@@ -48,7 +48,7 @@ class Main extends Component {
 		this.setState({logged: logged});
 	}
 	render() {
-		const title = 'MY APP';
+		const title = 'MY AdPP';
 		return (
       <div>
        {title}
@@ -60,7 +60,7 @@ class App extends Component {
 	render() {
 		return (
       <div className="app">
-        <Header />
+        {/* <Header />
         <div className="app-body">
           <Sidebar {...this.props}/>
           <main className="main">
@@ -86,7 +86,8 @@ class App extends Component {
           </main>
           <Aside />
         </div>
-        <Footer />
+        <Footer /> */}
+		<Main/>
       </div>
     );
 	}
