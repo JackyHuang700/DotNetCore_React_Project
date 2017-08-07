@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
+using DotNetCore_React.EntityFrameworkCore.Seeds;
 
 namespace DotNetCore_React.EntityFrameworkCore.Migrations
 {
@@ -26,6 +27,9 @@ namespace DotNetCore_React.EntityFrameworkCore.Migrations
                 {
                     table.PrimaryKey("PK_Roles", x => x.Id);
                 });
+
+            //Seed Data
+            new SeedConfiguration().Seed();
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

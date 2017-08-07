@@ -82,10 +82,6 @@ namespace DotNetCore_React
                     name: "spa-fallback",
                     defaults: new { controller = "Home", action = "Index" });
             });
-
-
-            //Seed
-            new SeedDataBase(app.ApplicationServices);
         }
     }
 }
