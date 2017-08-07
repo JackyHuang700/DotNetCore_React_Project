@@ -64,6 +64,8 @@ namespace DotNetCore_React
                     HotModuleReplacement = true,
                     ReactHotModuleReplacement = true
                 });
+                //Seed Data
+                new SeedConfiguration().Seed();
             }
             else
             {
