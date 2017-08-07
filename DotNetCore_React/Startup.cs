@@ -52,7 +52,7 @@ namespace DotNetCore_React
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, DotNetCore_ReactDBContext dbContext)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -65,7 +65,7 @@ namespace DotNetCore_React
                     ReactHotModuleReplacement = true
                 });
                 //Seed Data
-                new SeedConfiguration().Seed();
+                new SeedConfiguration(dbContext).Seed();
             }
             else
             {
