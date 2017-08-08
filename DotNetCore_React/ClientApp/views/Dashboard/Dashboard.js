@@ -276,6 +276,7 @@ class Dashboard extends Component {
     this.state = {
       dropdownOpen: false
     };
+
   }
 
   toggle() {
