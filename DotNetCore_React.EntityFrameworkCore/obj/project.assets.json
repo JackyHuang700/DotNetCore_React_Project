@@ -3049,12 +3049,6 @@
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
           "NETStandard.Library": "1.6.0"
-        },
-        "compile": {
-          "bin/placeholder/netstandard1.6/DotNetCore_React.Domain.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/netstandard1.6/DotNetCore_React.Domain.dll": {}
         }
       }
     }
@@ -8734,9 +8728,6 @@
       "originalTargetFrameworks": [
         "netcoreapp1.0"
       ],
-      "files": {
-        "lib/netcoreapp1.0/DotNetCore_React.EntityFrameworkCore.dll": "C:\\Users\\rockr\\Documents\\GitHub\\DotNetCore_React_Project\\DotNetCore_React.EntityFrameworkCore\\bin\\placeholder\\netcoreapp1.0\\DotNetCore_React.EntityFrameworkCore.dll"
-      },
       "frameworks": {
         "netcoreapp1.0": {
           "projectReferences": {
@@ -8750,13 +8741,22 @@
     "frameworks": {
       "netcoreapp1.0": {
         "dependencies": {
-          "Microsoft.NETCore.App": {
+          "Microsoft.Extensions.Configuration.FileExtensions": {
             "target": "Package",
-            "version": "1.0.5"
+            "version": "1.1.2"
+          },
+          "Microsoft.Extensions.Configuration.Json": {
+            "target": "Package",
+            "version": "1.1.2"
           },
           "Microsoft.EntityFrameworkCore.Tools": {
             "target": "Package",
             "version": "1.1.1"
+          },
+          "Microsoft.NETCore.App": {
+            "target": "Package",
+            "version": "1.0.5",
+            "autoReferenced": true
           },
           "Microsoft.EntityFrameworkCore.SqlServer": {
             "target": "Package",
@@ -8767,14 +8767,6 @@
             "version": "1.1.2"
           },
           "Microsoft.Extensions.Configuration.Binder": {
-            "target": "Package",
-            "version": "1.1.2"
-          },
-          "Microsoft.Extensions.Configuration.FileExtensions": {
-            "target": "Package",
-            "version": "1.1.2"
-          },
-          "Microsoft.Extensions.Configuration.Json": {
             "target": "Package",
             "version": "1.1.2"
           }

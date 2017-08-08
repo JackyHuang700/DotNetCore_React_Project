@@ -18,6 +18,7 @@ using Microsoft.EntityFrameworkCore;
 using DotNetCore_React.EntityFrameworkCore;
 using DotNetCore_React.EntityFrameworkCore.Repositories;
 using DotNetCore_React.EntityFrameworkCore.Seeds;
+using DotNetCore_React.Application.RoleApp;
 
 namespace DotNetCore_React
 {
@@ -31,6 +32,9 @@ namespace DotNetCore_React
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
+
+            //初始化映射关系
+            DotNetCore_ReactMapper.Initialize();
         }
 
         public IConfigurationRoot Configuration { get; }
@@ -46,6 +50,7 @@ namespace DotNetCore_React
             services.AddDbContext<DotNetCore_ReactDBContext>(options => options.UseSqlServer(sqlConnectionString));
 
             services.AddScoped<IRoleRepository, RoleRepository>();
+            services.AddScoped<IRoleAppService, RoleAppService>();
 
             // Add framework services.
             services.AddMvc();

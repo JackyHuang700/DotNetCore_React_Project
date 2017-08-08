@@ -25,7 +25,6 @@ constructor (props) {
 }
 
 componentDidMount(){
-  console.log(`data`);
   this.GetData();
 }
 

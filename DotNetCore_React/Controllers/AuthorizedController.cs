@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 
+
+
 namespace DotNetCore_React.Controllers
 {
     /// <summary>
@@ -9,5 +11,6 @@ namespace DotNetCore_React.Controllers
     /// </summary>
     public class AuthorizedController : Controller
     {
+       
     }
 }
