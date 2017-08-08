@@ -6,6 +6,7 @@ import Breadcrumb from '../../components/Breadcrumb/';
 import Aside from '../../components/Aside/';
 import Footer from '../../components/Footer/';
 
+//局部
 import Dashboard from '../../views/Dashboard/'
 import Charts from '../../views/Charts/'
 import Widgets from '../../views/Widgets/'
@@ -19,6 +20,7 @@ import Tables from '../../views/Components/Tables/'
 import Tabs from '../../views/Components/Tabs/'
 import FontAwesome from '../../views/Icons/FontAwesome/'
 import SimpleLineIcons from '../../views/Icons/SimpleLineIcons/'
+import JackyTest from '../../views/JackyTest'
 
 class Full extends Component {
   render() {
@@ -31,6 +33,7 @@ class Full extends Component {
             <Breadcrumb />
             <div className="container-fluid">
               <Switch>
+                <Route path="/jackyTest" name="JackyTest" component={JackyTest}/>
                 <Route path="/dashboard" name="Dashboard" component={Dashboard}/>
                 <Route path="/components/buttons" name="Buttons" component={Buttons}/>
                 <Route path="/components/cards" name="Cards" component={Cards}/>

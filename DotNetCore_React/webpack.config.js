@@ -51,10 +51,10 @@ const publicPath = `${sourcePath}/dist/`;
 module.exports = {
     devtool: 'cheap-module-eval-source-map',
     entry: {
-        'main': [
+        'boot': [
             'babel-polyfill',
             'react-hot-loader/patch',
-            `./ClientApp/components/main.js`
+            `./ClientApp/components/boot.js`
         ]
     },
     output: {
