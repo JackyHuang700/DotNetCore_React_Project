@@ -8,7 +8,7 @@ using DotNetCore_React.Domain.IRepositories;
 
 namespace DotNetCore_React.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
 
         public IActionResult Index()

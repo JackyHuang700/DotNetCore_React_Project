@@ -1,9 +1,9 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
-
+using System.Linq;
+using System.Threading.Tasks;
 using DotNetCore_React.Application.RoleApp;
-using DotNetCore_React.Domain.IRepositories;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DotNetCore_React.Controllers
 {
@@ -11,15 +11,14 @@ namespace DotNetCore_React.Controllers
     /// API (Front)
     /// </summary>
     [Route("api/[controller]")]
-    public class BaseController : Controller
+    public class TestController : BaseController
     {
         private readonly IRoleAppService _service;
 
-        public BaseController(IRoleAppService service)
+        public TestController(IRoleAppService service)
         {
             _service = service;
         }
-
 
         [HttpGet("[action]")]
         public ActionResult TestAPI()
