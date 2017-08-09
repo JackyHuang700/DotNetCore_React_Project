@@ -8,6 +8,7 @@ namespace DotNetCore_React.Domain.Entities
     /// </summary>
     public class Role : Entity
     {
+
         public string SysId { get; set; }   
 
         public string Name { get; set; }

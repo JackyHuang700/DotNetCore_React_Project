@@ -32,6 +32,8 @@ namespace DotNetCore_React.EntityFrameworkCore.Seeds
 
 
             //Seed Role
+            ComSystemSeed();
+            UserSeed();
             RoleSeed();
         }
 

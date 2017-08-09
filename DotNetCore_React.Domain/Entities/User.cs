@@ -9,18 +9,41 @@ namespace DotNetCore_React.Domain.Entities
     /// </summary>
     public class User : Entity
     {
-
-        public string Id { get; set; }
        
-        public string SysId { get; set; }
+        public string UserName { get; set; }
 
-        public string Name { get; set; }
-        public int Priority { get; set; }
+        public string RoleId { get; set; }
+        public string Password { get; set; }
+
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public string Email { get; set; }
+
+        public bool EmailConfirmed { get; set; }
+
+
+
         public byte Status { get; set; }
+
         public DateTime CreateDate { get; set; }
         public string CreateUser { get; set; }
+
         public DateTime UpdateDate { get; set; }
+
         public string UpdateUser { get; set; }
+
+
+        public int FailedCount { get; set; }
+
+
+        public bool ChangedPassword { get; set; }
+
+
+        public string PasswordHash { get; set; }
+
         
+
     }
 }

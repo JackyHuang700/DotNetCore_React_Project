@@ -21,6 +21,8 @@ import Tabs from '../../views/Components/Tabs/'
 import FontAwesome from '../../views/Icons/FontAwesome/'
 import SimpleLineIcons from '../../views/Icons/SimpleLineIcons/'
 import JackyTest from '../../views/JackyTest'
+import Login from '../../views/Login'
+import Index from '../../views/Index'
 
 class Full extends Component {
   render() {
@@ -33,6 +35,8 @@ class Full extends Component {
             <Breadcrumb />
             <div className="container-fluid">
               <Switch>
+                <Route path="/Index" name="Index" component={Index}/>
+                <Route path="/Login" name="Login" component={Login}/>
                 <Route path="/jackyTest" name="JackyTest" component={JackyTest}/>
                 <Route path="/dashboard" name="Dashboard" component={Dashboard}/>
                 <Route path="/components/buttons" name="Buttons" component={Buttons}/>

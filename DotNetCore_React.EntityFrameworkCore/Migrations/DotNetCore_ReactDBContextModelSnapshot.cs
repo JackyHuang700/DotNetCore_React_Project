@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using DotNetCore_React.EntityFrameworkCore;
-using DotNetCore_React.EntityFrameworkCore.Seeds;
 
 namespace DotNetCore_React.EntityFrameworkCore.Migrations
 {

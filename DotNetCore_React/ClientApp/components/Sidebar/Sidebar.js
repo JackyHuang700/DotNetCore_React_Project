@@ -22,6 +22,12 @@ class Sidebar extends Component {
         <nav className="sidebar-nav">
           <ul className="nav">
             <li className="nav-item">
+              <NavLink to={'/Index'} className="nav-link" activeClassName="active"><i className="icon-speedometer"></i> Index <span className="badge badge-info"></span></NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink to={'/Login'} className="nav-link" activeClassName="active"><i className="icon-speedometer"></i> Login <span className="badge badge-info"></span></NavLink>
+            </li>
+            <li className="nav-item">
               <NavLink to={'/jackyTest'} className="nav-link" activeClassName="active"><i className="icon-speedometer"></i> JackyTest <span className="badge badge-info">OLD</span></NavLink>
             </li>
             <li className="nav-item">

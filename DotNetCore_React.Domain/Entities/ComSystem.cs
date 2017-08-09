@@ -9,18 +9,13 @@ namespace DotNetCore_React.Domain.Entities
     /// </summary>
     public class ComSystem : Entity
     {
-        public int AccessFailedCount { get; set; }
-        public int Product_ListImage_MaxSize { get; set; }
-        public string Product_ListImage_File { get; set; }
-        public int Product_Image_MaxSize { get; set; }
-        public string Product_Image_File { get; set; }
-        public int Location_ListImage_MaxSize { get; set; }
-        public string Location_ListImage_File { get; set; }
 
+        public string sysName { get; set; }
 
-        public int Location_Image_MaxSize { get; set; }
-        public string Location_Image_File { get; set; }
-        public string System_Logo { get; set; }
-        public string System_Logo_Text { get; set; }
+        public string sysValue { get; set; }
+
+        public DateTime CreateTime { get; set; }
+
+        public DateTime UpdateTime { get; set; }
     }
 }
