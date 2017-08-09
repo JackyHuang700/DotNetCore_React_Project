@@ -18,14 +18,14 @@ class Auth_View extends Component {
 
   GetData() {
     const self = this;
-    // axios.get('api/Base/').then((result) => {
+    // axios.get('api/WebApi/').then((result) => {
     //   console.log(result.data)
     // }).catch((error) => {
     //   console.log(error)
     // });
 
 
-    // axios.post('api/Base/', {
+    // axios.post('api/WebApi/', {
     //   a: 10
     // }).then((result) => {
     //   console.log(result.data)
@@ -91,14 +91,14 @@ class JackyTest extends Component {
 
   GetData() {
     const self = this;
-    axios.get('api/Test/TestAPI').then((result) => {
+    axios.get('api/WebApi/TestAPI').then((result) => {
       console.log(result.data)
     }).catch((error) => {
       console.log(error)
     });
 
 
-    axios.post('api/Test/TestAPI3', {
+    axios.post('api/WebApi/TestAPI3', {
       a: 10
     }).then((result) => {
       console.log(result.data)

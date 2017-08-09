@@ -12,7 +12,7 @@ namespace DotNetCore_React.Controllers
     /// API (Front)
     /// </summary>
     [Route("api/[controller]")]
-    public class TestController : BaseController
+    public class WebApiController : BaseController
     {
         //private readonly IRoleAppService _service;
         private readonly IUserAppService _service;
@@ -22,7 +22,7 @@ namespace DotNetCore_React.Controllers
         //    _service = service;
         //}
 
-        public TestController(IUserAppService service)
+        public WebApiController(IUserAppService service)
         {
             _service = service;
         }
@@ -68,6 +68,18 @@ namespace DotNetCore_React.Controllers
 
             myJson.Add("success", true);
             myJson.Add("message", "Jacky4");
+            return Json(myJson);
+        }
+
+
+        [HttpPost("[action]")]
+        public ActionResult Login(string userName, string password)
+        {
+            var myJson = new Dictionary<string, object>();
+
+            myJson.Add("success", true);
+            myJson.Add("message", userName);
+            myJson.Add("message2", password);
             return Json(myJson);
         }
 

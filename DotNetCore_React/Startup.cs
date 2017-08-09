@@ -91,6 +91,14 @@ namespace DotNetCore_React
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
 
+
+
+         //       config.Routes.MapHttpRoute(
+         //    name: "DefaultApi",
+         //    routeTemplate: "api/{controller}/{id}",
+         //    defaults: new { id = RouteParameter.Optional }
+         //);
+
                 routes.MapSpaFallbackRoute(
                     name: "spa-fallback",
                     defaults: new { controller = "Home", action = "Index" });
