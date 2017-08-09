@@ -32,6 +32,14 @@ namespace DotNetCore_React.Application.UserApp
             //是否登入成功
             var is_Login_Success = false;
 
+
+            if (user == null)
+            {
+                myJson.Add("success", false);
+                myJson.Add("message", "登入錯誤");
+                return myJson;
+            }
+
             //判斷狀態
             switch (user.Status)
             {
