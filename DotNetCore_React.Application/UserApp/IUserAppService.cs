@@ -9,5 +9,10 @@ namespace DotNetCore_React.Application.UserApp
     {
         //獲取列表
         List<UserDto> GetAllList();
+
+        Dictionary<string, object> Login(string userName, string password);
+
+
+
     }
 }

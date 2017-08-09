@@ -32,10 +32,14 @@ class Login extends Component {
     } = this.state;
     console.log(userName)
     console.log(password)
-
-    axios.post('api/WebApi/Login', {
-      userName,
-      password
+    axios({
+      
+      url: 'api/WebApi/Login',
+      method: 'post',
+      data: {
+      "UserName":userName,
+      "Password":password
+    }
     }).then((result) => {
       console.log(result.data)
     }).catch((error) => {

@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using DotNetCore_React.Application.RoleApp;
 using DotNetCore_React.Application.UserApp;
 using Microsoft.AspNetCore.Mvc;
+using DotNetCore_React.Domain.Entities;
+using DotNetCore_React.Application.UserApp.Dtos;
 
 namespace DotNetCore_React.Controllers
 {
@@ -73,13 +75,9 @@ namespace DotNetCore_React.Controllers
 
 
         [HttpPost("[action]")]
-        public ActionResult Login(string userName, string password)
+        public ActionResult Login([FromBody] UserDto user)
         {
-            var myJson = new Dictionary<string, object>();
-
-            myJson.Add("success", true);
-            myJson.Add("message", userName);
-            myJson.Add("message2", password);
+            var myJson =_service.Login(user.UserName, user.Password);
             return Json(myJson);
         }
 
