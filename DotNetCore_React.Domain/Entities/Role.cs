@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace DotNetCore_React.Domain.Entities
 {
+    /// <summary>
+    /// ¸}¦â
+    /// </summary>
     public class Role : Entity
     {
         public string SysId { get; set; }   
