@@ -32,7 +32,6 @@ GetData(){
   const self = this;
   axios.get('api/Base/TestAPI').then((result)=>{
     console.log(result.data)
-    debugger;
   }).catch((error)=>{
     console.log(error)
   });

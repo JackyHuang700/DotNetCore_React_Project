@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { Dropdown, DropdownMenu, DropdownItem } from 'reactstrap';
 
+  //fix 選單被覆蓋
+const dropdownMenu_Style = {
+  "zIndex":"1050",
+};
+
 class Header extends Component {
 
   constructor(props) {
@@ -38,12 +43,6 @@ class Header extends Component {
     document.body.classList.toggle('aside-menu-hidden');
   }
 
-  //fix 選單被覆蓋
-  DropdownMenu_Style(){
-    return {
-      "z-index":"1050",
-    }
-  }
 
   render() {
     return (
@@ -81,7 +80,7 @@ class Header extends Component {
                 <span className="d-md-down-none">admin</span>
               </button>
 
-              <DropdownMenu className="dropdown-menu-right" style={this.DropdownMenu_Style()}>
+              <DropdownMenu className="dropdown-menu-right" style={dropdownMenu_Style}>
                 <DropdownItem header className="text-center"><strong>Account</strong></DropdownItem>
 
                 <DropdownItem><i className="fa fa-bell-o"></i> Updates<span className="badge badge-info">42</span></DropdownItem>
