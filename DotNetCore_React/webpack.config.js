@@ -49,6 +49,9 @@ const bundleOutputDir = './wwwroot/dist';
 const sourcePath = path.resolve(__dirname, '../wwwroot');
 const publicPath = `${sourcePath}/dist/`;
 module.exports = {
+    // devtool: 'source-map',
+    // devtool: 'cheap-eval-source-map',
+    // devtool: 'eval-source-map',
     devtool: 'cheap-module-eval-source-map',
     entry: {
         'boot': [
@@ -69,6 +72,7 @@ module.exports = {
     context: __dirname,
     devServer: {
         contentBase: publicPath,
+        compress: true,
     },
     module: {
         rules: [{
@@ -80,5 +84,15 @@ module.exports = {
             { test: /\.(png|jpg|jpeg|gif|svg)$/, use: 'url-loader?limit=25000' },
             { test: /.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' }
         ]
-    }
+    },
+    plugins: [
+        // new webpack.SourceMapDevToolPlugin({
+        //     filename: '[file].map',
+        //      exclude: ['vendor.js',],
+        //       columns: false
+        // }),
+        // new webpack.optimize.UglifyJsPlugin({
+        //     sourceMap: true,
+        // }),
+    ]
 };
