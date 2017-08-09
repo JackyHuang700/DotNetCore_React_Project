@@ -38,6 +38,12 @@ class Header extends Component {
     document.body.classList.toggle('aside-menu-hidden');
   }
 
+  DropdownMenu_Style(){
+    return {
+      "z-index":"1050",
+    }
+  }
+
   render() {
     return (
       <header className="app-header navbar">
@@ -74,7 +80,7 @@ class Header extends Component {
                 <span className="d-md-down-none">admin</span>
               </button>
 
-              <DropdownMenu className="dropdown-menu-right">
+              <DropdownMenu className="dropdown-menu-right" style={this.DropdownMenu_Style()}>
                 <DropdownItem header className="text-center"><strong>Account</strong></DropdownItem>
 
                 <DropdownItem><i className="fa fa-bell-o"></i> Updates<span className="badge badge-info">42</span></DropdownItem>
