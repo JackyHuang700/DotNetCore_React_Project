@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DotNetCore_React.Application.RoleApp;
+using DotNetCore_React.Application.UserApp;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DotNetCore_React.Controllers
@@ -13,9 +14,15 @@ namespace DotNetCore_React.Controllers
     [Route("api/[controller]")]
     public class TestController : BaseController
     {
-        private readonly IRoleAppService _service;
+        //private readonly IRoleAppService _service;
+        private readonly IUserAppService _service;
 
-        public TestController(IRoleAppService service)
+        //public TestController(IRoleAppService service)
+        //{
+        //    _service = service;
+        //}
+
+        public TestController(IUserAppService service)
         {
             _service = service;
         }

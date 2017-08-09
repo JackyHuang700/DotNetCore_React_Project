@@ -14,6 +14,10 @@ namespace DotNetCore_React.EntityFrameworkCore
 
 
         public DbSet<Role> Roles { get; set; }
+        public DbSet<User> Users { get; set; }
+
+        public DbSet<ComSystem> ComSystem { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

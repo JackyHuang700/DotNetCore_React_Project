@@ -7,5 +7,6 @@ namespace DotNetCore_React.Domain.IRepositories
 {
     public interface IUserRepository : IRepository<User>
     {
+        List<User> GetAllMenuListByUser();
     }
 }

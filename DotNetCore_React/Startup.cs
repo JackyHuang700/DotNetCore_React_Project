@@ -19,6 +19,8 @@ using DotNetCore_React.EntityFrameworkCore;
 using DotNetCore_React.EntityFrameworkCore.Repositories;
 using DotNetCore_React.EntityFrameworkCore.Seeds;
 using DotNetCore_React.Application.RoleApp;
+using DotNetCore_React.Application.UserApp;
+using DotNetCore_React.Application.ComSystemApp;
 
 namespace DotNetCore_React
 {
@@ -51,6 +53,10 @@ namespace DotNetCore_React
 
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<IRoleAppService, RoleAppService>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserAppService, UserAppService>();
+            services.AddScoped<IComSystemRepository, ComSystemRepository>();
+            services.AddScoped<IComSystemAppAppService, ComSystemAppAppService>();
 
             // Add framework services.
             services.AddMvc();
