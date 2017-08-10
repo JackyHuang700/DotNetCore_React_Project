@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import axios from 'axios';
+import EasyForm, { Field, FieldGroup } from 'react-easyform';
+import TextInput from '../Components/Forms/TextInput';
 
 
 class Role_Create extends Component {
@@ -14,47 +16,28 @@ class Role_Create extends Component {
       Status: 1,
     };
 
-
-    this.GetData = this.GetData.bind(this);
     this.Submit = this.Submit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
 
   }
 
-  GetData() {
-
-  }
-
-
   Submit(event) {
-    const {
-      SysId,
-      Name,
-      Priority,
-      Status,
-    } = this.state;
-  
-
     axios({
-
       url: 'api/Role/Create',
       method: 'post',
       data: {
-        SysId: SysId,
-        Name: Name,
-        Priority: Priority,
-        Status: Status,
+        SysId: this.state.SysId,
+        Name: this.state.Name,
+        Priority: this.state.Priority,
+        Status: this.state.Status,
       }
     }).then((result) => {
-
       if (result.data.success) {
         document.location.href = '/#/Role_View'
       }
     }).catch((error) => {
       console.log(error)
     });
-
-
     event.preventDefault();
     return false;
   }
@@ -70,42 +53,67 @@ class Role_Create extends Component {
   }
 
   render() {
+            // 经过EasyForm包装的组件，props里会有一个params属性，包含所有的表单项值
+            const { params } = this.props.params;
+            /*
+             * props里的easyform对象，包含了一组验证结果，
+             * 其中$invalid/$valid 可以用来判断表单项是够已经正确填写
+             */
+            const {$invalid} = this.props.easyform.$invalid;
+
     return (
       <div className="animated fadeIn row justify-content-center">
         <div className="col-sm-4">
           <div className="card">
             <div className="card-header">
-              新增腳色
+              新增角色
               </div>
             <div className="card-block">
-              <form action="" method="post">
-                <div className="form-group">
-                  <div className="input-group">
-                    <input type="text" id="SysId" name="SysId" onChange={this.handleInputChange} value={this.state.SysId} className="form-control" placeholder="123" />
+              <form className="" onSubmit={this.submit}>
 
-                    <span className="input-group-addon"><i className="fa fa-user"></i></span>
-                  </div>
-                </div>
-                <div className="form-group">
-                  <div className="input-group">
-                    <input type="text" id="Name" name="Name" className="form-control" onChange={this.handleInputChange} value={this.state.Name} placeholder="123" />
-                    <span className="input-group-addon"><i className="fa fa-envelope"></i></span>
-                  </div>
-                </div>
-                <div className="form-group">
-                  <div className="input-group">
-                    <input type="text" id="Priority" name="Priority" className="form-control" onChange={this.handleInputChange} value={this.state.Priority} placeholder="123" />
-                    <span className="input-group-addon"><i className="fa fa-asterisk"></i></span>
-                  </div>
-                </div>
-                <div className="form-group">
-                  <div className="input-group">
-                    <input type="text" id="Status" name="Status" className="form-control" onChange={this.handleInputChange} value={this.state.Status} placeholder="123" />
-                    <span className="input-group-addon"><i className="fa fa-asterisk"></i></span>
-                  </div>
-                </div>
+                <TextInput name="SysId"
+                  labelName="系統識別碼"
+                  className=""
+                  display={this.props.display_SysId}
+                  required={this.props.required_SysId} 
+                  pattern={/^[\w]{5,10}$/}
+                  validMessage={{required: 'SysId is reduired.', pattern: '不能包含字母数字底線以外的字符'}}
+                  onChange={this.handleInputChange} 
+                  defaultValue={this.state.SysId} 
+                  placeholder="sys123"/>
+
+                <TextInput name="Name" 
+                  labelName="角色名稱"
+                  className=""
+                  display={this.props.display_Name}
+                  required={this.props.required_Name} 
+                  validMessage={{required: 'Name is reduired.'}} 
+                  onChange={this.handleInputChange} 
+                  defaultValue={this.state.Name} 
+                  placeholder="糖糖"/>               
+
+                <TextInput name="Priority" 
+                  labelName="權重"
+                  className=""
+                  display={this.props.display_Priority}
+                  required={this.props.required_Priority} 
+                  validMessage={{required: 'Priority is reduired.'}} 
+                  onChange={this.handleInputChange} 
+                  defaultValue={this.state.Priority} 
+                  placeholder="1"/>
+
+                <TextInput name="Status"
+                  labelName="狀態"
+                  className=""
+                  display={this.props.display_Status}
+                  required={this.props.required_Status} 
+                  validMessage={{required: 'Status is reduired.'}} 
+                  onChange={this.handleInputChange} 
+                  defaultValue={this.state.Status} 
+                  placeholder="1"/>
+
                 <div className="form-group form-actions">
-                  <button type="botton" className="btn btn-sm btn-default" onClick={this.Submit}>確認</button>
+                  <Button color="primary" disabled={$invalid ? 'disabled' : false}>確認</Button>
                 </div>
               </form>
             </div>
@@ -116,14 +124,15 @@ class Role_Create extends Component {
   }
 }
 
+export default EasyForm(Role_Create, 2);
 
-export default Role_Create;
-
-// Role_Create.propTypes = {
-//     Id:  React.PropTypes.string,
-// }
-
-
-// Role_Create.defaultProps = {
-//     Id: '',
-// }
+Role_Create.defaultProps = {
+    display_SysId     : true,
+    display_Name      : true,
+    display_Priority  : true,
+    display_Status    : true,
+    required_SysId    : true,
+    required_Name     : true,
+    required_Priority : true,
+    required_Status   : true,
+}
