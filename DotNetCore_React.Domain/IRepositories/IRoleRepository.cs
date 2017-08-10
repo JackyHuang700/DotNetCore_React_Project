@@ -10,6 +10,6 @@ namespace DotNetCore_React.Domain.IRepositories
         //根據帳號獲取權限
         List<Role> GetAllMenuListByRole();
 
-        Role GetRole(string id);
+        Role GetRole(Guid id);
     } 
 }

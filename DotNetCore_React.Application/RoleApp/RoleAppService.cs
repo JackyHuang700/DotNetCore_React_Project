@@ -24,7 +24,10 @@ namespace DotNetCore_React.Application.RoleApp
         }
         public RoleDto GetRole(string id)
         {
-            var a = _repository.GetRole(id);
+            //³B²znullª¬ªp
+            Guid guid;
+            Guid.TryParse("", out guid);
+            var a = _repository.GetRole(guid);
             return Mapper.Map<RoleDto>(a);
         }
 

@@ -45,21 +45,6 @@ import axios from 'axios';
 
 
 
-///
-
-var products = [{
-    id: 1,
-    name: "Product1",
-    price: 120
-}, {
-    id: 1,
-    name: "Product2",
-    price: 80
-}];
-
-
-
-
 class Role_View extends Component {
 
     constructor(props) {
@@ -94,15 +79,24 @@ class Role_View extends Component {
         )
     }
 
-    //切換彈跳視窗
-    buttonFormatter() {
+    
+    buttonFormatter(cell, row) {
         return (
             <div>
-                {this.props.display_button_edit ? <Button color="primary" >Edit</Button> : null}
-                {this.props.display_button_del ? <Button color="danger" >Delete</Button> : null}
+                {this.props.display_button_edit ? <Button color="primary" data-id={row.id} onClick={this.OnClick_Edit}>Edit</Button> : null}
+                {this.props.display_button_del ? <Button color="danger" data-id={row.id} onClick={this.OnClick_Delete}>Delete</Button> : null}
             </div>
         );
     }
+
+
+OnClick_Edit(event){
+ document.location.href = `/#/Role_Edit/${event.currentTarget.getAttribute('data-id')}`;
+}
+
+OnClick_Delete(event){
+//  document.location.href = `/#/Role_Delete/${event.currentTarget.getAttribute('data-id')}`;
+}
 
 
     render() {
@@ -115,20 +109,17 @@ class Role_View extends Component {
         };
 
         return (
-            <BootstrapTable data={products} selectRow={selectRow} striped hover options={options} deleteRow>
+            <BootstrapTable data={this.state.RoleList} selectRow={selectRow} striped hover options={options} deleteRow>
                 <TableHeaderColumn isKey dataField="button" dataFormat={this.buttonFormatter}>Buttons</TableHeaderColumn>
-                {this.props.display_name ? <TableHeaderColumn dataField='name'>Product Name</TableHeaderColumn> : null}
-                {this.props.display_price ? <TableHeaderColumn dataField='price'>Product Price</TableHeaderColumn> : null}
-
-                {/**/}
-                {this.props.display_Id ? <TableHeaderColumn dataField='Id'>Id</TableHeaderColumn> : null}
-                {this.props.display_SysId ? <TableHeaderColumn dataField='SysId'>SysId</TableHeaderColumn> : null}
-                {this.props.display_Priority ? <TableHeaderColumn dataField='Priority'>Priority</TableHeaderColumn> : null}
-                {this.props.display_Status ? <TableHeaderColumn dataField='Status'>Status</TableHeaderColumn> : null}
-                {this.props.display_CreateDate ? <TableHeaderColumn dataField='CreateDate'>CreateDate</TableHeaderColumn> : null}
-                {this.props.display_CreateUser ? <TableHeaderColumn dataField='CreateUser'>CreateUser</TableHeaderColumn> : null}
-                {this.props.display_UpdateDate ? <TableHeaderColumn dataField='UpdateDate'>UpdateDate</TableHeaderColumn> : null}
-                {this.props.display_UpdateUser ? <TableHeaderColumn dataField='UpdateUser'>UpdateUser</TableHeaderColumn> : null}
+                {/* {this.props.display_Id ? <TableHeaderColumn dataField='id'>id</TableHeaderColumn> : null} */}
+                {this.props.display_SysId ? <TableHeaderColumn dataField='sysId'>sysId</TableHeaderColumn> : null}
+                {this.props.display_name ? <TableHeaderColumn dataField='name'>name</TableHeaderColumn> : null}
+                {this.props.display_Priority ? <TableHeaderColumn dataField='priority'>priority</TableHeaderColumn> : null}
+                {this.props.display_Status ? <TableHeaderColumn dataField='status'>ststus</TableHeaderColumn> : null}
+                {this.props.display_CreateDate ? <TableHeaderColumn dataField='createDate'>createDate</TableHeaderColumn> : null}
+                {this.props.display_CreateUser ? <TableHeaderColumn dataField='createUser'>createUser</TableHeaderColumn> : null}
+                {this.props.display_UpdateDate ? <TableHeaderColumn dataField='updateDate'>updateDate</TableHeaderColumn> : null}
+                {this.props.display_UpdateUser ? <TableHeaderColumn dataField='updateUser'>updateUser</TableHeaderColumn> : null}
 
 
             </BootstrapTable>

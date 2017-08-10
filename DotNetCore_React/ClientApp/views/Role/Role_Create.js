@@ -14,7 +14,7 @@ class Role_Create extends Component {
       Status: 1,
     };
 
-    this.GetData = this.GetData.bind(this);
+    // this.GetData = this.GetData.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
 
@@ -22,13 +22,25 @@ class Role_Create extends Component {
 
   handleSubmit(event) {
       //we don't want the form to submit, so we prevent the defaul behavior
-      e.preventDefault();
+       event.preventDefault();
 
-      ///////如何知道全部input是否驗證通過
-      var contributor = this.state.contributor.trim();
-      if (!contributor) {
-        return;
-      }
+
+///
+///
+//
+///////如何知道全部input是否驗證通過
+///
+//
+//
+
+
+
+
+      // 
+      // var contributor = this.state.contributor.trim();
+      // if (!contributor) {
+      //   return;
+      // }
 
       //if validated
       axios({

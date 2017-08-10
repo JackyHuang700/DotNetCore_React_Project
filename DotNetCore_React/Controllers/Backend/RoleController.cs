@@ -23,7 +23,7 @@ namespace DotNetCore_React.Controllers
 
         [HttpGet("[action]")]
 
-        public ActionResult Role_View(string id)
+        public ActionResult Get_Role(string id)
         {
             var myJson = _service.GetRole(id);
             return Json(myJson);

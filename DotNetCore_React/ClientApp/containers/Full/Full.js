@@ -25,6 +25,7 @@ import Login from '../../views/Login'
 import Index from '../../views/Index'
 import Role_View from '../../views/Role/Role_View'
 import Role_Create from '../../views/Role/Role_Create'
+import Role_Edit from '../../views/Role/Role_Edit'
 
 class Full extends Component {
 
@@ -53,6 +54,7 @@ class Full extends Component {
         <Route path="/Index" name="Index" component={Index} />,
         <Route path="/Role_View" name="Role_View" component={Role_View} />,
         <Route path="/Role_Create" name="Role_Create" component={Role_Create} />,
+        <Route path="/Role_Edit/:id" name="Role_Edit" component={Role_Edit} />,
         <Route path="/jackyTest" name="JackyTest" component={JackyTest} />,
         <Route path="/dashboard" name="Dashboard" component={Dashboard} />,
         <Route path="/components/buttons" name="Buttons" component={Buttons} />,
