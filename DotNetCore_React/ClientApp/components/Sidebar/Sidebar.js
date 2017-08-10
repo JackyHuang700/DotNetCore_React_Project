@@ -5,7 +5,6 @@ class Sidebar extends Component {
 
   constructor(props) {
     super(props);
-    console.log(props)
     this.SwitchController = this.SwitchController.bind(this);
 
   }

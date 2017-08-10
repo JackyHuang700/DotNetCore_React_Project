@@ -33,6 +33,8 @@ class Full extends Component {
     };
 
     this.SwitchController = this.SwitchController.bind(this);
+          this.Change_Login = this.Change_Login.bind(this);
+
   }
 
 
@@ -68,6 +70,15 @@ class Full extends Component {
     return renderList;
   }
 
+
+//切換
+//卡在如何把這隻function傳進Login component
+  Change_Login(){
+    console.log(`Change_Login`)
+    // this.setState({
+    //   isLogin: !isLogin,
+    // });
+  }
 
   render() {
     return (
