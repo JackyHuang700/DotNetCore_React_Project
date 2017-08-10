@@ -16,5 +16,10 @@ namespace DotNetCore_React.EntityFrameworkCore.Repositories
         {
             return _dbContext.Set<Role>().ToList();
         }
+
+        public Role GetRole(string id)
+        {
+            return _dbContext.Set<Role>().Find(id);
+        }
     }
 }

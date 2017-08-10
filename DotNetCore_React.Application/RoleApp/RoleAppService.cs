@@ -22,6 +22,11 @@ namespace DotNetCore_React.Application.RoleApp
             var a = _repository.GetAllMenuListByRole();
             return Mapper.Map<List<RoleDto>>(a);
         }
+        public RoleDto GetRole(string id)
+        {
+            var a = _repository.GetRole(id);
+            return Mapper.Map<RoleDto>(a);
+        }
 
         public Dictionary<string, object> Create_Role(RoleDto role)
         {
@@ -44,7 +49,15 @@ namespace DotNetCore_React.Application.RoleApp
         public Dictionary<string, object> Update_Role(RoleDto role)
         {
             var myJson = new Dictionary<string, object>();
+
+
+            //Àx¦s¸ê®Æ
+
+            myJson.Add("success", true);
+            myJson.Add("message", "");
             return myJson;
         }
+
+      
     }
 }

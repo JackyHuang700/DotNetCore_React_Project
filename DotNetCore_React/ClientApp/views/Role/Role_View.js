@@ -65,9 +65,11 @@ class Role_View extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            RoleList: [],
         }
         this.buttonFormatter = this.buttonFormatter.bind(this);
+        this.GetData = this.GetData.bind(this);
+
     }
 
 
@@ -78,6 +80,12 @@ class Role_View extends Component {
     GetData() {
         const self = this;
 
+        axios.get('api/Role/Role_View').then((result) => {
+            console.log(result.data);
+            this.setState({ RoleList: result.data });
+        }).catch((error) => {
+            console.log(error)
+        });
     }
 
     createCustomDeleteButton = (onBtnClick) => {
@@ -91,7 +99,7 @@ class Role_View extends Component {
         return (
             <div>
                 {this.props.display_button_edit ? <Button color="primary" >Edit</Button> : null}
-                {this.props.display_button_del ? <Button color="primary" >Delete</Button> : null}
+                {this.props.display_button_del ? <Button color="danger" >Delete</Button> : null}
             </div>
         );
     }
@@ -111,6 +119,18 @@ class Role_View extends Component {
                 <TableHeaderColumn isKey dataField="button" dataFormat={this.buttonFormatter}>Buttons</TableHeaderColumn>
                 {this.props.display_name ? <TableHeaderColumn dataField='name'>Product Name</TableHeaderColumn> : null}
                 {this.props.display_price ? <TableHeaderColumn dataField='price'>Product Price</TableHeaderColumn> : null}
+
+                {/**/}
+                {this.props.display_Id ? <TableHeaderColumn dataField='Id'>Id</TableHeaderColumn> : null}
+                {this.props.display_SysId ? <TableHeaderColumn dataField='SysId'>SysId</TableHeaderColumn> : null}
+                {this.props.display_Priority ? <TableHeaderColumn dataField='Priority'>Priority</TableHeaderColumn> : null}
+                {this.props.display_Status ? <TableHeaderColumn dataField='Status'>Status</TableHeaderColumn> : null}
+                {this.props.display_CreateDate ? <TableHeaderColumn dataField='CreateDate'>CreateDate</TableHeaderColumn> : null}
+                {this.props.display_CreateUser ? <TableHeaderColumn dataField='CreateUser'>CreateUser</TableHeaderColumn> : null}
+                {this.props.display_UpdateDate ? <TableHeaderColumn dataField='UpdateDate'>UpdateDate</TableHeaderColumn> : null}
+                {this.props.display_UpdateUser ? <TableHeaderColumn dataField='UpdateUser'>UpdateUser</TableHeaderColumn> : null}
+
+
             </BootstrapTable>
 
         );
@@ -129,6 +149,16 @@ Role_View.defaultProps = {
     display_price: true,
     display_button_edit: true,
     display_button_del: true,
+
+    /**/
+    display_Id: true,
+    display_SysId: true,
+    display_Priority: true,
+    display_Status: true,
+    display_CreateDate: true,
+    display_CreateUser: true,
+    display_UpdateDate: true,
+    display_UpdateUser: true,
 };
 
 

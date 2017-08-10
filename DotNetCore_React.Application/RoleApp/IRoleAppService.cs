@@ -11,6 +11,8 @@ namespace DotNetCore_React.Application.RoleApp
         //獲取列表
         List<RoleDto> GetAllList();
 
+        //獲取單一角色
+        RoleDto GetRole(string id);
 
         Dictionary<string, object> Create_Role(RoleDto role);
         Dictionary<string, object> Update_Role(RoleDto role);

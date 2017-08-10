@@ -11,7 +11,7 @@ class Role_Create extends Component {
       SysId: '',
       Name: '',
       Priority: '',
-      Status: '',
+      Status: 1,
     };
 
 

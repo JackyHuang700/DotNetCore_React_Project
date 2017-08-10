@@ -21,6 +21,24 @@ namespace DotNetCore_React.Controllers
             _service = service;
         }
 
+        [HttpGet("[action]")]
+
+        public ActionResult Role_View(string id)
+        {
+            var myJson = _service.GetRole(id);
+            return Json(myJson);
+        }
+
+
+        [HttpGet("[action]")]
+
+        public ActionResult Role_View()
+        {
+            var myJson = _service.GetAllList();
+            return Json(myJson);
+        }
+
+
         [HttpPost("[action]")]
 
         public ActionResult Create([FromBody] RoleDto role)
@@ -28,6 +46,16 @@ namespace DotNetCore_React.Controllers
             var myJson = _service.Create_Role(role);
             return Json(myJson);
         }
+
+        [HttpPost("[action]")]
+
+        public ActionResult Edit([FromBody] RoleDto role)
+        {
+            var myJson = _service.Update_Role(role);
+            return Json(myJson);
+        }
+
+
 
     }
 }
