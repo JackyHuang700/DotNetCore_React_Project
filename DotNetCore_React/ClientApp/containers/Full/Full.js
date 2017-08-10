@@ -23,13 +23,15 @@ import SimpleLineIcons from '../../views/Icons/SimpleLineIcons/'
 import JackyTest from '../../views/JackyTest'
 import Login from '../../views/Login'
 import Index from '../../views/Index'
+import Role_View from '../../views/Role/Role_View'
+import Role_Create from '../../views/Role/Role_Create'
 
 class Full extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      isLogin: false,
+      isLogin: true,
     };
 
     this.SwitchController = this.SwitchController.bind(this);
@@ -47,7 +49,10 @@ class Full extends Component {
     if (this.state.isLogin) {
 
       renderList = renderList.concat([
+        <Route path="/Login" name="Login" component={Login} />,
         <Route path="/Index" name="Index" component={Index} />,
+        <Route path="/Role_View" name="Role_View" component={Role_View} />,
+        <Route path="/Role_Create" name="Role_Create" component={Role_Create} />,
         <Route path="/jackyTest" name="JackyTest" component={JackyTest} />,
         <Route path="/dashboard" name="Dashboard" component={Dashboard} />,
         <Route path="/components/buttons" name="Buttons" component={Buttons} />,
@@ -62,7 +67,7 @@ class Full extends Component {
         <Route path="/icons/simple-line-icons" name="Simple Line Icons" component={SimpleLineIcons} />,
         <Route path="/widgets" name="Widgets" component={Widgets} />,
         <Route path="/charts" name="Charts" component={Charts} />,
-        <Redirect from="/" to="/dashboard" />,
+        <Redirect from="/" to="/Login" />,
       ]);
     }
 
@@ -74,13 +79,13 @@ class Full extends Component {
 //切換
 //卡在如何把這隻function傳進Login component
   Change_Login(){
-    console.log(`Change_Login`)
+     console.log(`Change_Login`);
     // this.setState({
     //   isLogin: !isLogin,
     // });
   }
 
-  render() {
+  render() {  
     return (
       <div className="app">
         <Header />
@@ -98,7 +103,7 @@ class Full extends Component {
         </div>
         <Footer />
       </div>
-    );
+    )
   }
 }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DotNetCore_React.Application.RoleApp.Dtos;
 using DotNetCore_React.Domain.IRepositories;
 using AutoMapper;
+using DotNetCore_React.Domain.Entities;
 
 namespace DotNetCore_React.Application.RoleApp
 {
@@ -16,11 +17,34 @@ namespace DotNetCore_React.Application.RoleApp
             _repository = repository;
         }
 
-
         public List<RoleDto> GetAllList()
         {
             var a = _repository.GetAllMenuListByRole();
             return Mapper.Map<List<RoleDto>>(a);
+        }
+
+        public Dictionary<string, object> Create_Role(RoleDto role)
+        {
+            var myJson = new Dictionary<string, object>();
+
+            var dateTime = DateTime.Now;
+            var roleDB = new Role() {
+                Id= Guid.NewGuid(),
+                CreateDate = dateTime,
+                UpdateDate = dateTime,
+            };
+
+            //Àx¦s¸ê®Æ
+
+            myJson.Add("success", true);
+            myJson.Add("message", "");
+            return myJson;
+        }
+
+        public Dictionary<string, object> Update_Role(RoleDto role)
+        {
+            var myJson = new Dictionary<string, object>();
+            return myJson;
         }
     }
 }

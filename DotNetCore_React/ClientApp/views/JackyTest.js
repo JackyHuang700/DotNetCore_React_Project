@@ -7,66 +7,6 @@ import '../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.
 import axios from 'axios';
 
 
-
-
-///
-class Auth_View extends Component {
-
-  componentDidMount() {
-    this.GetData();
-  }
-
-  GetData() {
-    const self = this;
-    // axios.get('api/WebApi/').then((result) => {
-    //   console.log(result.data)
-    // }).catch((error) => {
-    //   console.log(error)
-    // });
-
-
-    // axios.post('api/WebApi/', {
-    //   a: 10
-    // }).then((result) => {
-    //   console.log(result.data)
-    // }).catch((error) => {
-    //   console.log(error)
-    // });
-  }
-
-  render() {
-    return (
-      <BootstrapTable data={this.GetData()} striped hover>
-        <TableHeaderColumn isKey dataField='Id'>Id</TableHeaderColumn>
-        <TableHeaderColumn dataField='SysId'>SysId</TableHeaderColumn>
-        <TableHeaderColumn dataField='Name'>Name</TableHeaderColumn>
-        <TableHeaderColumn dataField='Priority'>Priority</TableHeaderColumn>
-        <TableHeaderColumn dataField='CreateDate'>CreateDate</TableHeaderColumn>
-        <TableHeaderColumn dataField='CreateUser'>CreateUser</TableHeaderColumn>
-        <TableHeaderColumn dataField='UpdateDate'>UpdateDate</TableHeaderColumn>
-        <TableHeaderColumn dataField='UpdateUser'>UpdateUser</TableHeaderColumn>
-
-      </BootstrapTable>
-
-    );
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-///
-
 var products = [{
   id: 1,
   name: "Product1",
@@ -116,7 +56,6 @@ class JackyTest extends Component {
         <TableHeaderColumn dataField='price'>Product Price</TableHeaderColumn>
       </BootstrapTable>
 
-      <Auth_View/>
       </div>
     );
   }
