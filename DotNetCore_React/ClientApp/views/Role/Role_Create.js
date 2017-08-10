@@ -14,49 +14,39 @@ class Role_Create extends Component {
       Status: 1,
     };
 
-
     this.GetData = this.GetData.bind(this);
-    this.Submit = this.Submit.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
 
   }
 
-  GetData() {
+  handleSubmit(event) {
+      //we don't want the form to submit, so we prevent the defaul behavior
+      e.preventDefault();
 
-  }
-
-
-  Submit(event) {
-    const {
-      SysId,
-      Name,
-      Priority,
-      Status,
-    } = this.state;
-  
-
-    axios({
-
-      url: 'api/Role/Create',
-      method: 'post',
-      data: {
-        SysId: SysId,
-        Name: Name,
-        Priority: Priority,
-        Status: Status,
+      ///////如何知道全部input是否驗證通過
+      var contributor = this.state.contributor.trim();
+      if (!contributor) {
+        return;
       }
-    }).then((result) => {
 
-      if (result.data.success) {
-        document.location.href = '/#/Role_View'
-      }
-    }).catch((error) => {
-      console.log(error)
-    });
-
-
-    event.preventDefault();
-    return false;
+      //if validated
+      axios({
+        url: 'api/Role/Create',
+        method: 'post',
+        data: {
+          SysId: this.state.SysId,
+          Name: this.state.Name,
+          Priority: this.state.Priority,
+          Status: this.state.Status,
+        }
+      }).then((result) => {
+        if (result.data.success) {
+          document.location.href = '/#/Role_View'
+        }
+      }).catch((error) => {
+        console.log(error)
+      });
   }
 
   handleInputChange(event) {
@@ -75,7 +65,7 @@ class Role_Create extends Component {
         <div className="col-sm-4">
           <div className="card">
             <div className="card-header">
-              新增腳色
+              新增角色
               </div>
             <div className="card-block">
               <form action="" method="post">
@@ -132,7 +122,7 @@ class Role_Create extends Component {
                   </div>
                 </div>
                 <div className="form-group form-actions">
-                  <Button color="primary" onClick={this.Submit}>確認</Button>
+                  <Button color="primary" onClick={this.handleSubmit}>確認</Button>
                 </div>
               </form>
             </div>
