@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import TextInput from '../Components/Forms/TextInput';
 import axios from 'axios';
-
 
 class Role_Create extends Component {
 
@@ -81,31 +81,58 @@ class Role_Create extends Component {
               <form action="" method="post">
                 <div className="form-group">
                   <div className="input-group">
-                    <input type="text" id="SysId" name="SysId" onChange={this.handleInputChange} value={this.state.SysId} className="form-control" placeholder="123" />
-
+                    <TextInput
+                        uniqueName="SysId"
+                        text="Please type in SysId."
+                        required={true}
+                        minCharacters={6}
+                        onChange={this.handleInputChange}
+                        errorMessage="SysId is invalid"
+                        emptyMessage="SysId is required" />
                     <span className="input-group-addon"><i className="fa fa-user"></i></span>
                   </div>
                 </div>
                 <div className="form-group">
                   <div className="input-group">
-                    <input type="text" id="Name" name="Name" className="form-control" onChange={this.handleInputChange} value={this.state.Name} placeholder="123" />
+                    <TextInput
+                        uniqueName="Name"
+                        text="Please type in Name."
+                        required={true}
+                        minCharacters={6}
+                        onChange={this.handleInputChange}
+                        errorMessage="Name is invalid"
+                        emptyMessage="Name is required" />
                     <span className="input-group-addon"><i className="fa fa-envelope"></i></span>
                   </div>
                 </div>
                 <div className="form-group">
                   <div className="input-group">
-                    <input type="text" id="Priority" name="Priority" className="form-control" onChange={this.handleInputChange} value={this.state.Priority} placeholder="123" />
+                      <TextInput
+                        uniqueName="Priority"
+                        text="Please type in Priority."
+                        required={true}
+                        minCharacters={6}
+                        onChange={this.handleInputChange}
+                        errorMessage="Priority is invalid"
+                        emptyMessage="Priority is required" />
                     <span className="input-group-addon"><i className="fa fa-asterisk"></i></span>
                   </div>
                 </div>
                 <div className="form-group">
                   <div className="input-group">
-                    <input type="text" id="Status" name="Status" className="form-control" onChange={this.handleInputChange} value={this.state.Status} placeholder="123" />
+                       <TextInput
+                        uniqueName="Status"
+                        text="Please type in Status."
+                        required={true}
+                        minCharacters={6}
+                        onChange={this.handleInputChange}
+                        errorMessage="Status is invalid"
+                        emptyMessage="Status is required" />
                     <span className="input-group-addon"><i className="fa fa-asterisk"></i></span>
                   </div>
                 </div>
                 <div className="form-group form-actions">
-                  <button type="botton" className="btn btn-sm btn-default" onClick={this.Submit}>確認</button>
+                  <Button color="primary" onClick={this.Submit}>確認</Button>
                 </div>
               </form>
             </div>
