@@ -25,33 +25,61 @@ import Login from '../../views/Login'
 import Index from '../../views/Index'
 
 class Full extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLogin: false,
+    };
+
+    this.SwitchController = this.SwitchController.bind(this);
+  }
+
+
+
+  SwitchController() {
+    var renderList = [
+      <Route path="/Login" name="Login" component={Login} />
+    ];
+
+    if (this.state.isLogin) {
+
+      renderList = renderList.concat([
+        <Route path="/Index" name="Index" component={Index} />,
+        <Route path="/jackyTest" name="JackyTest" component={JackyTest} />,
+        <Route path="/dashboard" name="Dashboard" component={Dashboard} />,
+        <Route path="/components/buttons" name="Buttons" component={Buttons} />,
+        <Route path="/components/cards" name="Cards" component={Cards} />,
+        <Route path="/components/forms" name="Forms" component={Forms} />,
+        <Route path="/components/modals" name="Modals" component={Modals} />,
+        <Route path="/components/social-buttons" name="Social Buttons" component={SocialButtons} />,
+        <Route path="/components/switches" name="Swithces" component={Switches} />,
+        <Route path="/components/tables" name="Tables" component={Tables} />,
+        <Route path="/components/tabs" name="Tabs" component={Tabs} />,
+        <Route path="/icons/font-awesome" name="Font Awesome" component={FontAwesome} />,
+        <Route path="/icons/simple-line-icons" name="Simple Line Icons" component={SimpleLineIcons} />,
+        <Route path="/widgets" name="Widgets" component={Widgets} />,
+        <Route path="/charts" name="Charts" component={Charts} />,
+        <Redirect from="/" to="/dashboard" />,
+      ]);
+    }
+
+
+    return renderList;
+  }
+
+
   render() {
     return (
       <div className="app">
         <Header />
         <div className="app-body">
-          <Sidebar {...this.props}/>
+          <Sidebar {...this.props} isLogin={this.state.isLogin}/>
           <main className="main">
             <Breadcrumb />
             <div className="container-fluid">
               <Switch>
-                <Route path="/Index" name="Index" component={Index}/>
-                <Route path="/Login" name="Login" component={Login}/>
-                <Route path="/jackyTest" name="JackyTest" component={JackyTest}/>
-                <Route path="/dashboard" name="Dashboard" component={Dashboard}/>
-                <Route path="/components/buttons" name="Buttons" component={Buttons}/>
-                <Route path="/components/cards" name="Cards" component={Cards}/>
-                <Route path="/components/forms" name="Forms" component={Forms}/>
-                <Route path="/components/modals" name="Modals" component={Modals}/>
-                <Route path="/components/social-buttons" name="Social Buttons" component={SocialButtons}/>
-                <Route path="/components/switches" name="Swithces" component={Switches}/>
-                <Route path="/components/tables" name="Tables" component={Tables}/>
-                <Route path="/components/tabs" name="Tabs" component={Tabs}/>
-                <Route path="/icons/font-awesome" name="Font Awesome" component={FontAwesome}/>
-                <Route path="/icons/simple-line-icons" name="Simple Line Icons" component={SimpleLineIcons}/>
-                <Route path="/widgets" name="Widgets" component={Widgets}/>
-                <Route path="/charts" name="Charts" component={Charts}/>
-                <Redirect from="/" to="/dashboard"/>
+                {this.SwitchController()}
               </Switch>
             </div>
           </main>
@@ -62,5 +90,8 @@ class Full extends Component {
     );
   }
 }
+
+
+
 
 export default Full;
