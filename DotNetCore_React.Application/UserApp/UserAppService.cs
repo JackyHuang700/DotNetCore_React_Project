@@ -28,8 +28,21 @@ namespace DotNetCore_React.Application.UserApp
             var roleDB = new User()
             {
                 Id = Guid.NewGuid(),
+                Password = this.PasswordToSHA256(user.Password),
+                RoleId = user.RoleId,
+                UserName = user.UserName,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                EmailConfirmed = user.EmailConfirmed,
+                Status = user.Status,
                 CreateDate = dateTime,
+                CreateUser = user.CreateUser,
                 UpdateDate = dateTime,
+                UpdateUser = user.RoleId,
+                FailedCount = 0,
+                ChangedPassword = false,
+                PasswordHash = Guid.NewGuid().ToString(),
             };
 
             //儲存資料
@@ -55,7 +68,7 @@ namespace DotNetCore_React.Application.UserApp
 
         public List<UserDto> GetAllList()
         {
-            var a = _repository_user.GetAllMenuListByUser();
+            var a = _repository_user.GetAllUser();
             return Mapper.Map<List<UserDto>>(a);
         }
 
@@ -111,7 +124,7 @@ namespace DotNetCore_React.Application.UserApp
                     myJson.Add("message", "登入失敗");
                     break;
             }
-            
+
 
             if (is_Login_Success)
             {

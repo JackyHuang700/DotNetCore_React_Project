@@ -46,6 +46,10 @@ namespace DotNetCore_React.Controllers.Backend
         public ActionResult Create([FromBody] UserDto user)
         {
             var myJson = _service.Create_User(user);
+
+            //這裡預計要填入目前登入的使用者
+            //user.CreateUser = HttpContext.Session[''].
+
             return Json(myJson);
         }
 
