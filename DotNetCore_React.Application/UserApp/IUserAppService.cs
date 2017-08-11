@@ -18,5 +18,11 @@ namespace DotNetCore_React.Application.UserApp
         Dictionary<string, object> Delete_User(string id);
         Dictionary<string, object> Update_User(UserDto user);
 
+        /// <summary>
+        /// 將密碼做SHA加密
+        /// </summary>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        string PasswordToSHA512(string password);
     }
 }

@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using AutoMapper;
 using DotNetCore_React.Application.UserApp.Dtos;
 using DotNetCore_React.Domain.IRepositories;
 using DotNetCore_React.Domain.Entities;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace DotNetCore_React.Application.UserApp
 {
@@ -134,8 +135,20 @@ namespace DotNetCore_React.Application.UserApp
             return myJson;
         }
 
-       
 
+        public string PasswordToSHA256(string password)
+        {
+            // SHA256 is disposable by inheritance.  
+            using (var sha256 = SHA256.Create())
+            {
+                // Send a sample text to hash.  
+                var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                // Get the hashed string.  
+                var hash = BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
+
+                return hash;
+            }
+        }
 
         public Dictionary<string, object> Update_User(UserDto user)
         {
