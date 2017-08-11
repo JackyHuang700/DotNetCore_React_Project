@@ -54,7 +54,7 @@ class Full extends Component {
         <Route path="/Index" name="Index" component={Index} />,
         <Route path="/Role_View" name="Role_View" component={Role_View} />,
         <Route path="/Role_Create" name="Role_Create" component={Role_Create} />,
-        <Route path="/Role_Edit/:id/:edit" name="Role_Edit" component={Role_Edit} />,
+        <Route path="/Role_Edit/:id/:" name="Role_Edit" component={Role_Edit} />,
         <Route path="/jackyTest" name="JackyTest" component={JackyTest} />,
         <Route path="/dashboard" name="Dashboard" component={Dashboard} />,
         <Route path="/components/buttons" name="Buttons" component={Buttons} />,
