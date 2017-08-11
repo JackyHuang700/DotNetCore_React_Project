@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 import axios from 'axios';
+import { user_Enum } from '../../EnumScript/GeneralEnumScript.js';
 
 
 //編輯與檢視共用
@@ -61,8 +62,8 @@ class User_Delete extends Component {
 
 
   Button_Submit(event) {
-    // debugger;
-    
+
+
     // axios({
 
     //   url: 'api/User/Delete',
@@ -71,20 +72,20 @@ class User_Delete extends Component {
     //       "id": this.state.User.id,
     //   }
     // })
-    
-    
-    axios.post(`api/User/Delete/${this.state.User.id}`,{
-  })
-    
-    
-    .then((result) => {
 
-      if (result.data.success) {
-        document.location.href = '/#/User_View'
-      }
-    }).catch((error) => {
-      console.log(error)
-    });
+
+    axios.post(`api/User/Delete/${this.state.User.id}`, {
+    })
+
+
+      .then((result) => {
+
+        if (result.data.success) {
+          document.location.href = '/#/User_View'
+        }
+      }).catch((error) => {
+        console.log(error)
+      });
 
     event.preventDefault();
     return false;
@@ -102,67 +103,123 @@ class User_Delete extends Component {
             <div className="card-block">
               <form action="" method="post">
                 <input type="hidden" id="id" name="id" value={this.state.User.id} />
-                
-                <div className="form-group">
-                <div className="input-group">
-                  <input type="text" id="userName" name="userName" className="form-control" placeholder="userName" value={this.state.User.userName} readOnly/>
-                  <span className="input-group-addon"><i className="fa fa-envelope"></i></span>
-                </div>
-              </div>
-              <div className="form-group">
-                <div className="input-group">
-                  <input type="text" id="password" name="password" className="form-control" placeholder="password" value={this.state.User.password} readOnly/>
-                  <span className="input-group-addon"><i className="fa fa-envelope"></i></span>
-                </div>
-              </div>
 
-              <div className="form-group">
-              <div className="input-group">
-                <input type="text" id="email" name="email" className="form-control" placeholder="email" value={this.state.User.email} readOnly/>
-                <span className="input-group-addon"><i className="fa fa-envelope"></i></span>
-              </div>
-            </div>
 
-            <div className="form-group">
-            <div className="input-group">
-              <input type="text" id="roleId" name="roleId" className="form-control" placeholder="roleId" value={this.state.User.roleId} readOnly/>
-              <span className="input-group-addon"><i className="fa fa-envelope"></i></span>
-            </div>
-          </div>
-              
-            <div className="form-group">
-            <div className="input-group">
-              <input type="text" id="firstName" name="firstName" className="form-control" placeholder="firstName" value={this.state.User.firstName} readOnly/>
-              <span className="input-group-addon"><i className="fa fa-envelope"></i></span>ㄇㄩ
-            </div>
-          </div>
-              
-            <div className="form-group">
-            <div className="input-group">
-              <input type="text" id="lastName" name="lastName" className="form-control" placeholder="lastName" value={this.state.User.lastName} readOnly/>
-              <span className="input-group-addon"><i className="fa fa-envelope"></i></span>
-            </div>
-          </div>
-              
-            <div className="form-group">
-            <div className="input-group">
-              <input type="text" id="status" name="status" className="form-control" placeholder="status" value={this.state.User.status} readOnly/>
-              <span className="input-group-addon"><i className="fa fa-envelope"></i></span>
-            </div>
-          </div>
-            <div className="form-group">
-            <div className="input-group">
-              <input type="text" id="createDate" name="createDate" className="form-control" placeholder="createDate" value={this.state.User.createDate} readOnly/>
-              <span className="input-group-addon"><i className="fa fa-envelope"></i></span>
-            </div>
-          </div>
 
-          <div className="form-group">
-          <div className="input-group">
-            <input type="text" id="createUser" name="createUser" className="form-control" placeholder="createUser" value={this.state.User.createUser} readOnly/>
-            <span className="input-group-addon"><i className="fa fa-envelope"></i></span>
-          </div>
-        </div>
+
+                <TextInput name="userName"
+                  labelName="角色名稱"
+                  className=""
+                  display={this.props.display_userName}
+                  required={this.props.required_userName}
+                  validMessage={{ required: 'userName is reduired.' }}
+                  onChange={this.handleInputChange}
+                  defaultValue={this.state.User.userName}
+                  placeholder="userName"
+                  readOnly={true} />
+
+
+
+                <TextInput name="password"
+                  labelName="角色名稱"
+                  className=""
+                  display={this.props.display_password}
+                  required={this.props.required_password}
+                  validMessage={{ required: 'password is reduired.' }}
+                  onChange={this.handleInputChange}
+                  defaultValue={this.state.User.password}
+                  placeholder="password"
+                  readOnly={true} />
+
+
+                <TextInput name="email"
+                  labelName="角色名稱"
+                  className=""
+                  display={this.props.display_email}
+                  required={this.props.required_email}
+                  validMessage={{ required: 'email is reduired.' }}
+                  onChange={this.handleInputChange}
+                  defaultValue={this.state.User.email}
+                  placeholder="email"
+                  readOnly={true} />
+
+
+
+
+                <TextInput name="roleId"
+                  labelName="角色名稱"
+                  className=""
+                  display={this.props.display_roleId}
+                  required={this.props.required_roleId}
+                  validMessage={{ required: 'roleId is reduired.' }}
+                  onChange={this.handleInputChange}
+                  defaultValue={this.state.User.roleId}
+                  placeholder="roleId"
+                  readOnly={true} />
+
+
+                <TextInput name="firstName"
+                  labelName="角色名稱"
+                  className=""
+                  display={this.props.display_firstName}
+                  required={this.props.required_firstName}
+                  validMessage={{ required: 'firstName is reduired.' }}
+                  onChange={this.handleInputChange}
+                  defaultValue={this.state.User.firstName}
+                  placeholder="firstName"
+                  readOnly={true} />
+
+
+                <TextInput name="lastName"
+                  labelName="角色名稱"
+                  className=""
+                  display={this.props.display_lastName}
+                  required={this.props.required_lastName}
+                  validMessage={{ required: 'lastName is reduired.' }}
+                  onChange={this.handleInputChange}
+                  defaultValue={this.state.User.lastName}
+                  placeholder="lastName"
+                  readOnly={true} />
+
+
+                <FormGroup>
+                  <Label for="status">狀態</Label>
+                  <Input type="select" name="status" id="status" onChange={this.handleInputChange}>
+                    <option value={user_Enum.STOP.value}>{user_Enum.STOP.name}</option>
+                    <option value={user_Enum.NORMAL.value}>{user_Enum.NORMAL.name}</option>
+                  </Input>
+
+                </FormGroup>
+
+
+
+
+                <TextInput name="createDate"
+                  labelName="角色名稱"
+                  className=""
+                  display={this.props.display_createDate}
+                  required={this.props.required_createDate}
+                  validMessage={{ required: 'createDate is reduired.' }}
+                  onChange={this.handleInputChange}
+                  defaultValue={this.state.User.createDate}
+                  placeholder="createDate"
+                  readOnly={true} />
+
+
+
+
+
+                <TextInput name="createUser"
+                  labelName="角色名稱"
+                  className=""
+                  display={this.props.display_createUser}
+                  required={this.props.required_createUser}
+                  validMessage={{ required: 'createUser is reduired.' }}
+                  onChange={this.handleInputChange}
+                  defaultValue={this.state.User.createUser}
+                  placeholder="createUser"
+                  readOnly={true} />
+
 
                 <div className="form-group form-actions">
                   <button type="botton" className="btn btn-sm btn-danger" onClick={this.Button_Submit}>確認刪除</button>
@@ -177,14 +234,22 @@ class User_Delete extends Component {
 }
 
 
-export default User_Delete;
+export default EasyForm(User_Delete, 2);
 
-// User_Delete.propTypes = {
+User_Delete.defaultProps = {
+  display_userName: true,
+  display_password: true,
+  display_roleId: true,
+  display_firstName: true,
+  display_lastName: true,
+  display_createDate: true,
+  display_createUser: true,
 
-//   Id: React.PropTypes.string,
-// }
-
-
-// User_Delete.defaultProps = {
-//   Id: '',
-// }
+  required_userName: true,
+  required_password: true,
+  required_roleId: true,
+  required_firstName: true,
+  required_lastName: true,
+  required_createDate: true,
+  required_createUser: true,
+}
