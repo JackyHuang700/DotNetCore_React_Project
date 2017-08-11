@@ -26,7 +26,7 @@ class User_Edit_Show extends Component {
     this.Bind_handleInputChange = this.Bind_handleInputChange.bind(this);
     this.Button_Submit = this.Button_Submit.bind(this);
     this.Is_Show_Password = this.Is_Show_Password.bind(this);
-    
+
   }
 
 
@@ -136,17 +136,24 @@ class User_Edit_Show extends Component {
 
 
 
-Is_Show_Password()
-{
-  return this.state.is_Edit ?
-  (   <div className="form-group">
-  <div className="input-group">
-    <input type="text" id="password" name="password" className="form-control" placeholder="password" value={this.state.User.password} onChange={this.Bind_handleInputChange} readOnly={!this.state.is_Edit} />
-    <span className="input-group-addon"><i className="fa fa-envelope"></i></span>
-  </div>
-</div>) :
-  null;
-}
+  Is_Show_Password() {
+
+
+
+
+    return this.state.is_Edit ?
+      (<TextInput name="password"
+        labelName="角色名稱"
+        className=""
+        display={this.props.display_password}
+        required={this.props.required_password}
+        validMessage={{ required: 'password is reduired.' }}
+        onChange={this.Bind_handleInputChange}
+        defaultValue={this.state.User.password}
+        placeholder="password"
+        readOnly={!this.state.is_Edit} />) :
+      null;
+  }
 
   render() {
     return (
@@ -158,65 +165,105 @@ Is_Show_Password()
             </div>
             <div className="card-block">
               <form action="" method="post">
-                <input type="hidden" id="id" name="id" value={this.state.User.id} />
 
-                <div className="form-group">
-                  <div className="input-group">
-                    <input type="text" id="userName" name="userName" className="form-control" placeholder="userName" value={this.state.User.userName} onChange={this.Bind_handleInputChange} readOnly={!this.state.is_Edit} />
-                    <span className="input-group-addon"><i className="fa fa-envelope"></i></span>
-                  </div>
+                <TextInput name="userName"
+                  labelName="角色名稱"
+                  className=""
+                  display={this.props.display_userName}
+                  required={this.props.required_userName}
+                  validMessage={{ required: 'userName is reduired.' }}
+                  onChange={this.Bind_handleInputChange}
+                  defaultValue={this.state.User.userName}
+                  placeholder="userName"
+                  readOnly={!this.state.is_Edit} />
+
+
+                {this.Is_Show_Password()}
+
+                <TextInput name="email"
+                  labelName="角色名稱"
+                  className=""
+                  display={this.props.display_email}
+                  required={this.props.required_email}
+                  validMessage={{ required: 'email is reduired.' }}
+                  onChange={this.Bind_handleInputChange}
+                  defaultValue={this.state.User.email}
+                  placeholder="email"
+                  readOnly={!this.state.is_Edit} />
+
+                <TextInput name="roleId"
+                  labelName="角色名稱"
+                  className=""
+                  display={this.props.display_roleId}
+                  required={this.props.required_roleId}
+                  validMessage={{ required: 'roleId is reduired.' }}
+                  onChange={this.Bind_handleInputChange}
+                  defaultValue={this.state.User.roleId}
+                  placeholder="roleId"
+                  readOnly={!this.state.is_Edit} />
+
+
+                <TextInput name="firstName"
+                  labelName="角色名稱"
+                  className=""
+                  display={this.props.display_firstName}
+                  required={this.props.required_firstName}
+                  validMessage={{ required: 'firstName is reduired.' }}
+                  onChange={this.Bind_handleInputChange}
+                  defaultValue={this.state.User.firstName}
+                  placeholder="firstName"
+                  readOnly={!this.state.is_Edit} />
+
+                <TextInput name="lastName"
+                  labelName="角色名稱"
+                  className=""
+                  display={this.props.display_lastName}
+                  required={this.props.required_lastName}
+                  validMessage={{ required: 'lastName is reduired.' }}
+                  onChange={this.Bind_handleInputChange}
+                  defaultValue={this.state.User.lastName}
+                  placeholder="lastName"
+                  readOnly={!this.state.is_Edit} />
+
+                  <div className="form-group">
+                  <FormGroup>
+                    <Label for="status">狀態</Label>
+                    <Input type="select" name="status" id="status" onChange={this.Bind_handleInputChange} readOnly={!this.state.is_Edit}>
+                      <option value={user_Enum.STOP.value}>{user_Enum.STOP.name}</option>
+                      <option value={user_Enum.NORMAL.value}>{user_Enum.NORMAL.name}</option>
+                      <option value={user_Enum.EMAIL_NO_VAILD.value}>{user_Enum.EMAIL_NO_VAILD.name}</option>
+                      <option value={user_Enum.FIRST_PASSWORD_UNCHANGE.value}>{user_Enum.FIRST_PASSWORD_UNCHANGE.name}</option>
+                      <option value={user_Enum.ERROR_COUNT.value}>{user_Enum.ERROR_COUNT.name}</option>
+                    </Input>
+                  </FormGroup>
                 </div>
-             
-{this.Is_Show_Password()}
-                <div className="form-group">
-                <div className="input-group">
-                  <input type="text" id="email" name="email" className="form-control" placeholder="email" value={this.state.User.email} onChange={this.Bind_handleInputChange} readOnly={!this.state.is_Edit} />
-                  <span className="input-group-addon"><i className="fa fa-envelope"></i></span>
-                </div>
-              </div>
 
-              <div className="form-group">
-              <div className="input-group">
-                <input type="text" id="roleId" name="roleId" className="form-control" placeholder="roleId" value={this.state.User.roleId} onChange={this.Bind_handleInputChange} readOnly={!this.state.is_Edit} />
-                <span className="input-group-addon"><i className="fa fa-envelope"></i></span>
-              </div>
-            </div>
-                
-              <div className="form-group">
-              <div className="input-group">
-                <input type="text" id="firstName" name="firstName" className="form-control" placeholder="firstName" value={this.state.User.firstName} onChange={this.Bind_handleInputChange} readOnly={!this.state.is_Edit} />
-                <span className="input-group-addon"><i className="fa fa-envelope"></i></span>
-              </div>
-            </div>
-                
-              <div className="form-group">
-              <div className="input-group">
-                <input type="text" id="lastName" name="lastName" className="form-control" placeholder="lastName" value={this.state.User.lastName} onChange={this.Bind_handleInputChange} readOnly={!this.state.is_Edit} />
-                <span className="input-group-addon"><i className="fa fa-envelope"></i></span>
-              </div>
-            </div>
-                
-              <div className="form-group">
-              <div className="input-group">
-                <input type="text" id="status" name="status" className="form-control" placeholder="status" value={this.state.User.status} onChange={this.Bind_handleInputChange} readOnly={!this.state.is_Edit} />
-                <span className="input-group-addon"><i className="fa fa-envelope"></i></span>
-              </div>
-            </div>
-              <div className="form-group">
-              <div className="input-group">
-                <input type="text" id="createDate" name="createDate" className="form-control" placeholder="createDate" value={this.state.User.createDate} onChange={this.Bind_handleInputChange} readOnly={!this.state.is_Edit} />
-                <span className="input-group-addon"><i className="fa fa-envelope"></i></span>
-              </div>
-            </div>
 
-            <div className="form-group">
-            <div className="input-group">
-              <input type="text" id="createUser" name="createUser" className="form-control" placeholder="createUser" value={this.state.User.createUser} onChange={this.Bind_handleInputChange} readOnly={!this.state.is_Edit} />
-              <span className="input-group-addon"><i className="fa fa-envelope"></i></span>
-            </div>
-          </div>
-                
-                
+
+                <TextInput name="createDate"
+                  labelName="角色名稱"
+                  className=""
+                  display={this.props.display_createDate}
+                  required={this.props.required_createDate}
+                  validMessage={{ required: 'createDate is reduired.' }}
+                  onChange={this.Bind_handleInputChange}
+                  defaultValue={this.state.User.createDate}
+                  placeholder="createDate"
+                  readOnly={!this.state.is_Edit} />
+
+
+                <TextInput name="createUser"
+                  labelName="角色名稱"
+                  className=""
+                  display={this.props.display_createUser}
+                  required={this.props.required_createUser}
+                  validMessage={{ required: 'createUser is reduired.' }}
+                  onChange={this.Bind_handleInputChange}
+                  defaultValue={this.state.User.createUser}
+                  placeholder="createUser"
+                  readOnly={!this.state.is_Edit} />
+
+
 
                 <div className="form-group form-actions">
                   <button type="botton" className="btn btn-sm btn-default" onClick={this.Button_Click} >{this.Button_Text()}</button>
@@ -231,14 +278,29 @@ Is_Show_Password()
 }
 
 
-export default User_Edit_Show;
-
-// User_Edit_Show.propTypes = {
-
-//   Id: React.PropTypes.string,
-// }
+export default EasyForm(User_Edit_Show, 2);
 
 
-// User_Edit_Show.defaultProps = {
-//   Id: '',
-// }
+User_Edit_Show.defaultProps = {
+  display_userName: true,
+  display_password: true,
+  display_roleId: true,
+  display_email: true,
+  display_firstName: true,
+  display_lastName: true,
+  // display_status     : true,
+  display_createDate: true,
+  display_createUser: true,
+
+
+  required_userName: true,
+  required_password: true,
+
+  required_roleId: true,
+  required_email: true,
+  required_firstName: true,
+  required_lastName: true,
+  // required_status     : true,
+  required_createDate: true,
+  required_createUser: true,
+}

@@ -192,8 +192,6 @@ class User_Delete extends Component {
                 </FormGroup>
 
 
-
-
                 <TextInput name="createDate"
                   labelName="角色名稱"
                   className=""
