@@ -56,6 +56,12 @@ namespace DotNetCore_React.Controllers
         }
 
 
+        [HttpPost("[action]/{id}")]
 
+        public ActionResult Delete(string id)
+        {
+            var myJson = _service.Delete_Role(id);
+            return Json(myJson);
+        }
     }
 }

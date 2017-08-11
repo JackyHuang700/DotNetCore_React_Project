@@ -61,6 +61,18 @@ namespace DotNetCore_React.Application.RoleApp
             return myJson;
         }
 
-      
+        public Dictionary<string, object> Delete_Role(string id)
+        {
+            var myJson = new Dictionary<string, object>();
+
+            //轉換Guid
+
+            //刪除資料
+            //var a = _repository
+
+            myJson.Add("success", true);
+            myJson.Add("message", "");
+            return myJson;
+        }
     }
 }

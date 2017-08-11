@@ -95,7 +95,7 @@ class Role_View extends Component {
     }
 
     OnClick_Delete(event) {
-        //  document.location.href = `/#/Role_Delete/${event.currentTarget.getAttribute('data-id')}/${false}`;
+         document.location.href = `/#/Role_Delete/${event.currentTarget.getAttribute('data-id')}`;
     }
 
 
