@@ -23,6 +23,6 @@ namespace DotNetCore_React.Application.UserApp
         /// </summary>
         /// <param name="password"></param>
         /// <returns></returns>
-        string PasswordToSHA512(string password);
+        string PasswordToSHA256(string password);
     }
 }
