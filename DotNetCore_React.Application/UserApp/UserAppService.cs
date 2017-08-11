@@ -110,10 +110,11 @@ namespace DotNetCore_React.Application.UserApp
                     myJson.Add("message", "登入失敗");
                     break;
             }
-
+            
 
             if (is_Login_Success)
             {
+                myJson.Add("user", user);
                 user.FailedCount = 0;
             }
             else
@@ -123,7 +124,7 @@ namespace DotNetCore_React.Application.UserApp
                 //失敗次數是否超過系統預設值
                 var aa = _repository_comSystem.Get_ComSystem_By_sysName("AccessFailedCount");
                 var sysFailedCount = int.Parse(aa.sysValue);
-               if (user.FailedCount >= sysFailedCount)
+                if (user.FailedCount >= sysFailedCount)
                 {
                     user.Status = 4;
                 }
@@ -132,6 +133,9 @@ namespace DotNetCore_React.Application.UserApp
 
             return myJson;
         }
+
+       
+
 
         public Dictionary<string, object> Update_User(UserDto user)
         {
