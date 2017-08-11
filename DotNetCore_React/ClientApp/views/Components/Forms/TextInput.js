@@ -62,9 +62,18 @@ export default class TextInput extends Component {
             });
         }
 
+
+        if(this.props.readOnly){
+            baseField = React.cloneElement(baseField,{
+                readOnly:this.props.readOnly
+            });
+        }
+
         if(!this.props.display){
             return (<div></div>)
         }
+
+        
 
         return(<FormGroup>
             <label style={{color:this.props.required && 'red'}}>{this.props.labelName} {this.props.required && '*'}</label>
@@ -77,5 +86,6 @@ TextInput.defaultProps = {
       display:true,
       type:'text',
       className:'',
-      validMessage:null
+      validMessage:null,
+      readOnly:false,
 }

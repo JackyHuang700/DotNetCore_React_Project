@@ -74,43 +74,18 @@ class User_Create extends Component {
                 <TextInput name="SysId"
                   labelName="系統識別碼"
                   className=""
-                  display={this.props.display_SysId}
-                  required={this.props.required_SysId} 
+                  display={this.props.display_userName}
+                  required={this.props.required_userName} 
                   pattern={/^[\w]{5,10}$/}
-                  validMessage={{required: 'SysId is reduired.', pattern: '不能包含字母数字底線以外的字符'}}
+                  validMessage={{required: 'userName is reduired.'}}
                   onChange={this.handleInputChange} 
-                  defaultValue={this.state.SysId} 
+                  defaultValue={this.state.userName} 
                   placeholder="sys123"/>
 
-                <TextInput name="Name" 
-                  labelName="角色名稱"
-                  className=""
-                  display={this.props.display_Name}
-                  required={this.props.required_Name} 
-                  validMessage={{required: 'Name is reduired.'}} 
-                  onChange={this.handleInputChange} 
-                  defaultValue={this.state.Name} 
-                  placeholder="糖糖"/>               
+              
 
-                <TextInput name="Priority" 
-                  labelName="權重"
-                  className=""
-                  display={this.props.display_Priority}
-                  required={this.props.required_Priority} 
-                  validMessage={{required: 'Priority is reduired.'}} 
-                  onChange={this.handleInputChange} 
-                  defaultValue={this.state.Priority} 
-                  placeholder="1"/>
 
-                <TextInput name="Status"
-                  labelName="狀態"
-                  className=""
-                  display={this.props.display_Status}
-                  required={this.props.required_Status} 
-                  validMessage={{required: 'Status is reduired.'}} 
-                  onChange={this.handleInputChange} 
-                  defaultValue={this.state.Status} 
-                  placeholder="1"/>
+
 
                 <div className="form-group form-actions">
                   <Button color="primary" disabled={$invalid ? 'disabled' : false}>確認</Button>
