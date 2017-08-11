@@ -40,7 +40,7 @@ class Login extends Component {
       "Password":password
     }
     }).then((result) => {
-      console.log(result.data)
+      // console.log(result.data)
 
 
     

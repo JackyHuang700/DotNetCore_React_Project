@@ -27,6 +27,7 @@ namespace DotNetCore_React.Controllers.Backend
         public ActionResult Get_User(string id)
         {
             var myJson = _service.GetUser(id);
+           
             return Json(myJson);
         }
 

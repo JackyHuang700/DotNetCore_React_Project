@@ -60,6 +60,9 @@ namespace DotNetCore_React
 
             // Add framework services.
             services.AddMvc();
+
+            //Session服务
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -83,7 +86,11 @@ namespace DotNetCore_React
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            //使用静态文件
             app.UseStaticFiles();
+
+            //Session
+            app.UseSession();
 
             app.UseMvc(routes =>
             {
