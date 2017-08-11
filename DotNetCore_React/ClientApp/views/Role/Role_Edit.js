@@ -10,7 +10,7 @@ class Role_Edit_Show extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      is_Edit: false,
+      is_Edit: true,
       Role: {},
     };
     this.GetData = this.GetData.bind(this);
@@ -38,7 +38,7 @@ class Role_Edit_Show extends Component {
       data: {
       }
     }).then((result) => {
-      // console.log(result.data);
+      console.log(result.data);
       self.setState({
         Role: result.data
       });
@@ -77,30 +77,30 @@ class Role_Edit_Show extends Component {
 
 
   //按鈕觸發事件
-Button_Text(){
-   return this.state.is_Edit ?
-   "編輯完成":
-   "返回";
-}
+  Button_Text() {
+    return this.state.is_Edit ?
+      "編輯完成" :
+      "返回";
+  }
 
 
   //按鈕觸發事件
-  Button_Click(event){
-     if (this.state.is_Edit) {
-       
-     this.Button_Submit();
-     }
-     else{
-     this.Button_BackUp();
+  Button_Click(event) {
+    if (this.state.is_Edit) {
 
-     }
+      this.Button_Submit();
+    }
+    else {
+      this.Button_BackUp();
 
-     event.preventDefault();
+    }
+
+    event.preventDefault();
     return false;
   }
 
 
-   Button_Submit(event) {
+  Button_Submit(event) {
     // const {
     //   SysId,
     //   Name,
@@ -113,12 +113,7 @@ Button_Text(){
 
       url: 'api/Role/Edit',
       method: 'post',
-      data: {
-        // SysId: SysId,
-        // Name: Name,
-        // Priority: Priority,
-        // Status: Status,
-      }
+      data: this.state.Role
     }).then((result) => {
 
       if (result.data.success) {
@@ -134,12 +129,9 @@ Button_Text(){
   }
 
 
-Button_BackUp(event){
-
-   document.location.href = '/#/Role_View';
-
- 
-}
+  Button_BackUp(event) {
+    document.location.href = '/#/Role_View';
+  }
 
   render() {
     return (
@@ -151,48 +143,44 @@ Button_BackUp(event){
             </div>
             <div className="card-block">
               <form action="" method="post">
-                <input type="hidden" id="Id" name="Id" value={this.state.Role.id} />
+                <input type="hidden" id="id" name="id" value={this.state.Role.id} />
 
                 <div className="form-group">
                   <div className="input-group">
-                    <input type="text" id="sysId" name="sysId" className="form-control" placeholder="sysId" value={this.state.Role.sysId} onChange={this.Bind_handleInputChange} readOnly={!this.state.is_Edit}/>
+                    <input type="text" id="sysId" name="sysId" className="form-control" placeholder="sysId" value={this.state.Role.sysId} onChange={this.Bind_handleInputChange} readOnly={!this.state.is_Edit} />
                     <span className="input-group-addon"><i className="fa fa-envelope"></i></span>
                   </div>
                 </div>
                 <div className="form-group">
                   <div className="input-group">
-                    <input type="text" id="name" name="name" className="form-control" placeholder="name" value={this.state.Role.name} onChange={this.Bind_handleInputChange} readOnly={!this.state.is_Edit}/>
+                    <input type="text" id="name" name="name" className="form-control" placeholder="name" value={this.state.Role.name} onChange={this.Bind_handleInputChange} readOnly={!this.state.is_Edit} />
                     <span className="input-group-addon"><i className="fa fa-asterisk"></i></span>
                   </div>
                 </div>
                 <div className="form-group">
                   <div className="input-group">
-                    <input type="text" id="priority" name="priority" className="form-control" placeholder="priority" value={this.state.Role.priority} onChange={this.Bind_handleInputChange} readOnly={!this.state.is_Edit}/>
+                    <input type="text" id="priority" name="priority" className="form-control" placeholder="priority" value={this.state.Role.priority} onChange={this.Bind_handleInputChange} readOnly={!this.state.is_Edit} />
                     <span className="input-group-addon"><i className="fa fa-asterisk"></i></span>
                   </div>
                 </div>
                 <div className="form-group">
                   <div className="input-group">
-                    <input type="text" id="status" name="status" className="form-control" placeholder="status" value={this.state.Role.status} onChange={this.Bind_handleInputChange} readOnly={!this.state.is_Edit}/>
+                    <input type="text" id="status" name="status" className="form-control" placeholder="status" value={this.state.Role.status} onChange={this.Bind_handleInputChange} readOnly={!this.state.is_Edit} />
                     <span className="input-group-addon"><i className="fa fa-asterisk"></i></span>
                   </div>
                 </div>
                 <div className="form-group">
                   <div className="input-group">
-                    <input type="text" id="createDate" name="createDate" className="form-control" placeholder="createDate" value={this.state.Role.createDate} onChange={this.Bind_handleInputChange} readOnly={!this.state.is_Edit}/>
+                    <input type="text" id="createDate" name="createDate" className="form-control" placeholder="createDate" value={this.state.Role.createDate} onChange={this.Bind_handleInputChange} readOnly={!this.state.is_Edit} />
                     <span className="input-group-addon"><i className="fa fa-asterisk"></i></span>
                   </div>
                 </div>
                 <div className="form-group">
                   <div className="input-group">
-                    <input type="text" id="createUser" name="createUser" className="form-control" placeholder="createUser" value={this.state.Role.createUser} onChange={this.Bind_handleInputChange} readOnly={!this.state.is_Edit}/>
+                    <input type="text" id="createUser" name="createUser" className="form-control" placeholder="createUser" value={this.state.Role.createUser} onChange={this.Bind_handleInputChange} readOnly={!this.state.is_Edit} />
                     <span className="input-group-addon"><i className="fa fa-asterisk"></i></span>
                   </div>
                 </div>
-
-
-
-
 
                 <div className="form-group form-actions">
                   <button type="botton" className="btn btn-sm btn-default" onClick={this.Button_Click} >{this.Button_Text()}</button>
@@ -205,15 +193,6 @@ Button_BackUp(event){
     )
   }
 }
-
-
-
-
-
-
-
-
-
 
 
 export default Role_Edit_Show;
