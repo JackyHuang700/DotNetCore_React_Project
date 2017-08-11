@@ -54,10 +54,10 @@ module.exports = {
     // devtool: 'eval-source-map',
     devtool: 'cheap-module-eval-source-map',
     entry: {
-        'boot': [
+        'App': [
             'babel-polyfill',
             'react-hot-loader/patch',
-            `./ClientApp/components/boot.js`
+            `./ClientApp/App.js`
         ]
     },
     output: {

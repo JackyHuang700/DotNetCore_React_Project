@@ -1,19 +1,11 @@
-const routes = {
-  '/': 'Home',
-  '/dashboard': 'Dashboard',
-  '/components': 'Components',
-  '/charts': 'Charts',
-  '/components/buttons': 'Buttons',
-  '/components/social-buttons': 'Social Buttons',
-  '/components/cards': 'Cards',
-  '/components/forms': 'Forms',
-  '/components/modals': 'Modals',
-  '/components/switches': 'Switches',
-  '/components/tables': 'Tables',
-  '/components/tabs': 'Tabs',
-  '/icons': 'Icons',
-  '/icons/font-awesome': 'Font Awesome',
-  '/icons/simple-line-icons': 'Simple Line Icons',
-  '/widgets': 'Widgets',
-};
-export default routes;
+import React, { Component } from 'react';
+import { Route, BrowserRouter, Link, Redirect, Switch } from 'react-router-dom'
+/*
+* 目前沒屁用
+* 已知Breadcrumb會呼叫這隻
+*/
+export default (
+    <Switch>
+
+    </Switch>
+)
