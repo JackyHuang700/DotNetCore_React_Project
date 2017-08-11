@@ -92,11 +92,11 @@ class Role_View extends Component {
 
 
     OnClick_Edit(event) {
-        document.location.href = `/#/Role_Edit/${event.currentTarget.getAttribute('data-id')}/${true}`;
+        document.location.href = `/Role/Edit/${event.currentTarget.getAttribute('data-id')}/${true}`;
     }
 
     OnClick_Delete(event) {
-        document.location.href = `/#/Role_Delete/${event.currentTarget.getAttribute('data-id')}`;
+        document.location.href = `/Role/Delete/${event.currentTarget.getAttribute('data-id')}`;
     }
 
     //將資訊轉換成中文
@@ -127,7 +127,7 @@ class Role_View extends Component {
         };
 
         return (
-            <BootstrapTable data={this.state.RoleList} selectRow={selectRow} striped hover options={options} deleteRow>
+            <BootstrapTable data={this.state.RoleList} selectRow={selectRow} striped hover options={options}>
                 <TableHeaderColumn isKey dataField="button" dataFormat={this.buttonFormatter}>Buttons</TableHeaderColumn>
                 {/* {this.props.display_Id ? <TableHeaderColumn dataField='id'>id</TableHeaderColumn> : null} */}
                 {this.props.display_SysId ? <TableHeaderColumn dataField='sysId'>sysId</TableHeaderColumn> : null}

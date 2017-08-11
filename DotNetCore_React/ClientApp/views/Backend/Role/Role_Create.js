@@ -3,7 +3,7 @@ import { FormGroup, Label, Input, Button, ButtonDropdown, DropdownToggle, Dropdo
 import axios from 'axios';
 import EasyForm, { Field, FieldGroup } from 'react-easyform';
 import TextInput from '../../Components/Forms/TextInput';
-
+import DropDownList from '../../Components/Forms/DropDownList';
 
 import { role_Enum } from '../../../EnumScript/GeneralEnumScript.js';
 
@@ -20,7 +20,6 @@ class Role_Create extends Component {
 
     this.Submit = this.Submit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
-
   }
 
   Submit(event) {
@@ -104,26 +103,25 @@ class Role_Create extends Component {
                   defaultValue={this.state.Priority}
                   placeholder="1" />
 
-                {/* <TextInput name="Status"
+                 <DropDownList name="Status"
                   labelName="狀態"
-                  className=""
                   display={this.props.display_Status}
                   required={this.props.required_Status} 
                   validMessage={{required: 'Status is reduired.'}} 
                   onChange={this.handleInputChange} 
-                  defaultValue={this.state.Status} 
-                  placeholder="1"/> */}
-
-                <FormGroup>
-                  <Label for="Status">狀態</Label>
-                  <Input type="select" name="Status" id="Status" onChange={this.handleInputChange}>
-                    <option value={role_Enum.STOP.value}>{role_Enum.STOP.name}</option>
-                    <option value={role_Enum.NORMAL.value}>{role_Enum.NORMAL.name}</option>
-                  </Input>
-
-                </FormGroup>
-
-
+                  defaultValue={this.state.Status}
+                  options={
+                    [
+                      {
+                        name:role_Enum.STOP.value,
+                        value:role_Enum.STOP.name
+                      },
+                      {
+                        name:role_Enum.NORMAL.value,
+                        value:role_Enum.NORMAL.name
+                      }
+                    ]}
+                  />
                 <div className="form-group form-actions">
                   <Button color="primary" disabled={$invalid ? 'disabled' : false}>確認</Button>
                 </div>
