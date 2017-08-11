@@ -3,8 +3,8 @@ import { Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } fr
 
 import axios from 'axios';
 
-
-import TextInput from '../Components/Forms/TextInput';
+import EasyForm, { Field, FieldGroup } from 'react-easyform';
+import TextInput from '../../Components/Forms/TextInput';
 
 
 //編輯與檢視共用

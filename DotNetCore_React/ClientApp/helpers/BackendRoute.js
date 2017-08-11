@@ -7,7 +7,7 @@ import Aside from '../components/Aside/';
 import Footer from '../components/Footer/';
 import { islogin } from './auth'
 
-import Dashboard from '../views/Dashboard/Dashboard'
+// import Dashboard from '../views/Dashboard/Dashboard'
 
 export function BackendRoute ({component: Component, ...rest}) {
   let logined = islogin();

@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
-import '../../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
+import '../../../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 
 import axios from 'axios';
 
-import {user_Enum} from '../../EnumScript/GeneralEnumScript.js';
+import { user_Enum } from '../../../EnumScript/GeneralEnumScript.js';
 
 
 
@@ -60,36 +60,36 @@ class User_View extends Component {
     }
 
     OnClick_Delete(event) {
-         document.location.href = `/#/User_Delete/${event.currentTarget.getAttribute('data-id')}`;
+        document.location.href = `/#/User_Delete/${event.currentTarget.getAttribute('data-id')}`;
     }
 
 
 
     //將資訊轉換成中文
-    Formatter_Status(cell, row){
+    Formatter_Status(cell, row) {
         let name = "";
 
-switch (`${row.status}`) {
-    case user_Enum.STOP.value:
-    name = user_Enum.STOP.name;
-    break;
-    case user_Enum.NORMAL.value:
-    name = user_Enum.NORMAL.name;
-    break;
-    case user_Enum.EMAIL_NO_VAILD.value:
-    name = user_Enum.EMAIL_NO_VAILD.name;
-    break;
-    case user_Enum.FIRST_PASSWORD_UNCHANGE.value:
-    name = user_Enum.FIRST_PASSWORD_UNCHANGE.name;
-    break;
-    case user_Enum.ERROR_COUNT.value:
-    name = user_Enum.ERROR_COUNT.name;
-    break;
+        switch (`${row.status}`) {
+            case user_Enum.STOP.value:
+                name = user_Enum.STOP.name;
+                break;
+            case user_Enum.NORMAL.value:
+                name = user_Enum.NORMAL.name;
+                break;
+            case user_Enum.EMAIL_NO_VAILD.value:
+                name = user_Enum.EMAIL_NO_VAILD.name;
+                break;
+            case user_Enum.FIRST_PASSWORD_UNCHANGE.value:
+                name = user_Enum.FIRST_PASSWORD_UNCHANGE.name;
+                break;
+            case user_Enum.ERROR_COUNT.value:
+                name = user_Enum.ERROR_COUNT.name;
+                break;
 
-   
-}
 
-return name;
+        }
+
+        return name;
 
     }
 
@@ -119,7 +119,7 @@ return name;
                 {this.props.display_updateDate ? <TableHeaderColumn dataField='updateDate'>updateDate</TableHeaderColumn> : null}
                 {this.props.display_updateUser ? <TableHeaderColumn dataField='updateUser'>updateUser</TableHeaderColumn> : null}
                 {this.props.display_failedCount ? <TableHeaderColumn dataField='failedCount'>failedCount</TableHeaderColumn> : null}
-             
+
 
 
             </BootstrapTable>
@@ -150,7 +150,7 @@ User_View.defaultProps = {
     display_updateDate: true,
     display_updateUser: true,
     display_failedCount: true,
-   
+
 };
 
 

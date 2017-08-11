@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 import axios from 'axios';
-import { user_Enum } from '../../EnumScript/GeneralEnumScript.js';
-
+import { user_Enum } from '../../../EnumScript/GeneralEnumScript.js';
+import EasyForm, { Field, FieldGroup } from 'react-easyform';
 
 //編輯與檢視共用
 class User_Delete extends Component {

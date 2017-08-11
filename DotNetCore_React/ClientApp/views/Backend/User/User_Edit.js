@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 import axios from 'axios';
-
+import EasyForm, { Field, FieldGroup } from 'react-easyform';
 
 //編輯與檢視共用
 class User_Edit_Show extends Component {
@@ -225,7 +225,7 @@ class User_Edit_Show extends Component {
                   placeholder="lastName"
                   readOnly={!this.state.is_Edit} />
 
-                  <div className="form-group">
+                <div className="form-group">
                   <FormGroup>
                     <Label for="status">狀態</Label>
                     <Input type="select" name="status" id="status" onChange={this.Bind_handleInputChange} readOnly={!this.state.is_Edit}>

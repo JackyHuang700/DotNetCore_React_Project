@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
-import '../../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
+import '../../../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 
 import axios from 'axios';
 
-import {role_Enum} from '../../EnumScript/GeneralEnumScript.js';
+import { role_Enum } from '../../../EnumScript/GeneralEnumScript.js';
+
 
 
 //彈跳視窗
@@ -95,25 +96,25 @@ class Role_View extends Component {
     }
 
     OnClick_Delete(event) {
-         document.location.href = `/#/Role_Delete/${event.currentTarget.getAttribute('data-id')}`;
+        document.location.href = `/#/Role_Delete/${event.currentTarget.getAttribute('data-id')}`;
     }
 
-       //將資訊轉換成中文
-       Formatter_Status(cell, row){
+    //將資訊轉換成中文
+    Formatter_Status(cell, row) {
         let name = "";
 
-switch (`${row.status}`) {
-    case role_Enum.STOP.value:
-    name = role_Enum.STOP.name;
-    break;
-    case role_Enum.NORMAL.value:
-    name = role_Enum.NORMAL.name;
-    break;
-   
-}
+        switch (`${row.status}`) {
+            case role_Enum.STOP.value:
+                name = role_Enum.STOP.name;
+                break;
+            case role_Enum.NORMAL.value:
+                name = role_Enum.NORMAL.name;
+                break;
 
-return name;
-       }
+        }
+
+        return name;
+    }
 
 
     render() {
