@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { FormGroup, Label,Input ,Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import axios from 'axios';
 import EasyForm, { Field, FieldGroup } from 'react-easyform';
 import TextInput from '../Components/Forms/TextInput';
 
+
+import {role_Enum} from '../../EnumScript/GeneralEnumScript.js';
 
 class Role_Create extends Component {
 
@@ -102,7 +104,7 @@ class Role_Create extends Component {
                   defaultValue={this.state.Priority} 
                   placeholder="1"/>
 
-                <TextInput name="Status"
+                {/* <TextInput name="Status"
                   labelName="狀態"
                   className=""
                   display={this.props.display_Status}
@@ -110,7 +112,17 @@ class Role_Create extends Component {
                   validMessage={{required: 'Status is reduired.'}} 
                   onChange={this.handleInputChange} 
                   defaultValue={this.state.Status} 
-                  placeholder="1"/>
+                  placeholder="1"/> */}
+
+                  <FormGroup>
+                  <Label for="Status">狀態</Label>
+           <Input type="select" name="Status" id="Status" onChange={this.handleInputChange}>
+            <option value={role_Enum.STOP.value}>{role_Enum.STOP.name}</option>
+            <option value={role_Enum.NORMAL.value}>{role_Enum.NORMAL.name}</option>
+          </Input>
+
+          </FormGroup>
+
 
                 <div className="form-group form-actions">
                   <Button color="primary" disabled={$invalid ? 'disabled' : false}>確認</Button>
