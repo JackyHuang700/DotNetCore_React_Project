@@ -4,6 +4,9 @@ import { Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } fr
 import axios from 'axios';
 
 
+import TextInput from '../Components/Forms/TextInput';
+
+
 //編輯與檢視共用
 class Role_Delete extends Component {
 
@@ -103,42 +106,80 @@ class Role_Delete extends Component {
               <form action="" method="post">
                 <input type="hidden" id="id" name="id" value={this.state.Role.id} />
 
-                <div className="form-group">
-                  <div className="input-group">
-                    <input type="text" id="sysId" name="sysId" className="form-control" placeholder="sysId" value={this.state.Role.sysId} readOnly />
-                    <span className="input-group-addon"><i className="fa fa-envelope"></i></span>
-                  </div>
-                </div>
-                <div className="form-group">
-                  <div className="input-group">
-                    <input type="text" id="name" name="name" className="form-control" placeholder="name" value={this.state.Role.name} readOnly />
-                    <span className="input-group-addon"><i className="fa fa-asterisk"></i></span>
-                  </div>
-                </div>
-                <div className="form-group">
-                  <div className="input-group">
-                    <input type="text" id="priority" name="priority" className="form-control" placeholder="priority" value={this.state.Role.priority} readOnly />
-                    <span className="input-group-addon"><i className="fa fa-asterisk"></i></span>
-                  </div>
-                </div>
-                <div className="form-group">
-                  <div className="input-group">
-                    <input type="text" id="status" name="status" className="form-control" placeholder="status" value={this.state.Role.status} readOnly />
-                    <span className="input-group-addon"><i className="fa fa-asterisk"></i></span>
-                  </div>
-                </div>
-                <div className="form-group">
-                  <div className="input-group">
-                    <input type="text" id="createDate" name="createDate" className="form-control" placeholder="createDate" value={this.state.Role.createDate} readOnly />
-                    <span className="input-group-addon"><i className="fa fa-asterisk"></i></span>
-                  </div>
-                </div>
-                <div className="form-group">
-                  <div className="input-group">
-                    <input type="text" id="createUser" name="createUser" className="form-control" placeholder="createUser" value={this.state.Role.createUser} readOnly />
-                    <span className="input-group-addon"><i className="fa fa-asterisk"></i></span>
-                  </div>
-                </div>
+
+                <TextInput name="sysId" 
+                labelName="角色名稱"
+                className=""
+                display={this.props.display_sysId}
+                required={this.props.required_sysId} 
+                validMessage={{required: 'sysId is reduired.'}} 
+                onChange={this.handleInputChange} 
+                defaultValue={this.state.sysId} 
+                placeholder="sysId"
+                readOnly={true}/> 
+
+
+                <TextInput name="name" 
+                labelName="角色名稱"
+                className=""
+                display={this.props.display_name}
+                required={this.props.required_name} 
+                validMessage={{required: 'name is reduired.'}} 
+                onChange={this.handleInputChange} 
+                defaultValue={this.state.name} 
+                placeholder="name"
+                readOnly={true}/> 
+
+                <TextInput name="priority" 
+                labelName="角色名稱"
+                className=""
+                display={this.props.display_priority}
+                required={this.props.required_priority} 
+                validMessage={{required: 'priority is reduired.'}} 
+                onChange={this.handleInputChange} 
+                defaultValue={this.state.priority} 
+                placeholder="priority"
+                readOnly={true}/> 
+
+
+
+
+                <TextInput name="status" 
+                labelName="角色名稱"
+                className=""
+                display={this.props.display_status}
+                required={this.props.required_status} 
+                validMessage={{required: 'status is reduired.'}} 
+                onChange={this.handleInputChange} 
+                defaultValue={this.state.status} 
+                placeholder="status"
+                readOnly={true}/> 
+
+
+                <TextInput name="createDate" 
+                labelName="角色名稱"
+                className=""
+                display={this.props.display_createDate}
+                required={this.props.required_createDate} 
+                validMessage={{required: 'createDate is reduired.'}} 
+                onChange={this.handleInputChange} 
+                defaultValue={this.state.createDate} 
+                placeholder="createDate"
+                readOnly={true}/> 
+
+
+       
+                <TextInput name="createUser" 
+                labelName="角色名稱"
+                className=""
+                display={this.props.display_createUser}
+                required={this.props.required_createUser} 
+                validMessage={{required: 'createUser is reduired.'}} 
+                onChange={this.handleInputChange} 
+                defaultValue={this.state.createUser} 
+                placeholder="createUser"
+                readOnly={true}/> 
+
 
                 <div className="form-group form-actions">
                   <button type="botton" className="btn btn-sm btn-danger" onClick={this.Button_Submit}>確認刪除</button>
@@ -153,14 +194,20 @@ class Role_Delete extends Component {
 }
 
 
-export default Role_Delete;
+export default EasyForm(Role_Delete, 2);
 
-// Role_Delete.propTypes = {
+Role_Delete.defaultProps = {
+  display_sysId     : true,
+  display_name     : true,
+  display_priority     : true,
+  display_status     : true,
+  display_createDate     : true,
+  display_createUser     : true,
 
-//   Id: React.PropTypes.string,
-// }
-
-
-// Role_Delete.defaultProps = {
-//   Id: '',
-// }
+  required_sysId     : true,
+  required_name     : true,
+  required_priority     : true,
+  required_status     : true,
+  required_createDate     : true,
+  required_createUser     : true,
+}

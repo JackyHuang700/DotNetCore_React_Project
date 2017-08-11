@@ -3,6 +3,7 @@ import { FormGroup, Label, Input, Button, ButtonDropdown, DropdownToggle, Dropdo
 
 import axios from 'axios';
 import { role_Enum } from '../../EnumScript/GeneralEnumScript.js';
+import TextInput from '../Components/Forms/TextInput';
 
 
 //編輯與檢視共用
@@ -152,24 +153,42 @@ class Role_Edit_Show extends Component {
               <form action="" method="post">
                 <input type="hidden" id="id" name="id" value={this.state.Role.id} />
 
-                <div className="form-group">
-                  <div className="input-group">
-                    <input type="text" id="sysId" name="sysId" className="form-control" placeholder="sysId" value={this.state.Role.sysId} onChange={this.Bind_handleInputChange} readOnly={!this.state.is_Edit} />
-                    <span className="input-group-addon"><i className="fa fa-envelope"></i></span>
-                  </div>
-                </div>
-                <div className="form-group">
-                  <div className="input-group">
-                    <input type="text" id="name" name="name" className="form-control" placeholder="name" value={this.state.Role.name} onChange={this.Bind_handleInputChange} readOnly={!this.state.is_Edit} />
-                    <span className="input-group-addon"><i className="fa fa-asterisk"></i></span>
-                  </div>
-                </div>
-                <div className="form-group">
-                  <div className="input-group">
-                    <input type="text" id="priority" name="priority" className="form-control" placeholder="priority" value={this.state.Role.priority} onChange={this.Bind_handleInputChange} readOnly={!this.state.is_Edit} />
-                    <span className="input-group-addon"><i className="fa fa-asterisk"></i></span>
-                  </div>
-                </div>
+
+
+                <TextInput name="sysId" 
+                labelName="角色名稱"
+                className=""
+                display={this.props.display_sysId}
+                required={this.props.required_sysId} 
+                validMessage={{required: 'sysId is reduired.'}} 
+                onChange={this.Bind_handleInputChange} 
+                defaultValue={this.state.sysId} 
+                placeholder="sysId"
+                readOnly={!this.state.is_Edit}/> 
+
+                <TextInput name="name" 
+                labelName="角色名稱"
+                className=""
+                display={this.props.display_name}
+                required={this.props.required_name} 
+                validMessage={{required: 'name is reduired.'}} 
+                onChange={this.Bind_handleInputChange} 
+                defaultValue={this.state.name} 
+                placeholder="name"
+                readOnly={!this.state.is_Edit}/> 
+
+                <TextInput name="priority" 
+                labelName="角色名稱"
+                className=""
+                display={this.props.display_priority}
+                required={this.props.required_priority} 
+                validMessage={{required: 'priority is reduired.'}} 
+                onChange={this.Bind_handleInputChange} 
+                defaultValue={this.state.priority} 
+                placeholder="priority"
+                readOnly={!this.state.is_Edit}/> 
+
+      
                 {/* <div className="form-group">
                    <div className="input-group">
                      <input type="text" id="status" name="status" className="form-control" placeholder="status" value={this.state.Role.status} onChange={this.Bind_handleInputChange} readOnly={!this.state.is_Edit} />
@@ -189,20 +208,28 @@ class Role_Edit_Show extends Component {
                 </div>
 
 
+                <TextInput name="createDate" 
+                labelName="角色名稱"
+                className=""
+                display={this.props.display_createDate}
+                required={this.props.required_createDate} 
+                validMessage={{required: 'createDate is reduired.'}} 
+                onChange={this.Bind_handleInputChange} 
+                defaultValue={this.state.createDate} 
+                placeholder="createDate"
+                readOnly={!this.state.is_Edit}/> 
+                
 
-
-                <div className="form-group">
-                  <div className="input-group">
-                    <input type="text" id="createDate" name="createDate" className="form-control" placeholder="createDate" value={this.state.Role.createDate} onChange={this.Bind_handleInputChange} readOnly={!this.state.is_Edit} />
-                    <span className="input-group-addon"><i className="fa fa-asterisk"></i></span>
-                  </div>
-                </div>
-                <div className="form-group">
-                  <div className="input-group">
-                    <input type="text" id="createUser" name="createUser" className="form-control" placeholder="createUser" value={this.state.Role.createUser} onChange={this.Bind_handleInputChange} readOnly={!this.state.is_Edit} />
-                    <span className="input-group-addon"><i className="fa fa-asterisk"></i></span>
-                  </div>
-                </div>
+                <TextInput name="createUser" 
+                labelName="角色名稱"
+                className=""
+                display={this.props.display_createUser}
+                required={this.props.required_createUser} 
+                validMessage={{required: 'createUser is reduired.'}} 
+                onChange={this.Bind_handleInputChange} 
+                defaultValue={this.state.createUser} 
+                placeholder="createUser"
+                readOnly={!this.state.is_Edit}/> 
 
                 <div className="form-group form-actions">
                   <button type="botton" className="btn btn-sm btn-default" onClick={this.Button_Click} >{this.Button_Text()}</button>
@@ -217,14 +244,21 @@ class Role_Edit_Show extends Component {
 }
 
 
-export default Role_Edit_Show;
-
-// Role_Edit_Show.propTypes = {
-
-//   Id: React.PropTypes.string,
-// }
+export default EasyForm(Role_Edit_Show, 2);
 
 
-// Role_Edit_Show.defaultProps = {
-//   Id: '',
-// }
+Role_Edit_Show.defaultProps = {
+  display_sysId     : true,
+  display_name     : true,
+  display_priority     : true,
+  // display_status     : true,
+  display_createDate     : true,
+  display_createUser     : true,
+
+  required_sysId     : true,
+  required_name     : true,
+  required_priority     : true,
+  // required_status     : true,
+  required_createDate     : true,
+  required_createUser     : true,
+}
