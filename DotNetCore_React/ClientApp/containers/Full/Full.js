@@ -27,6 +27,10 @@ import Role_View from '../../views/Role/Role_View'
 import Role_Create from '../../views/Role/Role_Create'
 import Role_Edit from '../../views/Role/Role_Edit'
 import Role_Delete from '../../views/Role/Role_Delete'
+import User_View from '../../views/User/User_View'
+import User_Create from '../../views/User/User_Create'
+import User_Edit from '../../views/User/User_Edit'
+import User_Delete from '../../views/User/User_Delete'
 
 class Full extends Component {
 
@@ -57,6 +61,13 @@ class Full extends Component {
         <Route path="/Role_Create" name="Role_Create" component={Role_Create} />,
         <Route path="/Role_Edit/:id/:edit" name="Role_Edit" component={Role_Edit} />,
         <Route path="/Role_Delete/:id" name="Role_Delete" component={Role_Delete} />,
+
+
+<Route path="/User_View" name="User_View" component={User_View} />,
+        <Route path="/User_Create" name="User_Create" component={User_Create} />,
+        <Route path="/User_Edit/:id/:edit" name="User_Edit" component={User_Edit} />,
+        <Route path="/User_Delete/:id" name="User_Delete" component={User_Delete} />,
+
         <Route path="/jackyTest" name="JackyTest" component={JackyTest} />,
         <Route path="/dashboard" name="Dashboard" component={Dashboard} />,
         <Route path="/components/buttons" name="Buttons" component={Buttons} />,

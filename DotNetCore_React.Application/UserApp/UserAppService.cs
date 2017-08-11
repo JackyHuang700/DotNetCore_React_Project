@@ -4,6 +4,7 @@ using System.Text;
 using AutoMapper;
 using DotNetCore_React.Application.UserApp.Dtos;
 using DotNetCore_React.Domain.IRepositories;
+using DotNetCore_React.Domain.Entities;
 
 namespace DotNetCore_React.Application.UserApp
 {
@@ -18,11 +19,54 @@ namespace DotNetCore_React.Application.UserApp
             _repository_comSystem = repository_comSystem;
         }
 
+        public Dictionary<string, object> Create_User(UserDto user)
+        {
+            var myJson = new Dictionary<string, object>();
+
+            var dateTime = DateTime.Now;
+            var roleDB = new User()
+            {
+                Id = Guid.NewGuid(),
+                CreateDate = dateTime,
+                UpdateDate = dateTime,
+            };
+
+            //儲存資料
+
+            myJson.Add("success", true);
+            myJson.Add("message", "");
+            return myJson;
+        }
+
+        public Dictionary<string, object> Delete_User(string id)
+        {
+            var myJson = new Dictionary<string, object>();
+
+            //轉換Guid
+
+            //刪除資料
+            //var a = _repository
+
+            myJson.Add("success", true);
+            myJson.Add("message", "");
+            return myJson;
+        }
+
         public List<UserDto> GetAllList()
         {
             var a = _repository_user.GetAllMenuListByUser();
             return Mapper.Map<List<UserDto>>(a);
         }
+
+        public UserDto GetUser(string id)
+        {
+            //處理null狀況
+            Guid guid;
+            Guid.TryParse(id, out guid);
+            var a = _repository_user.GetUser(guid);
+            return Mapper.Map<UserDto>(a);
+        }
+
 
 
         public Dictionary<string, object> Login(string userName, string password)
@@ -87,6 +131,11 @@ namespace DotNetCore_React.Application.UserApp
             _repository_user.Update_User(user);
 
             return myJson;
+        }
+
+        public Dictionary<string, object> Update_User(UserDto user)
+        {
+            throw new NotImplementedException();
         }
     }
 }

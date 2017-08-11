@@ -27,6 +27,10 @@ namespace DotNetCore_React.EntityFrameworkCore.Repositories
             return GetAllMenuListByUser().Where(c => c.UserName == userName).FirstOrDefault();
         }
 
+        public User GetUser(Guid id)
+        {
+            return _dbContext.Set<User>().FirstOrDefault(C => C.Id == id);
+        }
 
         Dictionary<string, object> IUserRepository.Update_User(User user)
         {

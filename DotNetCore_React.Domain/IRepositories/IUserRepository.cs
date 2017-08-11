@@ -13,5 +13,8 @@ namespace DotNetCore_React.Domain.IRepositories
 
         //更新使用者資料
         Dictionary<string, object> Update_User(User user);
+
+
+        User GetUser(Guid id);
     }
 }

@@ -4,9 +4,9 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import '../../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 
-
 import axios from 'axios';
 
+import {role_Enum} from '../../EnumScript/GeneralEnumScript.js';
 
 
 //彈跳視窗
@@ -98,6 +98,23 @@ class Role_View extends Component {
          document.location.href = `/#/Role_Delete/${event.currentTarget.getAttribute('data-id')}`;
     }
 
+       //將資訊轉換成中文
+       Formatter_Status(cell, row){
+        let name = "";
+
+switch (`${row.status}`) {
+    case role_Enum.STOP.value:
+    name = role_Enum.STOP.name;
+    break;
+    case role_Enum.NORMAL.value:
+    name = role_Enum.NORMAL.name;
+    break;
+   
+}
+
+return name;
+       }
+
 
     render() {
         const options = {
@@ -115,7 +132,7 @@ class Role_View extends Component {
                 {this.props.display_SysId ? <TableHeaderColumn dataField='sysId'>sysId</TableHeaderColumn> : null}
                 {this.props.display_name ? <TableHeaderColumn dataField='name'>name</TableHeaderColumn> : null}
                 {this.props.display_Priority ? <TableHeaderColumn dataField='priority'>priority</TableHeaderColumn> : null}
-                {this.props.display_Status ? <TableHeaderColumn dataField='status'>ststus</TableHeaderColumn> : null}
+                {this.props.display_Status ? <TableHeaderColumn dataField='status' dataFormat={this.Formatter_Status}>ststus</TableHeaderColumn> : null}
                 {this.props.display_CreateDate ? <TableHeaderColumn dataField='createDate'>createDate</TableHeaderColumn> : null}
                 {this.props.display_CreateUser ? <TableHeaderColumn dataField='createUser'>createUser</TableHeaderColumn> : null}
                 {this.props.display_UpdateDate ? <TableHeaderColumn dataField='updateDate'>updateDate</TableHeaderColumn> : null}
