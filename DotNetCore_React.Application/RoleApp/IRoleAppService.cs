@@ -16,5 +16,7 @@ namespace DotNetCore_React.Application.RoleApp
 
         Dictionary<string, object> Create_Role(RoleDto role);
         Dictionary<string, object> Update_Role(RoleDto role);
-    } 
+
+        Dictionary<string, object> Delete_Role(string id);
+    }
 }

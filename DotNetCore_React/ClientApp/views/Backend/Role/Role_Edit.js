@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { FormGroup, Label, Input, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 import axios from 'axios';
+import { role_Enum } from '../../EnumScript/GeneralEnumScript.js';
 
 
 //編輯與檢視共用
@@ -24,6 +25,8 @@ class Role_Edit_Show extends Component {
 
     this.Title = this.Title.bind(this);
     this.Bind_handleInputChange = this.Bind_handleInputChange.bind(this);
+    this.Button_Submit = this.Button_Submit.bind(this);
+
   }
 
 
@@ -72,9 +75,10 @@ class Role_Edit_Show extends Component {
       "檢視角色";
   }
 
-  Bind_handleInputChange() {
+
+  Bind_handleInputChange(event) {
     return this.state.is_Edit ?
-      this.handleInputChange :
+      this.handleInputChange(event) :
       null;
   }
 
@@ -166,12 +170,27 @@ class Role_Edit_Show extends Component {
                     <span className="input-group-addon"><i className="fa fa-asterisk"></i></span>
                   </div>
                 </div>
+                {/* <div className="form-group">
+                   <div className="input-group">
+                     <input type="text" id="status" name="status" className="form-control" placeholder="status" value={this.state.Role.status} onChange={this.Bind_handleInputChange} readOnly={!this.state.is_Edit} />
+                     <span className="input-group-addon"><i className="fa fa-asterisk"></i></span>
+                   </div>
+                 </div> */}
+
+
                 <div className="form-group">
-                  <div className="input-group">
-                    <input type="text" id="status" name="status" className="form-control" placeholder="status" value={this.state.Role.status} onChange={this.Bind_handleInputChange} readOnly={!this.state.is_Edit} />
-                    <span className="input-group-addon"><i className="fa fa-asterisk"></i></span>
-                  </div>
+                  <FormGroup>
+                    <Label for="status">狀態</Label>
+                    <Input type="select" name="status" id="status" onChange={this.handleInputChange} readOnly={!this.state.is_Edit}>
+                      <option value={role_Enum.STOP.value}>{role_Enum.STOP.name}</option>
+                      <option value={role_Enum.NORMAL.value}>{role_Enum.NORMAL.name}</option>
+                    </Input>
+                  </FormGroup>
                 </div>
+
+
+
+
                 <div className="form-group">
                   <div className="input-group">
                     <input type="text" id="createDate" name="createDate" className="form-control" placeholder="createDate" value={this.state.Role.createDate} onChange={this.Bind_handleInputChange} readOnly={!this.state.is_Edit} />

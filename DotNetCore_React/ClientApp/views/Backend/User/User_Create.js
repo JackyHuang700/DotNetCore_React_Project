@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import { FormGroup, Label,Input ,Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import axios from 'axios';
 import EasyForm, { Field, FieldGroup } from 'react-easyform';
 import TextInput from '../Components/Forms/TextInput';
 
 
-import {role_Enum} from '../../EnumScript/GeneralEnumScript.js';
-
-class Role_Create extends Component {
+class User_Create extends Component {
 
   constructor(props) {
     super(props);
@@ -25,7 +23,7 @@ class Role_Create extends Component {
 
   Submit(event) {
     axios({
-      url: 'api/Role/Create',
+      url: 'api/User/Create',
       method: 'post',
       data: {
         SysId: this.state.SysId,
@@ -35,7 +33,7 @@ class Role_Create extends Component {
       }
     }).then((result) => {
       if (result.data.success) {
-        document.location.href = '/#/Role_View'
+        document.location.href = '/#/User_View'
       }
     }).catch((error) => {
       console.log(error)
@@ -104,7 +102,7 @@ class Role_Create extends Component {
                   defaultValue={this.state.Priority} 
                   placeholder="1"/>
 
-                {/* <TextInput name="Status"
+                <TextInput name="Status"
                   labelName="狀態"
                   className=""
                   display={this.props.display_Status}
@@ -112,17 +110,7 @@ class Role_Create extends Component {
                   validMessage={{required: 'Status is reduired.'}} 
                   onChange={this.handleInputChange} 
                   defaultValue={this.state.Status} 
-                  placeholder="1"/> */}
-
-                  <FormGroup>
-                  <Label for="Status">狀態</Label>
-           <Input type="select" name="Status" id="Status" onChange={this.handleInputChange}>
-            <option value={role_Enum.STOP.value}>{role_Enum.STOP.name}</option>
-            <option value={role_Enum.NORMAL.value}>{role_Enum.NORMAL.name}</option>
-          </Input>
-
-          </FormGroup>
-
+                  placeholder="1"/>
 
                 <div className="form-group form-actions">
                   <Button color="primary" disabled={$invalid ? 'disabled' : false}>確認</Button>
@@ -136,9 +124,9 @@ class Role_Create extends Component {
   }
 }
 
-export default EasyForm(Role_Create, 2);
+export default EasyForm(User_Create, 2);
 
-Role_Create.defaultProps = {
+User_Create.defaultProps = {
     display_SysId     : true,
     display_Name      : true,
     display_Priority  : true,
