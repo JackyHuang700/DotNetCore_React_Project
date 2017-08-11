@@ -66,7 +66,7 @@ class Role_View extends Component {
         const self = this;
 
         axios.get('api/Role/Role_View').then((result) => {
-            console.log(result.data);
+            // console.log(result.data);
             this.setState({ RoleList: result.data });
         }).catch((error) => {
             console.log(error)
@@ -79,7 +79,7 @@ class Role_View extends Component {
         )
     }
 
-    
+
     buttonFormatter(cell, row) {
         return (
             <div>
@@ -90,13 +90,13 @@ class Role_View extends Component {
     }
 
 
-OnClick_Edit(event){
- document.location.href = `/#/Role_Edit/${event.currentTarget.getAttribute('data-id')}`;
-}
+    OnClick_Edit(event) {
+        document.location.href = `/#/Role_Edit/${event.currentTarget.getAttribute('data-id')}/${true}`;
+    }
 
-OnClick_Delete(event){
-//  document.location.href = `/#/Role_Delete/${event.currentTarget.getAttribute('data-id')}`;
-}
+    OnClick_Delete(event) {
+        //  document.location.href = `/#/Role_Delete/${event.currentTarget.getAttribute('data-id')}/${false}`;
+    }
 
 
     render() {

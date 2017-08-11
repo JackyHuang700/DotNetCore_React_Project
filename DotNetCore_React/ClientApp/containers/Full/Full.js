@@ -12,7 +12,7 @@ import Charts from '../../views/Charts/'
 import Widgets from '../../views/Widgets/'
 import Buttons from '../../views/Components/Buttons/'
 import Cards from '../../views/Components/Cards/'
-import Forms from '../../views/Components/Forms/'
+// import Forms from '../../views/Components/Forms/'
 import Modals from '../../views/Components/Modals/'
 import SocialButtons from '../../views/Components/SocialButtons/'
 import Switches from '../../views/Components/Switches/'
@@ -36,7 +36,7 @@ class Full extends Component {
     };
 
     this.SwitchController = this.SwitchController.bind(this);
-          this.Change_Login = this.Change_Login.bind(this);
+    this.Change_Login = this.Change_Login.bind(this);
 
   }
 
@@ -54,12 +54,12 @@ class Full extends Component {
         <Route path="/Index" name="Index" component={Index} />,
         <Route path="/Role_View" name="Role_View" component={Role_View} />,
         <Route path="/Role_Create" name="Role_Create" component={Role_Create} />,
-        <Route path="/Role_Edit/:id" name="Role_Edit" component={Role_Edit} />,
+        <Route path="/Role_Edit/:id/:edit" name="Role_Edit" component={Role_Edit} />,
         <Route path="/jackyTest" name="JackyTest" component={JackyTest} />,
         <Route path="/dashboard" name="Dashboard" component={Dashboard} />,
         <Route path="/components/buttons" name="Buttons" component={Buttons} />,
         <Route path="/components/cards" name="Cards" component={Cards} />,
-        <Route path="/components/forms" name="Forms" component={Forms} />,
+        // <Route path="/components/forms" name="Forms" component={Forms} />,
         <Route path="/components/modals" name="Modals" component={Modals} />,
         <Route path="/components/social-buttons" name="Social Buttons" component={SocialButtons} />,
         <Route path="/components/switches" name="Swithces" component={Switches} />,
@@ -78,21 +78,21 @@ class Full extends Component {
   }
 
 
-//切換
-//卡在如何把這隻function傳進Login component
-  Change_Login(){
-     console.log(`Change_Login`);
+  //切換
+  //卡在如何把這隻function傳進Login component
+  Change_Login() {
+    console.log(`Change_Login`);
     // this.setState({
     //   isLogin: !isLogin,
     // });
   }
 
-  render() {  
+  render() {
     return (
       <div className="app">
         <Header />
         <div className="app-body">
-          <Sidebar {...this.props} isLogin={this.state.isLogin}/>
+          <Sidebar {...this.props} isLogin={this.state.isLogin} />
           <main className="main">
             <Breadcrumb />
             <div className="container-fluid">

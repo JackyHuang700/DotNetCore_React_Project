@@ -10,9 +10,12 @@ class Role_Edit_Show extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      is_Edit: true,
+      is_Edit: this.props.match.params.edit.toLocaleLowerCase() === "true" ? true : false,
       Role: {},
     };
+    // debugger;
+    // console.log(`this.props.match.params)`, this.props.match.params)
+
     this.GetData = this.GetData.bind(this);
     this.Button_Click = this.Button_Click.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -38,7 +41,7 @@ class Role_Edit_Show extends Component {
       data: {
       }
     }).then((result) => {
-      console.log(result.data);
+      // console.log(result.data);
       self.setState({
         Role: result.data
       });
