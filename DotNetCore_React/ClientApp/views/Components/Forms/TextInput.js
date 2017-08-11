@@ -14,13 +14,7 @@ export default class TextInput extends Component {
 
         let baseField = <Field {...myProps} />
         baseField = React.cloneElement(baseField,{
-            type:this.props.type,
-            id:this.props.name,
-            name:this.props.name,
-            className:this.props.className,
-            onChange:this.props.onChange,
-            defaultValue:this.props.defaultValue,
-            placeholder:this.props.placeholder
+            id:this.props.name
         });
 
         if (!this.props.display) {
@@ -38,6 +32,5 @@ TextInput.defaultProps = {
     display: true,
     type: 'text',
     className: '',
-    validMessage: null,
-    readOnly: false,
+    validMessage: null
 }

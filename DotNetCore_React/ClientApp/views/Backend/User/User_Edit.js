@@ -225,20 +225,38 @@ class User_Edit_Show extends Component {
                   placeholder="lastName"
                   readOnly={!this.state.is_Edit} />
 
-                <div className="form-group">
-                  <FormGroup>
-                    <Label for="status">狀態</Label>
-                    <Input type="select" name="status" id="status" onChange={this.Bind_handleInputChange} readOnly={!this.state.is_Edit}>
-                      <option value={user_Enum.STOP.value}>{user_Enum.STOP.name}</option>
-                      <option value={user_Enum.NORMAL.value}>{user_Enum.NORMAL.name}</option>
-                      <option value={user_Enum.EMAIL_NO_VAILD.value}>{user_Enum.EMAIL_NO_VAILD.name}</option>
-                      <option value={user_Enum.FIRST_PASSWORD_UNCHANGE.value}>{user_Enum.FIRST_PASSWORD_UNCHANGE.name}</option>
-                      <option value={user_Enum.ERROR_COUNT.value}>{user_Enum.ERROR_COUNT.name}</option>
-                    </Input>
-                  </FormGroup>
-                </div>
-
-
+                 <DropDownList name="Status"
+                  labelName="狀態"
+                  display={this.props.display_Status}
+                  required={this.props.required_Status} 
+                  validMessage={{required: 'Status is reduired.'}} 
+                  onChange={this.Bind_handleInputChange} 
+                  defaultValue={this.state.Status}
+                  readOnly={!this.state.is_Edit}
+                  options={
+                    [
+                      {
+                        name:user_Enum.STOP.value,
+                        value:user_Enum.STOP.name
+                      },
+                      {
+                        name:user_Enum.NORMAL.value,
+                        value:user_Enum.NORMAL.name
+                      },
+                      {
+                        name:user_Enum.EMAIL_NO_VAILD.value,
+                        value:user_Enum.EMAIL_NO_VAILD.name
+                      },
+                      {
+                        name:user_Enum.FIRST_PASSWORD_UNCHANGE.value,
+                        value:user_Enum.FIRST_PASSWORD_UNCHANGE.name
+                      },
+                      {
+                        name:user_Enum.ERROR_COUNT.value,
+                        value:user_Enum.ERROR_COUNT.name
+                      }
+                    ]}
+                  />
 
                 <TextInput name="createDate"
                   labelName="角色名稱"

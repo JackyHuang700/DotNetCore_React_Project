@@ -126,7 +126,7 @@ class Role_Edit_Show extends Component {
     }).then((result) => {
 
       if (result.data.success) {
-        document.location.href = '/#/Role_View'
+        document.location.href = '/Role'
       }
     }).catch((error) => {
       console.log(error)
@@ -139,7 +139,7 @@ class Role_Edit_Show extends Component {
 
 
   Button_BackUp(event) {
-    document.location.href = '/#/Role_View';
+    document.location.href = '/Role';
   }
 
   render() {
@@ -153,8 +153,6 @@ class Role_Edit_Show extends Component {
             <div className="card-block">
               <form action="" method="post">
                 <input type="hidden" id="id" name="id" value={this.state.Role.id} />
-
-
 
                 <TextInput name="sysId"
                   labelName="角色名稱"
@@ -189,25 +187,26 @@ class Role_Edit_Show extends Component {
                   placeholder="priority"
                   readOnly={!this.state.is_Edit} />
 
-
-                {/* <div className="form-group">
-                   <div className="input-group">
-                     <input type="text" id="status" name="status" className="form-control" placeholder="status" value={this.state.Role.status} onChange={this.Bind_handleInputChange} readOnly={!this.state.is_Edit} />
-                     <span className="input-group-addon"><i className="fa fa-asterisk"></i></span>
-                   </div>
-                 </div> */}
-
-
-                <div className="form-group">
-                  <FormGroup>
-                    <Label for="status">狀態</Label>
-                    <Input type="select" name="status" id="status" onChange={this.handleInputChange} readOnly={!this.state.is_Edit}>
-                      <option value={role_Enum.STOP.value}>{role_Enum.STOP.name}</option>
-                      <option value={role_Enum.NORMAL.value}>{role_Enum.NORMAL.name}</option>
-                    </Input>
-                  </FormGroup>
-                </div>
-
+                 <DropDownList name="Status"
+                  labelName="狀態"
+                  display={this.props.display_Status}
+                  required={this.props.required_Status} 
+                  validMessage={{required: 'Status is reduired.'}} 
+                  onChange={this.handleInputChange} 
+                  defaultValue={this.state.Status}
+                  readOnly={!this.state.is_Edit}
+                  options={
+                    [
+                      {
+                        name:role_Enum.STOP.value,
+                        value:role_Enum.STOP.name
+                      },
+                      {
+                        name:role_Enum.NORMAL.value,
+                        value:role_Enum.NORMAL.name
+                      }
+                    ]}
+                  />
 
                 <TextInput name="createDate"
                   labelName="角色名稱"

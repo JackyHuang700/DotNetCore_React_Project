@@ -24,36 +24,26 @@ class Sidebar extends Component {
 
 
   SwitchController() {
-    var renderList = [
-      <li className="nav-item">
-        <NavLink to={'/Login'} className="nav-link" activeClassName="active"><i className="icon-speedometer"></i> Login <span className="badge badge-info"></span></NavLink>
-      </li>
-    ];
+    var renderList = [];
 
     if (this.props.isLogin) {
-      renderList.unshift(
+      renderList = renderList.concat([  
         <li className="nav-item">
           <NavLink to={'/Index'} className="nav-link" activeClassName="active"><i className="icon-speedometer"></i> Index <span className="badge badge-info"></span></NavLink>
-        </li>
-      );
-
-      renderList = renderList.concat([
-        
-        <li className="nav-item">
-          <NavLink to={'/Role_View'} className="nav-link" activeClassName="active"><i className="icon-speedometer"></i> Role <span className="badge badge-info"></span></NavLink>
         </li>,
         <li className="nav-item">
-          <NavLink to={'/User_View'} className="nav-link" activeClassName="active"><i className="icon-speedometer"></i> User <span className="badge badge-info"></span></NavLink>
+          <NavLink to={'/dashboard'} className="nav-link" activeClassName="active"><i className="icon-speedometer"></i> Dashboard <span className="badge badge-info">NEW</span></NavLink>
+        </li>,  
+        <li className="nav-item">
+          <NavLink to={'/Role'} className="nav-link" activeClassName="active"><i className="icon-speedometer"></i> Role <span className="badge badge-info"></span></NavLink>
+        </li>,
+        <li className="nav-item">
+          <NavLink to={'/User'} className="nav-link" activeClassName="active"><i className="icon-speedometer"></i> User <span className="badge badge-info"></span></NavLink>
         </li>,
         <li className="nav-item">
           <NavLink to={'/jackyTest'} className="nav-link" activeClassName="active"><i className="icon-speedometer"></i> JackyTest <span className="badge badge-info">OLD</span></NavLink>
         </li>,
-        <li className="nav-item">
-          <NavLink to={'/dashboard'} className="nav-link" activeClassName="active"><i className="icon-speedometer"></i> Dashboard <span className="badge badge-info">NEW</span></NavLink>
-        </li>,
-        <li className="nav-title">
-          UI Elements
-            </li>,
+        <li className="nav-title">UI Elements</li>,
         <li className={this.activeRoute("/components")}>
           <a className="nav-link nav-dropdown-toggle" href="#" onClick={this.handleClick.bind(this)}><i className="icon-puzzle"></i> Components</a>
           <ul className="nav-dropdown-items">
@@ -101,9 +91,7 @@ class Sidebar extends Component {
           <NavLink to={'/charts'} className="nav-link" activeClassName="active"><i className="icon-pie-chart"></i> Charts</NavLink>
         </li>,
         <li className="divider"></li>,
-        <li className="nav-title">
-          Extras
-            </li>,
+        <li className="nav-title">Extras</li>,
         <li className="nav-item nav-dropdown">
           <a className="nav-link nav-dropdown-toggle" href="#" onClick={this.handleClick.bind(this)}><i className="icon-star"></i> Pages</a>
           <ul className="nav-dropdown-items">
@@ -124,7 +112,6 @@ class Sidebar extends Component {
       ]);
     }
 
-
     return renderList;
   }
 
@@ -140,13 +127,5 @@ class Sidebar extends Component {
     )
   }
 }
-
-// Sidebar.propTypes = {
-//   isLogin: React.propTypes.bool,
-// }
-
-// Sidebar.defaultProps = {
-//   isLogin: false,
-// }
 
 export default Sidebar;

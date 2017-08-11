@@ -81,7 +81,7 @@ class User_Delete extends Component {
       .then((result) => {
 
         if (result.data.success) {
-          document.location.href = '/#/User_View'
+          document.location.href = '/User'
         }
       }).catch((error) => {
         console.log(error)
@@ -103,9 +103,6 @@ class User_Delete extends Component {
             <div className="card-block">
               <form action="" method="post">
                 <input type="hidden" id="id" name="id" value={this.state.User.id} />
-
-
-
 
                 <TextInput name="userName"
                   labelName="角色名稱"

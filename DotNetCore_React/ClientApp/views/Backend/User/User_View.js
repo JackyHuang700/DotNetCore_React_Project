@@ -56,11 +56,11 @@ class User_View extends Component {
 
 
     OnClick_Edit(event) {
-        document.location.href = `/#/User_Edit/${event.currentTarget.getAttribute('data-id')}/${true}`;
+        document.location.href = `/User/Edit/${event.currentTarget.getAttribute('data-id')}/${true}`;
     }
 
     OnClick_Delete(event) {
-        document.location.href = `/#/User_Delete/${event.currentTarget.getAttribute('data-id')}`;
+        document.location.href = `/User/Delete/${event.currentTarget.getAttribute('data-id')}`;
     }
 
 
@@ -103,7 +103,7 @@ class User_View extends Component {
         };
 
         return (
-            <BootstrapTable data={this.state.UserList} selectRow={selectRow} striped hover options={options} deleteRow>
+            <BootstrapTable data={this.state.UserList} selectRow={selectRow} striped hover options={options}>
                 <TableHeaderColumn isKey dataField="button" dataFormat={this.buttonFormatter}>Buttons</TableHeaderColumn>
                 {this.props.display_userName ? <TableHeaderColumn dataField='userName'>userName</TableHeaderColumn> : null}
                 {this.props.display_roleId ? <TableHeaderColumn dataField='roleId'>roleId</TableHeaderColumn> : null}
