@@ -6,22 +6,22 @@ using DotNetCore_React.Domain.Entities;
 
 namespace DotNetCore_React.EntityFrameworkCore.Repositories
 {
-    public class RoleRepository : DotNetCore_ReactRepositoryBase<Role>, IRoleRepository
+    public class News_LanRepository : DotNetCore_ReactRepositoryBase<News_Lan>, INews_LanRepository
     {
-        public RoleRepository(DotNetCore_ReactDBContext dbcontext) : base(dbcontext)
+        public News_LanRepository(DotNetCore_ReactDBContext dbcontext) : base(dbcontext)
         {
         }
 
-        public Dictionary<string, object> Create(Role role)
+        public Dictionary<string, object> Create(News_Lan News_Lan)
         {
             var myJson = new Dictionary<string, object>();
             try
             {
-                _dbContext.Add<Role>(role);
+                _dbContext.Add<News_Lan>(News_Lan);
                 _dbContext.SaveChanges();
                 myJson.Add("success", true);
                 myJson.Add("message", "");
-                myJson.Add("id", role.Id);
+                myJson.Add("id", News_Lan.Id);
                 return myJson;
 
             }
@@ -38,8 +38,8 @@ namespace DotNetCore_React.EntityFrameworkCore.Repositories
             var myJson = new Dictionary<string, object>();
             try
             {
-                var role = this.GetRole(id);
-                _dbContext.Remove<Role>(role);
+                var News_Lan = this.GetSingle(id);
+                _dbContext.Remove<News_Lan>(News_Lan);
                 _dbContext.SaveChanges();
                 myJson.Add("success", true);
                 myJson.Add("message", "動作完成");
@@ -54,28 +54,28 @@ namespace DotNetCore_React.EntityFrameworkCore.Repositories
             }
         }
 
-        public List<Role> GetAllRole()
+        public List<News_Lan> GetAll()
         {
-            return _dbContext.Set<Role>().ToList();
+            return _dbContext.Set<News_Lan>().ToList();
         }
 
-        public Role GetRole(Guid id)
+        public News_Lan GetSingle(Guid id)
         {
-            return _dbContext.Set<Role>().FirstOrDefault(C => C.Id == id);
+            return _dbContext.Set<News_Lan>().FirstOrDefault(C => C.Id == id);
         }
 
-        public Dictionary<string, object> Update(Role role)
+        public Dictionary<string, object> Update(News_Lan News_Lan)
         {
             var myJson = new Dictionary<string, object>();
             try
             {
                 //參考 https://stackoverflow.com/questions/15336248/entity-framework-5-updating-a-record
-                _dbContext.Roles.Attach(role);
-                var entry = _dbContext.Entry(role);
+                _dbContext.News_Lan.Attach(News_Lan);
+                var entry = _dbContext.Entry(News_Lan);
                 _dbContext.SaveChanges();
                 myJson.Add("success", true);
                 myJson.Add("message", "");
-                myJson.Add("id", role.Id);
+                myJson.Add("id", News_Lan.Id);
                 return myJson;
 
             }
@@ -88,4 +88,3 @@ namespace DotNetCore_React.EntityFrameworkCore.Repositories
         }
     }
 }
-

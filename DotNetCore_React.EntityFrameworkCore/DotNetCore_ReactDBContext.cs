@@ -18,6 +18,11 @@ namespace DotNetCore_React.EntityFrameworkCore
 
         public DbSet<ComSystem> ComSystem { get; set; }
 
+        public DbSet<News> News { get; set; }
+        public DbSet<News_Lan> News_Lan { get; set; }
+        public DbSet<Sys_Language> Sys_Languages { get; set; }
+
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

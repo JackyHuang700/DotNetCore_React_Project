@@ -19,6 +19,6 @@ namespace DotNetCore_React.Domain.IRepositories
 
         Dictionary<string, object> Create(Sys_Language News);
 
-        Dictionary<string, object> Delete(Sys_Language id);
+        Dictionary<string, object> Delete(int id);
     } 
 }
