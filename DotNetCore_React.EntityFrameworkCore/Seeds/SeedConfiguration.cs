@@ -35,6 +35,9 @@ namespace DotNetCore_React.EntityFrameworkCore.Seeds
             ComSystemSeed();
             UserSeed();
             RoleSeed();
+            NewsSeed();
+            News_LanSeed();
+            Sys_LanguageSeed();
         }
 
 
