@@ -100,7 +100,7 @@ class User_Delete extends Component {
                   required={this.props.required_userName}
                   validMessage={{ required: 'userName is reduired.' }}
                   onChange={this.handleInputChange}
-                  defaultValue={this.state.User.userName}
+                  value={this.state.User.userName}
                   placeholder="userName"
                   readOnly={true} />
 
@@ -113,7 +113,7 @@ class User_Delete extends Component {
                   required={this.props.required_password}
                   validMessage={{ required: 'password is reduired.' }}
                   onChange={this.handleInputChange}
-                  defaultValue={this.state.User.password}
+                  value={this.state.User.password}
                   placeholder="password"
                   readOnly={true} />
 
@@ -125,7 +125,7 @@ class User_Delete extends Component {
                   required={this.props.required_email}
                   validMessage={{ required: 'email is reduired.' }}
                   onChange={this.handleInputChange}
-                  defaultValue={this.state.User.email}
+                  value={this.state.User.email}
                   placeholder="email"
                   readOnly={true} />
 
@@ -139,7 +139,7 @@ class User_Delete extends Component {
                   required={this.props.required_roleId}
                   validMessage={{ required: 'roleId is reduired.' }}
                   onChange={this.handleInputChange}
-                  defaultValue={this.state.User.roleId}
+                  value={this.state.User.roleId}
                   placeholder="roleId"
                   readOnly={true} />
 
@@ -151,7 +151,7 @@ class User_Delete extends Component {
                   required={this.props.required_firstName}
                   validMessage={{ required: 'firstName is reduired.' }}
                   onChange={this.handleInputChange}
-                  defaultValue={this.state.User.firstName}
+                  value={this.state.User.firstName}
                   placeholder="firstName"
                   readOnly={true} />
 
@@ -163,7 +163,7 @@ class User_Delete extends Component {
                   required={this.props.required_lastName}
                   validMessage={{ required: 'lastName is reduired.' }}
                   onChange={this.handleInputChange}
-                  defaultValue={this.state.User.lastName}
+                  value={this.state.User.lastName}
                   placeholder="lastName"
                   readOnly={true} />
                 
@@ -173,7 +173,7 @@ class User_Delete extends Component {
                   required={this.props.required_Status} 
                   validMessage={{required: 'Status is reduired.'}} 
                   onChange={this.handleInputChange} 
-                  defaultValue={this.state.User.status}
+                  value={this.state.User.status}
                   readOnly={!this.state.is_Edit}
                   options={
                     [
@@ -196,7 +196,7 @@ class User_Delete extends Component {
                   required={this.props.required_createDate}
                   validMessage={{ required: 'createDate is reduired.' }}
                   onChange={this.handleInputChange}
-                  defaultValue={this.state.User.createDate}
+                  value={this.state.User.createDate}
                   placeholder="createDate"
                   readOnly={true} />
 
@@ -211,7 +211,7 @@ class User_Delete extends Component {
                   required={this.props.required_createUser}
                   validMessage={{ required: 'createUser is reduired.' }}
                   onChange={this.handleInputChange}
-                  defaultValue={this.state.User.createUser}
+                  value={this.state.User.createUser}
                   placeholder="createUser"
                   readOnly={true} />
 

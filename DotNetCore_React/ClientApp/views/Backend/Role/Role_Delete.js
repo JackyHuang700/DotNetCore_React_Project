@@ -153,8 +153,6 @@ class Role_Delete extends Component {
                   placeholder="createDate"
                   readOnly={true} />
 
-
-
                 <TextInput name="createUser"
                   labelName="角色名稱"
                   className=""

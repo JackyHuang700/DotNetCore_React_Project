@@ -80,7 +80,7 @@ class Role_Create extends Component {
                   pattern={/^[\w]{5,10}$/}
                   validMessage={{ required: 'SysId is reduired.', pattern: '不能包含字母数字底線以外的字符' }}
                   onChange={this.handleInputChange}
-                  defaultValue={this.state.SysId}
+                  value={this.state.SysId}
                   placeholder="sys123" />
 
                 <TextInput name="Name"
@@ -90,7 +90,7 @@ class Role_Create extends Component {
                   required={this.props.required_Name}
                   validMessage={{ required: 'Name is reduired.' }}
                   onChange={this.handleInputChange}
-                  defaultValue={this.state.Name}
+                  value={this.state.Name}
                   placeholder="糖糖" />
 
                 <TextInput name="Priority"
@@ -100,7 +100,7 @@ class Role_Create extends Component {
                   required={this.props.required_Priority}
                   validMessage={{ required: 'Priority is reduired.' }}
                   onChange={this.handleInputChange}
-                  defaultValue={this.state.Priority}
+                  value={this.state.Priority}
                   placeholder="1" />
 
                  <DropDownList name="Status"
@@ -109,7 +109,7 @@ class Role_Create extends Component {
                   required={this.props.required_Status} 
                   validMessage={{required: 'Status is reduired.'}} 
                   onChange={this.handleInputChange} 
-                  defaultValue={this.state.Status}
+                  value={this.state.Status}
                   options={
                     [
                       {

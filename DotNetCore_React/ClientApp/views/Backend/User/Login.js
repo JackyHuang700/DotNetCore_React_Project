@@ -52,9 +52,6 @@ class Login extends Component {
     event.preventDefault();
   }
 
-  
-
-
   render() {
     return (
       <div className="app flex-row align-items-center">

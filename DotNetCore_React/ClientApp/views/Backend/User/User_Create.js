@@ -75,7 +75,7 @@ class User_Create extends Component {
                   required={this.props.required_userName}
                   validMessage={{ required: 'userName is reduired.' }}
                   onChange={this.handleInputChange}
-                  defaultValue={this.state.userName}
+                  value={this.state.userName}
                   placeholder="userName" />
 
                 <TextInput name="roleId"
@@ -85,7 +85,7 @@ class User_Create extends Component {
                   required={this.props.required_roleId}
                   validMessage={{ required: 'roleId is reduired.' }}
                   onChange={this.handleInputChange}
-                  defaultValue={this.state.roleId}
+                  value={this.state.roleId}
                   placeholder="roleId" />
 
 
@@ -96,7 +96,7 @@ class User_Create extends Component {
                   required={this.props.required_email}
                   validMessage={{ required: 'email is reduired.' }}
                   onChange={this.handleInputChange}
-                  defaultValue={this.state.email}
+                  value={this.state.email}
                   placeholder="email" />
 
 
@@ -107,7 +107,7 @@ class User_Create extends Component {
                   required={this.props.required_emailComfirmed}
                   validMessage={{ required: 'emailComfirmed is reduired.' }}
                   onChange={this.handleInputChange}
-                  defaultValue={this.state.emailComfirmed}
+                  value={this.state.emailComfirmed}
                   placeholder="emailComfirmed" />
 
                 <TextInput name="firstName"
@@ -117,7 +117,7 @@ class User_Create extends Component {
                   required={this.props.required_firstName}
                   validMessage={{ required: 'firstName is reduired.' }}
                   onChange={this.handleInputChange}
-                  defaultValue={this.state.firstName}
+                  value={this.state.firstName}
                   placeholder="firstName" />
 
                 <TextInput name="lastName"
@@ -127,7 +127,7 @@ class User_Create extends Component {
                   required={this.props.required_lastName}
                   validMessage={{ required: 'lastName is reduired.' }}
                   onChange={this.handleInputChange}
-                  defaultValue={this.state.lastName}
+                  value={this.state.lastName}
                   placeholder="lastName" />
 
 
@@ -138,7 +138,7 @@ class User_Create extends Component {
               required={this.props.status} 
               validMessage={{required: 'status is reduired.'}} 
               onChange={this.handleInputChange} 
-              defaultValue={this.state.status} 
+              value={this.state.status} 
               placeholder="status"/>  */}
 
 
@@ -149,7 +149,7 @@ class User_Create extends Component {
                   required={this.props.createDate}
                   validMessage={{ required: 'createDate is reduired.' }}
                   onChange={this.handleInputChange}
-                  defaultValue={this.state.createDate}
+                  value={this.state.createDate}
                   placeholder="createDate" />
 
 
@@ -160,7 +160,7 @@ class User_Create extends Component {
                   required={this.props.createUser}
                   validMessage={{ required: 'createUser is reduired.' }}
                   onChange={this.handleInputChange}
-                  defaultValue={this.state.createUser}
+                  value={this.state.createUser}
                   placeholder="createUser" />
 
 
@@ -172,7 +172,7 @@ class User_Create extends Component {
                   required={this.props.updateDate}
                   validMessage={{ required: 'updateDate is reduired.' }}
                   onChange={this.handleInputChange}
-                  defaultValue={this.state.updateDate}
+                  value={this.state.updateDate}
                   placeholder="updateDate" />
 
 
@@ -183,7 +183,7 @@ class User_Create extends Component {
                   required={this.props.updateUser}
                   validMessage={{ required: 'updateUser is reduired.' }}
                   onChange={this.handleInputChange}
-                  defaultValue={this.state.updateUser}
+                  value={this.state.updateUser}
                   placeholder="updateUser" />
 
                 <TextInput name="failedCount"
@@ -193,7 +193,7 @@ class User_Create extends Component {
                   required={this.props.failedCount}
                   validMessage={{ required: 'failedCount is reduired.' }}
                   onChange={this.handleInputChange}
-                  defaultValue={this.state.failedCount}
+                  value={this.state.failedCount}
                   placeholder="failedCount" />
 
 

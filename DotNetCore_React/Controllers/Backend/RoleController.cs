@@ -43,6 +43,10 @@ namespace DotNetCore_React.Controllers
 
         public ActionResult Create([FromBody] RoleDto role)
         {
+            //寫入目前登入帳號
+            //role.CreateUser = "";
+            //role.UpdateUser = "";
+
             var myJson = _service.Create_Role(role);
             return Json(myJson);
         }

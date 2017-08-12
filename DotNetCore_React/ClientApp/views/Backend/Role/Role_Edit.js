@@ -154,7 +154,7 @@ class Role_Edit_Show extends Component {
                   required={this.props.required_sysId}
                   validMessage={{ required: 'sysId is reduired.' }}
                   onChange={this.Bind_handleInputChange}
-                  defaultValue={this.state.Role.sysId}
+                  value={this.state.Role.sysId}
                   placeholder="sysId"
                   readOnly={!this.state.is_Edit} />
 
@@ -165,7 +165,7 @@ class Role_Edit_Show extends Component {
                   required={this.props.required_name}
                   validMessage={{ required: 'name is reduired.' }}
                   onChange={this.Bind_handleInputChange}
-                  defaultValue={this.state.Role.name}
+                  value={this.state.Role.name}
                   placeholder="name"
                   readOnly={!this.state.is_Edit} />
 
@@ -176,7 +176,7 @@ class Role_Edit_Show extends Component {
                   required={this.props.required_priority}
                   validMessage={{ required: 'priority is reduired.' }}
                   onChange={this.Bind_handleInputChange}
-                  defaultValue={this.state.Role.priority}
+                  value={this.state.Role.priority}
                   placeholder="priority"
                   readOnly={!this.state.is_Edit} />
 
@@ -186,7 +186,7 @@ class Role_Edit_Show extends Component {
                   required={this.props.required_Status} 
                   validMessage={{required: 'Status is reduired.'}} 
                   onChange={this.handleInputChange} 
-                  defaultValue={this.state.Role.status}
+                  value={this.state.Role.status}
                   readOnly={!this.state.is_Edit}
                   options={
                     [
@@ -208,7 +208,7 @@ class Role_Edit_Show extends Component {
                   required={this.props.required_createDate}
                   validMessage={{ required: 'createDate is reduired.' }}
                   onChange={this.Bind_handleInputChange}
-                  defaultValue={this.state.Role.createDate}
+                  value={this.state.Role.createDate}
                   placeholder="createDate"
                   readOnly={!this.state.is_Edit} />
 
@@ -220,7 +220,7 @@ class Role_Edit_Show extends Component {
                   required={this.props.required_createUser}
                   validMessage={{ required: 'createUser is reduired.' }}
                   onChange={this.Bind_handleInputChange}
-                  defaultValue={this.state.Role.createUser}
+                  value={this.state.Role.createUser}
                   placeholder="createUser"
                   readOnly={!this.state.is_Edit} />
 
