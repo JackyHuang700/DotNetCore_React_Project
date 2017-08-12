@@ -19,5 +19,11 @@
     <PackageReference Include="AutoMapper" Version="5.1.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="NewsApp\Dtos\" />
+    <Folder Include="News_LanApp\Dtos\" />
+    <Folder Include="Sys_LanguageApp\Dtos\" />
+  </ItemGroup>
+
 
 </Project>

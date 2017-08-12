@@ -1,7 +1,6 @@
 
 using System;
 using System.Collections.Generic;
-
 using DotNetCore_React.Application.RoleApp.Dtos;
 
 namespace DotNetCore_React.Application.RoleApp
