@@ -6,8 +6,6 @@ namespace DotNetCore_React.Domain.Entities
 {
     public class News_Lan : Entity
     {
-        public string NewsId { get; set; }
-
         public int LanguageId { get; set; }
 
         public string Title { get; set; }
