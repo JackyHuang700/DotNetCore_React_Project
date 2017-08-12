@@ -1,35 +1,35 @@
 using System;
 using System.Collections.Generic;
-using DotNetCore_React.Application.News_LanApp.Dtos;
+using DotNetCore_React.Application.Sys_LanguageApp.Dtos;
 using DotNetCore_React.Domain.IRepositories;
 using AutoMapper;
 using DotNetCore_React.Domain.Entities;
 
-namespace DotNetCore_React.Application.News_LanApp
+namespace DotNetCore_React.Application.Sys_LanguageApp
 {
-    public class News_LanService : INews_LanAppService
+    public class Sys_LanguageAppService : ISys_LanguageAppService
     {
-        private readonly INews_LanAppService _repository;
+        private readonly ISys_LanguageAppService _repository;
 
 
-        public News_LanService(INews_LanAppService repository)
+        public Sys_LanguageAppService(ISys_LanguageAppService repository)
         {
             _repository = repository;
         }
 
-        public List<News_LanDto> GetAll()
+        public List<Sys_LanguageDto> GetAll()
         {
             var a = _repository.GetAll();
-            return Mapper.Map<List<News_LanDto>>(a);
+            return Mapper.Map<List<Sys_LanguageDto>>(a);
         }
-        public News_LanDto GetSingle(string id)
+        public Sys_LanguageDto GetSingle(int id)
         {
            
             var a = _repository.GetSingle(id);
-            return Mapper.Map<News_LanDto>(a);
+            return Mapper.Map<Sys_LanguageDto>(a);
         }
 
-        public Dictionary<string, object> Create(News_LanDto role)
+        public Dictionary<string, object> Create(Sys_LanguageDto role)
         {
             var myJson = new Dictionary<string, object>();
 
@@ -47,7 +47,7 @@ namespace DotNetCore_React.Application.News_LanApp
             return myJson;
         }
 
-        public Dictionary<string, object> Update(News_LanDto role)
+        public Dictionary<string, object> Update(Sys_LanguageDto role)
         {
             var myJson = new Dictionary<string, object>();
             //儲存資料
@@ -57,7 +57,7 @@ namespace DotNetCore_React.Application.News_LanApp
             return myJson;
         }
 
-        public Dictionary<string, object> Delete(string id)
+        public Dictionary<string, object> Delete(int id)
         {
             var myJson = new Dictionary<string, object>();
 
@@ -66,8 +66,7 @@ namespace DotNetCore_React.Application.News_LanApp
             //刪除資料
             //var a = _repository
             //處理null狀況
-            Guid guid;
-            Guid.TryParse(id, out guid);
+            
             myJson.Add("success", true);
             myJson.Add("message", "");
             return myJson;

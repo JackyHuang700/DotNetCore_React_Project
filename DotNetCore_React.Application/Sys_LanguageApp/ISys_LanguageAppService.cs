@@ -4,7 +4,7 @@ using DotNetCore_React.Application.Sys_LanguageApp.Dtos;
 
 namespace DotNetCore_React.Application.Sys_LanguageApp
 {
-    public interface ISys_LanguageService
+    public interface ISys_LanguageAppService
     {
         //根據帳號獲取權限
         List<Sys_LanguageDto> GetAll();

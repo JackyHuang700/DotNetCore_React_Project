@@ -21,6 +21,9 @@ using DotNetCore_React.EntityFrameworkCore.Seeds;
 using DotNetCore_React.Application.RoleApp;
 using DotNetCore_React.Application.UserApp;
 using DotNetCore_React.Application.ComSystemApp;
+using DotNetCore_React.Application.NewsApp;
+using DotNetCore_React.Application.News_LanApp;
+using DotNetCore_React.Application.Sys_LanguageApp;
 
 namespace DotNetCore_React
 {
@@ -57,6 +60,13 @@ namespace DotNetCore_React
             services.AddScoped<IUserAppService, UserAppService>();
             services.AddScoped<IComSystemRepository, ComSystemRepository>();
             services.AddScoped<IComSystemAppAppService, ComSystemAppAppService>();
+
+            services.AddScoped<INewsRepository, NewsRepository>();
+            services.AddScoped<INewsAppService, NewsAppService>();
+            services.AddScoped<INews_LanRepository, News_LanRepository>();
+            services.AddScoped<INews_LanAppService, News_LanAppService>();
+            services.AddScoped<ISys_LanguageRepository, Sys_LanguageRepository>();
+            services.AddScoped<ISys_LanguageAppService, Sys_LanguageAppService>();
 
             // Add framework services.
             services.AddMvc();

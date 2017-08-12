@@ -18,16 +18,13 @@ namespace DotNetCore_React.EntityFrameworkCore.Seeds
                 var data1 = new List<Sys_Language>
                 {
                       new Sys_Language {
-                    Id = 1,
                     Name = "繁體中文",
                     IsDisplay= true,
                 },
                        new Sys_Language {
-                    Id = 2,
                     Name = "簡體中文",
                     IsDisplay= false,
                 }, new Sys_Language {
-                    Id = 3,
                     Name = "英文",
                     IsDisplay= false,
                 },

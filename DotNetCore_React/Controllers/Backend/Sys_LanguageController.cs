@@ -14,9 +14,9 @@ namespace DotNetCore_React.Controllers
     [Route("api/[controller]")]
     public class Sys_LanguageController : AuthorizedController
     {
-        private readonly ISys_LanguageService _service;
+        private readonly ISys_LanguageAppService _service;
 
-        public Sys_LanguageController(ISys_LanguageService service)
+        public Sys_LanguageController(ISys_LanguageAppService service)
         {
             _service = service;
         }

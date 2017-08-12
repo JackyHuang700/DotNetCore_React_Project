@@ -7,12 +7,12 @@ using DotNetCore_React.Domain.Entities;
 
 namespace DotNetCore_React.Application.NewsApp
 {
-    public class NewsService : INewsAppService
+    public class NewsAppService : INewsAppService
     {
         private readonly INewsAppService _repository;
 
 
-        public NewsService(INewsAppService repository)
+        public NewsAppService(INewsAppService repository)
         {
             _repository = repository;
         }
