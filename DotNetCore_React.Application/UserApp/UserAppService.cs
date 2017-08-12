@@ -46,9 +46,10 @@ namespace DotNetCore_React.Application.UserApp
             };
 
             //儲存資料
+            myJson = _repository_user.Create(roleDB);
 
-            myJson.Add("success", true);
-            myJson.Add("message", "");
+            //myJson.Add("success", true);
+            //myJson.Add("message", "");
             return myJson;
         }
 
@@ -57,12 +58,15 @@ namespace DotNetCore_React.Application.UserApp
             var myJson = new Dictionary<string, object>();
 
             //轉換Guid
+            Guid guid;
+            Guid.TryParse(id, out guid);
+
 
             //刪除資料
-            //var a = _repository
+            myJson = _repository_user.Delete(guid);
 
-            myJson.Add("success", true);
-            myJson.Add("message", "");
+            //myJson.Add("success", true);
+            //myJson.Add("message", "");
             return myJson;
         }
 
@@ -136,14 +140,14 @@ namespace DotNetCore_React.Application.UserApp
                 user.FailedCount++;
 
                 //失敗次數是否超過系統預設值
-                var aa = _repository_comSystem.Get_ComSystem_By_sysName("AccessFailedCount");
+                var aa = _repository_comSystem.GetComSystem("AccessFailedCount");
                 var sysFailedCount = int.Parse(aa.sysValue);
                 if (user.FailedCount >= sysFailedCount)
                 {
                     user.Status = 4;
                 }
             }
-            _repository_user.Update_User(user);
+            _repository_user.Update(user);
 
             return myJson;
         }
@@ -165,7 +169,14 @@ namespace DotNetCore_React.Application.UserApp
 
         public Dictionary<string, object> Update_User(UserDto user)
         {
-            throw new NotImplementedException();
+            var myJson = new Dictionary<string, object>();
+
+            var userDB = Mapper.Map<User>(user);
+            myJson = _repository_user.Update(userDB);
+
+            //myJson.Add("success", true);
+            //myJson.Add("message", "");
+            return myJson;
         }
     }
 }

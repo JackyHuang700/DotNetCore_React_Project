@@ -19,7 +19,7 @@ namespace DotNetCore_React.Application.RoleApp
 
         public List<RoleDto> GetAllList()
         {
-            var a = _repository.GetAllMenuListByRole();
+            var a = _repository.GetAllRole();
             return Mapper.Map<List<RoleDto>>(a);
         }
         public RoleDto GetRole(string id)
