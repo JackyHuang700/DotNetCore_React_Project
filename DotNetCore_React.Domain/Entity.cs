@@ -12,5 +12,5 @@ namespace DotNetCore_React.Domain
     public abstract class Entity: Entity<Guid>
     {
         
-    }  
+    }
 }
