@@ -56,7 +56,7 @@ namespace DotNetCore_React.EntityFrameworkCore.Repositories
 
         public List<News> GetAll()
         {
-            return _dbContext.Set<News>().ToList();
+            return _dbContext.Set<News>().Where(c => c.Status != -1).ToList();
         }
 
         public News GetSingle(Guid id)

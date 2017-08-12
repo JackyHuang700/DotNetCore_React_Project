@@ -67,4 +67,5 @@ var news_Enum = {
 export {
     role_Enum,
     user_Enum,
+    news_Enum,
 };
