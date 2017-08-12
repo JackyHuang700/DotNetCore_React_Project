@@ -32,7 +32,7 @@ class Role_Delete extends Component {
     const self = this;
 
     axios({
-      url: `api/Role/Get_Role?id=${this.props.match.params.id}`,
+      url: `/api/Role/Get_Role?id=${this.props.match.params.id}`,
       method: 'GET',
       data: {
       }
@@ -68,7 +68,7 @@ class Role_Delete extends Component {
 
     // axios({
 
-    //   url: 'api/Role/Delete',
+    //   url: '/api/Role/Delete',
     //   method: 'post',
     //   data:{
     //       "id": this.state.Role.id,
@@ -76,7 +76,7 @@ class Role_Delete extends Component {
     // })
 
 
-    axios.post(`api/Role/Delete/${this.state.Role.id}`, {
+    axios.post(`/api/Role/Delete/${this.state.Role.id}`, {
     })
 
 

@@ -20,7 +20,7 @@ class User_Create extends Component {
 
   Submit(event) {
     axios({
-      url: 'api/User/Create',
+      url: '/api/User/Create',
       method: 'post',
       data: {
         SysId: this.state.SysId,

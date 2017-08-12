@@ -41,7 +41,7 @@ class Role_Edit_Show extends Component {
     const self = this;
 
     axios({
-      url: `api/Role/Get_Role?id=${this.props.match.params.id}`,
+      url: `/api/Role/Get_Role?id=${this.props.match.params.id}`,
       method: 'GET',
       data: {
       }
@@ -120,7 +120,7 @@ class Role_Edit_Show extends Component {
 
     axios({
 
-      url: 'api/Role/Edit',
+      url: '/api/Role/Edit',
       method: 'post',
       data: this.state.Role
     }).then((result) => {
@@ -187,7 +187,7 @@ class Role_Edit_Show extends Component {
                   placeholder="priority"
                   readOnly={!this.state.is_Edit} />
 
-                 <DropDownList name="Status"
+                 <DropDownList name="status"
                   labelName="狀態"
                   display={this.props.display_Status}
                   required={this.props.required_Status} 
@@ -198,12 +198,12 @@ class Role_Edit_Show extends Component {
                   options={
                     [
                       {
-                        name:role_Enum.STOP.value,
-                        value:role_Enum.STOP.name
+                        name:role_Enum.STOP.name,
+                        value:role_Enum.STOP.value
                       },
                       {
-                        name:role_Enum.NORMAL.value,
-                        value:role_Enum.NORMAL.name
+                        name:role_Enum.NORMAL.name,
+                        value:role_Enum.NORMAL.value
                       }
                     ]}
                   />
@@ -251,14 +251,14 @@ Role_Edit_Show.defaultProps = {
   display_sysId: true,
   display_name: true,
   display_priority: true,
-  // display_status     : true,
+  display_status     : true,
   display_createDate: true,
   display_createUser: true,
 
   required_sysId: true,
   required_name: true,
   required_priority: true,
-  // required_status     : true,
+  required_status     : true,
   required_createDate: true,
   required_createUser: true,
 }

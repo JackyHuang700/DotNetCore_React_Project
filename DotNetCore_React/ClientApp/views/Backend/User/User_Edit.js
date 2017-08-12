@@ -17,6 +17,7 @@ class User_Edit_Show extends Component {
     this.state = {
       is_Edit: this.props.match.params.edit.toLocaleLowerCase() === "true" ? true : false,
       User: {},
+      RoleList: [],
     };
     // debugger;
     // console.log(`this.props.match.params)`, this.props.match.params)
@@ -43,8 +44,9 @@ class User_Edit_Show extends Component {
   GetData() {
     const self = this;
 
+    //抓取帳號
     axios({
-      url: `api/User/Get_User?id=${this.props.match.params.id}`,
+      url: `/api/User/Get_User?id=${this.props.match.params.id}`,
       method: 'GET',
       data: {
       }
@@ -57,6 +59,29 @@ class User_Edit_Show extends Component {
       console.log(error)
     });
 
+
+    //抓取角色權限
+    axios({
+      url: `/api/Role/Role_View`,
+      method: 'GET',
+      data: {
+      }
+    }).then((result) => {
+      // console.log(result.data);
+      //  debugger;
+      var a = [];
+      result.data.map((c) => {
+        a.push({
+          name: c.name,
+          value: c.id
+        });
+      });
+
+
+      this.setState({ RoleList: a });
+    }).catch((error) => {
+      console.log(error)
+    });
   }
 
   handleInputChange(event) {
@@ -117,7 +142,7 @@ class User_Edit_Show extends Component {
 
     axios({
 
-      url: 'api/User/Edit',
+      url: '/api/User/Edit',
       method: 'post',
       data: this.state.User
     }).then((result) => {
@@ -142,9 +167,6 @@ class User_Edit_Show extends Component {
 
 
   Is_Show_Password() {
-
-
-
 
     return this.state.is_Edit ?
       (<TextInput name="password"
@@ -196,16 +218,18 @@ class User_Edit_Show extends Component {
                   placeholder="email"
                   readOnly={!this.state.is_Edit} />
 
-                <TextInput name="roleId"
-                  labelName="角色名稱"
-                  className=""
+
+                <DropDownList name="roleId"
+                  labelName="狀態"
                   display={this.props.display_roleId}
                   required={this.props.required_roleId}
                   validMessage={{ required: 'roleId is reduired.' }}
                   onChange={this.Bind_handleInputChange}
-                  defaultValue={this.state.User.roleId}
-                  placeholder="roleId"
-                  readOnly={!this.state.is_Edit} />
+                  defaultValue={this.state.roleId}
+                  readOnly={!this.state.is_Edit}
+                  options={this.state.RoleList}
+                />
+
 
 
                 <TextInput name="firstName"
@@ -230,38 +254,38 @@ class User_Edit_Show extends Component {
                   placeholder="lastName"
                   readOnly={!this.state.is_Edit} />
 
-                 <DropDownList name="Status"
+                <DropDownList name="status"
                   labelName="狀態"
                   display={this.props.display_Status}
-                  required={this.props.required_Status} 
-                  validMessage={{required: 'Status is reduired.'}} 
-                  onChange={this.Bind_handleInputChange} 
+                  required={this.props.required_Status}
+                  validMessage={{ required: 'Status is reduired.' }}
+                  onChange={this.Bind_handleInputChange}
                   defaultValue={this.state.Status}
                   readOnly={!this.state.is_Edit}
                   options={
                     [
                       {
-                        name:user_Enum.STOP.value,
-                        value:user_Enum.STOP.name
+                        name: user_Enum.STOP.name,
+                        value: user_Enum.STOP.value
                       },
                       {
-                        name:user_Enum.NORMAL.value,
-                        value:user_Enum.NORMAL.name
+                        name: user_Enum.NORMAL.name,
+                        value: user_Enum.NORMAL.value
                       },
                       {
-                        name:user_Enum.EMAIL_NO_VAILD.value,
-                        value:user_Enum.EMAIL_NO_VAILD.name
+                        name: user_Enum.EMAIL_NO_VAILD.name,
+                        value: user_Enum.EMAIL_NO_VAILD.value
                       },
                       {
-                        name:user_Enum.FIRST_PASSWORD_UNCHANGE.value,
-                        value:user_Enum.FIRST_PASSWORD_UNCHANGE.name
+                        name: user_Enum.FIRST_PASSWORD_UNCHANGE.name,
+                        value: user_Enum.FIRST_PASSWORD_UNCHANGE.value
                       },
                       {
-                        name:user_Enum.ERROR_COUNT.value,
-                        value:user_Enum.ERROR_COUNT.name
+                        name: user_Enum.ERROR_COUNT.name,
+                        value: user_Enum.ERROR_COUNT.value
                       }
                     ]}
-                  />
+                />
 
                 <TextInput name="createDate"
                   labelName="角色名稱"
@@ -311,7 +335,7 @@ User_Edit_Show.defaultProps = {
   display_email: true,
   display_firstName: true,
   display_lastName: true,
-  // display_status     : true,
+  display_status     : true,
   display_createDate: true,
   display_createUser: true,
 
@@ -323,7 +347,7 @@ User_Edit_Show.defaultProps = {
   required_email: true,
   required_firstName: true,
   required_lastName: true,
-  // required_status     : true,
+  required_status     : true,
   required_createDate: true,
   required_createUser: true,
 }

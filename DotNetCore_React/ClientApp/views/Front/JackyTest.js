@@ -31,14 +31,14 @@ class JackyTest extends Component {
 
   GetData() {
     const self = this;
-    axios.get('api/WebApi/TestAPI').then((result) => {
+    axios.get('/api/WebApi/TestAPI').then((result) => {
       console.log(result.data)
     }).catch((error) => {
       console.log(error)
     });
 
 
-    axios.post('api/WebApi/TestAPI3', {
+    axios.post('/api/WebApi/TestAPI3', {
       a: 10
     }).then((result) => {
       console.log(result.data)

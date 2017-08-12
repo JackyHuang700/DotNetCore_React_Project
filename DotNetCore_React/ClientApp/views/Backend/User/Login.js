@@ -33,7 +33,7 @@ class Login extends Component {
     } = this.state;
     axios({
       
-      url: 'api/WebApi/Login',
+      url: '/api/WebApi/Login',
       method: 'post',
       data: {
       "UserName":userName,

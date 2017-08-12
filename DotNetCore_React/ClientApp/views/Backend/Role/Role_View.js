@@ -66,7 +66,7 @@ class Role_View extends Component {
     GetData() {
         const self = this;
 
-        axios.get('api/Role/Role_View').then((result) => {
+        axios.get('/api/Role/Role_View').then((result) => {
             // console.log(result.data);
             this.setState({ RoleList: result.data });
         }).catch((error) => {

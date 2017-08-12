@@ -24,7 +24,7 @@ class Role_Create extends Component {
 
   Submit(event) {
     axios({
-      url: 'api/Role/Create',
+      url: '/api/Role/Create',
       method: 'post',
       data: {
         SysId: this.state.SysId,
@@ -113,12 +113,12 @@ class Role_Create extends Component {
                   options={
                     [
                       {
-                        name:role_Enum.STOP.value,
-                        value:role_Enum.STOP.name
+                        name:role_Enum.STOP.name,
+                        value:role_Enum.STOP.value
                       },
                       {
-                        name:role_Enum.NORMAL.value,
-                        value:role_Enum.NORMAL.name
+                        name:role_Enum.NORMAL.name,
+                        value:role_Enum.NORMAL.value
                       }
                     ]}
                   />

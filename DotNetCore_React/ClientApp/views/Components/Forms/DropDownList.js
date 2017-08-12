@@ -19,7 +19,7 @@ export default class DropDownList extends Component {
 
         let options = [];
         this.props.options.map((item,index) => {
-            options.push(<option key={index} value={item.name}>{item.value}</option>);
+            options.push(<option key={index} value={item.value}>{item.name}</option>);
         });
 
         return ( <FormGroup>

@@ -30,7 +30,7 @@ class User_Delete extends Component {
     const self = this;
 
     axios({
-      url: `api/User/Get_User?id=${this.props.match.params.id}`,
+      url: `/api/User/Get_User?id=${this.props.match.params.id}`,
       method: 'GET',
       data: {
       }
@@ -74,7 +74,7 @@ class User_Delete extends Component {
     // })
 
 
-    axios.post(`api/User/Delete/${this.state.User.id}`, {
+    axios.post(`/api/User/Delete/${this.state.User.id}`, {
     })
 
 
