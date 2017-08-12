@@ -8,9 +8,10 @@ using DotNetCore_React.EntityFrameworkCore;
 namespace DotNetCore_React.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(DotNetCore_ReactDBContext))]
-    partial class DotNetCore_ReactDBContextModelSnapshot : ModelSnapshot
+    [Migration("20170812101735_Init3")]
+    partial class Init3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")

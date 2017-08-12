@@ -13,4 +13,10 @@ namespace DotNetCore_React.Domain
     {
         
     }
+
+
+    public abstract class Entity_Int : Entity<int>
+    {
+
+    }
 }

@@ -6,7 +6,7 @@ using DotNetCore_React.Domain.Entities;
 
 namespace DotNetCore_React.EntityFrameworkCore.Repositories
 {
-    public class Sys_LanguageRepository : DotNetCore_ReactRepositoryBase<Sys_Language>, ISys_LanguageRepository
+    public class Sys_LanguageRepository : DotNetCore_ReactRepositoryBase_Int<Sys_Language>, ISys_LanguageRepository
     {
         public Sys_LanguageRepository(DotNetCore_ReactDBContext dbcontext) : base(dbcontext)
         {

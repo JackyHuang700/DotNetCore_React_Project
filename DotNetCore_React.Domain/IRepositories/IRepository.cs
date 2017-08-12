@@ -23,4 +23,10 @@ namespace DotNetCore_React.Domain.IRepositories
     {
 
     }
+
+
+    //默认Int主键类型仓储
+    public interface IRepository_Int<TEntity> : IRepository<TEntity, int> where TEntity : Entity_Int
+    {
+    }
 }

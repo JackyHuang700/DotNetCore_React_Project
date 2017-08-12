@@ -26,5 +26,12 @@ namespace DotNetCore_React.EntityFrameworkCore
             public DotNetCore_ReactRepositoryBase(DotNetCore_ReactDBContext dbContext) : base(dbContext)
             { }
         }
-    
+
+
+    public abstract class DotNetCore_ReactRepositoryBase_Int<TEntity> : DotNetCore_ReactRepositoryBase<TEntity, int> where TEntity : Entity_Int
+    {
+        public DotNetCore_ReactRepositoryBase_Int(DotNetCore_ReactDBContext dbContext) : base(dbContext)
+        { }
+    }
+
 }
