@@ -32,11 +32,11 @@ export default (
         <BackendRoute path='/dashboard' component={Dashboard} />
         <BackendRoute path='/Role' exact component={Role_View} />
         <BackendRoute path='/Role/Create' component={Role_Create} />
-        <BackendRoute path='/Role/Delete/' component={Role_Delete} />
+        <BackendRoute path='/Role/Delete/:id' component={Role_Delete} />
         <BackendRoute path='/Role/Edit/:id/:edit' component={Role_Edit} />
         <BackendRoute path='/User' exact component={User_View} />
         <BackendRoute path='/User/Create' component={User_Create} />
-        <BackendRoute path='/User/Delete/' component={User_Delete} />
+        <BackendRoute path='/User/Delete/:id' component={User_Delete} />
         <BackendRoute path='/User/Edit/:id/:edit' component={User_Edit} />
         <Route render={() => <h3>No Match Route</h3>} />
       </Switch>

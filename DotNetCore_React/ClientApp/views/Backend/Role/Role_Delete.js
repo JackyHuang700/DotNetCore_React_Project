@@ -64,26 +64,12 @@ class Role_Delete extends Component {
 
 
   Button_Submit(event) {
-    // debugger;
-
-    // axios({
-
-    //   url: '/api/Role/Delete',
-    //   method: 'post',
-    //   data:{
-    //       "id": this.state.Role.id,
-    //   }
-    // })
-
 
     axios.post(`/api/Role/Delete/${this.state.Role.id}`, {
-    })
-
-
-      .then((result) => {
+    }).then((result) => {
 
         if (result.data.success) {
-          document.location.href = '/#/Role_View'
+          document.location.href = '/Role'
         }
       }).catch((error) => {
         console.log(error)

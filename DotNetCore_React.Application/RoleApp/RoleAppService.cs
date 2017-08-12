@@ -38,14 +38,20 @@ namespace DotNetCore_React.Application.RoleApp
             var dateTime = DateTime.Now;
             var roleDB = new Role() {
                 Id= Guid.NewGuid(),
+                Name = role.Name,
+                Priority = role.Priority,
+                Status = role.Status,
+                SysId = role.SysId,
+
                 CreateDate = dateTime,
                 UpdateDate = dateTime,
             };
 
             //儲存資料
+            myJson = _repository.Create(roleDB);
 
-            myJson.Add("success", true);
-            myJson.Add("message", "");
+            //myJson.Add("success", true);
+            //myJson.Add("message", "");
             return myJson;
         }
 
@@ -53,11 +59,12 @@ namespace DotNetCore_React.Application.RoleApp
         {
             var myJson = new Dictionary<string, object>();
 
+            var roleDB = Mapper.Map<Role>(role);
 
             //儲存資料
-
-            myJson.Add("success", true);
-            myJson.Add("message", "");
+            myJson = _repository.Update(roleDB);
+            //myJson.Add("success", true);
+            //myJson.Add("message", "");
             return myJson;
         }
 
@@ -66,12 +73,14 @@ namespace DotNetCore_React.Application.RoleApp
             var myJson = new Dictionary<string, object>();
 
             //轉換Guid
+            Guid guid;
+            Guid.TryParse(id, out guid);
 
             //刪除資料
-            //var a = _repository
+            myJson = _repository.Delete(guid);
 
-            myJson.Add("success", true);
-            myJson.Add("message", "");
+            //myJson.Add("success", true);
+            //myJson.Add("message", "");
             return myJson;
         }
     }

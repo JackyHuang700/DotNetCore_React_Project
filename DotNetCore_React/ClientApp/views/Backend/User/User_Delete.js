@@ -4,6 +4,9 @@ import { Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } fr
 import axios from 'axios';
 import { user_Enum } from '../../../EnumScript/GeneralEnumScript.js';
 import EasyForm, { Field, FieldGroup } from 'react-easyform';
+import TextInput from '../../Components/Forms/TextInput';
+import DropDownList from '../../Components/Forms/DropDownList';
+
 
 //編輯與檢視共用
 class User_Delete extends Component {
@@ -63,22 +66,8 @@ class User_Delete extends Component {
 
   Button_Submit(event) {
 
-
-    // axios({
-
-    //   url: 'api/User/Delete',
-    //   method: 'post',
-    //   data:{
-    //       "id": this.state.User.id,
-    //   }
-    // })
-
-
     axios.post(`/api/User/Delete/${this.state.User.id}`, {
-    })
-
-
-      .then((result) => {
+    }).then((result) => {
 
         if (result.data.success) {
           document.location.href = '/User'
@@ -177,16 +166,27 @@ class User_Delete extends Component {
                   defaultValue={this.state.User.lastName}
                   placeholder="lastName"
                   readOnly={true} />
-
-
-                <FormGroup>
-                  <Label for="status">狀態</Label>
-                  <Input type="select" name="status" id="status" onChange={this.handleInputChange}>
-                    <option value={user_Enum.STOP.value}>{user_Enum.STOP.name}</option>
-                    <option value={user_Enum.NORMAL.value}>{user_Enum.NORMAL.name}</option>
-                  </Input>
-
-                </FormGroup>
+                
+                <DropDownList name="status"
+                  labelName="狀態"
+                  display={this.props.display_Status}
+                  required={this.props.required_Status} 
+                  validMessage={{required: 'Status is reduired.'}} 
+                  onChange={this.handleInputChange} 
+                  defaultValue={this.state.User.status}
+                  readOnly={!this.state.is_Edit}
+                  options={
+                    [
+                      {
+                        name:user_Enum.STOP.name,
+                        value:user_Enum.STOP.value
+                      },
+                      {
+                        name:user_Enum.NORMAL.name,
+                        value:user_Enum.NORMAL.value
+                      }
+                    ]}
+                  />
 
 
                 <TextInput name="createDate"
