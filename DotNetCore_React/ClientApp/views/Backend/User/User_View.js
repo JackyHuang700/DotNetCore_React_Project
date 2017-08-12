@@ -31,7 +31,7 @@ class User_View extends Component {
         const self = this;
 
         axios.get('api/User/User_View').then((result) => {
-            console.log(result.data);
+            // console.log(result.data);
             this.setState({ UserList: result.data });
         }).catch((error) => {
             console.log(error)

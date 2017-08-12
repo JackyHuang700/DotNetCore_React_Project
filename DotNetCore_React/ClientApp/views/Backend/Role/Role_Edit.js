@@ -5,6 +5,7 @@ import axios from 'axios';
 import { role_Enum } from '../../../EnumScript/GeneralEnumScript.js';
 import EasyForm, { Field, FieldGroup } from 'react-easyform';
 import TextInput from '../../Components/Forms/TextInput';
+import DropDownList from '../../Components/Forms/DropDownList';
 
 
 //編輯與檢視共用
@@ -16,7 +17,6 @@ class Role_Edit_Show extends Component {
       is_Edit: this.props.match.params.edit.toLocaleLowerCase() === "true" ? true : false,
       Role: {},
     };
-    // debugger;
     // console.log(`this.props.match.params)`, this.props.match.params)
 
     this.GetData = this.GetData.bind(this);

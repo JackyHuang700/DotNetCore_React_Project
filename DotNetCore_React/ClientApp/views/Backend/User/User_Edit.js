@@ -3,6 +3,11 @@ import { Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } fr
 
 import axios from 'axios';
 import EasyForm, { Field, FieldGroup } from 'react-easyform';
+import { user_Enum } from '../../../EnumScript/GeneralEnumScript.js';
+
+import TextInput from '../../Components/Forms/TextInput';
+
+import DropDownList from '../../Components/Forms/DropDownList';
 
 //編輯與檢視共用
 class User_Edit_Show extends Component {

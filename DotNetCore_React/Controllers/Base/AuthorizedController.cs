@@ -13,14 +13,14 @@ namespace DotNetCore_React.Controllers
         //判斷用戶是否登入
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            byte[] result;
-            filterContext.HttpContext.Session.TryGetValue("CurrentUser", out result);
-            if (result == null)
-            {
-                filterContext.Result = new RedirectResult("/login");
-                return;
-            }
-            base.OnActionExecuting(filterContext);
+            // byte[] result;
+            // filterContext.HttpContext.Session.TryGetValue("CurrentUser", out result);
+            // if (result == null)
+            // {
+            //     filterContext.Result = new RedirectResult("/login");
+            //     return;
+            // }
+            // base.OnActionExecuting(filterContext);
         }
     }
 }
