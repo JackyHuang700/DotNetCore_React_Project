@@ -40,9 +40,29 @@ var user_Enum = {
         "value": "4",
         "name": "錯誤次數",
     },
-
-
 }
+
+
+//最新消息
+var news_Enum = {
+    STOP: {
+        "value": "0",
+        "name": "已停",
+    },
+
+    NORMAL: {
+        "value": "1",
+        "name": "啟用",
+    },
+
+
+    DELETE: {
+        "value": "-1",
+        "name": "刪除",
+    },
+    
+}
+
 
 export {
     role_Enum,
