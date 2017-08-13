@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 import axios from 'axios';
-
+import history from '../../../history'
 import EasyForm, { Field, FieldGroup } from 'react-easyform';
 import TextInput from '../../Components/Forms/TextInput';
 
@@ -42,7 +42,6 @@ class News_Delete extends Component {
       data: {
       }
     }).then((result) => {
-      // console.log(result.data);
       self.setState({
         News: result.data
       });
@@ -70,14 +69,11 @@ class News_Delete extends Component {
   //按鈕觸發事件
   Button_Click(event) {
     if (this.state.is_Delete) {
-
       this.Button_Submit(event);
     }
     else {
       this.Button_BackUp(event);
-
     }
-
     event.preventDefault();
     return false;
   }
@@ -85,25 +81,20 @@ class News_Delete extends Component {
 
 
   Button_Submit(event) {
-
+    event.preventDefault();
     axios.post(`/api/News/Delete/${this.state.News.id}`, {
     }).then((result) => {
-
         if (result.data.success) {
-          document.location.href = '/News'
+          history.push('/News');
         }
       }).catch((error) => {
         console.log(error)
       });
-
-    event.preventDefault();
     return false;
   }
 
-
-
   Button_BackUp(event) {
-    document.location.href = '/News';
+    history.push('/News');
   }
 
   render() {

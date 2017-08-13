@@ -6,7 +6,7 @@ import { role_Enum } from '../../../EnumScript/GeneralEnumScript.js';
 import EasyForm, { Field, FieldGroup } from 'react-easyform';
 import TextInput from '../../Components/Forms/TextInput';
 import DropDownList from '../../Components/Forms/DropDownList';
-
+import history from '../../../history'
 
 //編輯與檢視共用
 class Role_Edit_Show extends Component {
@@ -17,7 +17,6 @@ class Role_Edit_Show extends Component {
       is_Edit: this.props.match.params.edit.toLocaleLowerCase() === "true" ? true : false,
       Role: {},
     };
-    // console.log(`this.props.match.params)`, this.props.match.params)
 
     this.GetData = this.GetData.bind(this);
     this.Submit = this.Submit.bind(this);
@@ -46,7 +45,6 @@ class Role_Edit_Show extends Component {
       data: {
       }
     }).then((result) => {
-      // console.log(result.data);
       self.setState({
         Role: result.data
       });
@@ -63,7 +61,6 @@ class Role_Edit_Show extends Component {
     const name = target.name;
     var new_Role = Object.assign(this.state.Role);
     new_Role[name] = value;
-
 
     this.setState({
       Role: new_Role,
@@ -92,9 +89,11 @@ class Role_Edit_Show extends Component {
       "返回";
   }
 
-
-  //按鈕觸發事件
+  /**
+  * 按鈕觸發事件
+  */
   Submit(event) {
+    event.preventDefault();
     if (this.state.is_Edit) {
 
       this.Button_Submit(event);
@@ -103,46 +102,39 @@ class Role_Edit_Show extends Component {
       this.Button_BackUp(event);
 
     }
-
-    event.preventDefault();
     return false;
   }
 
-
+  /**
+  * 編輯
+  */
   Button_Submit(event) {
-
+    event.preventDefault();
     axios({
-
       url: '/api/Role/Edit',
       method: 'post',
       data: this.state.Role
     }).then((result) => {
-
       if (result.data.success) {
-        document.location.href = '/Role'
+        history.push('/Role');
       }
     }).catch((error) => {
       console.log(error)
     });
-
-
-    event.preventDefault();
     return false;
   }
 
-
+  /*
+  * 返回
+  */
   Button_BackUp(event) {
-    document.location.href = '/Role';
+    history.push('/Role');
   }
 
   render() {
- // 经过EasyForm包装的组件，props里会有一个params属性，包含所有的表单项值
- const { params } = this.props.params;
- /*
-  * props里的easyform对象，包含了一组验证结果，
-  * 其中$invalid/$valid 可以用来判断表单项是够已经正确填写
-  */
- const { $invalid } = this.props.easyform.$invalid;
+
+    const { params } = this.props.params;
+    const { $invalid } = this.props.easyform.$invalid;
 
     return (
       <div className="animated fadeIn row justify-content-center">

@@ -4,6 +4,7 @@ import { Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } fr
 import axios from 'axios';
 import EasyForm, { Field, FieldGroup } from 'react-easyform';
 import { user_Enum } from '../../../EnumScript/GeneralEnumScript.js';
+import history from '../../../history'
 
 import TextInput from '../../Components/Forms/TextInput';
 
@@ -19,8 +20,6 @@ class User_Edit_Show extends Component {
       User: {},
       RoleList: [],
     };
-    // debugger;
-    // console.log(`this.props.match.params)`, this.props.match.params)
 
     this.GetData = this.GetData.bind(this);
     this.Button_Click = this.Button_Click.bind(this);
@@ -44,14 +43,12 @@ class User_Edit_Show extends Component {
   GetData() {
     const self = this;
 
-    //抓取帳號
     axios({
       url: `/api/User/Get_User?id=${this.props.match.params.id}`,
       method: 'GET',
       data: {
       }
     }).then((result) => {
-      // console.log(result.data);
       self.setState({
         User: result.data
       });
@@ -67,8 +64,6 @@ class User_Edit_Show extends Component {
       data: {
       }
     }).then((result) => {
-      // console.log(result.data);
-      //  debugger;
       var a = [];
       result.data.map((c) => {
         a.push({
@@ -76,7 +71,6 @@ class User_Edit_Show extends Component {
           value: c.id
         });
       });
-
 
       this.setState({ RoleList: a });
     }).catch((error) => {
@@ -135,36 +129,31 @@ class User_Edit_Show extends Component {
     return false;
   }
 
-
+  /**
+  * 編輯
+  */
   Button_Submit(event) {
-
-
-
+    event.preventDefault();
     axios({
-
       url: '/api/User/Edit',
       method: 'post',
       data: this.state.User
     }).then((result) => {
-
       if (result.data.success) {
-        document.location.href = '/User'
+        history.push('/User');
       }
     }).catch((error) => {
       console.log(error)
     });
-
-
-    event.preventDefault();
     return false;
   }
 
-
+  /**
+  * 返回
+  */
   Button_BackUp(event) {
-    document.location.href = '/User';
+    history.push('/User');
   }
-
-
 
   Is_Show_Password() {
 
@@ -184,13 +173,8 @@ class User_Edit_Show extends Component {
 
   render() {
 
- // 经过EasyForm包装的组件，props里会有一个params属性，包含所有的表单项值
- const { params } = this.props.params;
- /*
-  * props里的easyform对象，包含了一组验证结果，
-  * 其中$invalid/$valid 可以用来判断表单项是够已经正确填写
-  */
- const { $invalid } = this.props.easyform.$invalid;
+    const { params } = this.props.params;
+    const { $invalid } = this.props.easyform.$invalid;
 
     return (
       <div className="animated fadeIn row justify-content-center">

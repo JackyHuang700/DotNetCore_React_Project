@@ -5,7 +5,7 @@ import axios from 'axios';
 
 import EasyForm, { Field, FieldGroup } from 'react-easyform';
 import TextInput from '../../Components/Forms/TextInput';
-
+import history from '../../../history'
 
 //編輯與檢視共用
 class Role_Delete extends Component {
@@ -37,7 +37,6 @@ class Role_Delete extends Component {
       data: {
       }
     }).then((result) => {
-      // console.log(result.data);
       self.setState({
         Role: result.data
       });
@@ -55,7 +54,6 @@ class Role_Delete extends Component {
     var new_Role = Object.assign(this.state.Role);
     new_Role[name] = value;
 
-
     this.setState({
       Role: new_Role,
     });
@@ -64,18 +62,15 @@ class Role_Delete extends Component {
 
 
   Button_Submit(event) {
-
+    event.preventDefault();
     axios.post(`/api/Role/Delete/${this.state.Role.id}`, {
     }).then((result) => {
-
         if (result.data.success) {
-          document.location.href = '/Role'
+          history.push('/Role');
         }
       }).catch((error) => {
         console.log(error)
       });
-
-    event.preventDefault();
     return false;
   }
 

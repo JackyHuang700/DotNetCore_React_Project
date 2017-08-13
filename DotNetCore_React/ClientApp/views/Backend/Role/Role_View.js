@@ -1,50 +1,13 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-
-import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
+import { Button, Modal, Container, Row, Col  } from 'reactstrap';
+import { Link } from 'react-router-dom';
+import { BootstrapTable, TableHeaderColumn,ButtonGroup } from 'react-bootstrap-table';
 import '../../../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 
 import axios from 'axios';
+import history from '../../../history'
 
 import { role_Enum } from '../../../EnumScript/GeneralEnumScript.js';
-
-
-
-//彈跳視窗
-// class MyModal extends Component {
-
-//     constructor(props) {
-//         super(props);
-//         this.state = {
-//             primary: false,
-//         };
-//         this.togglePrimary = this.togglePrimary.bind(this);
-//     }
-
-//     togglePrimary() {
-//         this.setState({
-//             primary: !this.state.primary
-//         });
-//     }
-
-//     render() {
-//         return (
-//             <Modal isOpen={this.state.primary} toggle={this.togglePrimary} className={'modal-primary ' + this.props.className}>
-//                 <ModalHeader toggle={this.togglePrimary}>Modal title</ModalHeader>
-//                 <ModalBody>
-//                     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-//                   </ModalBody>
-//                 <ModalFooter>
-//                     <Button color="primary" onClick={this.togglePrimary}>Do Something</Button>{' '}
-//                     <Button color="secondary" onClick={this.togglePrimary}>Cancel</Button>
-//                 </ModalFooter>
-//             </Modal>
-//         )
-//     }
-// }
-
-
-
 
 class Role_View extends Component {
 
@@ -55,9 +18,7 @@ class Role_View extends Component {
         }
         this.buttonFormatter = this.buttonFormatter.bind(this);
         this.GetData = this.GetData.bind(this);
-
     }
-
 
     componentDidMount() {
         this.GetData();
@@ -67,36 +28,43 @@ class Role_View extends Component {
         const self = this;
 
         axios.get('/api/Role/Role_View').then((result) => {
-            // console.log(result.data);
             this.setState({ RoleList: result.data });
         }).catch((error) => {
             console.log(error)
         });
     }
 
-    createCustomDeleteButton = (onBtnClick) => {
+    createCustomButtonGroup = props => {
         return (
-            <button class="danger" onClick={onBtnClick}>Delete</button>
-        )
+            <ButtonGroup className='' sizeClass='btn-group-md'>
+                {this.props.dispaly_button_create &&
+                <Button color="primary" onClick={this.OnClick_Create}>建立</Button> }
+                {props.exportCSVBtn}
+            </ButtonGroup>
+        );
     }
 
 
     buttonFormatter(cell, row) {
         return (
-            <div>
+           <ButtonGroup className='' sizeClass='btn-group-md'>
                 {this.props.display_button_edit ? <Button color="primary" data-id={row.id} onClick={this.OnClick_Edit}>Edit</Button> : null}
                 {this.props.display_button_del ? <Button color="danger" data-id={row.id} onClick={this.OnClick_Delete}>Delete</Button> : null}
-            </div>
+           </ButtonGroup>
         );
     }
 
 
     OnClick_Edit(event) {
-        document.location.href = `/Role/Edit/${event.currentTarget.getAttribute('data-id')}/${true}`;
+        history.push(`/Role/Edit/${event.currentTarget.getAttribute('data-id')}/${true}`);        
     }
 
     OnClick_Delete(event) {
-        document.location.href = `/Role/Delete/${event.currentTarget.getAttribute('data-id')}`;
+        history.push(`/Role/Delete/${event.currentTarget.getAttribute('data-id')}`);
+    }
+
+    OnClick_Create(event) {
+        history.push('/Role/Create');
     }
 
     //將資訊轉換成中文
@@ -119,7 +87,7 @@ class Role_View extends Component {
 
     render() {
         const options = {
-            deleteBtn: this.createCustomDeleteButton
+            btnGroup: this.createCustomButtonGroup
         };
 
         const selectRow = {
@@ -127,40 +95,44 @@ class Role_View extends Component {
         };
 
         return (
-            <BootstrapTable data={this.state.RoleList} selectRow={selectRow} striped hover options={options}>
-                <TableHeaderColumn isKey dataField="button" dataFormat={this.buttonFormatter}>Buttons</TableHeaderColumn>
-                {/* {this.props.display_Id ? <TableHeaderColumn dataField='id'>id</TableHeaderColumn> : null} */}
-                {this.props.display_SysId ? <TableHeaderColumn dataField='sysId'>sysId</TableHeaderColumn> : null}
-                {this.props.display_name ? <TableHeaderColumn dataField='name'>name</TableHeaderColumn> : null}
-                {this.props.display_Priority ? <TableHeaderColumn dataField='priority'>priority</TableHeaderColumn> : null}
-                {this.props.display_Status ? <TableHeaderColumn dataField='status' dataFormat={this.Formatter_Status}>ststus</TableHeaderColumn> : null}
-                {this.props.display_CreateDate ? <TableHeaderColumn dataField='createDate'>createDate</TableHeaderColumn> : null}
-                {this.props.display_CreateUser ? <TableHeaderColumn dataField='createUser'>createUser</TableHeaderColumn> : null}
-                {this.props.display_UpdateDate ? <TableHeaderColumn dataField='updateDate'>updateDate</TableHeaderColumn> : null}
-                {this.props.display_UpdateUser ? <TableHeaderColumn dataField='updateUser'>updateUser</TableHeaderColumn> : null}
-
-
-            </BootstrapTable>
-
+            <Container>
+                <Row>
+                    <Col sm="12" md={{ size:7,offset:5}}><h1>角色管理</h1></Col>
+                </Row>
+                <Row>         
+                <BootstrapTable data={this.state.RoleList} 
+                                selectRow={selectRow} 
+                                striped 
+                                hover 
+                                options={options} 
+                                search
+                                exportCSV>
+                    <TableHeaderColumn isKey dataField="button" dataFormat={this.buttonFormatter}>Buttons</TableHeaderColumn>
+                    {/* {this.props.display_Id ? <TableHeaderColumn dataField='id'>id</TableHeaderColumn> : null} */}
+                    {this.props.display_SysId ? <TableHeaderColumn dataField='sysId' dataSort={ true }>sysId</TableHeaderColumn> : null}
+                    {this.props.display_name ? <TableHeaderColumn dataField='name' dataSort={ true }>name</TableHeaderColumn> : null}
+                    {this.props.display_Priority ? <TableHeaderColumn dataField='priority' dataSort={ true }>priority</TableHeaderColumn> : null}
+                    {this.props.display_Status ? <TableHeaderColumn dataField='status' dataSort={ true } dataFormat={this.Formatter_Status}>ststus</TableHeaderColumn> : null}
+                    {this.props.display_CreateDate ? <TableHeaderColumn dataField='createDate' dataSort={ true }>createDate</TableHeaderColumn> : null}
+                    {this.props.display_CreateUser ? <TableHeaderColumn dataField='createUser' dataSort={ true }>createUser</TableHeaderColumn> : null}
+                    {this.props.display_UpdateDate ? <TableHeaderColumn dataField='updateDate' dataSort={ true }>updateDate</TableHeaderColumn> : null}
+                    {this.props.display_UpdateUser ? <TableHeaderColumn dataField='updateUser' dataSort={ true }>updateUser</TableHeaderColumn> : null}
+                </BootstrapTable>
+                </Row>
+            </Container>
         );
     }
 }
 
-Role_View.propTypes = {
-    display_name: React.PropTypes.bool,
-    display_price: React.PropTypes.bool,
-    display_button_edit: React.PropTypes.bool,
-    display_button_del: React.PropTypes.bool,
-};
-
 Role_View.defaultProps = {
-    display_name: true,
-    display_price: true,
+    
+    dispaly_button_create:true,
     display_button_edit: true,
     display_button_del: true,
 
     /**/
     display_Id: true,
+    display_name: true,
     display_SysId: true,
     display_Priority: true,
     display_Status: true,
