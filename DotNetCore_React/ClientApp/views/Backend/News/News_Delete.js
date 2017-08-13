@@ -1,0 +1,279 @@
+import React, { Component } from 'react';
+import { Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+
+import axios from 'axios';
+
+import EasyForm, { Field, FieldGroup } from 'react-easyform';
+import TextInput from '../../Components/Forms/TextInput';
+
+
+//刪除與檢視共用
+class News_Delete extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+        is_Delete: this.props.match.params.delete.toLocaleLowerCase() === "true" ? true : false,
+        
+      News: {},
+    };
+
+    this.GetData = this.GetData.bind(this);
+    this.Button_Submit = this.Button_Submit.bind(this);
+
+      //
+      this.Title = this.Title.bind(this);
+      this.Button_Text = this.Button_Text.bind(this);
+      this.Button_Click = this.Button_Click.bind(this);
+  }
+
+
+  componentDidMount() {
+    this.GetData();
+  }
+
+
+  GetData() {
+    const self = this;
+
+    axios({
+      url: `/api/News/Get_News?id=${this.props.match.params.id}`,
+      method: 'GET',
+      data: {
+      }
+    }).then((result) => {
+      // console.log(result.data);
+      self.setState({
+        News: result.data
+      });
+    }).catch((error) => {
+      console.log(error)
+    });
+
+  }
+
+
+  Title() {
+    return this.state.is_Delete ?
+      "刪除最新消息" :
+      "檢視最新消息";
+  }
+
+
+  //按鈕觸發事件
+  Button_Text() {
+    return this.state.is_Delete ?
+      "確認刪除" :
+      "返回";
+  }
+
+  //按鈕觸發事件
+  Button_Click(event) {
+    if (this.state.is_Delete) {
+
+      this.Button_Submit(event);
+    }
+    else {
+      this.Button_BackUp(event);
+
+    }
+
+    event.preventDefault();
+    return false;
+  }
+
+
+
+  Button_Submit(event) {
+
+    axios.post(`/api/News/Delete/${this.state.News.id}`, {
+    }).then((result) => {
+
+        if (result.data.success) {
+          document.location.href = '/News'
+        }
+      }).catch((error) => {
+        console.log(error)
+      });
+
+    event.preventDefault();
+    return false;
+  }
+
+
+
+  Button_BackUp(event) {
+    document.location.href = '/News';
+  }
+
+  render() {
+    return (
+      <div className="animated fadeIn row justify-content-center">
+        <div className="col-sm-4">
+          <div className="card">
+            <div className="card-header">
+              {this.Title()}
+            </div>
+            <div className="card-block">
+              <form action="" method="post">
+                <input type="hidden" id="id" name="id" value={this.state.News.id} />
+
+                  <TextInput name="listImage"
+                  labelName="listImage"
+                  className=""
+                  display={this.props.display_listImage}
+                  required={this.props.required_listImage}
+                  validMessage={{ required: 'listImage is reduired.' }}
+                  value={this.state.listImage}
+                             readOnly={true}
+                  placeholder="listImage" />
+
+                
+
+                <TextInput name="category"
+                  labelName="category"
+                  className=""
+                  display={this.props.display_category}
+                  required={this.props.required_category}
+                  validMessage={{ required: 'category is reduired.' }}
+                  value={this.state.category}
+                             readOnly={true}
+                  placeholder="category" />
+
+                
+
+                <TextInput name="priority"
+                  labelName="priority"
+                  className=""
+                  display={this.props.display_priority}
+                  required={this.props.required_priority}
+                  validMessage={{ required: 'priority is reduired.' }}
+                  value={this.state.priority}
+                             readOnly={true}
+                  placeholder="priority" />
+
+                
+                <TextInput name="startDate"
+                  labelName="startDate"
+                  className=""
+                  display={this.props.display_startDate}
+                  required={this.props.required_startDate}
+                  validMessage={{ required: 'startDate is reduired.' }}
+                  value={this.state.startDate}
+                             readOnly={true}
+                  placeholder="startDate" />
+
+                
+                <TextInput name="endDate"
+                  labelName="endDate"
+                  className=""
+                  display={this.props.display_endDate}
+                  required={this.props.required_endDate}
+                  validMessage={{ required: 'endDate is reduired.' }}
+                  value={this.state.endDate}
+                             readOnly={true}
+                  placeholder="endDate" />
+
+                
+                <DropDownList name="status"
+                  labelName="狀態"
+                  display={this.props.display_status}
+                  required={this.props.required_status}
+                  validMessage={{ required: 'status is reduired.' }}
+                  value={this.state.status}
+                             readOnly={true}
+                  options={
+                    [
+                      {
+                        name: news_Enum.STOP.name,
+                        value: news_Enum.STOP.value
+                      },
+                      {
+                        name: news_Enum.NORMAL.name,
+                        value: news_Enum.NORMAL.value
+                      }
+                    ]}
+                />
+
+
+                <TextInput name="createDate"
+                  labelName="createDate"
+                  className=""
+                  display={this.props.display_createDate}
+                  required={this.props.required_createDate}
+                  validMessage={{ required: 'createDate is reduired.' }}
+                  value={this.state.Role.createDate}
+                  readOnly={true}
+                  placeholder="createDate"/>
+   
+                <TextInput name="createUser"
+                  labelName="createUser"
+                  className=""
+                  display={this.props.display_createUser}
+                  required={this.props.required_createUser}
+                  validMessage={{ required: 'createUser is reduired.' }}
+                  value={this.state.Role.createUser}
+                  readOnly={true}
+                  placeholder="createUser"/>
+   
+                <TextInput name="updateDate"
+                  labelName="updateDate"
+                  className=""
+                  display={this.props.display_updateDate}
+                  required={this.props.required_updateDate}
+                  validMessage={{ required: 'updateDate is reduired.' }}
+                  value={this.state.Role.updateDate}
+                  readOnly={true}
+                  placeholder="updateDate"/>
+   
+                <TextInput name="updateUser"
+                  labelName="updateUser"
+                  className=""
+                  display={this.props.display_updateUser}
+                  required={this.props.required_updateUser}
+                  validMessage={{ required: 'updateUser is reduired.' }}
+                  value={this.state.Role.updateUser}
+                  readOnly={true}
+                  placeholder="updateUser"/>
+   
+
+
+                <div className="form-group form-actions">
+                  <Button color="primary" disabled={$invalid ? 'disabled' : false} onClick={this.Button_Click}>{this.Button_Text()}</Button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+}
+
+
+export default EasyForm(News_Delete, 2);
+
+News_Delete.defaultProps = {
+  display_listImage: true,
+  display_category: true,
+  display_priority: true,
+  display_startDate: true,
+  display_endDate: true,
+  display_status: true,
+  display_createDate: true,
+  display_createUser: true,
+  display_updateDate: true,
+  display_updateUser: true,
+  
+/* */
+  required_listImage:true,
+  required_category:true,
+  required_priority:true,
+  required_startDate:true,
+  required_endDate:true,
+  required_status:true,
+  required_createDate:true,
+  required_createUser:true,
+  required_updateDate:true,
+  required_updateUser:true,
+}

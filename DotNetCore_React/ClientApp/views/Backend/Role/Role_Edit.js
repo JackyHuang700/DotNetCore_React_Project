@@ -97,10 +97,10 @@ class Role_Edit_Show extends Component {
   Button_Click(event) {
     if (this.state.is_Edit) {
 
-      this.Button_Submit();
+      this.Button_Submit(event);
     }
     else {
-      this.Button_BackUp();
+      this.Button_BackUp(event);
 
     }
 
