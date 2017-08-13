@@ -136,6 +136,14 @@ class Role_Edit_Show extends Component {
   }
 
   render() {
+ // 经过EasyForm包装的组件，props里会有一个params属性，包含所有的表单项值
+ const { params } = this.props.params;
+ /*
+  * props里的easyform对象，包含了一组验证结果，
+  * 其中$invalid/$valid 可以用来判断表单项是够已经正确填写
+  */
+ const { $invalid } = this.props.easyform.$invalid;
+
     return (
       <div className="animated fadeIn row justify-content-center">
         <div className="col-sm-4">
@@ -225,7 +233,7 @@ class Role_Edit_Show extends Component {
                   readOnly={!this.state.is_Edit} />
 
                 <div className="form-group form-actions">
-                  <button type="botton" className="btn btn-sm btn-default" onClick={this.Button_Click} >{this.Button_Text()}</button>
+                  <Button color="primary" disabled={$invalid ? 'disabled' : false} onClick={this.Button_Click}>{this.Button_Text()}</Button>
                 </div>
               </form>
             </div>
