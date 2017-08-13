@@ -124,10 +124,10 @@ class User_Edit_Show extends Component {
   Button_Click(event) {
     if (this.state.is_Edit) {
 
-      this.Button_Submit();
+      this.Button_Submit(event);
     }
     else {
-      this.Button_BackUp();
+      this.Button_BackUp(event);
 
     }
 
@@ -148,7 +148,7 @@ class User_Edit_Show extends Component {
     }).then((result) => {
 
       if (result.data.success) {
-        document.location.href = '/User_View'
+        document.location.href = '/User'
       }
     }).catch((error) => {
       console.log(error)
@@ -161,7 +161,7 @@ class User_Edit_Show extends Component {
 
 
   Button_BackUp(event) {
-    document.location.href = '/User_View';
+    document.location.href = '/User';
   }
 
 
@@ -183,6 +183,15 @@ class User_Edit_Show extends Component {
   }
 
   render() {
+
+ // 经过EasyForm包装的组件，props里会有一个params属性，包含所有的表单项值
+ const { params } = this.props.params;
+ /*
+  * props里的easyform对象，包含了一组验证结果，
+  * 其中$invalid/$valid 可以用来判断表单项是够已经正确填写
+  */
+ const { $invalid } = this.props.easyform.$invalid;
+
     return (
       <div className="animated fadeIn row justify-content-center">
         <div className="col-sm-4">
@@ -191,7 +200,7 @@ class User_Edit_Show extends Component {
               {this.Title()}
             </div>
             <div className="card-block">
-              <form action="" method="post">
+            <form className="" onSubmit={this.Button_Submit}>
 
                 <TextInput name="userName"
                   labelName="角色名稱"
@@ -225,7 +234,7 @@ class User_Edit_Show extends Component {
                   required={this.props.required_roleId}
                   validMessage={{ required: 'roleId is reduired.' }}
                   onInput={this.Bind_handleInputChange}
-                  value={this.state.roleId}
+                  value={this.state.User.roleId}
                   readOnly={!this.state.is_Edit}
                   options={this.state.RoleList}
                 />
@@ -256,11 +265,11 @@ class User_Edit_Show extends Component {
 
                 <DropDownList name="status"
                   labelName="狀態"
-                  display={this.props.display_Status}
-                  required={this.props.required_Status}
-                  validMessage={{ required: 'Status is reduired.' }}
+                  display={this.props.display_status}
+                  required={this.props.required_status}
+                  validMessage={{ required: 'status is reduired.' }}
                   onInput={this.Bind_handleInputChange}
-                  value={this.state.Status}
+                  value={this.state.User.status}
                   readOnly={!this.state.is_Edit}
                   options={
                     [
@@ -313,7 +322,7 @@ class User_Edit_Show extends Component {
 
 
                 <div className="form-group form-actions">
-                  <button type="botton" className="btn btn-sm btn-default" onClick={this.Button_Click} >{this.Button_Text()}</button>
+                  <Button color="primary" disabled={$invalid ? 'disabled' : false} >{this.Button_Text()}</Button>
                 </div>
               </form>
             </div>

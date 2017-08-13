@@ -72,7 +72,7 @@ class News_Edit extends Component {
             編輯最新消息
             </div>
             <div className="card-block">
-              <form action="" method="post">
+            <form className="" onSubmit={this.Button_Submit}>
                 <input type="hidden" id="id" name="id" value={this.state.News.id} />
 
                 <TextInput name="listImage"
@@ -192,7 +192,7 @@ class News_Edit extends Component {
                   placeholder="updateUser"/>
 
                 <div className="form-group form-actions">
-                <Button color="primary" disabled={$invalid ? 'disabled' : false}  onClick={this.Button_Submit}>完成</Button>
+                <Button color="primary" disabled={$invalid ? 'disabled' : false} >完成</Button>
                 </div>
               </form>
             </div>
