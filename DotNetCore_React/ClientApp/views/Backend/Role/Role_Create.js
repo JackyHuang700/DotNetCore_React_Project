@@ -34,7 +34,7 @@ class Role_Create extends Component {
       }
     }).then((result) => {
       if (result.data.success) {
-        document.location.href = '/Role_View'
+        document.location.href = '/Role'
       }
     }).catch((error) => {
       console.log(error)

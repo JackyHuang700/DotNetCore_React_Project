@@ -30,7 +30,7 @@ class User_Create extends Component {
       }
     }).then((result) => {
       if (result.data.success) {
-        document.location.href = '/User_View'
+        document.location.href = '/User'
       }
     }).catch((error) => {
       console.log(error)
