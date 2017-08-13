@@ -20,7 +20,7 @@ class Role_Edit_Show extends Component {
     // console.log(`this.props.match.params)`, this.props.match.params)
 
     this.GetData = this.GetData.bind(this);
-    this.Button_Click = this.Button_Click.bind(this);
+    this.Submit = this.Submit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
 
     //
@@ -94,7 +94,7 @@ class Role_Edit_Show extends Component {
 
 
   //按鈕觸發事件
-  Button_Click(event) {
+  Submit(event) {
     if (this.state.is_Edit) {
 
       this.Button_Submit(event);
@@ -152,7 +152,7 @@ class Role_Edit_Show extends Component {
               {this.Title()}
             </div>
             <div className="card-block">
-              <form action="" method="post">
+            <form className="" onSubmit={this.Submit}>
                 <input type="hidden" id="id" name="id" value={this.state.Role.id} />
 
                 <TextInput name="sysId"
@@ -233,7 +233,7 @@ class Role_Edit_Show extends Component {
                   readOnly={!this.state.is_Edit} />
 
                 <div className="form-group form-actions">
-                  <Button color="primary" disabled={$invalid ? 'disabled' : false} onClick={this.Button_Click}>{this.Button_Text()}</Button>
+                  <Button color="primary" disabled={$invalid ? 'disabled' : false}>{this.Button_Text()}</Button>
                 </div>
               </form>
             </div>
