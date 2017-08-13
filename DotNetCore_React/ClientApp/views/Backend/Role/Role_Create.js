@@ -34,7 +34,7 @@ class Role_Create extends Component {
       }
     }).then((result) => {
       if (result.data.success) {
-        document.location.href = '/#/Role_View'
+        document.location.href = '/Role_View'
       }
     }).catch((error) => {
       console.log(error)
@@ -79,7 +79,7 @@ class Role_Create extends Component {
                   required={this.props.required_SysId}
                   pattern={/^[\w]{5,10}$/}
                   validMessage={{ required: 'SysId is reduired.', pattern: '不能包含字母数字底線以外的字符' }}
-                  onChange={this.handleInputChange}
+                  onInput={this.handleInputChange}
                   value={this.state.SysId}
                   placeholder="sys123" />
 
@@ -89,7 +89,7 @@ class Role_Create extends Component {
                   display={this.props.display_Name}
                   required={this.props.required_Name}
                   validMessage={{ required: 'Name is reduired.' }}
-                  onChange={this.handleInputChange}
+                  onInput={this.handleInputChange}
                   value={this.state.Name}
                   placeholder="糖糖" />
 
@@ -99,7 +99,7 @@ class Role_Create extends Component {
                   display={this.props.display_Priority}
                   required={this.props.required_Priority}
                   validMessage={{ required: 'Priority is reduired.' }}
-                  onChange={this.handleInputChange}
+                  onInput={this.handleInputChange}
                   value={this.state.Priority}
                   placeholder="1" />
 
@@ -108,7 +108,7 @@ class Role_Create extends Component {
                   display={this.props.display_Status}
                   required={this.props.required_Status} 
                   validMessage={{required: 'Status is reduired.'}} 
-                  onChange={this.handleInputChange} 
+                  onInput={this.handleInputChange} 
                   value={this.state.Status}
                   options={
                     [

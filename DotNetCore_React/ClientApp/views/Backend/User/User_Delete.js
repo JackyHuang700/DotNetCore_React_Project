@@ -99,7 +99,7 @@ class User_Delete extends Component {
                   display={this.props.display_userName}
                   required={this.props.required_userName}
                   validMessage={{ required: 'userName is reduired.' }}
-                  onChange={this.handleInputChange}
+                  onInput={this.handleInputChange}
                   value={this.state.User.userName}
                   placeholder="userName"
                   readOnly={true} />
@@ -112,7 +112,7 @@ class User_Delete extends Component {
                   display={this.props.display_password}
                   required={this.props.required_password}
                   validMessage={{ required: 'password is reduired.' }}
-                  onChange={this.handleInputChange}
+                  onInput={this.handleInputChange}
                   value={this.state.User.password}
                   placeholder="password"
                   readOnly={true} />
@@ -124,7 +124,7 @@ class User_Delete extends Component {
                   display={this.props.display_email}
                   required={this.props.required_email}
                   validMessage={{ required: 'email is reduired.' }}
-                  onChange={this.handleInputChange}
+                  onInput={this.handleInputChange}
                   value={this.state.User.email}
                   placeholder="email"
                   readOnly={true} />
@@ -138,7 +138,7 @@ class User_Delete extends Component {
                   display={this.props.display_roleId}
                   required={this.props.required_roleId}
                   validMessage={{ required: 'roleId is reduired.' }}
-                  onChange={this.handleInputChange}
+                  onInput={this.handleInputChange}
                   value={this.state.User.roleId}
                   placeholder="roleId"
                   readOnly={true} />
@@ -150,7 +150,7 @@ class User_Delete extends Component {
                   display={this.props.display_firstName}
                   required={this.props.required_firstName}
                   validMessage={{ required: 'firstName is reduired.' }}
-                  onChange={this.handleInputChange}
+                  onInput={this.handleInputChange}
                   value={this.state.User.firstName}
                   placeholder="firstName"
                   readOnly={true} />
@@ -162,7 +162,7 @@ class User_Delete extends Component {
                   display={this.props.display_lastName}
                   required={this.props.required_lastName}
                   validMessage={{ required: 'lastName is reduired.' }}
-                  onChange={this.handleInputChange}
+                  onInput={this.handleInputChange}
                   value={this.state.User.lastName}
                   placeholder="lastName"
                   readOnly={true} />
@@ -172,7 +172,7 @@ class User_Delete extends Component {
                   display={this.props.display_Status}
                   required={this.props.required_Status} 
                   validMessage={{required: 'Status is reduired.'}} 
-                  onChange={this.handleInputChange} 
+                  onInput={this.handleInputChange} 
                   value={this.state.User.status}
                   readOnly={!this.state.is_Edit}
                   options={
@@ -195,7 +195,7 @@ class User_Delete extends Component {
                   display={this.props.display_createDate}
                   required={this.props.required_createDate}
                   validMessage={{ required: 'createDate is reduired.' }}
-                  onChange={this.handleInputChange}
+                  onInput={this.handleInputChange}
                   value={this.state.User.createDate}
                   placeholder="createDate"
                   readOnly={true} />
@@ -210,7 +210,7 @@ class User_Delete extends Component {
                   display={this.props.display_createUser}
                   required={this.props.required_createUser}
                   validMessage={{ required: 'createUser is reduired.' }}
-                  onChange={this.handleInputChange}
+                  onInput={this.handleInputChange}
                   value={this.state.User.createUser}
                   placeholder="createUser"
                   readOnly={true} />

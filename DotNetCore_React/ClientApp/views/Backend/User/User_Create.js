@@ -30,7 +30,7 @@ class User_Create extends Component {
       }
     }).then((result) => {
       if (result.data.success) {
-        document.location.href = '/#/User_View'
+        document.location.href = '/User_View'
       }
     }).catch((error) => {
       console.log(error)
@@ -74,7 +74,7 @@ class User_Create extends Component {
                   display={this.props.display_userName}
                   required={this.props.required_userName}
                   validMessage={{ required: 'userName is reduired.' }}
-                  onChange={this.handleInputChange}
+                  onInput={this.handleInputChange}
                   value={this.state.userName}
                   placeholder="userName" />
 
@@ -84,7 +84,7 @@ class User_Create extends Component {
                   display={this.props.display_roleId}
                   required={this.props.required_roleId}
                   validMessage={{ required: 'roleId is reduired.' }}
-                  onChange={this.handleInputChange}
+                  onInput={this.handleInputChange}
                   value={this.state.roleId}
                   placeholder="roleId" />
 
@@ -95,7 +95,7 @@ class User_Create extends Component {
                   display={this.props.display_email}
                   required={this.props.required_email}
                   validMessage={{ required: 'email is reduired.' }}
-                  onChange={this.handleInputChange}
+                  onInput={this.handleInputChange}
                   value={this.state.email}
                   placeholder="email" />
 
@@ -106,7 +106,7 @@ class User_Create extends Component {
                   display={this.props.display_emailComfirmed}
                   required={this.props.required_emailComfirmed}
                   validMessage={{ required: 'emailComfirmed is reduired.' }}
-                  onChange={this.handleInputChange}
+                  onInput={this.handleInputChange}
                   value={this.state.emailComfirmed}
                   placeholder="emailComfirmed" />
 
@@ -116,7 +116,7 @@ class User_Create extends Component {
                   display={this.props.display_firstName}
                   required={this.props.required_firstName}
                   validMessage={{ required: 'firstName is reduired.' }}
-                  onChange={this.handleInputChange}
+                  onInput={this.handleInputChange}
                   value={this.state.firstName}
                   placeholder="firstName" />
 
@@ -126,7 +126,7 @@ class User_Create extends Component {
                   display={this.props.display_lastName}
                   required={this.props.required_lastName}
                   validMessage={{ required: 'lastName is reduired.' }}
-                  onChange={this.handleInputChange}
+                  onInput={this.handleInputChange}
                   value={this.state.lastName}
                   placeholder="lastName" />
 
@@ -137,7 +137,7 @@ class User_Create extends Component {
               display={this.props.status}
               required={this.props.status} 
               validMessage={{required: 'status is reduired.'}} 
-              onChange={this.handleInputChange} 
+              onInput={this.handleInputChange} 
               value={this.state.status} 
               placeholder="status"/>  */}
 
@@ -148,7 +148,7 @@ class User_Create extends Component {
                   display={this.props.createDate}
                   required={this.props.createDate}
                   validMessage={{ required: 'createDate is reduired.' }}
-                  onChange={this.handleInputChange}
+                  onInput={this.handleInputChange}
                   value={this.state.createDate}
                   placeholder="createDate" />
 
@@ -159,7 +159,7 @@ class User_Create extends Component {
                   display={this.props.createUser}
                   required={this.props.createUser}
                   validMessage={{ required: 'createUser is reduired.' }}
-                  onChange={this.handleInputChange}
+                  onInput={this.handleInputChange}
                   value={this.state.createUser}
                   placeholder="createUser" />
 
@@ -171,7 +171,7 @@ class User_Create extends Component {
                   display={this.props.updateDate}
                   required={this.props.updateDate}
                   validMessage={{ required: 'updateDate is reduired.' }}
-                  onChange={this.handleInputChange}
+                  onInput={this.handleInputChange}
                   value={this.state.updateDate}
                   placeholder="updateDate" />
 
@@ -182,7 +182,7 @@ class User_Create extends Component {
                   display={this.props.updateUser}
                   required={this.props.updateUser}
                   validMessage={{ required: 'updateUser is reduired.' }}
-                  onChange={this.handleInputChange}
+                  onInput={this.handleInputChange}
                   value={this.state.updateUser}
                   placeholder="updateUser" />
 
@@ -192,7 +192,7 @@ class User_Create extends Component {
                   display={this.props.failedCount}
                   required={this.props.failedCount}
                   validMessage={{ required: 'failedCount is reduired.' }}
-                  onChange={this.handleInputChange}
+                  onInput={this.handleInputChange}
                   value={this.state.failedCount}
                   placeholder="failedCount" />
 

@@ -13,6 +13,8 @@ namespace DotNetCore_React.Application.NewsApp.Dtos
 
         public string ListImage { get; set; }
 
+        public string Title { get; set; }
+
         public int Category { get; set; }
 
         public int Priority { get; set; }

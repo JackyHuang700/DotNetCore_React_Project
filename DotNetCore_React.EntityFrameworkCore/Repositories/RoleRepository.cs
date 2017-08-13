@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DotNetCore_React.Domain.IRepositories;
 using DotNetCore_React.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace DotNetCore_React.EntityFrameworkCore.Repositories
 {
@@ -71,7 +72,7 @@ namespace DotNetCore_React.EntityFrameworkCore.Repositories
             {
                 //參考 https://stackoverflow.com/questions/15336248/entity-framework-5-updating-a-record
                 _dbContext.Roles.Attach(role);
-                var entry = _dbContext.Entry(role);
+                _dbContext.Entry(role).State = EntityState.Modified;
                 _dbContext.SaveChanges();
                 myJson.Add("success", true);
                 myJson.Add("message", "");

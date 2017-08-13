@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace DotNetCore_React.EntityFrameworkCore.Repositories
 {
@@ -36,7 +37,7 @@ namespace DotNetCore_React.EntityFrameworkCore.Repositories
             {
                 //參考 https://stackoverflow.com/questions/15336248/entity-framework-5-updating-a-record
                 _dbContext.Users.Attach(user);
-                var entry = _dbContext.Entry(user);
+                _dbContext.Entry(user).State = EntityState.Modified;
                 _dbContext.SaveChanges();
                 myJson.Add("success", true);
                 myJson.Add("message", "");
