@@ -30,7 +30,7 @@ namespace DotNetCore_React.EntityFrameworkCore.Seeds
                 };
 
                 _context.Set<News>().Add(data1);
-                //_context.SaveChanges();
+                _context.SaveChanges();
             }
         }
     }

@@ -32,6 +32,8 @@ namespace DotNetCore_React.Application
 
                 cfg.CreateMap<News, NewsDto>();
                 cfg.CreateMap<NewsDto, News>();
+                cfg.CreateMap<List<News>, List<NewsDto>>();
+                cfg.CreateMap<List<NewsDto>, List<News>>();
 
                 cfg.CreateMap<News_Lan, News_LanDto>();
                 cfg.CreateMap<News_LanDto, News_Lan>();

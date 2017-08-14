@@ -5,6 +5,7 @@ using DotNetCore_React.Domain.IRepositories;
 using AutoMapper;
 using DotNetCore_React.Domain.Entities;
 using DotNetCore_React.Application.News_LanApp;
+using DotNetCore_React.Application.News_LanApp.Dtos;
 
 namespace DotNetCore_React.Application.NewsApp
 {
@@ -35,10 +36,12 @@ namespace DotNetCore_React.Application.NewsApp
             Guid.TryParse(id, out guid);
             //抓取主表
             var a = _repository.GetSingle(guid);
+            var newsDto = Mapper.Map<NewsDto>(a);
+            //抓取附表
+            var new_lans_List = _repository_news_lan.Getall_By_NewsId(guid);
+            newsDto.New_LanList = Mapper.Map<List<News_LanDto>>(new_lans_List);
 
-            //var new_lans_List = _repository_news_lan.GetAll();
-
-            return Mapper.Map<NewsDto>(a);
+            return newsDto;
         }
 
         public Dictionary<string, object> Create(NewsDto role)
