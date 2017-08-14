@@ -80,14 +80,14 @@ namespace DotNetCore_React.Application.NewsApp
             //主表
             if (!(bool)myJson_News["success"])
             {
-                errorList.Add(myJson_News["message"]);
+                errorList.Add(myJson_News["id"]);
             }
             //副表
             foreach (var aa in myJson_News_Lan_List)
             {
                 if (!(bool)aa["success"])
                 {
-                    errorList.Add(myJson_News["message"]);
+                    errorList.Add(myJson_News["id"]);
                 }
             }
 
@@ -100,11 +100,11 @@ namespace DotNetCore_React.Application.NewsApp
             else
             {
                 //刪除主表
-                _repository.Delete((Guid)myJson_News["message"]);
+                _repository.Delete((Guid)myJson_News["id"]);
                 //刪除附表
                 foreach (var item in myJson_News_Lan_List)
                 {
-                    _repository_news_lan.Delete((Guid)myJson_News["message"]);
+                    _repository_news_lan.Delete((Guid)myJson_News["id"]);
                 }
 
                 //刪除其他資料
@@ -134,10 +134,16 @@ namespace DotNetCore_React.Application.NewsApp
             //轉換Guid
             Guid guid;
             Guid.TryParse(id, out guid);
+            //刪除主表
             myJson = _repository.Delete(guid);
+            //刪除副表
+            var news_LanList = _repository_news_lan.Getall_By_NewsId((Guid)myJson["id"]);
 
-            //myJson.Add("success", true);
-            //myJson.Add("message", "");
+            foreach (var item in news_LanList)
+            {
+                _repository_news_lan.Delete(item.Id);
+            }
+
             return myJson;
         }
     }
