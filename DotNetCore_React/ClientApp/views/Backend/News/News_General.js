@@ -13,7 +13,7 @@ export function Get_Sys_Language(){
         }).then((result) => {
             console.log(`Get_Sys_Language)`, result.data)
           self.setState({
-            Sys_LanguageList: result.data
+            Sys_Language_List: result.data
           });
         }).catch((error) => {
           console.log(error)
@@ -21,4 +21,23 @@ export function Get_Sys_Language(){
 
 
     
+}
+
+
+export function GetData() {
+    const self = this;
+    
+        axios({
+          url: `/api/News/Get_News?id=${this.props.match.params.id}`,
+          method: 'GET',
+          data: {
+          }
+        }).then((result) => {
+          // console.log(result.data);
+          self.setState({
+            News: result.data
+          });
+        }).catch((error) => {
+          console.log(error)
+        });
 }

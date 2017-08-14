@@ -60,6 +60,11 @@ namespace DotNetCore_React.EntityFrameworkCore.Repositories
             return _dbContext.Set<News_Lan>().ToList();
         }
 
+        public List<News_Lan> Getall_By_NewsId(Guid newsId)
+        {
+            return _dbContext.Set<News_Lan>().Where(c => c.NewsId == newsId).ToList();
+        }
+
         public News_Lan GetSingle(Guid id)
         {
             return _dbContext.Set<News_Lan>().FirstOrDefault(C => C.Id == id);

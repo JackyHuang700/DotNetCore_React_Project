@@ -23,7 +23,7 @@ namespace DotNetCore_React.Application.NewsApp
         public List<NewsDto> GetAll()
         {
             var a = _repository.GetAll();
-
+            
             //要撈子表
             return Mapper.Map<List<NewsDto>>(a);
         }
@@ -33,7 +33,11 @@ namespace DotNetCore_React.Application.NewsApp
             //轉換Guid
             Guid guid;
             Guid.TryParse(id, out guid);
+            //抓取主表
             var a = _repository.GetSingle(guid);
+
+            //var new_lans_List = _repository_news_lan.GetAll();
+
             return Mapper.Map<NewsDto>(a);
         }
 

@@ -10,6 +10,9 @@ namespace DotNetCore_React.Domain.IRepositories
         //根據帳號獲取權限
         List<News_Lan> GetAll();
 
+        //依照主表取的資料
+        List<News_Lan> Getall_By_NewsId(Guid newsId);
+
         News_Lan GetSingle(Guid id);
 
 
