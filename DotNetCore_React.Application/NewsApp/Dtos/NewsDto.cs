@@ -32,5 +32,9 @@ namespace DotNetCore_React.Application.NewsApp.Dtos
         public DateTime? UpdateDate { get; set; }
 
         public string UpdateUser { get; set; }
+
+
+        //副表
+        public List<News_LanApp.Dtos.News_LanDto> New_LanList { get; set; }
     }
 }

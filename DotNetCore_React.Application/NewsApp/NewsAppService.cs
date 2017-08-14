@@ -42,15 +42,19 @@ namespace DotNetCore_React.Application.NewsApp
             var myJson = new Dictionary<string, object>();
 
             var dateTime = DateTime.Now;
+
+            //主表
             var roleDB = new News()
             {
                 //Id = Guid.NewGuid(),
                 //CreateDate = dateTime,
                 //UpdateDate = dateTime,
             };
+            myJson = _repository.Create(roleDB);
+            //副表
+            
 
             //儲存資料
-            myJson = _repository.Create(roleDB);
 
             //myJson.Add("success", true);
             //myJson.Add("message", "");

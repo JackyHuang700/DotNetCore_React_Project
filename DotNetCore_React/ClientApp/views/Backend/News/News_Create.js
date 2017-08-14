@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import { FormGroup, Label, Input, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { FormGroup, Label, Input, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem,  TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
 import axios from 'axios';
 import history from '../../../history'
 import EasyForm, { Field, FieldGroup } from 'react-easyform';
 import TextInput from '../../Components/Forms/TextInput';
 import DropDownList from '../../Components/Forms/DropDownList';
 
-import { news_Enum } from '../../../EnumScript/GeneralEnumScript.js';
+import { news_Enum } from '../../../EnumScript/GeneralEnumScript';
+import classnames from 'classnames';
+import {Get_Sys_Language} from './News_General';
 
 class News_Create extends Component {
 
@@ -14,11 +16,30 @@ class News_Create extends Component {
     super(props);
     this.state = {
       News: {},
+      Sys_Language_List: [],
+      activeTab: '1'
     };
 
     this.Submit = this.Submit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.Button_Submit = this.Button_Submit.bind(this);
+    this.toggle = this.toggle.bind(this);
+
+    //Import
+    this.Get_Sys_Language = Get_Sys_Language.bind(this);
+  }
+
+  componentDidMount(){
+    this.Get_Sys_Language();
+  }
+
+
+  toggle(tab) {
+    if (this.state.activeTab !== tab) {
+      this.setState({
+        activeTab: tab
+      });
+    }
   }
 
   Submit(event) {
@@ -80,7 +101,7 @@ class News_Create extends Component {
         <div className="col-sm-4">
           <div className="card">
             <div className="card-header">
-              �倰�
+              建立最新消息
               </div>
             <div className="card-block">
               <form className="" onSubmit={this.Submit}>
@@ -162,8 +183,49 @@ class News_Create extends Component {
                       }
                     ]}
                 />
+
+{/* 副表 */}
+
+<Nav tabs>
+              <NavItem>
+                <NavLink
+                  className={classnames({ active: this.state.activeTab === '1' })}
+                  onClick={() => { this.toggle('1'); }}
+                >
+                  <i className="icon-calculator"></i> Calculator
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink
+                  className={classnames({ active: this.state.activeTab === '2' })}
+                  onClick={() => { this.toggle('2'); }}
+                >
+                  <i className="icon-basket-loaded"></i> Shoping cart
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink
+                  className={classnames({ active: this.state.activeTab === '3' })}
+                  onClick={() => { this.toggle('3'); }}
+                >
+                  <i className="icon-pie-chart"></i> Charts
+                </NavLink>
+              </NavItem>
+            </Nav>
+            <TabContent activeTab={this.state.activeTab}>
+              <TabPane tabId="1">
+                1. 
+              </TabPane>
+              <TabPane tabId="2">
+                2. 
+              </TabPane>
+              <TabPane tabId="3">
+                3. 
+              </TabPane>
+            </TabContent>
+
                 <div className="form-group form-actions">
-                  <Button color="primary" disabled={$invalid ? 'disabled' : false}>確�</Button>
+                  <Button color="primary" disabled={$invalid ? 'disabled' : false}>確認</Button>
                 </div>
               </form>
             </div>
