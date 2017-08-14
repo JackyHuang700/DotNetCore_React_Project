@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FormGroup, Label, Input, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem,  TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
+import { FormGroup, Label, Input, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
 import axios from 'axios';
 import history from '../../../history'
 import EasyForm, { Field, FieldGroup } from 'react-easyform';
@@ -8,7 +8,7 @@ import DropDownList from '../../Components/Forms/DropDownList';
 
 import { news_Enum } from '../../../EnumScript/GeneralEnumScript';
 import classnames from 'classnames';
-import {Get_Sys_Language} from './News_General';
+import { Get_Sys_Language } from './News_General';
 
 class News_Create extends Component {
 
@@ -27,9 +27,10 @@ class News_Create extends Component {
 
     //Import
     this.Get_Sys_Language = Get_Sys_Language.bind(this);
+    this.Component_Nav = this.Component_Nav.bind(this);
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.Get_Sys_Language();
   }
 
@@ -78,19 +79,59 @@ class News_Create extends Component {
 
   Button_Submit(event) {
     event.preventDefault();
-        axios.post(`/api/News/Delete/${this.state.News.id}`, {
-        }).then((result) => { 
-            if (result.data.success) {
-              history.push('/News');
-            }
-          }).catch((error) => {
-            console.log(error)
-          });
-    
-
-        return false;
+    axios.post(`/api/News/Delete/${this.state.News.id}`, {
+    }).then((result) => {
+      if (result.data.success) {
+        history.push('/News');
       }
-    
+    }).catch((error) => {
+      console.log(error)
+    });
+
+
+    return false;
+  }
+
+  //語系元件
+  Component_Nav() {
+
+    return (
+      <div>
+        <Nav tabs>
+          {
+            this.state.Sys_Language_List.map((sys, index) => {
+              return (
+                <NavItem>
+
+                  <NavLink
+                    className={classnames({ active: this.state.activeTab === `${index}` })}
+                    onClick={() => { this.toggle(`${index}`); }}
+                  >
+                    <i className="icon-calculator"></i> {sys.name}
+                  </NavLink>
+                </NavItem>
+
+              );
+            })
+          }
+        </Nav>
+        <TabContent activeTab={this.state.activeTab}>
+          {
+            this.state.Sys_Language_List.map((sys, index) => {
+              return (
+                <TabPane tabId={`${index}`}>
+                  {index}.
+  </TabPane>
+              )
+            })
+          }
+        </TabContent>
+      </div>
+    );
+
+
+  }
+
 
   render() {
     const { params } = this.props.params;
@@ -117,7 +158,7 @@ class News_Create extends Component {
                   value={this.state.listImage}
                   placeholder="listImage" />
 
-                
+
 
                 <TextInput name="category"
                   labelName="category"
@@ -129,7 +170,7 @@ class News_Create extends Component {
                   value={this.state.category}
                   placeholder="category" />
 
-                
+
 
                 <TextInput name="priority"
                   labelName="priority"
@@ -141,7 +182,7 @@ class News_Create extends Component {
                   value={this.state.priority}
                   placeholder="priority" />
 
-                
+
                 <TextInput name="startDate"
                   labelName="startDate"
                   className=""
@@ -152,7 +193,7 @@ class News_Create extends Component {
                   value={this.state.startDate}
                   placeholder="startDate" />
 
-                
+
                 <TextInput name="endDate"
                   labelName="endDate"
                   className=""
@@ -163,7 +204,7 @@ class News_Create extends Component {
                   value={this.state.endDate}
                   placeholder="endDate" />
 
-                
+
                 <DropDownList name="status"
                   labelName="status"
                   display={this.props.display_status}
@@ -184,45 +225,7 @@ class News_Create extends Component {
                     ]}
                 />
 
-{/* 副表 */}
-
-<Nav tabs>
-              <NavItem>
-                <NavLink
-                  className={classnames({ active: this.state.activeTab === '1' })}
-                  onClick={() => { this.toggle('1'); }}
-                >
-                  <i className="icon-calculator"></i> Calculator
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink
-                  className={classnames({ active: this.state.activeTab === '2' })}
-                  onClick={() => { this.toggle('2'); }}
-                >
-                  <i className="icon-basket-loaded"></i> Shoping cart
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink
-                  className={classnames({ active: this.state.activeTab === '3' })}
-                  onClick={() => { this.toggle('3'); }}
-                >
-                  <i className="icon-pie-chart"></i> Charts
-                </NavLink>
-              </NavItem>
-            </Nav>
-            <TabContent activeTab={this.state.activeTab}>
-              <TabPane tabId="1">
-                1. 
-              </TabPane>
-              <TabPane tabId="2">
-                2. 
-              </TabPane>
-              <TabPane tabId="3">
-                3. 
-              </TabPane>
-            </TabContent>
+                {this.Component_Nav()}
 
                 <div className="form-group form-actions">
                   <Button color="primary" disabled={$invalid ? 'disabled' : false}>確認</Button>

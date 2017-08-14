@@ -57,7 +57,7 @@ namespace DotNetCore_React.EntityFrameworkCore.Repositories
 
         public List<Sys_Language> GetAll()
         {
-            return _dbContext.Set<Sys_Language>().ToList();
+            return _dbContext.Set<Sys_Language>().Where(c => c.IsDisplay == true).ToList();
         }
 
         public Sys_Language GetSingle(int id)

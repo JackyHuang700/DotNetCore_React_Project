@@ -5,8 +5,7 @@ export function Get_Sys_Language(){
     const self = this;
     
         axios({
-          url: `/api/Role/Role_View`,
-        //   url: `/api/Sys_Language/Sys_Language_View`,
+          url: `/api/Sys_Language/Sys_Language_View`,
           method: 'GET',
           data: {
           }
