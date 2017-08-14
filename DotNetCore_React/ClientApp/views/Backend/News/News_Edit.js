@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import { FormGroup, Label, Input, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 import axios from 'axios';
-import { role_Enum } from '../../../EnumScript/GeneralEnumScript.js';
 import EasyForm, { Field, FieldGroup } from 'react-easyform';
 import TextInput from '../../Components/Forms/TextInput';
 import DropDownList from '../../Components/Forms/DropDownList';
-
+import { news_Enum } from '../../../EnumScript/GeneralEnumScript.js';
 
 class News_Edit extends Component {
 
@@ -18,7 +17,7 @@ class News_Edit extends Component {
     // console.log(`this.props.match.params)`, this.props.match.params)
 
     this.GetData = this.GetData.bind(this);
-    this.Button_Click = this.Button_Click.bind(this);
+    this.Button_Submit = this.Button_Submit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
@@ -61,9 +60,37 @@ class News_Edit extends Component {
     });
   }
 
-
+  Button_Submit(event) {
+    
+        axios({
+    
+          url: '/api/News/Edit',
+          method: 'post',
+          data: this.state.News
+        }).then((result) => {
+    
+          if (result.data.success) {
+            document.location.href = '/News'
+          }
+        }).catch((error) => {
+          console.log(error)
+        });
+    
+    
+        event.preventDefault();
+        return false;
+      }
 
   render() {
+
+    // 经过EasyForm包装的组件，props里会有一个params属性，包含所有的表单项值
+    const { params } = this.props.params;
+    /*
+     * props里的easyform对象，包含了一组验证结果，
+     * 其中$invalid/$valid 可以用来判断表单项是够已经正确填写
+     */
+    const { $invalid } = this.props.easyform.$invalid;
+
     return (
       <div className="animated fadeIn row justify-content-center">
         <div className="col-sm-4">
@@ -208,17 +235,26 @@ export default EasyForm(News_Edit, 2);
 
 
 News_Edit.defaultProps = {
-  display_sysId: true,
-  display_name: true,
+  display_listImage: true,
+  display_category: true,
   display_priority: true,
-  display_status     : true,
+  display_startDate: true,
+  display_endDate: true,
+  display_status: true,
   display_createDate: true,
   display_createUser: true,
+  display_updateDate: true,
+  display_updateUser: true,
 
-  required_sysId: true,
-  required_name: true,
-  required_priority: true,
-  required_status     : true,
-  required_createDate: true,
-  required_createUser: true,
+/* */
+  required_listImage:true,
+  required_category:true,
+  required_priority:true,
+  required_startDate:true,
+  required_endDate:true,
+  required_status:true,
+  required_createDate:true,
+  required_createUser:true,
+  required_updateDate:true,
+  required_updateUser:true,
 }

@@ -54,11 +54,11 @@ export default class News_View extends Component {
 
 
     OnClick_Edit(event) {
-        document.location.href = `/Role/Edit/${event.currentTarget.getAttribute('data-id')}/${true}`;
+        document.location.href = `/News/Edit/${event.currentTarget.getAttribute('data-id')}`;
     }
 
     OnClick_Delete(event) {
-        document.location.href = `/Role/Delete/${event.currentTarget.getAttribute('data-id')}`;
+        document.location.href = `/News/Delete/${event.currentTarget.getAttribute('data-id')}/${true}`;
     }
 
     //將資訊轉換成中文

@@ -5,6 +5,9 @@ import axios from 'axios';
 
 import EasyForm, { Field, FieldGroup } from 'react-easyform';
 import TextInput from '../../Components/Forms/TextInput';
+import DropDownList from '../../Components/Forms/DropDownList';
+import { news_Enum } from '../../../EnumScript/GeneralEnumScript.js';
+
 
 
 //刪除與檢視共用
@@ -14,7 +17,7 @@ class News_Delete extends Component {
     super(props);
     this.state = {
         is_Delete: this.props.match.params.delete.toLocaleLowerCase() === "true" ? true : false,
-        
+
       News: {},
     };
 
@@ -69,8 +72,8 @@ class News_Delete extends Component {
 
   //按鈕觸發事件
   Button_Click(event) {
-    if (this.state.is_Delete) {
 
+    if (this.state.is_Delete) {
       this.Button_Submit(event);
     }
     else {
@@ -85,7 +88,6 @@ class News_Delete extends Component {
 
 
   Button_Submit(event) {
-
     axios.post(`/api/News/Delete/${this.state.News.id}`, {
     }).then((result) => {
 
@@ -124,11 +126,11 @@ class News_Delete extends Component {
                   display={this.props.display_listImage}
                   required={this.props.required_listImage}
                   validMessage={{ required: 'listImage is reduired.' }}
-                  value={this.state.listImage}
+                  value={this.state.News.listImage}
                              readOnly={true}
                   placeholder="listImage" />
 
-                
+
 
                 <TextInput name="category"
                   labelName="category"
@@ -136,11 +138,11 @@ class News_Delete extends Component {
                   display={this.props.display_category}
                   required={this.props.required_category}
                   validMessage={{ required: 'category is reduired.' }}
-                  value={this.state.category}
+                  value={this.state.News.category}
                              readOnly={true}
                   placeholder="category" />
 
-                
+
 
                 <TextInput name="priority"
                   labelName="priority"
@@ -148,39 +150,39 @@ class News_Delete extends Component {
                   display={this.props.display_priority}
                   required={this.props.required_priority}
                   validMessage={{ required: 'priority is reduired.' }}
-                  value={this.state.priority}
+                  value={this.state.News.priority}
                              readOnly={true}
                   placeholder="priority" />
 
-                
+
                 <TextInput name="startDate"
                   labelName="startDate"
                   className=""
                   display={this.props.display_startDate}
                   required={this.props.required_startDate}
                   validMessage={{ required: 'startDate is reduired.' }}
-                  value={this.state.startDate}
+                  value={this.state.News.startDate}
                              readOnly={true}
                   placeholder="startDate" />
 
-                
+
                 <TextInput name="endDate"
                   labelName="endDate"
                   className=""
                   display={this.props.display_endDate}
                   required={this.props.required_endDate}
                   validMessage={{ required: 'endDate is reduired.' }}
-                  value={this.state.endDate}
+                  value={this.state.News.endDate}
                              readOnly={true}
                   placeholder="endDate" />
 
-                
+
                 <DropDownList name="status"
                   labelName="狀態"
                   display={this.props.display_status}
                   required={this.props.required_status}
                   validMessage={{ required: 'status is reduired.' }}
-                  value={this.state.status}
+                  value={this.state.News.status}
                              readOnly={true}
                   options={
                     [
@@ -202,44 +204,44 @@ class News_Delete extends Component {
                   display={this.props.display_createDate}
                   required={this.props.required_createDate}
                   validMessage={{ required: 'createDate is reduired.' }}
-                  value={this.state.Role.createDate}
+                  value={this.state.News.createDate}
                   readOnly={true}
                   placeholder="createDate"/>
-   
+
                 <TextInput name="createUser"
                   labelName="createUser"
                   className=""
                   display={this.props.display_createUser}
                   required={this.props.required_createUser}
                   validMessage={{ required: 'createUser is reduired.' }}
-                  value={this.state.Role.createUser}
+                  value={this.state.News.createUser}
                   readOnly={true}
                   placeholder="createUser"/>
-   
+
                 <TextInput name="updateDate"
                   labelName="updateDate"
                   className=""
                   display={this.props.display_updateDate}
                   required={this.props.required_updateDate}
                   validMessage={{ required: 'updateDate is reduired.' }}
-                  value={this.state.Role.updateDate}
+                  value={this.state.News.updateDate}
                   readOnly={true}
                   placeholder="updateDate"/>
-   
+
                 <TextInput name="updateUser"
                   labelName="updateUser"
                   className=""
                   display={this.props.display_updateUser}
                   required={this.props.required_updateUser}
                   validMessage={{ required: 'updateUser is reduired.' }}
-                  value={this.state.Role.updateUser}
+                  value={this.state.News.updateUser}
                   readOnly={true}
                   placeholder="updateUser"/>
-   
+
 
 
                 <div className="form-group form-actions">
-                  <Button color="primary" disabled={$invalid ? 'disabled' : false} onClick={this.Button_Click}>{this.Button_Text()}</Button>
+                  <button type="botton" className="btn btn-sm btn-danger" onClick={this.Button_Click}>{this.Button_Text()}</button>
                 </div>
               </form>
             </div>
@@ -264,7 +266,7 @@ News_Delete.defaultProps = {
   display_createUser: true,
   display_updateDate: true,
   display_updateUser: true,
-  
+
 /* */
   required_listImage:true,
   required_category:true,

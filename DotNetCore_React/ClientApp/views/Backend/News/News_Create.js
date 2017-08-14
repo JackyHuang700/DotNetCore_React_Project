@@ -31,7 +31,7 @@ class News_Create extends Component {
       }
     }).then((result) => {
       if (result.data.success) {
-        document.location.href = '/News_View'
+        document.location.href = '/News'
       }
     }).catch((error) => {
       console.log(error)
@@ -90,7 +90,7 @@ class News_Create extends Component {
               新增最新消息
               </div>
             <div className="card-block">
-              <form className="" onSubmit={this.submit}>
+              <form className="" onSubmit={this.Submit}>
 
 
                 <TextInput name="listImage"

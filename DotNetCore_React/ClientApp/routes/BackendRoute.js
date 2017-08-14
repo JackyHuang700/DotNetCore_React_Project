@@ -11,6 +11,7 @@ import Dashboard from '../views/Backend/Dashboard/Dashboard'
 
 export function BackendRoute({ component: Component, ...rest }) {
   let logined = islogin();
+
   return (
     <Route
       {...rest}

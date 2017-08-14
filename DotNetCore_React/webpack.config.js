@@ -73,6 +73,16 @@ module.exports = {
     devServer: {
         contentBase: publicPath,
         compress: true,
+        inline: true,
+        hot: true,
+        proxy: {
+            '*': {
+                target: 'http://localhost:5000',
+            }
+        },
+        // watch: true,
+        // devtool: "eval",
+        port: 8080,
     },
     module: {
         rules: [{

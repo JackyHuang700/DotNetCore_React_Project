@@ -19,6 +19,12 @@ import User_Create from './views/Backend/User/User_Create'
 import User_Delete from './views/Backend/User/User_Delete'
 import User_Edit from './views/Backend/User/User_Edit'
 import User_View from './views/Backend/User/User_View'
+
+import News_Create from './views/Backend/News/News_Create'
+import News_Delete from './views/Backend/News/News_Delete'
+import News_Edit from './views/Backend/News/News_Edit'
+import News_View from './views/Backend/News/News_View'
+
 /*
 * 目前沒屁用
 * 已知Breadcrumb會呼叫這隻
@@ -38,6 +44,10 @@ export default (
         <BackendRoute path='/User/Create' component={User_Create} />
         <BackendRoute path='/User/Delete/:id' component={User_Delete} />
         <BackendRoute path='/User/Edit/:id/:edit' component={User_Edit} />
+        <BackendRoute path='/News' exact component={News_View} />
+        <BackendRoute path='/News/Create' component={News_Create} />
+        <BackendRoute path='/News/Delete/:id/:delete' component={News_Delete} />
+        <BackendRoute path='/News/Edit/:id' component={News_Edit} />
         <Route render={() => <h3>No Match Route</h3>} />
       </Switch>
 )
