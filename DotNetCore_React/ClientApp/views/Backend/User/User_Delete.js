@@ -6,6 +6,7 @@ import { user_Enum } from '../../../EnumScript/GeneralEnumScript.js';
 import EasyForm, { Field, FieldGroup } from 'react-easyform';
 import TextInput from '../../Components/Forms/TextInput';
 import DropDownList from '../../Components/Forms/DropDownList';
+import history from '../../../history'
 
 
 //編輯與檢視共用
@@ -38,7 +39,6 @@ class User_Delete extends Component {
       data: {
       }
     }).then((result) => {
-      // console.log(result.data);
       self.setState({
         User: result.data
       });
@@ -55,8 +55,6 @@ class User_Delete extends Component {
     const name = target.name;
     var new_User = Object.assign(this.state.User);
     new_User[name] = value;
-
-
     this.setState({
       User: new_User,
     });
@@ -65,18 +63,16 @@ class User_Delete extends Component {
 
 
   Button_Submit(event) {
-
+    event.preventDefault();
     axios.post(`/api/User/Delete/${this.state.User.id}`, {
     }).then((result) => {
 
         if (result.data.success) {
-          document.location.href = '/User'
+          history.push('/User');
         }
       }).catch((error) => {
         console.log(error)
       });
-
-    event.preventDefault();
     return false;
   }
 

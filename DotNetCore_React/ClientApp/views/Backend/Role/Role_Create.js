@@ -6,6 +6,7 @@ import TextInput from '../../Components/Forms/TextInput';
 import DropDownList from '../../Components/Forms/DropDownList';
 
 import { role_Enum } from '../../../EnumScript/GeneralEnumScript.js';
+import history from '../../../history'
 
 class Role_Create extends Component {
 
@@ -34,7 +35,7 @@ class Role_Create extends Component {
       }
     }).then((result) => {
       if (result.data.success) {
-        document.location.href = '/Role'
+        history.push('/Role');
       }
     }).catch((error) => {
       console.log(error)

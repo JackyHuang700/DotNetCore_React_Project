@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { FormGroup, Label, Input, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import axios from 'axios';
+import history from '../../../history'
 import EasyForm, { Field, FieldGroup } from 'react-easyform';
 import TextInput from '../../Components/Forms/TextInput';
 import DropDownList from '../../Components/Forms/DropDownList';
@@ -22,7 +23,7 @@ class News_Create extends Component {
 
   Submit(event) {
     const self = this;
-
+    event.preventDefault();
     axios({
       url: '/api/News/Create',
       method: 'post',
@@ -31,13 +32,11 @@ class News_Create extends Component {
       }
     }).then((result) => {
       if (result.data.success) {
-        document.location.href = '/News'
+        history.push('/News/View');
       }
     }).catch((error) => {
       console.log(error)
     });
-
-    event.preventDefault();
     return false;
   }
 
@@ -57,29 +56,23 @@ class News_Create extends Component {
 
 
   Button_Submit(event) {
-    
+    event.preventDefault();
         axios.post(`/api/News/Delete/${this.state.News.id}`, {
-        }).then((result) => {
-    
+        }).then((result) => { 
             if (result.data.success) {
-              document.location.href = '/News'
+              history.push('/News');
             }
           }).catch((error) => {
             console.log(error)
           });
     
-        event.preventDefault();
+
         return false;
       }
     
 
   render() {
-    // 经过EasyForm包装的组件，props里会有一个params属性，包含所有的表单项值
     const { params } = this.props.params;
-    /*
-     * props里的easyform对象，包含了一组验证结果，
-     * 其中$invalid/$valid 可以用来判断表单项是够已经正确填写
-     */
     const { $invalid } = this.props.easyform.$invalid;
 
     return (
@@ -87,7 +80,7 @@ class News_Create extends Component {
         <div className="col-sm-4">
           <div className="card">
             <div className="card-header">
-              新增最新消息
+              �倰�
               </div>
             <div className="card-block">
               <form className="" onSubmit={this.Submit}>
@@ -151,7 +144,7 @@ class News_Create extends Component {
 
                 
                 <DropDownList name="status"
-                  labelName="狀態"
+                  labelName="status"
                   display={this.props.display_status}
                   required={this.props.required_status}
                   validMessage={{ required: 'status is reduired.' }}
@@ -170,7 +163,7 @@ class News_Create extends Component {
                     ]}
                 />
                 <div className="form-group form-actions">
-                  <Button color="primary" disabled={$invalid ? 'disabled' : false}>確認</Button>
+                  <Button color="primary" disabled={$invalid ? 'disabled' : false}>確�</Button>
                 </div>
               </form>
             </div>

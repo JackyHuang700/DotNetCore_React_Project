@@ -3,6 +3,7 @@ import { Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } fr
 import axios from 'axios';
 import EasyForm, { Field, FieldGroup } from 'react-easyform';
 import TextInput from '../../Components/Forms/TextInput';
+import history from '../../../history'
 
 
 class User_Create extends Component {
@@ -30,7 +31,7 @@ class User_Create extends Component {
       }
     }).then((result) => {
       if (result.data.success) {
-        document.location.href = '/User'
+        history.push('/User');
       }
     }).catch((error) => {
       console.log(error)

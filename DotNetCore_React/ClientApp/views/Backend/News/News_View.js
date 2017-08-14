@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Button, Modal, Container, Row, Col  } from 'reactstrap';
 
-import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
-import '../../../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
+import { BootstrapTable, TableHeaderColumn,ButtonGroup } from 'react-bootstrap-table';
 
 import axios from 'axios';
+import history from '../../../history'
 
 import { news_Enum } from '../../../EnumScript/GeneralEnumScript.js';
 
@@ -29,39 +29,47 @@ export default class News_View extends Component {
         const self = this;
 
         axios.get('/api/News/News_View').then((result) => {
-            // console.log(result.data);
             this.setState({ NewsList: result.data });
         }).catch((error) => {
             console.log(error)
         });
     }
 
-    createCustomDeleteButton = (onBtnClick) => {
+    /**
+     * ���
+     */
+    createCustomButtonGroup = props => {
         return (
-            <button class="danger" onClick={onBtnClick}>Delete</button>
-        )
-    }
-
-
-    buttonFormatter(cell, row) {
-        return (
-            <div>
-                {this.props.display_button_edit ? <Button color="primary" data-id={row.id} onClick={this.OnClick_Edit}>Edit</Button> : null}
-                {this.props.display_button_del ? <Button color="danger" data-id={row.id} onClick={this.OnClick_Delete}>Delete</Button> : null}
-            </div>
+            <ButtonGroup className='' sizeClass='btn-group-md'>
+                {this.props.dispaly_button_create &&
+                <Button color="primary" onClick={this.OnClick_Create}>建�</Button> }
+                {props.exportCSVBtn}
+            </ButtonGroup>
         );
     }
 
+    buttonFormatter(cell, row) {
+        return (
+            <ButtonGroup className='' sizeClass='btn-group-md'>
+                {this.props.display_button_edit && <Button color="primary" data-id={row.id} onClick={this.OnClick_Edit}>Edit</Button> }
+                {this.props.display_button_del && <Button color="danger" data-id={row.id} onClick={this.OnClick_Delete}>Delete</Button> }
+                </ButtonGroup>
+        );
+    }
 
     OnClick_Edit(event) {
-        document.location.href = `/News/Edit/${event.currentTarget.getAttribute('data-id')}`;
+        history.push(`/News/Edit/${event.currentTarget.getAttribute('data-id')}/${true}`);        
     }
 
     OnClick_Delete(event) {
-        document.location.href = `/News/Delete/${event.currentTarget.getAttribute('data-id')}/${true}`;
+        history.push(`/News/Delete/${event.currentTarget.getAttribute('data-id')}`);
     }
 
-    //將資訊轉換成中文
+    OnClick_Create(event) {
+        history.push('/News/Create');
+    }
+
+    //將�訊��中�
     Formatter_Status(cell, row) {
         let name = "";
 
@@ -84,7 +92,7 @@ export default class News_View extends Component {
 
     render() {
         const options = {
-            deleteBtn: this.createCustomDeleteButton
+            btnGroup: this.createCustomButtonGroup
         };
 
         const selectRow = {
@@ -92,7 +100,18 @@ export default class News_View extends Component {
         };
 
         return (
-            <BootstrapTable data={this.state.NewsList} selectRow={selectRow} striped hover options={options}>
+            <Container>
+            <Row>
+                <Col sm="12" md={{ size:7,offset:5}}><h1>最新消息</h1></Col>
+            </Row>
+            <Row>         
+            <BootstrapTable data={this.state.RoleList} 
+                            selectRow={selectRow} 
+                            striped 
+                            hover 
+                            options={options} 
+                            search
+                            exportCSV>
                 <TableHeaderColumn isKey dataField="button" dataFormat={this.buttonFormatter}>Buttons</TableHeaderColumn>
                 {this.props.display_listImage ? <TableHeaderColumn dataField='listImage'>listImage</TableHeaderColumn> : null}
                 {this.props.display_title ? <TableHeaderColumn dataField='title'>title</TableHeaderColumn> : null}
@@ -106,23 +125,19 @@ export default class News_View extends Component {
                 {this.props.display_updateDate ? <TableHeaderColumn dataField='updateDate'>updateDate</TableHeaderColumn> : null}
                 {this.props.display_updateUser ? <TableHeaderColumn dataField='updateUser'>updateUser</TableHeaderColumn> : null}
             </BootstrapTable>
-
+            </Row>
+            </Container>
         );
     }
 }
 
-News_View.propTypes = {
-    display_name: React.PropTypes.bool,
-    display_button_edit: React.PropTypes.bool,
-    display_button_del: React.PropTypes.bool,
-};
-
 News_View.defaultProps = {
-    display_name: true,
+    dispaly_button_create:true,
     display_button_edit: true,
     display_button_del: true,
 
     /* */
+    display_name: true,
     display_listImage: true,
     display_title: true,
     display_category: true,

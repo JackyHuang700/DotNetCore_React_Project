@@ -1,20 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { browserHistory } from 'react-router';
-import { Route, BrowserRouter, Link, Redirect, Switch } from 'react-router-dom'
+import { Router } from 'react-router-dom'
 import { AppContainer } from 'react-hot-loader'
 
+import history from './history'
 import routes from './routes'
+import '../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 
 // Views
 const renderApp = appRoutes => {
   ReactDOM.render((
     <AppContainer>
-      <BrowserRouter>
+      <Router history={history}>
         <div>
           {appRoutes}
         </div>
-      </BrowserRouter>
+      </Router>
     </AppContainer>
   ), document.getElementById('react-app'));
 }

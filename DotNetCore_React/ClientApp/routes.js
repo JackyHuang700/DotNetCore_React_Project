@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, BrowserRouter, Link, Redirect, Switch } from 'react-router-dom'
+import { Route, Link, Redirect, Switch } from 'react-router-dom'
 
 import { FrontRoute } from './routes/FrontRoute'
 import { LoginRoute } from './routes/LoginRoute'
@@ -25,10 +25,10 @@ import News_Delete from './views/Backend/News/News_Delete'
 import News_Edit from './views/Backend/News/News_Edit'
 import News_View from './views/Backend/News/News_View'
 
-/*
-* 目前沒屁用
-* 已知Breadcrumb會呼叫這隻
-*/
+/**
+  * 
+  * 已知Breadcrumb�呼�這隻
+  */
 export default (
       <Switch>
         <FrontRoute path='/' exact component={Home} />

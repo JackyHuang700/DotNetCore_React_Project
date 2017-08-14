@@ -30,7 +30,7 @@ export function BackendRoute({ component: Component, ...rest }) {
               </div>
               <Component {...props} />
             </main>
-            <Aside />
+            {/* <Aside /> */}
           </div>
           <Footer />
         </div>}

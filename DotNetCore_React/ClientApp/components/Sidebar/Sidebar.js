@@ -27,88 +27,31 @@ class Sidebar extends Component {
     var renderList = [];
 
     if (this.props.isLogin) {
-      renderList = renderList.concat([  
-        <li className="nav-item">
-          <NavLink to={'/Index'} className="nav-link" activeClassName="active"><i className="icon-speedometer"></i> Index <span className="badge badge-info"></span></NavLink>
+      renderList = renderList.concat([
+        <li key='1' className="nav-item">
+          <NavLink to={'/dashboard'} className="nav-link" activeClassName="active"><i className="icon-speedometer"></i> Dashboard</NavLink>
         </li>,
-        <li className="nav-item">
-          <NavLink to={'/dashboard'} className="nav-link" activeClassName="active"><i className="icon-speedometer"></i> Dashboard <span className="badge badge-info">NEW</span></NavLink>
-        </li>,  
-        <li className="nav-item">
-          <NavLink to={'/Role'} className="nav-link" activeClassName="active"><i className="icon-speedometer"></i> Role <span className="badge badge-info"></span></NavLink>
-        </li>,
-        <li className="nav-item">
-          <NavLink to={'/User'} className="nav-link" activeClassName="active"><i className="icon-speedometer"></i> User <span className="badge badge-info"></span></NavLink>
-        </li>,
-        <li className="nav-item">
+        <li key='2' className="nav-title">模�</li>,
+        <li key='3' className="nav-item nav-dropdown">
+          <a className="nav-link nav-dropdown-toggle" href="#" onClick={this.handleClick.bind(this)}><i className="icon-star"></i> �用</a>
           <NavLink to={'/News'} className="nav-link" activeClassName="active"><i className="icon-speedometer"></i> News <span className="badge badge-info"></span></NavLink>
         </li>,
         <li className="nav-item">
-          <NavLink to={'/jackyTest'} className="nav-link" activeClassName="active"><i className="icon-speedometer"></i> JackyTest <span className="badge badge-info">OLD</span></NavLink>
-        </li>,
-        <li className="nav-title">UI Elements</li>,
-        <li className={this.activeRoute("/components")}>
-          <a className="nav-link nav-dropdown-toggle" href="#" onClick={this.handleClick.bind(this)}><i className="icon-puzzle"></i> Components</a>
           <ul className="nav-dropdown-items">
-            <li className="nav-item">
-              <NavLink to={'/components/buttons'} className="nav-link" activeClassName="active"><i className="icon-puzzle"></i> Buttons</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink to={'/components/social-buttons'} className="nav-link" activeClassName="active"><i className="icon-puzzle"></i> Social Buttons</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink to={'/components/cards'} className="nav-link" activeClassName="active"><i className="icon-puzzle"></i> Cards</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink to={'/components/forms'} className="nav-link" activeClassName="active"><i className="icon-puzzle"></i> Forms</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink to={'/components/modals'} className="nav-link" activeClassName="active"><i className="icon-puzzle"></i> Modals</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink to={'/components/switches'} className="nav-link" activeClassName="active"><i className="icon-puzzle"></i> Switches</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink to={'/components/tables'} className="nav-link" activeClassName="active"><i className="icon-puzzle"></i> Tables</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink to={'/components/tabs'} className="nav-link" activeClassName="active"><i className="icon-puzzle"></i> Tabs</NavLink>
+            <li key='4' className="nav-item">
+              <NavLink to={'/News'} className="nav-link" activeClassName="active"><i className="icon-star"></i> ���</NavLink>
             </li>
           </ul>
         </li>,
-        <li className={this.activeRoute("/icons")}>
-          <a className="nav-link nav-dropdown-toggle" href="#" onClick={this.handleClick.bind(this)}><i className="icon-star"></i> Icons</a>
+        <li key='6' className="nav-title">系統</li>,
+        <li key='7' className="nav-item nav-dropdown">
+          <a className="nav-link nav-dropdown-toggle" href="#" onClick={this.handleClick.bind(this)}><i className="icon-star"></i> 管�</a>
           <ul className="nav-dropdown-items">
-            <li className="nav-item">
-              <NavLink to={'/icons/font-awesome'} className="nav-link" activeClassName="active"><i className="icon-star"></i> Font Awesome</NavLink>
+            <li key='8' className="nav-item">
+              <NavLink to={'/Role'} className="nav-link" activeClassName="active"><i className="icon-star"></i> 角色管�</NavLink>
             </li>
-            <li className="nav-item">
-              <NavLink to={'/icons/simple-line-icons'} className="nav-link" activeClassName="active"><i className="icon-star"></i> Simple Line Icons</NavLink>
-            </li>
-          </ul>
-        </li>,
-        <li className="nav-item">
-          <NavLink to={'/widgets'} className="nav-link" activeClassName="active"><i className="icon-calculator"></i> Widgets <span className="badge badge-info">NEW</span></NavLink>
-        </li>,
-        <li className="nav-item">
-          <NavLink to={'/charts'} className="nav-link" activeClassName="active"><i className="icon-pie-chart"></i> Charts</NavLink>
-        </li>,
-        <li className="divider"></li>,
-        <li className="nav-title">Extras</li>,
-        <li className="nav-item nav-dropdown">
-          <a className="nav-link nav-dropdown-toggle" href="#" onClick={this.handleClick.bind(this)}><i className="icon-star"></i> Pages</a>
-          <ul className="nav-dropdown-items">
-            <li className="nav-item">
-              <NavLink to={'/login'} className="nav-link" activeClassName="active"><i className="icon-star"></i> Login</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink to={'/register'} className="nav-link" activeClassName="active"><i className="icon-star"></i> Register</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink to={'/404'} className="nav-link" activeClassName="active"><i className="icon-star"></i> Error 404</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink to={'/500'} className="nav-link" activeClassName="active"><i className="icon-star"></i> Error 500</NavLink>
+            <li key='9' className="nav-item">
+              <NavLink to={'/User'} className="nav-link" activeClassName="active"><i className="icon-star"></i> 帳�管�</NavLink>
             </li>
           </ul>
         </li>,

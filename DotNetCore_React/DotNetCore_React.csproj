@@ -5,9 +5,13 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="ClientApp\views\Backend\News_Lan\**" />
     <Compile Remove="ClientApp\views\Backend\Sys_Language\**" />
+    <Content Remove="ClientApp\views\Backend\News_Lan\**" />
     <Content Remove="ClientApp\views\Backend\Sys_Language\**" />
+    <EmbeddedResource Remove="ClientApp\views\Backend\News_Lan\**" />
     <EmbeddedResource Remove="ClientApp\views\Backend\Sys_Language\**" />
+    <None Remove="ClientApp\views\Backend\News_Lan\**" />
     <None Remove="ClientApp\views\Backend\Sys_Language\**" />
   </ItemGroup>
   <ItemGroup>
@@ -28,7 +32,6 @@
   <ItemGroup>
     <Folder Include="ClientApp\css\" />
     <Folder Include="ClientApp\views\Backend\News\" />
-    <Folder Include="ClientApp\views\Backend\News_Lan\" />
   </ItemGroup>
   <Target Name="RunWebpack" AfterTargets="ComputeFilesToPublish">
     <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->

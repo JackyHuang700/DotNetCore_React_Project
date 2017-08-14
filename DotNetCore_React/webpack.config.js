@@ -77,7 +77,8 @@ module.exports = {
         hot: true,
         proxy: {
             '*': {
-                target: 'http://localhost:5000',
+                // target: 'http://localhost:5000',
+                target: 'http://localhost:60658',
             }
         },
         // watch: true,
