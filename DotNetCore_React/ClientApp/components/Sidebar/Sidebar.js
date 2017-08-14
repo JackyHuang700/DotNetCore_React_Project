@@ -39,19 +39,19 @@ class Sidebar extends Component {
         <li className="nav-item">
           <ul className="nav-dropdown-items">
             <li key='4' className="nav-item">
-              <NavLink to={'/News'} className="nav-link" activeClassName="active"><i className="icon-star"></i> ���</NavLink>
+              <NavLink to={'/News'} className="nav-link" activeClassName="active"><i className="icon-star"></i> 最新消息</NavLink>
             </li>
           </ul>
         </li>,
         <li key='6' className="nav-title">系統</li>,
         <li key='7' className="nav-item nav-dropdown">
-          <a className="nav-link nav-dropdown-toggle" href="#" onClick={this.handleClick.bind(this)}><i className="icon-star"></i> 管�</a>
+          <a className="nav-link nav-dropdown-toggle" href="#" onClick={this.handleClick.bind(this)}><i className="icon-star"></i> 管理</a>
           <ul className="nav-dropdown-items">
             <li key='8' className="nav-item">
-              <NavLink to={'/Role'} className="nav-link" activeClassName="active"><i className="icon-star"></i> 角色管�</NavLink>
+              <NavLink to={'/Role'} className="nav-link" activeClassName="active"><i className="icon-star"></i> 角色管理</NavLink>
             </li>
             <li key='9' className="nav-item">
-              <NavLink to={'/User'} className="nav-link" activeClassName="active"><i className="icon-star"></i> 帳�管�</NavLink>
+              <NavLink to={'/User'} className="nav-link" activeClassName="active"><i className="icon-star"></i> 帳號管理</NavLink>
             </li>
           </ul>
         </li>,
