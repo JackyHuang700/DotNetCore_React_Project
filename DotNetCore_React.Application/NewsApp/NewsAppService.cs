@@ -54,8 +54,10 @@ namespace DotNetCore_React.Application.NewsApp
 
         public Dictionary<string, object> Create(NewsDto role)
         {
-            var myJson = new Dictionary<string, object>();
-
+            var myJson_News = new Dictionary<string, object>();
+            var myJson_News_Lan_List = new List<Dictionary<string, object>>();
+            var myJson_Return = new Dictionary<string, object>();
+            var errorList = new List<object>();
             var dateTime = DateTime.Now;
 
             //主表
@@ -65,15 +67,52 @@ namespace DotNetCore_React.Application.NewsApp
                 //CreateDate = dateTime,
                 //UpdateDate = dateTime,
             };
-            myJson = _repository.Create(roleDB);
-            //副表
+            myJson_News = _repository.Create(roleDB);
             
+            //副表
+            foreach (var item in role.New_LanList)
+            {
+                var aa = Mapper.Map<News_Lan>(item); 
+                myJson_News_Lan_List.Add(_repository_news_lan.Create(aa));
+            }
 
-            //儲存資料
+            //檢查
+            //主表
+            if (!(bool)myJson_News["success"])
+            {
+                errorList.Add(myJson_News["message"]);
+            }
+            //副表
+            foreach (var aa in myJson_News_Lan_List)
+            {
+                if (!(bool)aa["success"])
+                {
+                    errorList.Add(myJson_News["message"]);
+                }
+            }
 
-            //myJson.Add("success", true);
-            //myJson.Add("message", "");
-            return myJson;
+
+            if (errorList.Count == 0)
+            {
+                myJson_Return.Add("success", true);
+                myJson_Return.Add("message", "");
+            }
+            else
+            {
+                //刪除主表
+                _repository.Delete((Guid)myJson_News["message"]);
+                //刪除附表
+                foreach (var item in myJson_News_Lan_List)
+                {
+                    _repository_news_lan.Delete((Guid)myJson_News["message"]);
+                }
+
+                //刪除其他資料
+                myJson_Return.Add("success", false);
+                myJson_Return.Add("message", "失敗");
+            }
+
+            return myJson_Return;
         }
 
         public Dictionary<string, object> Update(NewsDto role)
