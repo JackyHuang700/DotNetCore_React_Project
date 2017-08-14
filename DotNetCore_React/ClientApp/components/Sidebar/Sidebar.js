@@ -31,9 +31,9 @@ class Sidebar extends Component {
         <li key='1' className="nav-item">
           <NavLink to={'/dashboard'} className="nav-link" activeClassName="active"><i className="icon-speedometer"></i> Dashboard</NavLink>
         </li>,
-        <li key='2' className="nav-title">模�</li>,
+        <li key='2' className="nav-title">模組</li>,
         <li key='3' className="nav-item nav-dropdown">
-          <a className="nav-link nav-dropdown-toggle" href="#" onClick={this.handleClick.bind(this)}><i className="icon-star"></i> �用</a>
+          <a className="nav-link nav-dropdown-toggle" href="#" onClick={this.handleClick.bind(this)}><i className="icon-star"></i> 通用</a>
           <NavLink to={'/News'} className="nav-link" activeClassName="active"><i className="icon-speedometer"></i> News <span className="badge badge-info"></span></NavLink>
         </li>,
         <li className="nav-item">

@@ -42,7 +42,7 @@ export default class News_View extends Component {
         return (
             <ButtonGroup className='' sizeClass='btn-group-md'>
                 {this.props.dispaly_button_create &&
-                <Button color="primary" onClick={this.OnClick_Create}>建�</Button> }
+                <Button color="primary" onClick={this.OnClick_Create}>建立</Button> }
                 {props.exportCSVBtn}
             </ButtonGroup>
         );
@@ -69,7 +69,7 @@ export default class News_View extends Component {
         history.push('/News/Create');
     }
 
-    //將�訊��中�
+ 
     Formatter_Status(cell, row) {
         let name = "";
 

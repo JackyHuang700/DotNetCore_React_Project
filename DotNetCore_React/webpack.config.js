@@ -48,8 +48,11 @@ const bundleOutputDir = './wwwroot/dist';
 
 const sourcePath = path.resolve(__dirname, '../wwwroot');
 const publicPath = `${sourcePath}/dist/`;
-module.exports = {
-    // devtool: 'source-map',
+
+//https://doc.webpack-china.org/guides/production/
+module.exports = (env) => {
+   return [{
+        // devtool: 'source-map',
     // devtool: 'cheap-eval-source-map',
     // devtool: 'eval-source-map',
     devtool: 'cheap-module-eval-source-map',
@@ -97,6 +100,10 @@ module.exports = {
         ]
     },
     plugins: [
+      
+        // new webpack.DefinePlugin({
+            // 'process.env.NODE_ENV': JSON.stringify('production')
+        // }),
         // new webpack.SourceMapDevToolPlugin({
         //     filename: '[file].map',
         //      exclude: ['vendor.js',],
@@ -105,5 +112,8 @@ module.exports = {
         // new webpack.optimize.UglifyJsPlugin({
         //     sourceMap: true,
         // }),
-    ]
+    ].concat((env) === "dev" ? [
+        new webpack.HotModuleReplacementPlugin(),
+    ] : [])
+   }];
 };
