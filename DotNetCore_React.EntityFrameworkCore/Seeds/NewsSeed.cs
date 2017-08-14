@@ -12,11 +12,14 @@ namespace DotNetCore_React.EntityFrameworkCore.Seeds
     {
         private void NewsSeed()
         {
+            Guid newsId = Guid.NewGuid();
+
+
             if (!_context.Set<News>().Any())
             {
                 var data1 = new News
                 {
-                    Id = Guid.NewGuid(),
+                    Id = newsId,
                     ListImage = "aa.jpg",
                     Category = 0,
                     Priority = 0,
@@ -30,6 +33,24 @@ namespace DotNetCore_React.EntityFrameworkCore.Seeds
                 };
 
                 _context.Set<News>().Add(data1);
+                _context.SaveChanges();
+            }
+
+
+            if (!_context.Set<News_Lan>().Any())
+            {
+
+                var data1 = new News_Lan
+                {
+                    Id = Guid.NewGuid(),
+                    NewsId = newsId,
+                    LanguageId = 1,
+                    Title = "Title",
+                    SubTitle = "SubTitle",
+                    Content = "Content",
+                };
+
+                _context.Set<News_Lan>().Add(data1);
                 _context.SaveChanges();
             }
         }
