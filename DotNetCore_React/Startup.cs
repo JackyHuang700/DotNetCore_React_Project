@@ -12,7 +12,6 @@ using Microsoft.Extensions.Logging;
 
 /// 
 using DotNetCore_React.Application;
-using DotNetCore_React.Domain;
 using DotNetCore_React.Domain.IRepositories;
 using Microsoft.EntityFrameworkCore;
 using DotNetCore_React.EntityFrameworkCore;

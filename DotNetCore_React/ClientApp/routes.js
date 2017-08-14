@@ -27,7 +27,7 @@ import News_View from './views/Backend/News/News_View'
 
 /**
   * 
-  * 已知Breadcrumb�呼�這隻
+  * 已知Breadcrumb�呼�這隻
   */
 export default (
       <Switch>

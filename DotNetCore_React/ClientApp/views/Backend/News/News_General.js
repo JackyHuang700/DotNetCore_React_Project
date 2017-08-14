@@ -23,21 +23,21 @@ export function Get_Sys_Language(){
     
 }
 
-
-export function GetData() {
-    const self = this;
+//抓取資料
+// export function GetData() {
+//     const self = this;
     
-        axios({
-          url: `/api/News/Get_News?id=${this.props.match.params.id}`,
-          method: 'GET',
-          data: {
-          }
-        }).then((result) => {
-          // console.log(result.data);
-          self.setState({
-            News: result.data
-          });
-        }).catch((error) => {
-          console.log(error)
-        });
-}
+//         axios({
+//           url: `/api/News/Get_News?id=${this.props.match.params.id}`,
+//           method: 'GET',
+//           data: {
+//           }
+//         }).then((result) => {
+//           // console.log(result.data);
+//           self.setState({
+//             News: result.data
+//           });
+//         }).catch((error) => {
+//           console.log(error)
+//         });
+// }

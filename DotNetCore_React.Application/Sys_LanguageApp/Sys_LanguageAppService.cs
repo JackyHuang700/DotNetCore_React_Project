@@ -9,10 +9,10 @@ namespace DotNetCore_React.Application.Sys_LanguageApp
 {
     public class Sys_LanguageAppService : ISys_LanguageAppService
     {
-        private readonly ISys_LanguageAppService _repository;
+        private readonly ISys_LanguageRepository _repository;
 
 
-        public Sys_LanguageAppService(ISys_LanguageAppService repository)
+        public Sys_LanguageAppService(ISys_LanguageRepository repository)
         {
             _repository = repository;
         }
