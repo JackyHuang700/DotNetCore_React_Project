@@ -105,7 +105,7 @@ export default class News_View extends Component {
                 <Col sm="12" md={{ size:7,offset:5}}><h1>最新消息</h1></Col>
             </Row>
             <Row>         
-            <BootstrapTable data={this.state.RoleList} 
+            <BootstrapTable data={this.state.NewsList} 
                             selectRow={selectRow} 
                             striped 
                             hover 
