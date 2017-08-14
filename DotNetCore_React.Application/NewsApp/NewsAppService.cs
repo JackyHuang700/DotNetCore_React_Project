@@ -36,6 +36,7 @@ namespace DotNetCore_React.Application.NewsApp
             //要撈子表
             return newsDtoList;
         }
+
         public NewsDto GetSingle(string id)
         {
 
@@ -115,13 +116,22 @@ namespace DotNetCore_React.Application.NewsApp
             return myJson_Return;
         }
 
+
         public Dictionary<string, object> Update(NewsDto role)
         {
             var myJson = new Dictionary<string, object>();
 
+            //更新主表
             var newsDB = Mapper.Map<News>(role);
             myJson = _repository.Update(newsDB);
 
+            //更新副表
+            var aaList = _repository_news_lan.Getall_By_NewsId(newsDB.Id);
+            foreach (var item in aaList)
+            {
+                var news_LanDB = Mapper.Map<News_Lan>(item);
+                _repository_news_lan.Update(news_LanDB);
+            }
             //myJson.Add("success", true);
             //myJson.Add("message", "");
             return myJson;
