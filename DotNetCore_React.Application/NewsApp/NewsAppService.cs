@@ -24,9 +24,17 @@ namespace DotNetCore_React.Application.NewsApp
         public List<NewsDto> GetAll()
         {
             var a = _repository.GetAll();
-            
+            var newsDtoList = Mapper.Map<List<NewsDto>>(a);
+
+            foreach (var item in newsDtoList)
+            {
+                //抓取附表
+                var new_lans_List = _repository_news_lan.Getall_By_NewsId(item.Id);
+                item.New_LanList = Mapper.Map<List<News_LanDto>>(new_lans_List);
+            }
+
             //要撈子表
-            return Mapper.Map<List<NewsDto>>(a);
+            return newsDtoList;
         }
         public NewsDto GetSingle(string id)
         {
