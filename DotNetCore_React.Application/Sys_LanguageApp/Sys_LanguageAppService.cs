@@ -51,7 +51,6 @@ namespace DotNetCore_React.Application.Sys_LanguageApp
         {
             var myJson = new Dictionary<string, object>();
             //Àx¦s¸ê®Æ
-
             myJson.Add("success", true);
             myJson.Add("message", "");
             return myJson;

@@ -19,6 +19,10 @@ export class AuthModule {
         }
     }
 
+    getUserName(){
+        return this.userData.userName;
+    }
+
     checkLogged(){
         axios({
             url:'/api/WebApi/isLogin',
@@ -26,7 +30,7 @@ export class AuthModule {
             data:{}
         }).then((result) => {
             if(result.data.success){
-                this.writeData(result.data.message);
+                this.writeData(result.data.user);
             }
             else{
                 this.signout();
@@ -52,7 +56,7 @@ export class AuthModule {
           }
           }).then((result) => {
             if(result.data.success){
-                this.writeData(result.data.message);
+                this.writeData(result.data.user);
                 if(callback){
                     return callback();
                 }

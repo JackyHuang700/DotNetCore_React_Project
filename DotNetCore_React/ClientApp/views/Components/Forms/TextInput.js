@@ -11,6 +11,8 @@ export default class TextInput extends Component {
     render() {
         const myProps = Object.assign({},this.props);
         delete myProps.labelName;
+        delete myProps.labelCustom;
+        delete myProps.divClassName;
 
         let baseField = <Field {...myProps} />
         baseField = React.cloneElement(baseField,{
@@ -21,8 +23,11 @@ export default class TextInput extends Component {
             return (<div></div>)
         }
 
-        return ( <FormGroup>
+        return ( <FormGroup className={this.props.divClassName}>
+                {this.props.labelName &&
                 <label style = {{ color: this.props.required && 'red' }} > { this.props.labelName } { this.props.required && '*' } </label> 
+                }
+                {this.props.labelCustom}
                 { baseField } 
         </FormGroup>)
     }

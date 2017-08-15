@@ -35,7 +35,7 @@ namespace DotNetCore_React.Controllers
             if (checkLogged)
             {
                 //記錄Session
-                User user = (DotNetCore_React.Domain.Entities.User)(myJson["user"]);
+                UserSimpleDto user = (UserSimpleDto)(myJson["user"]);
                 HttpContext.Session.Set("CurrentUser", ByteConvertHelper.Object2Bytes(user));
             }
 
@@ -72,17 +72,43 @@ namespace DotNetCore_React.Controllers
             if (userObject != null)
             {
 
-                var user = ByteConvertHelper.Bytes2Object<User>(userObject);
+                var user = ByteConvertHelper.Bytes2Object<UserSimpleDto>(userObject);
 
                 myJson["success"] = true;
-                myJson["message"] = new
+                myJson["user"] = new UserSimpleDto
                 {
                     UserName = user.UserName,
-                    Fname = user.FirstName,
-                    Lname = user.LastName
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Status = user.Status
                 };
             }
             return Json(myJson);
+        }
+
+        [HttpGet("[action]")]
+        public IActionResult forgot(string username , string email)
+        {
+            return Json(_service.forgot(username, email));
+        }
+
+        [HttpGet("[action]")]
+        public IActionResult forgotConfirm(string username, string passwordhash)
+        {
+            return Json(_service.forgotConfirm(username, passwordhash));
+        }
+
+        [HttpPost("[action]")]
+        public IActionResult changePassword(string username , string newPassword , string passwordhash)
+        {
+            byte[] userObject = null;
+            HttpContext.Session.TryGetValue("CurrentUser", out userObject);
+            UserSimpleDto user = null;
+            if (userObject != null)
+            {
+                user = ByteConvertHelper.Bytes2Object<UserSimpleDto>(userObject);
+            }
+            return Json(_service.changePassword(user,username,newPassword, passwordhash));
         }
     }
 }

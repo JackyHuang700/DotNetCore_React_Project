@@ -4,11 +4,14 @@ import { Route, Link, Redirect, Switch } from 'react-router-dom'
 import { FrontRoute } from './routes/FrontRoute'
 import { LoginRoute } from './routes/LoginRoute'
 import { BackendRoute } from './routes/BackendRoute'
+import { EmptyRoute } from './routes/EmptyRoute'
 
 import Home from './views/Front/Home'
-import JackyTest from './views/Front/JackyTest'
 
-import Login from './views/Backend/User/Login'
+import Login from './views/Front/User/Login'
+import Forgot from './views/Front/User/Forgot'
+import changePwd from './views/Front/User/changePwd'
+
 import Dashboard from './views/Backend/Dashboard/Dashboard'
 import Role_Create from './views/Backend/Role/Role_Create'
 import Role_Delete from './views/Backend/Role/Role_Delete'
@@ -34,7 +37,8 @@ export default (
         <FrontRoute path='/' exact component={Home} />
         <FrontRoute path='/Index' exact component={Home} />
         <LoginRoute path='/login' component={Login} />
-        <FrontRoute path='/JackyTest' component={JackyTest} />
+        <LoginRoute path='/forgot' component={Forgot} />
+        <EmptyRoute path='/changePwd' component={changePwd} />
         <BackendRoute path='/dashboard' component={Dashboard} />
         <BackendRoute path='/Role' exact component={Role_View} />
         <BackendRoute path='/Role/Create' component={Role_Create} />

@@ -12,13 +12,5 @@ namespace DotNetCore_React.Domain.IRepositories
 
         Sys_Language GetSingle(int id);
 
-
-        //更新使用者資料
-        Dictionary<string, object> Update(Sys_Language News);
-
-
-        Dictionary<string, object> Create(Sys_Language News);
-
-        Dictionary<string, object> Delete(int id);
     } 
 }
