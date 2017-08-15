@@ -5,23 +5,23 @@ import Sidebar from '../components/Sidebar/';
 import Breadcrumb from '../components/Breadcrumb/';
 import Aside from '../components/Aside/';
 import Footer from '../components/Footer/';
-import { islogin } from '../helpers/auth'
+import {Auth} from '../helpers/auth'
 
 import Dashboard from '../views/Backend/Dashboard/Dashboard'
 
 export function BackendRoute({ component: Component, ...rest }) {
-  let logined = islogin();
-
+  console.log(Auth);
+  const islogin = Auth.isAuthenticated;
   return (
     <Route
       {...rest}
-      render={(props) => logined !== true
+      render={(props) => islogin !== true
         ? <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
         :
         <div className="app">
           <Header />
           <div className="app-body">
-            <Sidebar {...props} isLogin={logined} />
+            <Sidebar {...props} isLogin={islogin} />
             <main className="main">
               <Breadcrumb />
               <div className="container-fluid">

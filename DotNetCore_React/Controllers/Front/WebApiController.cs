@@ -92,6 +92,29 @@ namespace DotNetCore_React.Controllers
             });
         }
 
+        [HttpGet("[action]")]
+        public IActionResult isLogin()
+        {
+            var myJson = new Dictionary<string, object>()
+            {
+                { "success",false },
+                { "message",false }
+            };
+
+            byte[] userObject = null;
+
+            HttpContext.Session.TryGetValue("currentUser",out userObject);
+
+            var user = Bytes2Object<User>(userObject);
+
+            if(user != null)
+            {
+                myJson["success"] = true;
+                myJson["message"] = true;
+            }
+
+            return Json(myJson);
+        }
 
 
         /// <summary>

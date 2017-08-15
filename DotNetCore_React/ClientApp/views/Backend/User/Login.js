@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import {Auth} from '../../../helpers/auth'
+import history from '../../../history'
 
 class Login extends Component {
 
@@ -31,23 +33,10 @@ class Login extends Component {
       userName,
       password
     } = this.state;
-    axios({
-      
-      url: '/api/WebApi/Login',
-      method: 'post',
-      data: {
-      "UserName":userName,
-      "Password":password
-    }
-    }).then((result) => {
-      // console.log(result.data)
 
-
-    
-    }).catch((error) => {
-      console.log(error)
+    Auth.authenticate(userName,password,() => {
+      history.push('/Dashboard');
     });
-
 
     event.preventDefault();
   }

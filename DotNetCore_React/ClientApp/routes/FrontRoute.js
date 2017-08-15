@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { Route, BrowserRouter, Link, Redirect, Switch } from 'react-router-dom'
-import { islogin } from '../helpers/auth'
+import {Auth} from '../helpers/auth'
 
 export function FrontRoute({ component: Component, ...rest }) {
-
-  let logined = islogin();
 
   return (
     <Route
@@ -27,7 +25,7 @@ export function FrontRoute({ component: Component, ...rest }) {
                   <Link to="/JackyTest" className="navbar-brand">JackyTest</Link>
                 </li>
                 <li>
-                  {logined
+                  {Auth.isAuthenticated
                     ? <button
                       style={{ border: 'none', background: 'transparent' }}
                       onClick={() => {
