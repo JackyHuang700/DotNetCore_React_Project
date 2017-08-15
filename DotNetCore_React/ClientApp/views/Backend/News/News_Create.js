@@ -12,6 +12,7 @@ import { Get_Sys_Language,
   HandleInputChange,
   HandleInputChange_By_New_LanList } from './News_General';
 
+
 class News_Create extends Component {
 
   constructor(props) {
@@ -37,6 +38,7 @@ class News_Create extends Component {
 
   componentDidMount() {
     this.Get_Sys_Language();
+    CKEDITOR.replace( 'content2');
   }
 
 
@@ -144,6 +146,8 @@ class News_Create extends Component {
                   value={this.state.News.new_LanList[`${index}`].Content}
                   placeholder="Content" />
 
+{/* refer https://stackoverflow.com/questions/36535234/how-can-ckeditor-be-used-with-react-js-in-a-way-that-allows-react-to-recognize-i */}
+                  <CKEditor value={this.props.value} />
                 </TabPane>
               )
             })
@@ -280,4 +284,30 @@ News_Create.defaultProps = {
   required_startDate: true,
   required_endDate: true,
   required_status: true,
+}
+
+
+// export default 
+class CKEditor extends Component {
+  constructor(props) {
+    super(props);
+    this.componentDidMount = this.componentDidMount.bind(this);
+  }
+
+  render() {
+    return (
+      <textarea name="editor" cols="100" rows="6" defaultValue={this.props.value}></textarea>
+    )
+  }
+
+  componentDidMount() {
+    let configuration = {
+      toolbar: "Basic"
+    };
+    CKEDITOR.replace("editor", configuration);
+    CKEDITOR.instances.editor.on('change', function () {
+      let data = CKEDITOR.instances.editor.getData();
+      this.props.onChange(data);
+    }.bind(this));
+  }
 }
