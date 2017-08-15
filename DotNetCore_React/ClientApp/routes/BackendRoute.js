@@ -10,18 +10,16 @@ import {Auth} from '../helpers/auth'
 import Dashboard from '../views/Backend/Dashboard/Dashboard'
 
 export function BackendRoute({ component: Component, ...rest }) {
-  console.log(Auth);
-  const islogin = Auth.isAuthenticated;
   return (
     <Route
       {...rest}
-      render={(props) => islogin !== true
+      render={(props) => Auth.isAuthenticated !== true
         ? <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
         :
         <div className="app">
           <Header />
           <div className="app-body">
-            <Sidebar {...props} isLogin={islogin} />
+            <Sidebar {...props} isLogin={Auth.isAuthenticated} />
             <main className="main">
               <Breadcrumb />
               <div className="container-fluid">
