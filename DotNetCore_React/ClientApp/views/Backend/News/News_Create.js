@@ -8,25 +8,30 @@ import DropDownList from '../../Components/Forms/DropDownList';
 
 import { news_Enum } from '../../../EnumScript/GeneralEnumScript';
 import classnames from 'classnames';
-import { Get_Sys_Language } from './News_General';
+import { Get_Sys_Language,
+  HandleInputChange,
+  HandleInputChange_By_New_LanList } from './News_General';
 
 class News_Create extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      News: {},
+      News: {
+        new_LanList:[],
+      },
       Sys_Language_List: [],
-      activeTab: '1'
+      activeTab: '0'
     };
 
     this.Submit = this.Submit.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
     this.Button_Submit = this.Button_Submit.bind(this);
     this.toggle = this.toggle.bind(this);
 
     //Import
     this.Get_Sys_Language = Get_Sys_Language.bind(this);
+    this.HandleInputChange = HandleInputChange.bind(this);
+    this.HandleInputChange_By_New_LanList = HandleInputChange_By_New_LanList.bind(this);
     this.Component_Nav = this.Component_Nav.bind(this);
   }
 
@@ -63,20 +68,6 @@ class News_Create extends Component {
   }
 
 
-  handleInputChange(event) {
-    const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
-
-    var new_News = Object.assign(this.state.News);
-    new_News[name] = value;
-
-    this.setState({
-      News: new_News,
-    });
-  }
-
-
   Button_Submit(event) {
     event.preventDefault();
     axios.post(`/api/News/Delete/${this.state.News.id}`, {
@@ -105,8 +96,7 @@ class News_Create extends Component {
 
                   <NavLink
                     className={classnames({ active: this.state.activeTab === `${index}` })}
-                    onClick={() => { this.toggle(`${index}`); }}
-                  >
+                    onClick={() => { this.toggle(`${index}`); }}>
                     <i className="icon-calculator"></i> {sys.name}
                   </NavLink>
                 </NavItem>
@@ -120,8 +110,41 @@ class News_Create extends Component {
             this.state.Sys_Language_List.map((sys, index) => {
               return (
                 <TabPane tabId={`${index}`}>
-                  {index}.
-  </TabPane>
+                  
+                  <TextInput name="Title"
+                  labelName="Title"
+                  className=""
+                  data-index={index}
+                  display={this.props.display_Title}
+                  required={this.props.required_Title}
+                  validMessage={{ required: 'Title is reduired.' }}
+                  onInput={this.HandleInputChange_By_New_LanList}
+                  value={this.state.News.new_LanList[`${index}`].Title}
+                  placeholder="Title" />
+
+                  <TextInput name="SubTitle"
+                  labelName="SubTitle"
+                  className=""
+                  data-index={index}                  
+                  display={this.props.display_SubTitle}
+                  required={this.props.required_SubTitle}
+                  validMessage={{ required: 'SubTitle is reduired.' }}
+                  onInput={this.HandleInputChange_By_New_LanList}
+                  value={this.state.News.new_LanList[`${index}`].SubTitle}
+                  placeholder="SubTitle" />
+
+                  <TextInput name="Content"
+                  labelName="Content"
+                  className=""
+                  data-index={index}
+                  display={this.props.display_Content}
+                  required={this.props.required_Content}
+                  validMessage={{ required: 'Content is reduired.' }}
+                  onInput={this.HandleInputChange_By_New_LanList}
+                  value={this.state.News.new_LanList[`${index}`].Content}
+                  placeholder="Content" />
+
+                </TabPane>
               )
             })
           }
@@ -154,8 +177,8 @@ class News_Create extends Component {
                   display={this.props.display_listImage}
                   required={this.props.required_listImage}
                   validMessage={{ required: 'listImage is reduired.' }}
-                  onInput={this.handleInputChange}
-                  value={this.state.listImage}
+                  onInput={this.HandleInputChange}
+                  value={this.state.News.listImage}
                   placeholder="listImage" />
 
 
@@ -166,8 +189,8 @@ class News_Create extends Component {
                   display={this.props.display_category}
                   required={this.props.required_category}
                   validMessage={{ required: 'category is reduired.' }}
-                  onInput={this.handleInputChange}
-                  value={this.state.category}
+                  onInput={this.HandleInputChange}
+                  value={this.state.News.category}
                   placeholder="category" />
 
 
@@ -178,8 +201,8 @@ class News_Create extends Component {
                   display={this.props.display_priority}
                   required={this.props.required_priority}
                   validMessage={{ required: 'priority is reduired.' }}
-                  onInput={this.handleInputChange}
-                  value={this.state.priority}
+                  onInput={this.HandleInputChange}
+                  value={this.state.News.priority}
                   placeholder="priority" />
 
 
@@ -189,8 +212,8 @@ class News_Create extends Component {
                   display={this.props.display_startDate}
                   required={this.props.required_startDate}
                   validMessage={{ required: 'startDate is reduired.' }}
-                  onInput={this.handleInputChange}
-                  value={this.state.startDate}
+                  onInput={this.HandleInputChange}
+                  value={this.state.News.startDate}
                   placeholder="startDate" />
 
 
@@ -200,8 +223,8 @@ class News_Create extends Component {
                   display={this.props.display_endDate}
                   required={this.props.required_endDate}
                   validMessage={{ required: 'endDate is reduired.' }}
-                  onInput={this.handleInputChange}
-                  value={this.state.endDate}
+                  onInput={this.HandleInputChange}
+                  value={this.state.News.endDate}
                   placeholder="endDate" />
 
 
@@ -210,8 +233,8 @@ class News_Create extends Component {
                   display={this.props.display_status}
                   required={this.props.required_status}
                   validMessage={{ required: 'status is reduired.' }}
-                  onInput={this.handleInputChange}
-                  value={this.state.status}
+                  onInput={this.HandleInputChange}
+                  value={this.state.News.status}
                   options={
                     [
                       {
