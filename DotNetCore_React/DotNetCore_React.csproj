@@ -27,6 +27,7 @@
     <None Remove="yarn.lock" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DotNetCore_React.Utility\DotNetCore_React.Utility.csproj" />
     <ProjectReference Include="..\DotNetCore_React.Application\DotNetCore_React.Application.csproj" />
   </ItemGroup>
   <ItemGroup>

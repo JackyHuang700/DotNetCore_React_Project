@@ -12,6 +12,7 @@ class Login extends Component {
     this.state = {
       userName: '',
       password: '',
+      rememberMe: true,
     };
 
       this.handleInputChange = this.handleInputChange.bind(this);
@@ -31,10 +32,11 @@ class Login extends Component {
   Login(event) {
     const {
       userName,
-      password
+      password,
+      rememberMe
     } = this.state;
 
-    Auth.authenticate(userName,password,() => {
+    Auth.authenticate(userName,password,rememberMe,() => {
       history.push('/Dashboard');
     });
 
@@ -60,6 +62,14 @@ class Login extends Component {
                     <div className="input-group mb-4">
                       <span className="input-group-addon"><i className="icon-lock"></i></span>
                       <input type="password" className="form-control" placeholder="Password" name="password" value={this.state.password} onChange={this.handleInputChange}/>
+                    </div>
+                    <div className="input-group mb-4">
+                    <p className="text-muted">Remember Me　</p>
+                      <label className="switch switch-text switch-pill switch-primary">
+                        <input type="checkbox" className="switch-input" value={this.state.rememberMe} defaultChecked/>
+                        <span className="switch-label" data-on="On" data-off="Off"></span>
+                        <span className="switch-handle"></span>
+                      </label>
                     </div>
                     <div className="row">
                       <div className="col-6">

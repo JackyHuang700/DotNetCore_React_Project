@@ -6,6 +6,7 @@ using DotNetCore_React.Domain.IRepositories;
 using DotNetCore_React.Domain.Entities;
 using System.Security.Cryptography;
 using System.Text;
+using DotNetCore_React.Utility;
 
 namespace DotNetCore_React.Application.UserApp
 {
@@ -28,7 +29,7 @@ namespace DotNetCore_React.Application.UserApp
             var roleDB = new User()
             {
                 Id = Guid.NewGuid(),
-                Password = this.PasswordToSHA256(user.Password),
+                Password = HashHelper.CreateSHA256(user.Password),
                 RoleId = user.RoleId,
                 UserName = user.UserName,
                 FirstName = user.FirstName,
@@ -91,33 +92,56 @@ namespace DotNetCore_React.Application.UserApp
         {
             var myJson = new Dictionary<string, object>();
             var user = _repository_user.GetUser(userName);
-            //是否登入成功
-            var is_Login_Success = false;
-
 
             if (user == null)
             {
                 myJson.Add("success", false);
-                myJson.Add("message", "登入錯誤");
+                myJson.Add("message", "登入失敗");
                 return myJson;
+            }
+
+            if (user.Password != HashHelper.CreateSHA256(password))
+            {
+                user.Status = 255;
+                user.FailedCount++;
+
+                //失敗次數是否超過系統預設值
+                var AccessFailedCount = _repository_comSystem.GetComSystem("AccessFailedCount");
+                var sysFailedCount = int.Parse(AccessFailedCount.sysValue);
+                if (user.FailedCount >= sysFailedCount)
+                {
+                    user.Status = 4;
+                }
+
+                //更新狀態
+                _repository_user.Update(user);
+                //_repository_user.Save();
             }
 
             //判斷狀態
             switch (user.Status)
             {
+                case 0:
+                    myJson.Add("success", false);
+                    myJson.Add("message", "您已被停權，請聯絡管理員。");
+                    break;
                 case 1:
-                    is_Login_Success = true;
                     myJson.Add("success", true);
-                    myJson.Add("message", "");
+                    myJson.Add("message", new
+                    {
+                        UserName = user.UserName,
+                        Fname = user.FirstName,
+                        Lname = user.LastName
+                    });
+                    myJson.Add("user", user);
                     break;
                 case 2:
                     myJson.Add("success", false);
                     myJson.Add("message", "信箱未驗證，請立即驗證");
                     break;
                 case 3:
-                    is_Login_Success = true;
-                    myJson.Add("success", true);
-                    myJson.Add("message", "");
+                    myJson.Add("success", false);
+                    myJson.Add("message", "第一次未更改密碼");
                     break;
                 case 4:
                     myJson.Add("success", false);
@@ -125,46 +149,11 @@ namespace DotNetCore_React.Application.UserApp
                     break;
                 default:
                     myJson.Add("success", false);
-                    myJson.Add("message", "登入失敗");
+                    myJson.Add("message", "帳號或密碼不正確");
                     break;
             }
 
-
-            if (is_Login_Success)
-            {
-                myJson.Add("user", user);
-                user.FailedCount = 0;
-            }
-            else
-            {
-                user.FailedCount++;
-
-                //失敗次數是否超過系統預設值
-                var aa = _repository_comSystem.GetComSystem("AccessFailedCount");
-                var sysFailedCount = int.Parse(aa.sysValue);
-                if (user.FailedCount >= sysFailedCount)
-                {
-                    user.Status = 4;
-                }
-            }
-            _repository_user.Update(user);
-
             return myJson;
-        }
-
-
-        public string PasswordToSHA256(string password)
-        {
-            // SHA256 is disposable by inheritance.  
-            using (var sha256 = SHA256.Create())
-            {
-                // Send a sample text to hash.  
-                var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
-                // Get the hashed string.  
-                var hash = BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
-
-                return hash;
-            }
         }
 
         public Dictionary<string, object> Update_User(UserDto user)

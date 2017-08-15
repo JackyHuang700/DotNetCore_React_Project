@@ -10,6 +10,7 @@ export class AuthModule {
     }
 
     check(){
+        this.checkLogged();
         let tryData = localStorage.getItem(this.SESSION_TOKEN_KEY);
         if(tryData){
             let mydata = JSON.parse(tryData);
@@ -18,18 +19,40 @@ export class AuthModule {
         }
     }
 
-    authenticate(userName,password,callback){
+    checkLogged(){
+        axios({
+            url:'/api/WebApi/isLogin',
+            method: 'get',
+            data:{}
+        }).then((result) => {
+            if(result.data.success){
+                this.writeData(result.data.message);
+            }
+            else{
+                this.signout();
+            }
+        }).catch((error) => {
+            console.error(error)
+        });      
+    }
+
+    writeData(user){
+        this.isAuthenticated =true;
+        localStorage.setItem(this.SESSION_TOKEN_KEY,JSON.stringify(user));
+    }
+
+    authenticate(userName,password,rememberMe,callback){
         axios({       
             url: '/api/WebApi/Login',
             method: 'post',
             data: {
             "UserName":userName,
-            "Password":password
+            "Password":password,
+            "rememberMe":rememberMe
           }
           }).then((result) => {
             if(result.data.success){
-                this.isAuthenticated =true;
-                localStorage.setItem(this.SESSION_TOKEN_KEY,JSON.stringify(result.data.message));
+                this.writeData(result.data.message);
                 if(callback){
                     return callback();
                 }
@@ -43,8 +66,20 @@ export class AuthModule {
     signout(callback){
         this.isAuthenticated = false;
         localStorage.clear();
-        if(callback) callback();
-        history.push('/Login');
+        axios({       
+            url: '/api/WebApi/Logout',
+            method: 'get',
+            data: {}
+          }).then((result) => {
+            if(result.data.success){
+                if(callback){
+                    callback();
+                }
+                history.push('/Login');
+            }
+          }).catch((error) => {
+            console.error(error)
+        });      
     };
 }
 
