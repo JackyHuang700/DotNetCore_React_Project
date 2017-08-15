@@ -61,6 +61,7 @@ namespace DotNetCore_React.Controllers
         public ActionResult Delete(string id)
         {
             var myJson = _service.Delete(id);
+            
             return Json(myJson);
         }
     }
