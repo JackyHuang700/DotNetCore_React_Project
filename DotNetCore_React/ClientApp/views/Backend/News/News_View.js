@@ -58,11 +58,11 @@ export default class News_View extends Component {
     }
 
     OnClick_Edit(event) {
-        history.push(`/News/Edit/${event.currentTarget.getAttribute('data-id')}/${true}`);        
+        history.push(`/News/Edit/${event.currentTarget.getAttribute('data-id')}`);        
     }
 
     OnClick_Delete(event) {
-        history.push(`/News/Delete/${event.currentTarget.getAttribute('data-id')}`);
+        history.push(`/News/Delete/${event.currentTarget.getAttribute('data-id')}/${true}`);
     }
 
     OnClick_Create(event) {

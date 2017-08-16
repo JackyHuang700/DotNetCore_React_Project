@@ -12,7 +12,6 @@ class User_View extends Component {
 
     constructor(props) {
         super(props);
-        debugger;
         this.state = {
             UserList: [],
         }
