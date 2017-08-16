@@ -104,51 +104,51 @@ class News_Edit extends Component {
                 <input type="hidden" id="id" name="id" value={this.state.News.id} />
 
                 <TextInput name="listImage"
-                  labelName="listImage"
+                  labelName="列表圖片"
                   className=""
                   display={this.props.display_listImage}
                   required={this.props.required_listImage}
-                  validMessage={{ required: 'listImage is reduired.' }}
+                  validMessage={{ required: '列表圖片 is reduired.' }}
                   onInput={this.handleInputChange}
                   value={this.state.News.listImage}
                   placeholder="listImage"/>
 
                 <TextInput name="category"
-                  labelName="category"
+                  labelName="類別"
                   className=""
                   display={this.props.display_category}
                   required={this.props.required_category}
-                  validMessage={{ required: 'category is reduired.' }}
+                  validMessage={{ required: '類別 is reduired.' }}
                   onInput={this.handleInputChange}
                   value={this.state.News.category}
                   placeholder="category"/>
 
                 <TextInput name="priority"
-                  labelName="priority"
+                  labelName="列表排序"
                   className=""
                   display={this.props.display_priority}
                   required={this.props.required_priority}
-                  validMessage={{ required: 'priority is reduired.' }}
+                  validMessage={{ required: '列表排序 is reduired.' }}
                   onInput={this.handleInputChange}
                   value={this.state.News.priority}
                   placeholder="priority"/>
 
                 <TextInput name="startDate"
-                  labelName="startDate"
+                  labelName="上架時間"
                   className=""
                   display={this.props.display_startDate}
                   required={this.props.required_startDate}
-                  validMessage={{ required: 'startDate is reduired.' }}
+                  validMessage={{ required: '上架時間 is reduired.' }}
                   onInput={this.handleInputChange}
                   value={this.state.News.startDate}
                   placeholder="startDate"/>
 
                 <TextInput name="endDate"
-                  labelName="endDate"
+                  labelName="下架時間"
                   className=""
                   display={this.props.display_endDate}
                   required={this.props.required_endDate}
-                  validMessage={{ required: 'endDate is reduired.' }}
+                  validMessage={{ required: '下架時間 is reduired.' }}
                   onInput={this.handleInputChange}
                   value={this.state.News.endDate}
                   placeholder="endDate"/>
@@ -176,44 +176,44 @@ class News_Edit extends Component {
 
 
                   <TextInput name="createDate"
-                  labelName="createDate"
+                  labelName="建立時間"
                   className=""
                   display={this.props.display_createDate}
                   required={this.props.required_createDate}
-                  validMessage={{ required: 'createDate is reduired.' }}
+                  validMessage={{ required: '建立時間 is reduired.' }}
                   onInput={this.handleInputChange}
                   value={this.state.News.createDate}
                   readOnly={true}
                   placeholder="createDate"/>
 
                   <TextInput name="createUser"
-                  labelName="createUser"
+                  labelName="建立者"
                   className=""
                   display={this.props.display_createUser}
                   required={this.props.required_createUser}
-                  validMessage={{ required: 'createUser is reduired.' }}
+                  validMessage={{ required: '建立者 is reduired.' }}
                   onInput={this.handleInputChange}
                   value={this.state.News.createUser}
                   readOnly={true}
                   placeholder="createUser"/>
 
                   <TextInput name="updateDate"
-                  labelName="updateDate"
+                  labelName="更新時間"
                   className=""
                   display={this.props.display_updateDate}
                   required={this.props.required_updateDate}
-                  validMessage={{ required: 'updateDate is reduired.' }}
+                  validMessage={{ required: '更新時間 is reduired.' }}
                   onInput={this.handleInputChange}
                   value={this.state.News.updateDate}
                   readOnly={true}
                   placeholder="updateDate"/>
 
                   <TextInput name="updateUser"
-                  labelName="updateUser"
+                  labelName="更新者"
                   className=""
                   display={this.props.display_updateUser}
                   required={this.props.required_updateUser}
-                  validMessage={{ required: 'updateUser is reduired.' }}
+                  validMessage={{ required: '更新者 is reduired.' }}
                   onInput={this.handleInputChange}
                   value={this.state.News.updateUser}
                   readOnly={true}
