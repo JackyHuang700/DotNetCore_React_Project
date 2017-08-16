@@ -33,6 +33,8 @@ namespace DotNetCore_React.EntityFrameworkCore.Seeds
                     ChangedPassword = true,
                     PasswordHash = null,
                 });
+
+                _context.SaveChanges();
             }
         }
     }
