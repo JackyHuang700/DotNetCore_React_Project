@@ -68,7 +68,7 @@ class User_View extends Component {
     }
 
     OnClick_Create(event) {
-        history.push('/Role/Create');
+        history.push('/User/Create');
     }
 
     //將資訊轉換成中文

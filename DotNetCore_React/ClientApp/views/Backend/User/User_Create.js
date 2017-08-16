@@ -65,7 +65,7 @@ class User_Create extends Component {
         <div className="col-sm-6">
           <div className="card">
             <div className="card-header">
-              新增角色
+              新增帳號
               </div>
             <div className="card-block">
               <form className="" onSubmit={this.submit}>
