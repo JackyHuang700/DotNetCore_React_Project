@@ -9,6 +9,7 @@ using DotNetCore_React.Domain.Entities;
 using DotNetCore_React.Application.UserApp.Dtos;
 using Newtonsoft.Json;
 using DotNetCore_React.Utility;
+using Newtonsoft.Json.Linq;
 
 namespace DotNetCore_React.Controllers
 {
@@ -86,20 +87,20 @@ namespace DotNetCore_React.Controllers
             return Json(myJson);
         }
 
-        [HttpGet("[action]")]
-        public IActionResult forgot(string username , string email)
+        [HttpPost("[action]")]
+        public IActionResult forgot([FromBody] dynamic data)
         {
-            return Json(_service.forgot(username, email));
-        }
-
-        [HttpGet("[action]")]
-        public IActionResult forgotConfirm(string username, string passwordhash)
-        {
-            return Json(_service.forgotConfirm(username, passwordhash));
+            return Json(_service.forgot((string)data["userName"], (string)data["email"]));
         }
 
         [HttpPost("[action]")]
-        public IActionResult changePassword(string username , string newPassword , string passwordhash)
+        public IActionResult forgotConfirm([FromBody] dynamic data)
+        {
+            return Json(_service.forgotConfirm((string)data["username"], (string)data["passwordhash"]));
+        }
+
+        [HttpPost("[action]")]
+        public IActionResult changePassword([FromBody] dynamic data)
         {
             byte[] userObject = null;
             HttpContext.Session.TryGetValue("CurrentUser", out userObject);
@@ -108,7 +109,7 @@ namespace DotNetCore_React.Controllers
             {
                 user = ByteConvertHelper.Bytes2Object<UserSimpleDto>(userObject);
             }
-            return Json(_service.changePassword(user,username,newPassword, passwordhash));
+            return Json(_service.changePassword(user, (string)data["username"], (string)data["newPassword"], (string)data["passwordhash"]));
         }
     }
 }

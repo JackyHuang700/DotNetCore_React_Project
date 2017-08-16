@@ -39,7 +39,7 @@ class Forgot extends Component {
 
     axios({
         url: '/api/WebApi/forgot',
-        method: 'get',
+        method: 'post',
         data: {
         userName: userName,
         email: email
