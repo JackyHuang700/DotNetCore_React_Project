@@ -17,7 +17,7 @@ namespace DotNetCore_React.Domain.IRepositories
     {
         void Delete(TEntity entity);
         void Delete(TPrimaryKey id);
-        void DeleteRange(List<TPrimaryKey> idList);
+
         TEntity FirstOrDefault(Expression<Func<TEntity, bool>> predicate);
         TEntity Get(TPrimaryKey id);
         List<TEntity> GetAllList();

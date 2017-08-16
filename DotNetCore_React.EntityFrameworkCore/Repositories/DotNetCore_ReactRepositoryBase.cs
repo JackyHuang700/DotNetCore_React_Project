@@ -104,35 +104,42 @@ namespace DotNetCore_React.EntityFrameworkCore
             return Insert(entity);
         }
 
-        /// <summary>
-        /// 删除实体
-        /// </summary>
-        /// <param name="entity">要删除的实体</param>
-        public void Delete(TEntity entity)
-        {
-            _dbContext.Set<TEntity>().Remove(entity);
-        }
 
-        /// <summary>
-        /// 删除实体
-        /// </summary>
-        /// <param name="id">实体主键</param>
-        public void Delete(TPrimaryKey id)
-        {
-            _dbContext.Set<TEntity>().Remove(Get(id));
-        }
+        public abstract void Delete(TEntity entity);
 
-        /// <summary>
-        /// 删除实体
-        /// </summary>
-        /// <param name="id">实体主键</param>
-        public void DeleteRange(List<TPrimaryKey> id)
-        {
-            foreach (var i in id)
-            {
-                _dbContext.Set<TEntity>().Remove(Get(i));
-            }
-        }
+        public abstract void Delete(TPrimaryKey id);
+
+
+        ///// <summary>
+        ///// 删除实体
+        ///// </summary>
+        ///// <param name="entity">要删除的实体</param>
+        //public void Delete(TEntity entity)
+        //{
+        //    //真刪除
+        //    _dbContext.Set<TEntity>().Remove(entity);
+        //}
+
+        ///// <summary>
+        ///// 删除实体
+        ///// </summary>
+        ///// <param name="id">实体主键</param>
+        //public void Delete(TPrimaryKey id)
+        //{
+        //    _dbContext.Set<TEntity>().Remove(Get(id));
+        //}
+
+        ///// <summary>
+        ///// 删除实体
+        ///// </summary>
+        ///// <param name="id">实体主键</param>
+        //public void DeleteRange(List<TPrimaryKey> id)
+        //{
+        //    foreach (var i in id)
+        //    {
+        //        _dbContext.Set<TEntity>().Remove(Get(i));
+        //    }
+        //}
 
 
         /// <summary>
