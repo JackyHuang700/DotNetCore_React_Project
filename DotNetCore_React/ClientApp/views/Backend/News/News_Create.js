@@ -116,34 +116,34 @@ class News_Create extends Component {
                 <TabPane tabId={`${index}`}>
                   
                   <TextInput name="title"
-                  labelName="title"
+                  labelName="標題"
                   className=""
                   data-index={index}
                   display={this.props.display_title}
                   required={this.props.required_title}
-                  validMessage={{ required: 'title is reduired.' }}
+                  validMessage={{ required: '標題 is reduired.' }}
                   onInput={this.HandleInputChange_By_New_LanList}
                   value={this.state.News.new_LanList[`${index}`].title}
                   placeholder="title" />
 
                   <TextInput name="subTitle"
-                  labelName="subTitle"
+                  labelName="副標題"
                   className=""
                   data-index={index}                  
                   display={this.props.display_subTitle}
                   required={this.props.required_subTitle}
-                  validMessage={{ required: 'subTitle is reduired.' }}
+                  validMessage={{ required: '副標題 is reduired.' }}
                   onInput={this.HandleInputChange_By_New_LanList}
                   value={this.state.News.new_LanList[`${index}`].subTitle}
                   placeholder="subTitle" />
 
                   <CKEditor name="content"
-                  labelName="content"
+                  labelName="內容"
                   className=""
                   data-index={index}
                   display={this.props.display_content}
                   required={this.props.required_content}
-                  validMessage={{ required: 'content is reduired.' }}
+                  validMessage={{ required: '內容 is reduired.' }}
                   onInput={this.HandleInputChange_By_New_LanList_CKEditor}
                   value={this.state.News.new_LanList[`${index}`].content}
                   cols="100" 
@@ -182,11 +182,11 @@ class News_Create extends Component {
 
 
                 <TextInput name="listImage"
-                  labelName="listImage"
+                  labelName="列表圖片"
                   className=""
                   display={this.props.display_listImage}
                   required={this.props.required_listImage}
-                  validMessage={{ required: 'listImage is reduired.' }}
+                  validMessage={{ required: '列表圖片 is reduired.' }}
                   onInput={this.HandleInputChange}
                   value={this.state.News.listImage}
                   placeholder="listImage" />
@@ -194,11 +194,11 @@ class News_Create extends Component {
 
 
                 <TextInput name="category"
-                  labelName="category"
+                  labelName="類別"
                   className=""
                   display={this.props.display_category}
                   required={this.props.required_category}
-                  validMessage={{ required: 'category is reduired.' }}
+                  validMessage={{ required: '類別 is reduired.' }}
                   onInput={this.HandleInputChange}
                   value={this.state.News.category}
                   placeholder="category" />
@@ -206,33 +206,33 @@ class News_Create extends Component {
 
 
                 <TextInput name="priority"
-                  labelName="priority"
+                  labelName="列表排序"
                   className=""
                   display={this.props.display_priority}
                   required={this.props.required_priority}
-                  validMessage={{ required: 'priority is reduired.' }}
+                  validMessage={{ required: '列表排序 is reduired.' }}
                   onInput={this.HandleInputChange}
                   value={this.state.News.priority}
                   placeholder="priority" />
 
 
                 <TextInput name="startDate"
-                  labelName="startDate"
+                  labelName="上架時間"
                   className=""
                   display={this.props.display_startDate}
                   required={this.props.required_startDate}
-                  validMessage={{ required: 'startDate is reduired.' }}
+                  validMessage={{ required: '上架時間 is reduired.' }}
                   onInput={this.HandleInputChange}
                   value={this.state.News.startDate}
                   placeholder="startDate" />
 
 
                 <TextInput name="endDate"
-                  labelName="endDate"
+                  labelName="下架時間"
                   className=""
                   display={this.props.display_endDate}
                   required={this.props.required_endDate}
-                  validMessage={{ required: 'endDate is reduired.' }}
+                  validMessage={{ required: '下架時間 is reduired.' }}
                   onInput={this.HandleInputChange}
                   value={this.state.News.endDate}
                   placeholder="endDate" />
