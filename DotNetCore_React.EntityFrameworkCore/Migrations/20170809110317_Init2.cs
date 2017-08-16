@@ -39,7 +39,7 @@ namespace DotNetCore_React.EntityFrameworkCore.Migrations
                     Password = table.Column<string>(nullable: true),
                     PasswordHash = table.Column<string>(nullable: true),
                     RoleId = table.Column<string>(nullable: true),
-                    Status = table.Column<byte>(nullable: false),
+                    Status = table.Column<int>(nullable: false),
                     UpdateDate = table.Column<DateTime>(nullable: false),
                     UpdateUser = table.Column<string>(nullable: true),
                     UserName = table.Column<string>(nullable: true)

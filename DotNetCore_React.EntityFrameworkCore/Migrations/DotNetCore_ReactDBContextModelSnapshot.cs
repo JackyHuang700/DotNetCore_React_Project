@@ -151,7 +151,7 @@ namespace DotNetCore_React.EntityFrameworkCore.Migrations
 
                     b.Property<string>("RoleId");
 
-                    b.Property<byte>("Status");
+                    b.Property<int>("Status");
 
                     b.Property<DateTime>("UpdateDate");
 

@@ -23,9 +23,7 @@ namespace DotNetCore_React.Domain.Entities
 
         public bool EmailConfirmed { get; set; }
 
-
-
-        public byte Status { get; set; }
+        public int Status { get; set; }
 
         public DateTime CreateDate { get; set; }
         public string CreateUser { get; set; }
@@ -42,8 +40,7 @@ namespace DotNetCore_React.Domain.Entities
 
 
         public string PasswordHash { get; set; }
-
-        
+    
 
     }
 }
