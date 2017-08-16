@@ -40,6 +40,9 @@ class changePwd extends Component {
         userName : parsed.userName,
         passwordhash: parsed.passwordhash
     },() =>{
+        if(this.state.userName !== Auth.getUserName()){
+          history.push('/Login');
+        }
         this.checkhash();
     });
   }

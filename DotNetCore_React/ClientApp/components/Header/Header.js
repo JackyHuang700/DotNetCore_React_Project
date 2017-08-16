@@ -23,31 +23,10 @@ class Header extends Component {
     this.state = {
       dropdownOpen: false
     };
-
-    this.GetData = this.GetData.bind(this);
-    
   }
 
   componentDidMount() {
-  this.GetData();
-  }
 
-
-  GetData() {
-    const self = this;
-
-    axios({
-      url: `/api/User/Get_CurrentUser_UserName`,
-      method: 'POST',
-      data: {
-      }
-    }).then((result) => {
-      self.setState({
-        userName: result.data
-      });
-    }).catch((error) => {
-      console.log(error)
-    });
   }
 
   toggle() {
@@ -84,6 +63,10 @@ class Header extends Component {
     history.push('/changePwd?userName='+Auth.getUserName());
   }
 
+  profile(e){
+    history.push('/User/Personal_Edit/userName='+Auth.getUserName());
+  }
+
   render() {
     return (
       <header className="app-header navbar">
@@ -101,35 +84,19 @@ class Header extends Component {
           <li className="nav-item">
             <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
               <button onClick={this.toggle} className="nav-link dropdown-toggle" data-toggle="dropdown" type="button" aria-haspopup="true" aria-expanded={this.state.dropdownOpen}>
-                <img src={'img/avatars/avatar2.png'} className="img-avatar" alt="admin@bootstrapmaster.com"/>
-                <span className="d-md-down-none">admin</span>
+                <img src={'img/avatars/avatar2.png'} className="img-avatar" alt={Auth.getUserName()}/>
+                <span className="d-md-down-none">{Auth.getNickName()}</span>
               </button>
 
               <DropdownMenu className="dropdown-menu-right" style={dropdownMenu_Style}>
                 <DropdownItem header className="text-center"><strong>Account</strong></DropdownItem>
-
-                <DropdownItem><i className="fa fa-bell-o"></i> Updates<span className="badge badge-info">42</span></DropdownItem>
-                <DropdownItem><i className="fa fa-envelope-o"></i> Messages<span className="badge badge-success">42</span></DropdownItem>
-                <DropdownItem><i className="fa fa-tasks"></i> Tasks<span className="badge badge-danger">42</span></DropdownItem>
-                <DropdownItem><i className="fa fa-comments"></i> Comments<span className="badge badge-warning">42</span></DropdownItem>
-
-                <DropdownItem header className="text-center"><strong>Settings</strong></DropdownItem>
-
-                <DropdownItem><i className="fa fa-user"></i> 
-                  <NavLink to={`/User/Personal_Edit/${this.state.userName}`} className="nav-link" activeClassName="active">Profile</NavLink>
-                </DropdownItem>
-                <DropdownItem><i className="fa fa-wrench"></i> Settings</DropdownItem>
-                <DropdownItem><i className="fa fa-usd"></i> Payments<span className="badge badge-default">42</span></DropdownItem>
-                <DropdownItem><i className="fa fa-file"></i> Projects<span className="badge badge-primary">42</span></DropdownItem>
+                <DropdownItem onClick={this.profile}><i className="fa fa-user"></i> Profile</DropdownItem>
+                <DropdownItem onClick={this.changePwd}><i className="fa fa-shield"></i> Change Password</DropdownItem>
                 <DropdownItem divider />
-                <DropdownItem onClick={this.changePwd}><i className="fa fa-shield"></i> Change Pwd</DropdownItem>
                 <DropdownItem onClick={this.logout}><i className="fa fa-lock"></i> Logout</DropdownItem>
 
               </DropdownMenu>
             </Dropdown>
-          </li>
-          <li className="nav-item d-md-down-none">
-            <button className="nav-link navbar-toggler aside-menu-toggler" type="button" onClick={this.asideToggle}>&#9776;</button>
           </li>
         </ul>
       </header>

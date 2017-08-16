@@ -53,6 +53,10 @@ class Forgot extends Component {
     return false;
   }
 
+  back(event){
+    history.goBack();
+  }
+
   render() {
     const { params } = this.props.params;
     const { $invalid } = this.props.easyform.$invalid;
@@ -94,6 +98,9 @@ class Forgot extends Component {
                     <div className="row">
                       <div className="col-6">
                         <button className="btn btn-primary px-4" disabled={$invalid ? 'disabled' : false}>送出</button>
+                      </div>
+                      <div className="offset-4 col-2">
+                        <button type="button" className="btn btn-warning px-4" onClick={this.back}>返回</button>
                       </div>
                     </div>
                   </div>
