@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using System.Linq;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace DotNetCore_React.EntityFrameworkCore
 {
@@ -27,7 +28,7 @@ namespace DotNetCore_React.EntityFrameworkCore
         /// <returns></returns>
         public List<TEntity> GetAllList()
         {
-            return _dbContext.Set<TEntity>().ToList();
+            return _dbContext.Set<TEntity>().Where(createBaseFilter()).ToList();
         }
 
         /// <summary>
@@ -37,7 +38,7 @@ namespace DotNetCore_React.EntityFrameworkCore
         /// <returns></returns>
         public List<TEntity> GetAllList(Expression<Func<TEntity, bool>> predicate)
         {
-            return _dbContext.Set<TEntity>().Where(predicate).ToList();
+            return _dbContext.Set<TEntity>().Where(createBaseFilter()).Where(predicate).ToList();
         }
 
         /// <summary>
@@ -47,7 +48,7 @@ namespace DotNetCore_React.EntityFrameworkCore
         /// <returns></returns>
         public TEntity Get(TPrimaryKey id)
         {
-            return _dbContext.Set<TEntity>().FirstOrDefault(CreateEqualityExpressionForId(id));
+            return _dbContext.Set<TEntity>().Where(createBaseFilter()).FirstOrDefault(CreateEqualityExpressionForId(id));
         }
 
         /// <summary>
@@ -57,7 +58,7 @@ namespace DotNetCore_React.EntityFrameworkCore
         /// <returns></returns>
         public TEntity FirstOrDefault(Expression<Func<TEntity, bool>> predicate)
         {
-            return _dbContext.Set<TEntity>().FirstOrDefault(predicate);
+            return _dbContext.Set<TEntity>().Where(createBaseFilter()).FirstOrDefault(predicate);
         }
 
         /// <summary>
@@ -105,41 +106,54 @@ namespace DotNetCore_React.EntityFrameworkCore
         }
 
 
-        public abstract void Delete(TEntity entity);
+        //public abstract void Delete(TEntity entity);
 
-        public abstract void Delete(TPrimaryKey id);
+        //public abstract void Delete(TPrimaryKey id);
 
 
-        ///// <summary>
-        ///// 删除实体
-        ///// </summary>
-        ///// <param name="entity">要删除的实体</param>
-        //public void Delete(TEntity entity)
-        //{
-        //    //真刪除
-        //    _dbContext.Set<TEntity>().Remove(entity);
-        //}
+        /// <summary>
+        /// 删除实体
+        /// </summary>
+        /// <param name="entity">要删除的实体</param>
+        public void Delete(TEntity entity)
+        {
+            //真刪除
+            TrySetProperty(entity, "Status", -1);
 
-        ///// <summary>
-        ///// 删除实体
-        ///// </summary>
-        ///// <param name="id">实体主键</param>
-        //public void Delete(TPrimaryKey id)
-        //{
-        //    _dbContext.Set<TEntity>().Remove(Get(id));
-        //}
+            _dbContext.Set<TEntity>().Update(entity);
+        }
 
-        ///// <summary>
-        ///// 删除实体
-        ///// </summary>
-        ///// <param name="id">实体主键</param>
-        //public void DeleteRange(List<TPrimaryKey> id)
-        //{
-        //    foreach (var i in id)
-        //    {
-        //        _dbContext.Set<TEntity>().Remove(Get(i));
-        //    }
-        //}
+        private void TrySetProperty(object obj, string property, object value)
+        {
+            var prop = obj.GetType().GetProperty(property, BindingFlags.Public | BindingFlags.Instance);
+            if (prop != null && prop.CanWrite)
+                prop.SetValue(obj, value, null);
+        }
+
+        /// <summary>
+        /// 删除实体
+        /// </summary>
+        /// <param name="id">实体主键</param>
+        public void Delete(TPrimaryKey id)
+        {
+            var getData = Get(id);
+            if (getData != null)
+            {
+                Delete(getData);
+            }      
+        }
+
+        /// <summary>
+        /// 删除实体
+        /// </summary>
+        /// <param name="id">实体主键</param>
+        public void DeleteRange(List<TPrimaryKey> id)
+        {
+            foreach (var i in id)
+            {
+                Delete(i);
+            }
+        }
 
 
         /// <summary>
@@ -166,7 +180,17 @@ namespace DotNetCore_React.EntityFrameworkCore
             return Expression.Lambda<Func<TEntity, bool>>(lambdaBody, lambdaParam);
         }
 
-       
+        protected static Expression<Func<TEntity, bool>> createBaseFilter()
+        {
+            var lambdaParam = Expression.Parameter(typeof(TEntity));
+            var lambdaBody = 
+                    Expression.GreaterThan(
+                        Expression.PropertyOrField(lambdaParam, "Status"),
+                        Expression.Constant(-1,typeof(int))
+                        );
+
+            return Expression.Lambda<Func<TEntity, bool>>(lambdaBody, lambdaParam);
+        }
     }
 
     public abstract class DotNetCore_ReactRepositoryBase<TEntity> : DotNetCore_ReactRepositoryBase<TEntity, Guid> where TEntity : Entity
