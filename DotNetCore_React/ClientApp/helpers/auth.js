@@ -98,7 +98,6 @@ export class AuthModule {
             "rememberMe":rememberMe
           }
           }).then((result) => {
-              debugger;
             if(result.data.success){
                 this.writeData(result.data.user);
                 if(callback){

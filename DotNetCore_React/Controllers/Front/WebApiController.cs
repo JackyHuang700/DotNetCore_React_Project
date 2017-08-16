@@ -40,10 +40,7 @@ namespace DotNetCore_React.Controllers
                 HttpContext.Session.Set("CurrentUser", ByteConvertHelper.Object2Bytes(user));
             }
 
-            return Json(new Dictionary<string, object> {
-                { "success", myJson["success"]},
-                { "message",  myJson["message"]}
-            });
+            return Json(myJson);
         }
 
         [HttpGet("[action]")]

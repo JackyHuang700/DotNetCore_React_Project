@@ -100,14 +100,13 @@ GetData(){
               <form className="" onSubmit={this.Submit}>
 
                 <TextInput name="userName"
-                  labelName="系統帳號"
+                  labelName="帳號"
                   className=""
                   display={this.props.display_userName}
                   required={this.props.required_userName}
-                  validMessage={{ required: '系統帳號 is reduired.' }}
+                  validMessage={{ required: '帳號 is reduired.' }}
                   onInput={this.handleInputChange}
-                  value={this.state.User.userName}
-                  readOnly={true}                  
+                  value={this.state.User.userName}                
                   placeholder="userName" />
 
 
@@ -116,10 +115,9 @@ GetData(){
                   className=""
                   display={this.props.display_password}
                   required={this.props.required_password}
-                  validMessage={{ required: '系統帳號 is reduired.' }}
+                  validMessage={{ required: '密碼 is reduired.' }}
                   onInput={this.handleInputChange}
-                  value={this.state.User.password}
-                  readOnly={true}                  
+                  value={this.state.User.password}                
                   placeholder="password" />
 
 

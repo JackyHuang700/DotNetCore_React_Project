@@ -30,8 +30,6 @@ class User_Edit_Show extends Component {
     this.Title = this.Title.bind(this);
     this.Bind_handleInputChange = this.Bind_handleInputChange.bind(this);
     this.Button_Submit = this.Button_Submit.bind(this);
-    this.Is_Show_Password = this.Is_Show_Password.bind(this);
-
   }
 
 
@@ -155,22 +153,6 @@ class User_Edit_Show extends Component {
     history.push('/User');
   }
 
-  Is_Show_Password() {
-
-    return this.state.is_Edit ?
-      (<TextInput name="password"
-        labelName="角色名稱"
-        className=""
-        display={this.props.display_password}
-        required={this.props.required_password}
-        validMessage={{ required: 'password is reduired.' }}
-        onInput={this.Bind_handleInputChange}
-        value={this.state.User.password}
-        placeholder="password"
-        readOnly={!this.state.is_Edit} />) :
-      null;
-  }
-
   render() {
 
     const { params } = this.props.params;
@@ -198,7 +180,16 @@ class User_Edit_Show extends Component {
                   readOnly={!this.state.is_Edit} />
 
 
-                {this.Is_Show_Password()}
+                  <TextInput name="password"
+                  labelName="密碼"
+                  className=""
+                  display={this.props.display_password}
+                  required={this.props.required_password}
+                  validMessage={{ required: 'password is reduired.' }}
+                  onInput={this.Bind_handleInputChange}
+                  value={this.state.User.password}
+                  placeholder="如需變更密碼"
+                  readOnly={!this.state.is_Edit} />
 
                 <TextInput name="email"
                   labelName="email"
@@ -222,8 +213,6 @@ class User_Edit_Show extends Component {
                   readOnly={!this.state.is_Edit}
                   options={this.state.RoleList}
                 />
-
-
 
                 <TextInput name="firstName"
                   labelName="姓"
@@ -280,31 +269,6 @@ class User_Edit_Show extends Component {
                     ]}
                 />
 
-                <TextInput name="createDate"
-                  labelName="建立時間"
-                  className=""
-                  display={this.props.display_createDate}
-                  required={this.props.required_createDate}
-                  validMessage={{ required: '建立時間 is reduired.' }}
-                  onInput={this.Bind_handleInputChange}
-                  value={this.state.User.createDate}
-                  placeholder="createDate"
-                  readOnly={!this.state.is_Edit} />
-
-
-                <TextInput name="createUser"
-                  labelName="建立者"
-                  className=""
-                  display={this.props.display_createUser}
-                  required={this.props.required_createUser}
-                  validMessage={{ required: '建立者 is reduired.' }}
-                  onInput={this.Bind_handleInputChange}
-                  value={this.state.User.createUser}
-                  placeholder="createUser"
-                  readOnly={!this.state.is_Edit} />
-
-
-
                 <div className="form-group form-actions">
                   <Button color="primary" disabled={$invalid ? 'disabled' : false} >{this.Button_Text()}</Button>
                 </div>
@@ -329,18 +293,12 @@ User_Edit_Show.defaultProps = {
   display_firstName: true,
   display_lastName: true,
   display_status     : true,
-  display_createDate: true,
-  display_createUser: true,
-
 
   required_userName: true,
-  required_password: true,
-
+  required_password: false,
   required_roleId: true,
   required_email: true,
   required_firstName: true,
   required_lastName: true,
   required_status     : true,
-  required_createDate: true,
-  required_createUser: true,
 }

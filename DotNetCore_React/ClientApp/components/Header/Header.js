@@ -84,7 +84,7 @@ class Header extends Component {
           <li className="nav-item">
             <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
               <button onClick={this.toggle} className="nav-link dropdown-toggle" data-toggle="dropdown" type="button" aria-haspopup="true" aria-expanded={this.state.dropdownOpen}>
-                <img src={'img/avatars/avatar2.png'} className="img-avatar" alt={Auth.getUserName()}/>
+                <img src={'/img/avatars/avatar2.png'} className="img-avatar" alt={Auth.getUserName()}/>
                 <span className="d-md-down-none">{Auth.getNickName()}</span>
               </button>
 

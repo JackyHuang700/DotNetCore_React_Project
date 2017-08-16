@@ -201,29 +201,6 @@ class Role_Edit_Show extends Component {
                     ]}
                   />
 
-                <TextInput name="createDate"
-                  labelName="建立日期"
-                  className=""
-                  display={this.props.display_createDate}
-                  required={this.props.required_createDate}
-                  validMessage={{ required: '建立日期 is reduired.' }}
-                  onInput={this.Bind_handleInputChange}
-                  value={this.state.Role.createDate}
-                  placeholder="createDate"
-                  readOnly={!this.state.is_Edit} />
-
-
-                <TextInput name="createUser"
-                  labelName="建立者"
-                  className=""
-                  display={this.props.display_createUser}
-                  required={this.props.required_createUser}
-                  validMessage={{ required: '建立者 is reduired.' }}
-                  onInput={this.Bind_handleInputChange}
-                  value={this.state.Role.createUser}
-                  placeholder="createUser"
-                  readOnly={!this.state.is_Edit} />
-
                 <div className="form-group form-actions">
                   <Button color="primary" disabled={$invalid ? 'disabled' : false}>{this.Button_Text()}</Button>
                 </div>
@@ -245,13 +222,9 @@ Role_Edit_Show.defaultProps = {
   display_name: true,
   display_priority: true,
   display_status     : true,
-  display_createDate: true,
-  display_createUser: true,
 
   required_sysId: true,
   required_name: true,
   required_priority: true,
   required_status     : true,
-  required_createDate: true,
-  required_createUser: true,
 }

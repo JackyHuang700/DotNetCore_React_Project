@@ -229,7 +229,7 @@ export default EasyForm(User_Delete, 2);
 
 User_Delete.defaultProps = {
   display_userName: true,
-  display_password: true,
+  display_password: false,
   display_roleId: true,
   display_firstName: true,
   display_lastName: true,
@@ -237,7 +237,7 @@ User_Delete.defaultProps = {
   display_createUser: true,
 
   required_userName: true,
-  required_password: true,
+  required_password: false,
   required_roleId: true,
   required_firstName: true,
   required_lastName: true,

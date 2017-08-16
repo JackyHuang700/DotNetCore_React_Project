@@ -73,8 +73,8 @@ namespace DotNetCore_React.Application.UserApp
             _repository_user.Insert(roleDB);
             var effect = _repository_user.Save();
 
-            myJson.Add("success", effect > 0);
-            myJson.Add("message", effect > 0 ? "操作完成" : "操作失敗");
+            myJson["success"]= effect > 0;
+            myJson["message"]= effect > 0 ? "操作完成" : "操作失敗";
             return myJson;
         }
 
@@ -107,13 +107,14 @@ namespace DotNetCore_React.Application.UserApp
             Guid guid;
             Guid.TryParse(id, out guid);
             var a = _repository_user.Get(guid);
+            a.Password = String.Empty;
             return Mapper.Map<UserDto>(a);
         }
 
         public Personal_UserDto GetUser_By_UserName(string userName)
         {
             var a = _repository_user.FirstOrDefault(o => o.UserName == userName);
-            a.Password = "";
+            a.Password = String.Empty;
             return Mapper.Map<Personal_UserDto>(a);
         }
 
@@ -196,6 +197,12 @@ namespace DotNetCore_React.Application.UserApp
 
             var userDB = Mapper.Map<User>(user);
 
+            //更新密碼
+            if(!string.IsNullOrWhiteSpace(user.Password)){
+                userDB.Password = HashHelper.CreateSHA256(user.Password);
+                userDB.ChangedPassword = true;
+            }
+
             //回復狀態時，將錯誤次數清空
             if (userDB.Status == (byte)User_Status.NORMAL)
             {
@@ -250,7 +257,7 @@ namespace DotNetCore_React.Application.UserApp
 
                     //寄信
                     _mailServices.AddTo(userDB.UserName, userDB.Email);
-                    _mailServices.Sent("啟用帳號", $"請點選 <a href='$Domain$/forgot?userName={userDB.UserName}&passwordhash={userDB.PasswordHash}'>啟用</a> 進行啟用帳號。");
+                    _mailServices.Sent("啟用帳號", $"請點選 <a href='$Domain$/EmailConfirm?userName={userDB.UserName}&passwordhash={userDB.PasswordHash}'>啟用</a> 進行啟用帳號。");
 
 
                     if (effect > 0)
