@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom'
+import axios from 'axios';
 import { Dropdown, DropdownMenu, DropdownItem } from 'reactstrap';
 import {Auth} from '../../helpers/auth'
 import history from '../../history'
@@ -12,12 +14,40 @@ class Header extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      userName: "",
+    };
 
     this.toggle = this.toggle.bind(this);
     this.logout = this.logout.bind(this);
     this.state = {
       dropdownOpen: false
     };
+
+    this.GetData = this.GetData.bind(this);
+    
+  }
+
+  componentDidMount() {
+  this.GetData();
+  }
+
+
+  GetData() {
+    const self = this;
+
+    axios({
+      url: `/api/User/Get_CurrentUser_UserName`,
+      method: 'POST',
+      data: {
+      }
+    }).then((result) => {
+      self.setState({
+        userName: result.data
+      });
+    }).catch((error) => {
+      console.log(error)
+    });
   }
 
   toggle() {
@@ -85,7 +115,9 @@ class Header extends Component {
 
                 <DropdownItem header className="text-center"><strong>Settings</strong></DropdownItem>
 
-                <DropdownItem><i className="fa fa-user"></i> Profile</DropdownItem>
+                <DropdownItem><i className="fa fa-user"></i> 
+                  <NavLink to={`/User/Personal_Edit/${this.state.userName}`} className="nav-link" activeClassName="active">Profile</NavLink>
+                </DropdownItem>
                 <DropdownItem><i className="fa fa-wrench"></i> Settings</DropdownItem>
                 <DropdownItem><i className="fa fa-usd"></i> Payments<span className="badge badge-default">42</span></DropdownItem>
                 <DropdownItem><i className="fa fa-file"></i> Projects<span className="badge badge-primary">42</span></DropdownItem>

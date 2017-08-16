@@ -8,7 +8,7 @@ import axios from 'axios';
 import history from '../../../history'
 
 
-class Personal_Edit extends Component {
+class User_Personal_Edit extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -16,6 +16,8 @@ class Personal_Edit extends Component {
         };
 
         this.GetData = this.GetData.bind(this);        
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.Button_Submit = this.Button_Submit.bind(this);
     }
 
 
@@ -27,21 +29,53 @@ class Personal_Edit extends Component {
     GetData() {
         const self = this;
 
-        // axios({
-        //   url: `/api/Role/Get_Role?id=${this.props.match.params.id}`,
-        //   method: 'GET',
-        //   data: {
-        //   }
-        // }).then((result) => {
-        //   self.setState({
-        //     Role: result.data
-        //   });
-        // }).catch((error) => {
-        //   console.log(error)
-        // });
+        axios({
+          url: `/api/User/Get_User_By_UserName?userName=${this.props.match.params.userName}`,
+          method: 'GET',
+          data: {
+          }
+        }).then((result) => {
+          self.setState({
+            User: result.data
+          });
+        }).catch((error) => {
+          console.log(error)
+        });
 
     }
 
+
+  //編輯
+  Button_Submit(event) {
+    event.preventDefault();
+    axios({
+      url: '/api/User/Edit_Personal_User',
+      method: 'post',
+      data: this.state.User
+    }).then((result) => {
+      if (result.data.success) {
+        history.push('/User');
+      }
+    }).catch((error) => {
+      console.log(error)
+    });
+    return false;
+  }
+
+
+    handleInputChange(event) {
+        
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+        var new_User = Object.assign(this.state.User);
+        new_User[name] = value;
+
+
+        this.setState({
+            User: new_User,
+        });
+    }
 
     render() {
 
@@ -53,10 +87,10 @@ class Personal_Edit extends Component {
                 <div className="col-sm-4">
                     <div className="card">
                         <div className="card-header">
-                            {this.Title()}
+                            編輯帳號資訊
                         </div>
                         <div className="card-block">
-                            <form className="" onSubmit={this.Submit}>
+                            <form className="" onSubmit={this.Button_Submit}>
                                 <input type="hidden" id="id" name="id" value={this.state.User.id} />
 
                                 <TextInput name="userName"
@@ -65,7 +99,7 @@ class Personal_Edit extends Component {
                                     display={this.props.display_userName}
                                     required={this.props.required_userName}
                                     validMessage={{ required: 'userName is reduired.' }}
-                                    onInput={this.Bind_handleInputChange}
+                                    onInput={this.handleInputChange}
                                     value={this.state.User.userName}
                                     placeholder="userName"
                                     readOnly={true} />
@@ -76,7 +110,7 @@ class Personal_Edit extends Component {
                                     display={this.props.display_password}
                                     required={this.props.required_password}
                                     validMessage={{ required: 'password is reduired.' }}
-                                    onInput={this.Bind_handleInputChange}
+                                    onInput={this.handleInputChange}
                                     value={this.state.User.password}
                                     placeholder="password" />
 
@@ -87,7 +121,7 @@ class Personal_Edit extends Component {
                                     display={this.props.display_email}
                                     required={this.props.required_email}
                                     validMessage={{ required: 'email is reduired.' }}
-                                    onInput={this.Bind_handleInputChange}
+                                    onInput={this.handleInputChange}
                                     value={this.state.User.email}
                                     placeholder="email" />
 
@@ -97,7 +131,7 @@ class Personal_Edit extends Component {
                                     display={this.props.display_firstName}
                                     required={this.props.required_firstName}
                                     validMessage={{ required: 'firstName is reduired.' }}
-                                    onInput={this.Bind_handleInputChange}
+                                    onInput={this.handleInputChange}
                                     value={this.state.User.firstName}
                                     placeholder="firstName" />
 
@@ -107,7 +141,7 @@ class Personal_Edit extends Component {
                                     display={this.props.display_lastName}
                                     required={this.props.required_lastName}
                                     validMessage={{ required: 'lastName is reduired.' }}
-                                    onInput={this.Bind_handleInputChange}
+                                    onInput={this.handleInputChange}
                                     value={this.state.User.lastName}
                                     placeholder="lastName" />
 
@@ -125,39 +159,23 @@ class Personal_Edit extends Component {
     }
 }
 
-export default EasyForm(Personal_Edit, 2);
+export default EasyForm(User_Personal_Edit, 2);
 
 
-Personal_Edit.defaultProps = {
+User_Personal_Edit.defaultProps = {
     display_userName: true,
     display_password: true,
     display_email: true,
-    display_firstName: true,
-    display_lastName: true,
+    display_firstName: false,
+    display_lastName: false,
 
 
     //..
     required_userName: true,
     required_password: true,
     required_email: true,
-    required_firstName: true,
-    required_lastName: true,
+    required_firstName: false,
+    required_lastName: false,
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-//   userName
-//   password
-//   email
-//   firstName
-//   lastName

@@ -13,6 +13,8 @@ namespace DotNetCore_React.Application.UserApp
 
         UserDto GetUser(string id);
 
+        Personal_UserDto GetUser_By_UserName(string userName);
+
         Dictionary<string, object> Login(string userName, string password);
 
         Dictionary<string, object> Create_User(UserDto user);
