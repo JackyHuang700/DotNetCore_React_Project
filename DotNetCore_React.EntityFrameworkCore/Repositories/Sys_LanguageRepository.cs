@@ -14,15 +14,11 @@ namespace DotNetCore_React.EntityFrameworkCore.Repositories
         }
 
 
-        public List<Sys_Language> GetAll()
+        public new List<Sys_Language> GetAllList()
         {
             return _dbContext.Set<Sys_Language>().Where(c => c.IsDisplay == true).ToList();
         }
 
-        public Sys_Language GetSingle(int id)
-        {
-            return _dbContext.Set<Sys_Language>().FirstOrDefault(C => C.Id == id);
-        }
-
+      
     }
 }

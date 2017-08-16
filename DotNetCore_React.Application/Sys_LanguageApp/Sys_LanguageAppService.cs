@@ -19,13 +19,13 @@ namespace DotNetCore_React.Application.Sys_LanguageApp
 
         public List<Sys_LanguageDto> GetAll()
         {
-            var a = _repository.GetAll();
+            var a = _repository.GetAllList();
             return Mapper.Map<List<Sys_LanguageDto>>(a);
         }
         public Sys_LanguageDto GetSingle(int id)
         {
            
-            var a = _repository.GetSingle(id);
+            var a = _repository.Get(id);
             return Mapper.Map<Sys_LanguageDto>(a);
         }
 
