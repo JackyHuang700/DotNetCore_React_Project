@@ -19,6 +19,8 @@ namespace DotNetCore_React.Application.UserApp
         Dictionary<string, object> Delete_User(string id);
         Dictionary<string, object> Update_User(UserDto user);
 
+        Dictionary<string, object> Update_Personal_User(Personal_UserDto user);
+
         Dictionary<string, object> forgot(string userName, string email);
 
         Dictionary<string, object> forgotConfirm(string userName, string passwordhash);

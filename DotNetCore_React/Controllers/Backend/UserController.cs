@@ -58,6 +58,13 @@ namespace DotNetCore_React.Controllers.Backend
             return Json(myJson);
         }
 
+        [HttpPost("[action]")]
+        public ActionResult Personal_Edit([FromBody] Personal_UserDto user)
+        {
+            var myJson = _service.Update_Personal_User(user);
+            return Json(myJson);
+        }
+
 
         [HttpPost("[action]/{id}")]
 
@@ -66,5 +73,7 @@ namespace DotNetCore_React.Controllers.Backend
             var myJson = _service.Delete_User(id);
             return Json(myJson);
         }
+
+      
     }
 }

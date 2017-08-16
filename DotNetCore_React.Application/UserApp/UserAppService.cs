@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using DotNetCore_React.Application.UserApp.Dtos;
 using DotNetCore_React.Domain.IRepositories;
@@ -199,6 +200,52 @@ namespace DotNetCore_React.Application.UserApp
             return myJson;
         }
 
+        /// <summary>
+        /// 修改個人資料
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        public Dictionary<string, object> Update_Personal_User(Personal_UserDto user)
+        {
+            var myJson = new Dictionary<string, object>()
+            {
+                {"success",false },
+                {"message",null  }
+            };
+
+            var userDB = _repository_user.Get(user.Id);
+            //抓取不包含自己的mail清單
+            var emailList = _repository_user.GetAllList(c => c.Email != userDB.Email).Select(c => c.Email).ToList();
+
+            //驗證
+            //比對email是否有更改
+            var is_Change_Email = user.Email.Trim() == user.Email.Trim();
+            //比對email是否有重複
+            var is_Repeat_Email = emailList.Contains(user.Email);
+
+            //更新
+            if (is_Change_Email)
+            {
+                if (is_Repeat_Email)
+                {
+                    userDB = Mapper.Map<User>(user);
+                    //有修改email
+                    userDB.EmailConfirmed = false;
+                    userDB.Status = (byte)User_Status.EMAIL_NO_VAILD;
+                    _repository_user.Update(userDB);
+                    var effect = _repository_user.Save();
+
+                    if (effect > 0)
+                    {
+                        myJson["success"] = true;
+                        myJson["message"] = "修改成功";
+                    }
+                }
+            }
+
+            return myJson;
+        }
+
         public Dictionary<string, object> forgot(string userName, string email)
         {
             var myJson = new Dictionary<string, object>() {
@@ -300,6 +347,8 @@ namespace DotNetCore_React.Application.UserApp
             _repository_user.Update(getUser);
             return _repository_user.Save();
         }
+
+     
     }
 
     public enum User_Status : byte
