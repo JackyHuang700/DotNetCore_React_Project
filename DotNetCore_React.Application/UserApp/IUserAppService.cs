@@ -29,6 +29,8 @@ namespace DotNetCore_React.Application.UserApp
 
         Dictionary<string, object> changePassword(UserSimpleDto user, string userName, string newPassword, string passwdhash);
 
+        Dictionary<string, object> EmailConfirm(string userName, string passwordhash);
 
+        
     }
 }

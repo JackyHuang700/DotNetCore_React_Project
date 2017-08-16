@@ -104,5 +104,19 @@ namespace DotNetCore_React.Controllers.Backend
 
             return Json(UserName);
         }
+
+
+        /// <summary>
+        /// 啟用帳號
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="passwordHash"></param>
+        /// <returns></returns>
+        [HttpGet("[action]")]
+        public ActionResult EmailConfirm(string userName, string passwordHash)
+        {
+            var myJson = _service.EmailConfirm(userName, passwordHash);
+            return Json(myJson);
+        }
     }
 }

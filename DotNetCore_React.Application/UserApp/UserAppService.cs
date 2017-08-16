@@ -230,13 +230,16 @@ namespace DotNetCore_React.Application.UserApp
             //比對email是否有更改
             var is_Change_Email = user.Email.Trim() == user.Email.Trim();
             //比對email是否有重複
-            var is_Repeat_Email = emailList.Contains(user.Email);
+            var is_Repeat_Email = emailList.Contains(user.Email) == false;
 
             //更新
             if (is_Change_Email)
             {
                 if (is_Repeat_Email)
                 {
+                    //寄信
+
+                    //修改資料
                     userDB.Password = HashHelper.CreateSHA256(user.Password); ;
                     userDB.Email = user.Email;
                     userDB.FirstName = user.FirstName;
@@ -285,6 +288,31 @@ namespace DotNetCore_React.Application.UserApp
 
             myJson.Add("success", effect > 0);
             myJson.Add("message", effect > 0 ? "已傳送密碼重置至您的信箱" : "操作失敗");
+            return myJson;
+        }
+
+
+        public Dictionary<string, object> EmailConfirm(string userName, string passwordhash)
+        {
+            var myJson = new Dictionary<string, object>() {
+                {"success",false },
+                {"message",null }
+            };
+
+            var getUser = _repository_user.FirstOrDefault(o => o.UserName == userName && o.PasswordHash == passwordhash);
+            //啟用帳號
+            if (getUser != null)
+            {
+                getUser.Status = (byte)User_Status.NORMAL;
+                _repository_user.Update(getUser);
+                var effect = _repository_user.Save();
+
+                myJson["success"] = effect > 0;
+                myJson["message"] = effect > 0 ? "啟用成功" : "啟用失敗";
+
+                return myJson;
+            }
+
             return myJson;
         }
 
@@ -361,7 +389,7 @@ namespace DotNetCore_React.Application.UserApp
             return _repository_user.Save();
         }
 
-
+       
     }
 
     public enum User_Status : byte
