@@ -94,29 +94,29 @@ class User_Personal_Edit extends Component {
                                 <input type="hidden" id="id" name="id" value={this.state.User.id} />
 
                                 <TextInput name="userName"
-                                    labelName="角色名稱"
+                                    labelName="系統帳號"
                                     className=""
                                     display={this.props.display_userName}
                                     required={this.props.required_userName}
                                     validMessage={{ required: 'userName is reduired.' }}
                                     onInput={this.handleInputChange}
                                     value={this.state.User.userName}
-                                    placeholder="userName"
+                                    placeholder="系統帳號"
                                     readOnly={true} />
 
                                 <TextInput name="password"
-                                    labelName="角色名稱"
+                                    labelName="登入密碼"
                                     className=""
                                     display={this.props.display_password}
                                     required={this.props.required_password}
                                     validMessage={{ required: 'password is reduired.' }}
                                     onInput={this.handleInputChange}
                                     value={this.state.User.password}
-                                    placeholder="password" />
+                                    placeholder="登入密碼" />
 
                                 {/* 判斷Email格式 */}
                                 <TextInput name="email"
-                                    labelName="角色名稱"
+                                    labelName="email"
                                     className=""
                                     display={this.props.display_email}
                                     required={this.props.required_email}
@@ -126,26 +126,24 @@ class User_Personal_Edit extends Component {
                                     placeholder="email" />
 
                                 <TextInput name="firstName"
-                                    labelName="角色名稱"
+                                    labelName="姓"
                                     className=""
                                     display={this.props.display_firstName}
                                     required={this.props.required_firstName}
                                     validMessage={{ required: 'firstName is reduired.' }}
                                     onInput={this.handleInputChange}
                                     value={this.state.User.firstName}
-                                    placeholder="firstName" />
+                                    placeholder="姓" />
 
                                 <TextInput name="lastName"
-                                    labelName="角色名稱"
+                                    labelName="名"
                                     className=""
                                     display={this.props.display_lastName}
                                     required={this.props.required_lastName}
                                     validMessage={{ required: 'lastName is reduired.' }}
                                     onInput={this.handleInputChange}
                                     value={this.state.User.lastName}
-                                    placeholder="lastName" />
-
-
+                                    placeholder="名" />
 
                                 <div className="form-group form-actions">
                                     <Button color="primary" disabled={$invalid ? 'disabled' : false}>編輯完成</Button>

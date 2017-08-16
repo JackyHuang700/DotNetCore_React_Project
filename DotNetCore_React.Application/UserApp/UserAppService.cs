@@ -237,11 +237,8 @@ namespace DotNetCore_React.Application.UserApp
             {
                 if (is_Repeat_Email)
                 {
-                    
-
-
                     //修改資料
-                    userDB.Password = HashHelper.CreateSHA256(user.Password); ;
+                    userDB.Password = HashHelper.CreateSHA256(user.Password);
                     userDB.Email = user.Email;
                     userDB.FirstName = user.FirstName;
                     userDB.LastName = user.LastName;
@@ -260,6 +257,7 @@ namespace DotNetCore_React.Application.UserApp
                     {
                         myJson["success"] = true;
                         myJson["message"] = "修改成功";
+                        return myJson;
                     }
                 }
             }
