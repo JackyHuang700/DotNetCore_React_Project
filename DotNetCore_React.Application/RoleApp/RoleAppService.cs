@@ -19,7 +19,7 @@ namespace DotNetCore_React.Application.RoleApp
 
         public List<RoleDto> GetAllList()
         {
-            var a = _repository.GetAllRole();
+            var a = _repository.GetAllList();
             return Mapper.Map<List<RoleDto>>(a);
         }
         public RoleDto GetRole(string id)
@@ -27,7 +27,7 @@ namespace DotNetCore_React.Application.RoleApp
             //³B²znullª¬ªp
             Guid guid;
             Guid.TryParse(id, out guid);
-            var a = _repository.GetRole(guid);
+            var a = _repository.Get(guid);
             return Mapper.Map<RoleDto>(a);
         }
 
