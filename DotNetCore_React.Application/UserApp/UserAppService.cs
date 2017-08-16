@@ -110,6 +110,12 @@ namespace DotNetCore_React.Application.UserApp
             return Mapper.Map<UserDto>(a);
         }
 
+        public Personal_UserDto GetUser_By_UserName(string userName)
+        {
+            var a = _repository_user.GetUser(userName);
+            a.Password = "";
+            return Mapper.Map<Personal_UserDto>(a);
+        }
 
 
         public Dictionary<string, object> Login(string userName, string password)
@@ -231,7 +237,10 @@ namespace DotNetCore_React.Application.UserApp
             {
                 if (is_Repeat_Email)
                 {
-                    userDB = Mapper.Map<User>(user);
+                    userDB.Password = HashHelper.CreateSHA256(user.Password); ;
+                    userDB.Email = user.Email;
+                    userDB.FirstName = user.FirstName;
+                    userDB.LastName = user.LastName;
                     //有修改email
                     userDB.EmailConfirmed = false;
                     userDB.Status = (byte)User_Status.EMAIL_NO_VAILD;
@@ -332,7 +341,7 @@ namespace DotNetCore_React.Application.UserApp
             }
 
             //比對雜湊碼
-            if(getUser.PasswordHash == passwdhash)
+            if (getUser.PasswordHash == passwdhash)
             {
                 UpdatePwd(newPassword, getUser);
                 myJson["success"] = true;
@@ -352,7 +361,7 @@ namespace DotNetCore_React.Application.UserApp
             return _repository_user.Save();
         }
 
-     
+
     }
 
     public enum User_Status : byte

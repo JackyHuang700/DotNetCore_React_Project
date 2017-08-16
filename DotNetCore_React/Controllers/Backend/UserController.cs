@@ -1,5 +1,6 @@
 using DotNetCore_React.Application.UserApp;
 using DotNetCore_React.Application.UserApp.Dtos;
+using DotNetCore_React.Utility;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -31,6 +32,15 @@ namespace DotNetCore_React.Controllers.Backend
             return Json(myJson);
         }
 
+        [HttpGet("[action]")]
+
+        public ActionResult Get_User_By_UserName(string userName)
+        {
+            var myJson = _service.GetUser_By_UserName(userName);
+
+            return Json(myJson);
+        }
+
 
         [HttpGet("[action]")]
 
@@ -59,6 +69,13 @@ namespace DotNetCore_React.Controllers.Backend
         }
 
         [HttpPost("[action]")]
+        public ActionResult Edit_Personal_User([FromBody] Personal_UserDto user)
+        {
+            var myJson = _service.Update_Personal_User(user);
+            return Json(myJson);
+        }
+
+        [HttpPost("[action]")]
         public ActionResult Personal_Edit([FromBody] Personal_UserDto user)
         {
             var myJson = _service.Update_Personal_User(user);
@@ -74,6 +91,18 @@ namespace DotNetCore_React.Controllers.Backend
             return Json(myJson);
         }
 
-      
+        [HttpPost("[action]")]
+        public ActionResult Get_CurrentUser_UserName()
+        {
+            byte[] userObject = null;
+            HttpContext.Session.TryGetValue("CurrentUser", out userObject);
+            string UserName = "";
+            if (userObject != null)
+            {
+                UserName = ByteConvertHelper.Bytes2Object<UserSimpleDto>(userObject).UserName;
+            }
+
+            return Json(UserName);
+        }
     }
 }

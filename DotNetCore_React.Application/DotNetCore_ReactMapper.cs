@@ -28,6 +28,8 @@ namespace DotNetCore_React.Application
                 cfg.CreateMap<UserDto, User>();
                 cfg.CreateMap<User, UserSimpleDto>();
                 cfg.CreateMap<UserSimpleDto, User>();
+                cfg.CreateMap<User, Personal_UserDto>();
+                cfg.CreateMap<Personal_UserDto, User>();
 
                 cfg.CreateMap<ComSystem, ComSystemDto>();
                 cfg.CreateMap<ComSystemDto, ComSystem>();

@@ -21,6 +21,7 @@ import Role_View from './views/Backend/Role/Role_View'
 import User_Create from './views/Backend/User/User_Create'
 import User_Delete from './views/Backend/User/User_Delete'
 import User_Edit from './views/Backend/User/User_Edit'
+import User_Personal_Edit from './views/Backend/User/User_Personal_Edit'
 import User_View from './views/Backend/User/User_View'
 
 import News_Create from './views/Backend/News/News_Create'
@@ -48,6 +49,7 @@ export default (
         <BackendRoute path='/User/Create' component={User_Create} />
         <BackendRoute path='/User/Delete/:id' component={User_Delete} />
         <BackendRoute path='/User/Edit/:id/:edit' component={User_Edit} />
+        <BackendRoute path='/User/Personal_Edit/:userName' component={User_Personal_Edit} />
         <BackendRoute path='/News' exact component={News_View} />
         <BackendRoute path='/News/Create' component={News_Create} />
         <BackendRoute path='/News/Delete/:id/:delete' component={News_Delete} />
