@@ -187,11 +187,11 @@ class User_Edit_Show extends Component {
             <form className="" onSubmit={this.Button_Submit}>
 
                 <TextInput name="userName"
-                  labelName="角色名稱"
+                  labelName="系統帳號"
                   className=""
                   display={this.props.display_userName}
                   required={this.props.required_userName}
-                  validMessage={{ required: 'userName is reduired.' }}
+                  validMessage={{ required: '系統帳號 is reduired.' }}
                   onInput={this.Bind_handleInputChange}
                   value={this.state.User.userName}
                   placeholder="userName"
@@ -201,7 +201,7 @@ class User_Edit_Show extends Component {
                 {this.Is_Show_Password()}
 
                 <TextInput name="email"
-                  labelName="角色名稱"
+                  labelName="email"
                   className=""
                   display={this.props.display_email}
                   required={this.props.required_email}
@@ -213,10 +213,10 @@ class User_Edit_Show extends Component {
 
 
                 <DropDownList name="roleId"
-                  labelName="狀態"
+                  labelName="群組名稱"
                   display={this.props.display_roleId}
                   required={this.props.required_roleId}
-                  validMessage={{ required: 'roleId is reduired.' }}
+                  validMessage={{ required: '群組名稱 is reduired.' }}
                   onInput={this.Bind_handleInputChange}
                   value={this.state.User.roleId}
                   readOnly={!this.state.is_Edit}
@@ -226,22 +226,22 @@ class User_Edit_Show extends Component {
 
 
                 <TextInput name="firstName"
-                  labelName="角色名稱"
+                  labelName="姓"
                   className=""
                   display={this.props.display_firstName}
                   required={this.props.required_firstName}
-                  validMessage={{ required: 'firstName is reduired.' }}
+                  validMessage={{ required: '姓 is reduired.' }}
                   onInput={this.Bind_handleInputChange}
                   value={this.state.User.firstName}
                   placeholder="firstName"
                   readOnly={!this.state.is_Edit} />
 
                 <TextInput name="lastName"
-                  labelName="角色名稱"
+                  labelName="名"
                   className=""
                   display={this.props.display_lastName}
                   required={this.props.required_lastName}
-                  validMessage={{ required: 'lastName is reduired.' }}
+                  validMessage={{ required: '名 is reduired.' }}
                   onInput={this.Bind_handleInputChange}
                   value={this.state.User.lastName}
                   placeholder="lastName"
@@ -251,7 +251,7 @@ class User_Edit_Show extends Component {
                   labelName="狀態"
                   display={this.props.display_status}
                   required={this.props.required_status}
-                  validMessage={{ required: 'status is reduired.' }}
+                  validMessage={{ required: '狀態 is reduired.' }}
                   onInput={this.Bind_handleInputChange}
                   value={this.state.User.status}
                   readOnly={!this.state.is_Edit}
@@ -281,11 +281,11 @@ class User_Edit_Show extends Component {
                 />
 
                 <TextInput name="createDate"
-                  labelName="角色名稱"
+                  labelName="建立時間"
                   className=""
                   display={this.props.display_createDate}
                   required={this.props.required_createDate}
-                  validMessage={{ required: 'createDate is reduired.' }}
+                  validMessage={{ required: '建立時間 is reduired.' }}
                   onInput={this.Bind_handleInputChange}
                   value={this.state.User.createDate}
                   placeholder="createDate"
@@ -293,11 +293,11 @@ class User_Edit_Show extends Component {
 
 
                 <TextInput name="createUser"
-                  labelName="角色名稱"
+                  labelName="建立者"
                   className=""
                   display={this.props.display_createUser}
                   required={this.props.required_createUser}
-                  validMessage={{ required: 'createUser is reduired.' }}
+                  validMessage={{ required: '建立者 is reduired.' }}
                   onInput={this.Bind_handleInputChange}
                   value={this.state.User.createUser}
                   placeholder="createUser"
