@@ -9,16 +9,16 @@ namespace DotNetCore_React.Utility
         /// <summary>
         /// 站台位置
         /// </summary>
-        public string Domain { get; set; }
+        public string DOMAIN { get; set; }
 
         /// <summary>
         /// 郵件服務位置
         /// </summary>
-        public string Mail_Address { get; set; }
+        public string SMTP_ADDRESS { get; set; }
 
         /// <summary>
         /// 郵件服務端口
         /// </summary>
-        public int Mail_Port { get; set; }
+        public int SMTP_PORT { get; set; }
     }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using DotNetCore_React.Utility.Interface;
 using MailKit.Net.Smtp;
 using MimeKit;
+using Microsoft.Extensions.Options;
 
 namespace DotNetCore_React.Utility.Services
 {
@@ -17,7 +18,8 @@ namespace DotNetCore_React.Utility.Services
         protected MimeMessage _Message { set; get; }
 
 
-        public LocalMailServices() {
+        public LocalMailServices(IOptions<GlobalConfig> optionsAccessor) {
+            _config = optionsAccessor.Value;
             _Message = new MimeMessage();
             _Message.From.Add(_SENT_FROM);
         }
@@ -32,7 +34,7 @@ namespace DotNetCore_React.Utility.Services
             _Message.Subject = subject;
             _Message.Body = new TextPart(MimeKit.Text.TextFormat.Html)
             {
-                Text = body.Replace("$Domain$", _config.Domain)
+                Text = body.Replace("$Domain$", _config.DOMAIN)
             };
 
             using (var client = new SmtpClient())
@@ -40,7 +42,7 @@ namespace DotNetCore_React.Utility.Services
                 // For demo-purposes, accept all SSL certificates (in case the server supports STARTTLS)
                 client.ServerCertificateValidationCallback = (s, c, h, e) => true;
 
-                client.Connect(_config.Mail_Address, _config.Mail_Port, false);
+                client.Connect(_config.SMTP_ADDRESS, _config.SMTP_PORT, false);
 
                 // Note: since we don't have an OAuth2 token, disable
                 // the XOAUTH2 authentication mechanism.
