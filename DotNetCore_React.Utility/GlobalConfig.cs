@@ -19,6 +19,6 @@ namespace DotNetCore_React.Utility
         /// <summary>
         /// 郵件服務端口
         /// </summary>
-        public string Mail_Port { get; set; }
+        public int Mail_Port { get; set; }
     }
 }

@@ -17,8 +17,7 @@ namespace DotNetCore_React.Utility.Services
         protected MimeMessage _Message { set; get; }
 
 
-        public LocalMailServices(GlobalConfig config) {
-            _config = config;
+        public LocalMailServices() {
             _Message = new MimeMessage();
             _Message.From.Add(_SENT_FROM);
         }
@@ -41,7 +40,7 @@ namespace DotNetCore_React.Utility.Services
                 // For demo-purposes, accept all SSL certificates (in case the server supports STARTTLS)
                 client.ServerCertificateValidationCallback = (s, c, h, e) => true;
 
-                client.Connect(_config.Mail_Address, int.Parse(_config.Mail_Port), false);
+                client.Connect(_config.Mail_Address, _config.Mail_Port, false);
 
                 // Note: since we don't have an OAuth2 token, disable
                 // the XOAUTH2 authentication mechanism.
