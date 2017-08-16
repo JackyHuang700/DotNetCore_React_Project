@@ -12,7 +12,9 @@ export default class CKEditor extends Component {
     componentDidMount() {
         const self = this;
         let configuration = {
-          toolbar: "Basic"
+          toolbar: "Basic",
+          width: 500,
+          height: 600,
         };
         CKEDITOR.replace(self.props.name, configuration);
         CKEDITOR.instances[self.props.name].on('change', function (event) {
