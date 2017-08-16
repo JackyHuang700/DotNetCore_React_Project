@@ -22,7 +22,7 @@ namespace DotNetCore_React.Application.UserApp.Dtos
 
 
 
-        public byte Status { get; set; }
+        public int Status { get; set; }
 
         public DateTime CreateDate { get; set; }
         public string CreateUser { get; set; }
