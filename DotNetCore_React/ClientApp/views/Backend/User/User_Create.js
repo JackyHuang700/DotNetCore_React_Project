@@ -133,17 +133,6 @@ class User_Create extends Component {
                   placeholder="lastName" />
 
 
-                {/* <TextInput name="status" 
-              labelName="角色名稱"
-              className=""
-              display={this.props.status}
-              required={this.props.status} 
-              validMessage={{required: 'status is reduired.'}} 
-              onInput={this.handleInputChange} 
-              value={this.state.status} 
-              placeholder="status"/>  */}
-
-
                 <TextInput name="createDate"
                   labelName="建立時間"
                   className=""

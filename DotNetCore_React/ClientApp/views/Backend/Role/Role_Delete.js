@@ -89,11 +89,11 @@ class Role_Delete extends Component {
 
 
                 <TextInput name="sysId"
-                  labelName="角色名稱"
+                  labelName="系統識別碼"
                   className=""
                   display={this.props.display_sysId}
                   required={this.props.required_sysId}
-                  validMessage={{ required: 'sysId is reduired.' }}
+                  validMessage={{ required: '系統識別碼 is reduired.' }}
                   onInput={this.handleInputChange}
                   value={this.state.Role.sysId}
                   placeholder="sysId"
@@ -105,18 +105,18 @@ class Role_Delete extends Component {
                   className=""
                   display={this.props.display_name}
                   required={this.props.required_name}
-                  validMessage={{ required: 'name is reduired.' }}
+                  validMessage={{ required: '角色名稱 is reduired.' }}
                   onInput={this.handleInputChange}
                   value={this.state.Role.name}
                   placeholder="name"
                   readOnly={true} />
 
                 <TextInput name="priority"
-                  labelName="角色名稱"
+                  labelName="權重"
                   className=""
                   display={this.props.display_priority}
                   required={this.props.required_priority}
-                  validMessage={{ required: 'priority is reduired.' }}
+                  validMessage={{ required: '權重 is reduired.' }}
                   onInput={this.handleInputChange}
                   value={this.state.Role.priority}
                   placeholder="priority"
@@ -126,11 +126,11 @@ class Role_Delete extends Component {
 
 
                 <TextInput name="status"
-                  labelName="角色名稱"
+                  labelName="狀態"
                   className=""
                   display={this.props.display_status}
                   required={this.props.required_status}
-                  validMessage={{ required: 'status is reduired.' }}
+                  validMessage={{ required: '狀態 is reduired.' }}
                   onInput={this.handleInputChange}
                   value={this.state.Role.status}
                   placeholder="status"
@@ -138,22 +138,22 @@ class Role_Delete extends Component {
 
 
                 <TextInput name="createDate"
-                  labelName="角色名稱"
+                  labelName="建立日期"
                   className=""
                   display={this.props.display_createDate}
                   required={this.props.required_createDate}
-                  validMessage={{ required: 'createDate is reduired.' }}
+                  validMessage={{ required: '建立日期 is reduired.' }}
                   onInput={this.handleInputChange}
                   value={this.state.Role.createDate}
                   placeholder="createDate"
                   readOnly={true} />
 
                 <TextInput name="createUser"
-                  labelName="角色名稱"
+                  labelName="建立者"
                   className=""
                   display={this.props.display_createUser}
                   required={this.props.required_createUser}
-                  validMessage={{ required: 'createUser is reduired.' }}
+                  validMessage={{ required: '建立者 is reduired.' }}
                   onInput={this.handleInputChange}
                   value={this.state.Role.createUser}
                   placeholder="createUser"
