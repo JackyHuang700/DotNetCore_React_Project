@@ -5,19 +5,17 @@ export function Get_Sys_Language() {
   const self = this;
 
   axios({
-      url: `/api/Sys_Language/Sys_Language_View`,
+    url: `/api/Sys_Language/Sys_Language_View`,
     method: 'GET',
     data: {
     }
   }).then((result) => {
     // console.log(`Get_Sys_Language)`, result.data);
-var aa = Object.assign(this.state.News);
-result.data.map((data)=>{
-  aa.new_LanList.push({});
-});
-
-
-
+    //物件初始化，不然會噴調
+    var aa = Object.assign(this.state.News);
+    result.data.map((data) => {
+      aa.new_LanList.push({});
+    });
 
 
     self.setState({
