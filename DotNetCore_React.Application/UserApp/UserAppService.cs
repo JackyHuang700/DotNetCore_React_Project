@@ -237,10 +237,8 @@ namespace DotNetCore_React.Application.UserApp
             {
                 if (is_Repeat_Email)
                 {
-                    //寄信
-
                     //修改資料
-                    userDB.Password = HashHelper.CreateSHA256(user.Password); ;
+                    userDB.Password = HashHelper.CreateSHA256(user.Password);
                     userDB.Email = user.Email;
                     userDB.FirstName = user.FirstName;
                     userDB.LastName = user.LastName;
@@ -250,10 +248,16 @@ namespace DotNetCore_React.Application.UserApp
                     _repository_user.Update(userDB);
                     var effect = _repository_user.Save();
 
+                    //寄信
+                    _mailServices.AddTo(userDB.UserName, userDB.Email);
+                    _mailServices.Sent("啟用帳號", $"請點選 <a href='$Domain$/forgot?userName={userDB.UserName}&passwordhash={userDB.PasswordHash}'>啟用</a> 進行啟用帳號。");
+
+
                     if (effect > 0)
                     {
                         myJson["success"] = true;
                         myJson["message"] = "修改成功";
+                        return myJson;
                     }
                 }
             }
