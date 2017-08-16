@@ -84,7 +84,7 @@ class User_Personal_Edit extends Component {
 
         return (
             <div className="animated fadeIn row justify-content-center">
-                <div className="col-sm-4">
+                <div className="col-sm-6">
                     <div className="card">
                         <div className="card-header">
                             編輯帳號資訊

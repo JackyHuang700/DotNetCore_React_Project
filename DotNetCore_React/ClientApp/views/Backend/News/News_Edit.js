@@ -84,20 +84,20 @@ class News_Edit extends Component {
 
   render() {
 
-    // 经�EasyForm���件�props���个params属性�含���表�项�
+    // 经�EasyForm���件�props���个params属性�含���表�项�
     const { params } = this.props.params;
     /*
-     * props��easyform对象，��一组�证��
-     * �中$invalid/$valid �以�来�断表�项是够已经正确填
+     * props��easyform对象，��一组�证��
+     * �中$invalid/$valid �以�来�断表�项是够已经正确填
      */
     const { $invalid } = this.props.easyform.$invalid;
 
     return (
       <div className="animated fadeIn row justify-content-center">
-        <div className="col-sm-4">
+        <div className="col-sm-6">
           <div className="card">
             <div className="card-header">
-            編輯���
+            編輯���
             </div>
             <div className="card-block">
             <form className="" onSubmit={this.Button_Submit}>
@@ -220,7 +220,7 @@ class News_Edit extends Component {
                   placeholder="updateUser"/>
 
                 <div className="form-group form-actions">
-                <Button color="primary" disabled={$invalid ? 'disabled' : false} >完�</Button>
+                <Button color="primary" disabled={$invalid ? 'disabled' : false} >完�</Button>
                 </div>
               </form>
             </div>

@@ -80,7 +80,7 @@ class User_Delete extends Component {
   render() {
     return (
       <div className="animated fadeIn row justify-content-center">
-        <div className="col-sm-4">
+        <div className="col-sm-6">
           <div className="card">
             <div className="card-header">
               刪除會員
