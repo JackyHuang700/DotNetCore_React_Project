@@ -1,0 +1,7 @@
+C:\Users\rockr\Documents\GitHub\DotNetCore_React_Project\DotNetCore_React.Utility\bin\Debug\netcoreapp1.0\DotNetCore_React.Utility.deps.json
+C:\Users\rockr\Documents\GitHub\DotNetCore_React_Project\DotNetCore_React.Utility\bin\Debug\netcoreapp1.0\DotNetCore_React.Utility.dll
+C:\Users\rockr\Documents\GitHub\DotNetCore_React_Project\DotNetCore_React.Utility\bin\Debug\netcoreapp1.0\DotNetCore_React.Utility.pdb
+C:\Users\rockr\Documents\GitHub\DotNetCore_React_Project\DotNetCore_React.Utility\obj\Debug\netcoreapp1.0\DotNetCore_React.Utility.csprojResolveAssemblyReference.cache
+C:\Users\rockr\Documents\GitHub\DotNetCore_React_Project\DotNetCore_React.Utility\obj\Debug\netcoreapp1.0\DotNetCore_React.Utility.AssemblyInfo.cs
+C:\Users\rockr\Documents\GitHub\DotNetCore_React_Project\DotNetCore_React.Utility\obj\Debug\netcoreapp1.0\DotNetCore_React.Utility.dll
+C:\Users\rockr\Documents\GitHub\DotNetCore_React_Project\DotNetCore_React.Utility\obj\Debug\netcoreapp1.0\DotNetCore_React.Utility.pdb

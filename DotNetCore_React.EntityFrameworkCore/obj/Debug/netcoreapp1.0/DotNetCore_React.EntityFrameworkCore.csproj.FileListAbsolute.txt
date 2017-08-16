@@ -16,3 +16,5 @@ C:\Users\rockr\Documents\GitHub\DotNetCore_React_Project\DotNetCore_React.Entity
 C:\Users\rockr\Documents\GitHub\DotNetCore_React_Project\DotNetCore_React.EntityFrameworkCore\obj\Debug\netcoreapp1.0\DotNetCore_React.EntityFrameworkCore.AssemblyInfo.cs
 C:\Users\rockr\Documents\GitHub\DotNetCore_React_Project\DotNetCore_React.EntityFrameworkCore\obj\Debug\netcoreapp1.0\DotNetCore_React.EntityFrameworkCore.dll
 C:\Users\rockr\Documents\GitHub\DotNetCore_React_Project\DotNetCore_React.EntityFrameworkCore\obj\Debug\netcoreapp1.0\DotNetCore_React.EntityFrameworkCore.pdb
+C:\Users\rockr\Documents\GitHub\DotNetCore_React_Project\DotNetCore_React.EntityFrameworkCore\bin\Debug\netcoreapp1.0\DotNetCore_React.Utility.dll
+C:\Users\rockr\Documents\GitHub\DotNetCore_React_Project\DotNetCore_React.EntityFrameworkCore\bin\Debug\netcoreapp1.0\DotNetCore_React.Utility.pdb
