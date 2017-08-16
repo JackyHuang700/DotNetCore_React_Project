@@ -90,11 +90,11 @@ class User_Delete extends Component {
                 <input type="hidden" id="id" name="id" value={this.state.User.id} />
 
                 <TextInput name="userName"
-                  labelName="角色名稱"
+                  labelName="系統帳號"
                   className=""
                   display={this.props.display_userName}
                   required={this.props.required_userName}
-                  validMessage={{ required: 'userName is reduired.' }}
+                  validMessage={{ required: '系統帳號 is reduired.' }}
                   onInput={this.handleInputChange}
                   value={this.state.User.userName}
                   placeholder="userName"
@@ -103,11 +103,11 @@ class User_Delete extends Component {
 
 
                 <TextInput name="password"
-                  labelName="角色名稱"
+                  labelName="登入密碼"
                   className=""
                   display={this.props.display_password}
                   required={this.props.required_password}
-                  validMessage={{ required: 'password is reduired.' }}
+                  validMessage={{ required: '登入密碼 is reduired.' }}
                   onInput={this.handleInputChange}
                   value={this.state.User.password}
                   placeholder="password"
@@ -115,7 +115,7 @@ class User_Delete extends Component {
 
 
                 <TextInput name="email"
-                  labelName="角色名稱"
+                  labelName="email"
                   className=""
                   display={this.props.display_email}
                   required={this.props.required_email}
@@ -129,11 +129,11 @@ class User_Delete extends Component {
 
 
                 <TextInput name="roleId"
-                  labelName="角色名稱"
+                  labelName="群組名稱"
                   className=""
                   display={this.props.display_roleId}
                   required={this.props.required_roleId}
-                  validMessage={{ required: 'roleId is reduired.' }}
+                  validMessage={{ required: '群組名稱 is reduired.' }}
                   onInput={this.handleInputChange}
                   value={this.state.User.roleId}
                   placeholder="roleId"
@@ -141,11 +141,11 @@ class User_Delete extends Component {
 
 
                 <TextInput name="firstName"
-                  labelName="角色名稱"
+                  labelName="姓"
                   className=""
                   display={this.props.display_firstName}
                   required={this.props.required_firstName}
-                  validMessage={{ required: 'firstName is reduired.' }}
+                  validMessage={{ required: '姓 is reduired.' }}
                   onInput={this.handleInputChange}
                   value={this.state.User.firstName}
                   placeholder="firstName"
@@ -153,11 +153,11 @@ class User_Delete extends Component {
 
 
                 <TextInput name="lastName"
-                  labelName="角色名稱"
+                  labelName="名"
                   className=""
                   display={this.props.display_lastName}
                   required={this.props.required_lastName}
-                  validMessage={{ required: 'lastName is reduired.' }}
+                  validMessage={{ required: '名 is reduired.' }}
                   onInput={this.handleInputChange}
                   value={this.state.User.lastName}
                   placeholder="lastName"
@@ -186,7 +186,7 @@ class User_Delete extends Component {
 
 
                 <TextInput name="createDate"
-                  labelName="角色名稱"
+                  labelName="建立時間"
                   className=""
                   display={this.props.display_createDate}
                   required={this.props.required_createDate}
@@ -201,7 +201,7 @@ class User_Delete extends Component {
 
 
                 <TextInput name="createUser"
-                  labelName="角色名稱"
+                  labelName="建立者"
                   className=""
                   display={this.props.display_createUser}
                   required={this.props.required_createUser}
