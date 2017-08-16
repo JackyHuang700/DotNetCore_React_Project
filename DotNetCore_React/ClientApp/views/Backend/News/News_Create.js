@@ -11,7 +11,8 @@ import { news_Enum } from '../../../EnumScript/GeneralEnumScript';
 import classnames from 'classnames';
 import { Get_Sys_Language,
   HandleInputChange,
-  HandleInputChange_By_New_LanList } from './News_General';
+  HandleInputChange_By_New_LanList,
+  HandleInputChange_By_New_LanList_CKEditor } from './News_General';
 
 
 class News_Create extends Component {
@@ -33,6 +34,7 @@ class News_Create extends Component {
     //Import
     this.Get_Sys_Language = Get_Sys_Language.bind(this);
     this.HandleInputChange = HandleInputChange.bind(this);
+    this.HandleInputChange_By_New_LanList_CKEditor = HandleInputChange_By_New_LanList_CKEditor.bind(this);
     this.HandleInputChange_By_New_LanList = HandleInputChange_By_New_LanList.bind(this);
     this.Component_Nav = this.Component_Nav.bind(this);
   }
@@ -113,38 +115,40 @@ class News_Create extends Component {
               return (
                 <TabPane tabId={`${index}`}>
                   
-                  <TextInput name="Title"
-                  labelName="Title"
+                  <TextInput name="title"
+                  labelName="title"
                   className=""
                   data-index={index}
-                  display={this.props.display_Title}
-                  required={this.props.required_Title}
-                  validMessage={{ required: 'Title is reduired.' }}
+                  display={this.props.display_title}
+                  required={this.props.required_title}
+                  validMessage={{ required: 'title is reduired.' }}
                   onInput={this.HandleInputChange_By_New_LanList}
-                  value={this.state.News.new_LanList[`${index}`].Title}
-                  placeholder="Title" />
+                  value={this.state.News.new_LanList[`${index}`].title}
+                  placeholder="title" />
 
-                  <TextInput name="SubTitle"
-                  labelName="SubTitle"
+                  <TextInput name="subTitle"
+                  labelName="subTitle"
                   className=""
                   data-index={index}                  
-                  display={this.props.display_SubTitle}
-                  required={this.props.required_SubTitle}
-                  validMessage={{ required: 'SubTitle is reduired.' }}
+                  display={this.props.display_subTitle}
+                  required={this.props.required_subTitle}
+                  validMessage={{ required: 'subTitle is reduired.' }}
                   onInput={this.HandleInputChange_By_New_LanList}
-                  value={this.state.News.new_LanList[`${index}`].SubTitle}
-                  placeholder="SubTitle" />
+                  value={this.state.News.new_LanList[`${index}`].subTitle}
+                  placeholder="subTitle" />
 
-                  <CKEditor name="Content"
-                  labelName="Content"
+                  <CKEditor name="content"
+                  labelName="content"
                   className=""
                   data-index={index}
-                  display={this.props.display_Content}
-                  required={this.props.required_Content}
-                  validMessage={{ required: 'Content is reduired.' }}
-                  onInput={this.HandleInputChange_By_New_LanList}
-                  value={this.state.News.new_LanList[`${index}`].Content}
-                  placeholder="Content" />
+                  display={this.props.display_content}
+                  required={this.props.required_content}
+                  validMessage={{ required: 'content is reduired.' }}
+                  onInput={this.HandleInputChange_By_New_LanList_CKEditor}
+                  value={this.state.News.new_LanList[`${index}`].content}
+                  cols="100" 
+                  rows="6"
+                  placeholder="content" />
 
                   
 

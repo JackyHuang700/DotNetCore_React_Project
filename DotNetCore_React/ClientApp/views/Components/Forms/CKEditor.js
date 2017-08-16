@@ -6,17 +6,23 @@ export default class CKEditor extends Component {
 
     constructor(props) {
         super(props);
-        this.componentDidMount = this.componentDidMount.bind(this)
+        this.componentDidMount = this.componentDidMount.bind(this);
     }
 
     componentDidMount() {
+        const self = this;
         let configuration = {
           toolbar: "Basic"
         };
-        CKEDITOR.replace(this.props.name, configuration);
-        CKEDITOR.instances.editor.on('change', function () {
-          let data = CKEDITOR.instances.editor.getData();
-          this.props.onChange(data);
+        CKEDITOR.replace(self.props.name, configuration);
+        CKEDITOR.instances[self.props.name].on('change', function (event) {
+          let data = CKEDITOR.instances[self.props.name].getData();
+        //   debugger;
+          this.props.onInput({
+              value: data,
+              name: CKEDITOR.instances[self.props.name].name,
+              index: CKEDITOR.instances[self.props.name].element.getAttribute('data-index'),
+          });
         }.bind(this));
       }
 

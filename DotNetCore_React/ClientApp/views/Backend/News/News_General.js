@@ -58,6 +58,19 @@ export function HandleInputChange_By_New_LanList(event) {
   });
 }
 
+
+export function HandleInputChange_By_New_LanList_CKEditor(obj){
+  const value = obj.value;
+  const name = obj.name;  
+  const index = obj.index;
+  var new_News = Object.assign(this.state.News);
+
+  new_News.new_LanList[index][name] = value;
+  this.setState({
+    News: new_News,
+  });
+}
+
 //抓取資料
 // export function GetData() {
 //     const self = this;
