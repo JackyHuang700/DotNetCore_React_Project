@@ -182,7 +182,9 @@ namespace DotNetCore_React.EntityFrameworkCore
 
         protected static Expression<Func<TEntity, bool>> createBaseFilter()
         {
-            var lambdaParam = Expression.Parameter(typeof(TEntity));
+            var checkParams = typeof(TEntity).GetProperty("Status");
+            if (checkParams == null) { return o => true; }
+            var lambdaParam = Expression.Parameter(typeof(TEntity));  
             var lambdaBody = 
                     Expression.GreaterThan(
                         Expression.PropertyOrField(lambdaParam, "Status"),

@@ -19,7 +19,7 @@ namespace DotNetCore_React.EntityFrameworkCore.Seeds
                 {
                     Id = Guid.NewGuid(),
                     SysId = "Admin",
-                    Name = "Group",
+                    Name = "管理員",
                     CreateDate = DateTime.Now,
                     CreateUser = "Admin",
                     UpdateDate = DateTime.Now,

@@ -17,12 +17,12 @@ namespace DotNetCore_React.EntityFrameworkCore.Seeds
                 _context.Set<User>().Add(new User
                 {
                     Id = Guid.NewGuid(),
-                    UserName = "jacky@gmail.com",
+                    UserName = "admin@test.com",
                     RoleId = roleID,
-                    Password = HashHelper.CreateSHA256("jacky@gmail.com"),
-                    FirstName = "jacky",
-                    LastName = "87",
-                    Email = "jacky@gmail.com",
+                    Password = HashHelper.CreateSHA256("admin@test.com"),
+                    FirstName = "Admin",
+                    LastName = "Super",
+                    Email = "admin@test.com",
                     EmailConfirmed = true,
                     Status = 1,
                     CreateDate = DateTime.Now,
