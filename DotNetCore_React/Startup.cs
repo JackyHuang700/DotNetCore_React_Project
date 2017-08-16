@@ -23,11 +23,15 @@ using DotNetCore_React.Application.ComSystemApp;
 using DotNetCore_React.Application.NewsApp;
 using DotNetCore_React.Application.News_LanApp;
 using DotNetCore_React.Application.Sys_LanguageApp;
+using DotNetCore_React.Utility.Services;
+using DotNetCore_React.Utility;
 
 namespace DotNetCore_React
 {
     public class Startup
     {
+        public IConfigurationRoot Configuration { get; }
+
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -37,20 +41,19 @@ namespace DotNetCore_React
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
 
-            //初始化映射关系
+            //初始化映射關系
             DotNetCore_ReactMapper.Initialize();
         }
 
-        public IConfigurationRoot Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
 
-            //获取数据库连接字符串
+            //獲取數據庫連接字符串
             var sqlConnectionString = Configuration.GetConnectionString("DefaultConnection");
 
-            //添加数据上下文
+            //添加數據上下文
             services.AddDbContext<DotNetCore_ReactDBContext>(options => options.UseSqlServer(sqlConnectionString));
 
             services.AddScoped<IRoleRepository, RoleRepository>();
@@ -67,11 +70,19 @@ namespace DotNetCore_React
             services.AddScoped<ISys_LanguageRepository, Sys_LanguageRepository>();
             services.AddScoped<ISys_LanguageAppService, Sys_LanguageAppService>();
 
+            services.AddTransient<IMailServices, LocalMailServices>();
+
             // Add framework services.
             services.AddMvc();
 
-            //Session服务
+            //Session服務
             services.AddSession();
+
+            // Adds services required for using options.
+            services.AddOptions();
+
+            // Add our Config object so it can be injected
+            services.Configure<GlobalConfig>(Configuration.GetSection("AppConfiguration"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -95,7 +106,7 @@ namespace DotNetCore_React
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            //使用静态文件
+            //使用靜態文件
             app.UseStaticFiles();
 
             //Session
