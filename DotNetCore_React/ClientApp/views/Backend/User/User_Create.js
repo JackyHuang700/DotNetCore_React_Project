@@ -33,7 +33,7 @@ class User_Create extends Component {
       if (result.data.success) {
        return history.push('/User');
         }
-      Alert(result.data.message);
+      alert(result.data.message);
     }).catch((error) => {
       console.log(error)
     });
