@@ -115,7 +115,7 @@ class User_View extends Component {
                 <Col sm="12" md={{ size:7,offset:5}}><h1>帳號管理</h1></Col>
             </Row>
             <Row>  
-            <BootstrapTable data={this.state.RoleList} 
+            <BootstrapTable data={this.state.UserList} 
                             selectRow={selectRow} 
                             striped 
                             hover 
