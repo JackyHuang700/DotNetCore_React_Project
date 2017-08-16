@@ -71,28 +71,28 @@ class User_Create extends Component {
               <form className="" onSubmit={this.submit}>
 
                 <TextInput name="userName"
-                  labelName="角色名稱"
+                  labelName="系統帳號"
                   className=""
                   display={this.props.display_userName}
                   required={this.props.required_userName}
-                  validMessage={{ required: 'userName is reduired.' }}
+                  validMessage={{ required: '系統帳號 is reduired.' }}
                   onInput={this.handleInputChange}
                   value={this.state.userName}
                   placeholder="userName" />
 
                 <TextInput name="roleId"
-                  labelName="角色名稱"
+                  labelName="群組名稱"
                   className=""
                   display={this.props.display_roleId}
                   required={this.props.required_roleId}
-                  validMessage={{ required: 'roleId is reduired.' }}
+                  validMessage={{ required: '群組名稱 is reduired.' }}
                   onInput={this.handleInputChange}
                   value={this.state.roleId}
                   placeholder="roleId" />
 
 
                 <TextInput name="email"
-                  labelName="角色名稱"
+                  labelName="email"
                   className=""
                   display={this.props.display_email}
                   required={this.props.required_email}
@@ -103,31 +103,31 @@ class User_Create extends Component {
 
 
                 <TextInput name="emailComfirmed"
-                  labelName="角色名稱"
+                  labelName="Email確認"
                   className=""
                   display={this.props.display_emailComfirmed}
                   required={this.props.required_emailComfirmed}
-                  validMessage={{ required: 'emailComfirmed is reduired.' }}
+                  validMessage={{ required: 'Email確認 is reduired.' }}
                   onInput={this.handleInputChange}
                   value={this.state.emailComfirmed}
                   placeholder="emailComfirmed" />
 
                 <TextInput name="firstName"
-                  labelName="角色名稱"
+                  labelName="姓"
                   className=""
                   display={this.props.display_firstName}
                   required={this.props.required_firstName}
-                  validMessage={{ required: 'firstName is reduired.' }}
+                  validMessage={{ required: '姓 is reduired.' }}
                   onInput={this.handleInputChange}
                   value={this.state.firstName}
                   placeholder="firstName" />
 
                 <TextInput name="lastName"
-                  labelName="角色名稱"
+                  labelName="名"
                   className=""
                   display={this.props.display_lastName}
                   required={this.props.required_lastName}
-                  validMessage={{ required: 'lastName is reduired.' }}
+                  validMessage={{ required: '名 is reduired.' }}
                   onInput={this.handleInputChange}
                   value={this.state.lastName}
                   placeholder="lastName" />
@@ -145,22 +145,22 @@ class User_Create extends Component {
 
 
                 <TextInput name="createDate"
-                  labelName="角色名稱"
+                  labelName="建立時間"
                   className=""
                   display={this.props.createDate}
                   required={this.props.createDate}
-                  validMessage={{ required: 'createDate is reduired.' }}
+                  validMessage={{ required: '建立時間 is reduired.' }}
                   onInput={this.handleInputChange}
                   value={this.state.createDate}
                   placeholder="createDate" />
 
 
                 <TextInput name="createUser"
-                  labelName="角色名稱"
+                  labelName="建立者"
                   className=""
                   display={this.props.createUser}
                   required={this.props.createUser}
-                  validMessage={{ required: 'createUser is reduired.' }}
+                  validMessage={{ required: '建立者 is reduired.' }}
                   onInput={this.handleInputChange}
                   value={this.state.createUser}
                   placeholder="createUser" />
@@ -168,32 +168,32 @@ class User_Create extends Component {
 
 
                 <TextInput name="updateDate"
-                  labelName="角色名稱"
+                  labelName="更新時間"
                   className=""
                   display={this.props.updateDate}
                   required={this.props.updateDate}
-                  validMessage={{ required: 'updateDate is reduired.' }}
+                  validMessage={{ required: '更新時間 is reduired.' }}
                   onInput={this.handleInputChange}
                   value={this.state.updateDate}
                   placeholder="updateDate" />
 
 
                 <TextInput name="updateUser"
-                  labelName="角色名稱"
+                  labelName="更新者"
                   className=""
                   display={this.props.updateUser}
                   required={this.props.updateUser}
-                  validMessage={{ required: 'updateUser is reduired.' }}
+                  validMessage={{ required: '更新者 is reduired.' }}
                   onInput={this.handleInputChange}
                   value={this.state.updateUser}
                   placeholder="updateUser" />
 
                 <TextInput name="failedCount"
-                  labelName="角色名稱"
+                  labelName="已錯誤次數"
                   className=""
                   display={this.props.failedCount}
                   required={this.props.failedCount}
-                  validMessage={{ required: 'failedCount is reduired.' }}
+                  validMessage={{ required: '已錯誤次數 is reduired.' }}
                   onInput={this.handleInputChange}
                   value={this.state.failedCount}
                   placeholder="failedCount" />
