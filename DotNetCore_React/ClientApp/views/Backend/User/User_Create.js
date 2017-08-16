@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import axios from 'axios';
 import EasyForm, { Field, FieldGroup } from 'react-easyform';
+import { user_Enum } from '../../../EnumScript/GeneralEnumScript.js';
 import TextInput from '../../Components/Forms/TextInput';
+import DropDownList from '../../Components/Forms/DropDownList';
 import history from '../../../history'
 
 
@@ -11,24 +13,48 @@ class User_Create extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      User: {},
+      RoleList: [],
     };
 
     this.Submit = this.Submit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
-
+    this.GetData = this.GetData.bind(this);
+    
   }
+
+
+  componentDidMount() {
+    this.GetData();
+  }
+
+GetData(){
+  //抓取角色權限
+  axios({
+    url: `/api/Role/Role_View`,
+    method: 'GET',
+    data: {
+    }
+  }).then((result) => {
+    var a = [];
+    result.data.map((c) => {
+      a.push({
+        name: c.name,
+        value: c.id
+      });
+    });
+
+    this.setState({ RoleList: a });
+  }).catch((error) => {
+    console.log(error)
+  });
+}
 
   Submit(event) {
     axios({
       url: '/api/User/Create',
       method: 'post',
-      data: {
-        SysId: this.state.SysId,
-        Name: this.state.Name,
-        Priority: this.state.Priority,
-        Status: this.state.Status,
-      }
+      data: this.state.User,
     }).then((result) => {
       if (result.data.success) {
        return history.push('/User');
@@ -45,9 +71,12 @@ class User_Create extends Component {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
+    var new_User = Object.assign(this.state.User);
+    new_User[name] = value;
+
 
     this.setState({
-      [name]: value
+      User: new_User,
     });
   }
 
@@ -68,7 +97,7 @@ class User_Create extends Component {
               新增帳號
               </div>
             <div className="card-block">
-              <form className="" onSubmit={this.submit}>
+              <form className="" onSubmit={this.Submit}>
 
                 <TextInput name="userName"
                   labelName="系統帳號"
@@ -77,40 +106,44 @@ class User_Create extends Component {
                   required={this.props.required_userName}
                   validMessage={{ required: '系統帳號 is reduired.' }}
                   onInput={this.handleInputChange}
-                  value={this.state.userName}
+                  value={this.state.User.userName}
+                  readOnly={true}                  
                   placeholder="userName" />
 
-                <TextInput name="roleId"
-                  labelName="群組名稱"
+
+                  <TextInput name="password"
+                  labelName="密碼"
                   className=""
-                  display={this.props.display_roleId}
-                  required={this.props.required_roleId}
-                  validMessage={{ required: '群組名稱 is reduired.' }}
+                  display={this.props.display_password}
+                  required={this.props.required_password}
+                  validMessage={{ required: '系統帳號 is reduired.' }}
                   onInput={this.handleInputChange}
-                  value={this.state.roleId}
-                  placeholder="roleId" />
+                  value={this.state.User.password}
+                  readOnly={true}                  
+                  placeholder="password" />
 
 
-                <TextInput name="email"
+                  <TextInput name="email"
                   labelName="email"
                   className=""
                   display={this.props.display_email}
                   required={this.props.required_email}
                   validMessage={{ required: 'email is reduired.' }}
                   onInput={this.handleInputChange}
-                  value={this.state.email}
+                  value={this.state.User.email}
                   placeholder="email" />
+                  
 
+                  <DropDownList name="roleId"
+                  labelName="群組名稱"
+                  display={this.props.display_roleId}
+                  required={this.props.required_roleId}
+                  validMessage={{ required: '群組名稱 is reduired.' }}
+                  onInput={this.Bind_handleInputChange}
+                  value={this.state.User.roleId}
+                  options={this.state.RoleList}
+                />
 
-                <TextInput name="emailComfirmed"
-                  labelName="Email確認"
-                  className=""
-                  display={this.props.display_emailComfirmed}
-                  required={this.props.required_emailComfirmed}
-                  validMessage={{ required: 'Email確認 is reduired.' }}
-                  onInput={this.handleInputChange}
-                  value={this.state.emailComfirmed}
-                  placeholder="emailComfirmed" />
 
                 <TextInput name="firstName"
                   labelName="姓"
@@ -119,7 +152,7 @@ class User_Create extends Component {
                   required={this.props.required_firstName}
                   validMessage={{ required: '姓 is reduired.' }}
                   onInput={this.handleInputChange}
-                  value={this.state.firstName}
+                  value={this.state.User.firstName}
                   placeholder="firstName" />
 
                 <TextInput name="lastName"
@@ -129,18 +162,54 @@ class User_Create extends Component {
                   required={this.props.required_lastName}
                   validMessage={{ required: '名 is reduired.' }}
                   onInput={this.handleInputChange}
-                  value={this.state.lastName}
+                  value={this.state.User.lastName}
                   placeholder="lastName" />
 
 
-                <TextInput name="createDate"
+
+                  <DropDownList name="status"
+                  labelName="狀態"
+                  display={this.props.display_status}
+                  required={this.props.required_status}
+                  validMessage={{ required: '狀態 is reduired.' }}
+                  onInput={this.handleInputChange}
+                  value={this.state.User.status}
+                  options={
+                    [
+                      {
+                        name: user_Enum.STOP.name,
+                        value: user_Enum.STOP.value
+                      },
+                      {
+                        name: user_Enum.NORMAL.name,
+                        value: user_Enum.NORMAL.value
+                      },
+                      {
+                        name: user_Enum.EMAIL_NO_VAILD.name,
+                        value: user_Enum.EMAIL_NO_VAILD.value
+                      },
+                      {
+                        name: user_Enum.FIRST_PASSWORD_UNCHANGE.name,
+                        value: user_Enum.FIRST_PASSWORD_UNCHANGE.value
+                      },
+                      {
+                        name: user_Enum.ERROR_COUNT.name,
+                        value: user_Enum.ERROR_COUNT.value
+                      }
+                    ]}
+                />
+
+
+
+                {/* <TextInput name="createDate"
                   labelName="建立時間"
                   className=""
                   display={this.props.createDate}
                   required={this.props.createDate}
                   validMessage={{ required: '建立時間 is reduired.' }}
                   onInput={this.handleInputChange}
-                  value={this.state.createDate}
+                  value={this.state.User.createDate}
+                  readOnly={true}
                   placeholder="createDate" />
 
 
@@ -151,7 +220,8 @@ class User_Create extends Component {
                   required={this.props.createUser}
                   validMessage={{ required: '建立者 is reduired.' }}
                   onInput={this.handleInputChange}
-                  value={this.state.createUser}
+                  value={this.state.User.createUser}
+                  readOnly={true}                  
                   placeholder="createUser" />
 
 
@@ -163,7 +233,7 @@ class User_Create extends Component {
                   required={this.props.updateDate}
                   validMessage={{ required: '更新時間 is reduired.' }}
                   onInput={this.handleInputChange}
-                  value={this.state.updateDate}
+                  value={this.state.User.updateDate}
                   placeholder="updateDate" />
 
 
@@ -174,7 +244,7 @@ class User_Create extends Component {
                   required={this.props.updateUser}
                   validMessage={{ required: '更新者 is reduired.' }}
                   onInput={this.handleInputChange}
-                  value={this.state.updateUser}
+                  value={this.state.User.updateUser}
                   placeholder="updateUser" />
 
                 <TextInput name="failedCount"
@@ -184,8 +254,8 @@ class User_Create extends Component {
                   required={this.props.failedCount}
                   validMessage={{ required: '已錯誤次數 is reduired.' }}
                   onInput={this.handleInputChange}
-                  value={this.state.failedCount}
-                  placeholder="failedCount" />
+                  value={this.state.User.failedCount}
+                  placeholder="failedCount" /> */}
 
 
                 <div className="form-group form-actions">
@@ -204,28 +274,38 @@ export default EasyForm(User_Create, 2);
 
 User_Create.defaultProps = {
   display_userName: true,
-  display_roleId: true,
+  display_password: true,
   display_email: true,
-  display_emailComfirmed: true,
+  display_roleId: true,
   display_firstName: true,
-  // display_status     : true,
-  display_createDate: true,
-  display_createUser: true,
-  display_updateDate: true,
-  display_updateUser: true,
-  display_failedCount: true,
+  display_lastName: true,
+  display_status     : true,
+  
+
+
+  // display_emailComfirmed: true,
+  // display_createDate: true,
+  // display_createUser: true,
+  // display_updateDate: true,
+  // display_updateUser: true,
+  // display_failedCount: true,
 
 
   required_userName: true,
-  required_roleId: true,
+  required_password: true,
   required_email: true,
-  required_emailComfirmed: true,
-  required_firstName: true,
-  // required_status     : true,
-  required_createDate: true,
-  required_createUser: true,
-  required_updateDate: true,
-  required_updateUser: true,
-  required_failedCount: true,
+  required_roleId: true,
+  required_firstName: false,
+  required_lastName: false,
+  required_status     : true,
+  
+
+
+  // required_emailComfirmed: true,
+  // required_createDate: true,
+  // required_createUser: true,
+  // required_updateDate: true,
+  // required_updateUser: true,
+  // required_failedCount: true,
 }
 

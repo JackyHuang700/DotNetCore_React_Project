@@ -19,7 +19,7 @@ namespace DotNetCore_React.Application.UserApp.Dtos
 
         public string Email { get; set; }
 
-        public byte Status { get; set; }
+        public int Status { get; set; }
 
     }
 }

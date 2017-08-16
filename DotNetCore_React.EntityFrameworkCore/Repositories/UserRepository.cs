@@ -15,20 +15,5 @@ namespace DotNetCore_React.EntityFrameworkCore.Repositories
 
         }
 
-        public List<User> GetAllUser()
-        {
-            return _dbContext.Set<User>().ToList();
-        }
-
-        public User GetUser(string userName)
-        {
-            return GetAllUser().Where(c => c.UserName == userName).FirstOrDefault();
-        }
-
-        public User GetUser(Guid id)
-        {
-            return _dbContext.Set<User>().FirstOrDefault(C => C.Id == id);
-        }
-
     }
 }

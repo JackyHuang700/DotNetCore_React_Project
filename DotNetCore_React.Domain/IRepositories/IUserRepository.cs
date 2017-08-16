@@ -7,11 +7,6 @@ namespace DotNetCore_React.Domain.IRepositories
 {
     public interface IUserRepository : IRepository<User>
     {
-        User GetUser(string userName);
-
-        User GetUser(Guid id);
-
-        List<User> GetAllUser();
 
     }
 }

@@ -97,7 +97,7 @@ namespace DotNetCore_React.Application.UserApp
 
         public List<UserDto> GetAllList()
         {
-            var a = _repository_user.GetAllUser();
+            var a = _repository_user.GetAllList();
             return Mapper.Map<List<UserDto>>(a);
         }
 
@@ -106,13 +106,13 @@ namespace DotNetCore_React.Application.UserApp
             //處理null狀況
             Guid guid;
             Guid.TryParse(id, out guid);
-            var a = _repository_user.GetUser(guid);
+            var a = _repository_user.Get(guid);
             return Mapper.Map<UserDto>(a);
         }
 
         public Personal_UserDto GetUser_By_UserName(string userName)
         {
-            var a = _repository_user.GetUser(userName);
+            var a = _repository_user.FirstOrDefault(o => o.UserName == userName);
             a.Password = "";
             return Mapper.Map<Personal_UserDto>(a);
         }
@@ -121,7 +121,7 @@ namespace DotNetCore_React.Application.UserApp
         public Dictionary<string, object> Login(string userName, string password)
         {
             var myJson = new Dictionary<string, object>();
-            var user = _repository_user.GetUser(userName);
+            var user = _repository_user.FirstOrDefault(o => o.UserName == userName);
 
             if (user == null)
             {
