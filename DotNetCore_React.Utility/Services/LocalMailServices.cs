@@ -8,7 +8,8 @@ using MimeKit;
 
 namespace DotNetCore_React.Utility.Services
 {
-    public class LocalMailServices : IMailServices
+    public class LocalMailServices
+        //: IMailServices
     {
 
     }
