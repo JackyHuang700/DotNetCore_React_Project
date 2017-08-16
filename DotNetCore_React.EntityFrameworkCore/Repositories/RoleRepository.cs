@@ -12,17 +12,6 @@ namespace DotNetCore_React.EntityFrameworkCore.Repositories
         public RoleRepository(DotNetCore_ReactDBContext dbcontext) : base(dbcontext)
         {
         }
-
-        public List<Role> GetAllRole()
-        {
-            return _dbContext.Set<Role>().ToList();
-        }
-
-        public Role GetRole(Guid id)
-        {
-            return _dbContext.Set<Role>().FirstOrDefault(C => C.Id == id);
-        }
-
     }
 }
 

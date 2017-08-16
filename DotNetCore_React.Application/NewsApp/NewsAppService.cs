@@ -90,7 +90,7 @@ namespace DotNetCore_React.Application.NewsApp
                 _repository.Save();
 
                 //刪除副表
-                _repository_news_lan.DeleteRange(news_lan_idList);
+                //_repository_news_lan.DeleteRange(news_lan_idList);
                 _repository_news_lan.Save();
 
                 myJson_Return.Add("success", false);
@@ -134,7 +134,7 @@ namespace DotNetCore_React.Application.NewsApp
             //刪除副表
             var news_LanList = _repository_news_lan.Getall_By_NewsId((Guid)myJson["id"]);
 
-            _repository_news_lan.DeleteRange(news_LanList.Select(o => o.Id).ToList());
+            //_repository_news_lan.DeleteRange(news_LanList.Select(o => o.Id).ToList());
             _repository_news_lan.Save();
 
             return myJson;
