@@ -148,11 +148,11 @@ class Role_Edit_Show extends Component {
                 <input type="hidden" id="id" name="id" value={this.state.Role.id} />
 
                 <TextInput name="sysId"
-                  labelName="角色名稱"
+                  labelName="系統識別碼"
                   className=""
                   display={this.props.display_sysId}
                   required={this.props.required_sysId}
-                  validMessage={{ required: 'sysId is reduired.' }}
+                  validMessage={{ required: '系統識別碼 is reduired.' }}
                   onInput={this.Bind_handleInputChange}
                   value={this.state.Role.sysId}
                   placeholder="sysId"
@@ -170,11 +170,11 @@ class Role_Edit_Show extends Component {
                   readOnly={!this.state.is_Edit} />
 
                 <TextInput name="priority"
-                  labelName="角色名稱"
+                  labelName="權重"
                   className=""
                   display={this.props.display_priority}
                   required={this.props.required_priority}
-                  validMessage={{ required: 'priority is reduired.' }}
+                  validMessage={{ required: '權重 is reduired.' }}
                   onInput={this.Bind_handleInputChange}
                   value={this.state.Role.priority}
                   placeholder="priority"
@@ -184,7 +184,7 @@ class Role_Edit_Show extends Component {
                   labelName="狀態"
                   display={this.props.display_Status}
                   required={this.props.required_Status} 
-                  validMessage={{required: 'Status is reduired.'}} 
+                  validMessage={{required: '狀態 is reduired.'}} 
                   onInput={this.handleInputChange} 
                   value={this.state.Role.status}
                   readOnly={!this.state.is_Edit}
@@ -202,11 +202,11 @@ class Role_Edit_Show extends Component {
                   />
 
                 <TextInput name="createDate"
-                  labelName="角色名稱"
+                  labelName="建立日期"
                   className=""
                   display={this.props.display_createDate}
                   required={this.props.required_createDate}
-                  validMessage={{ required: 'createDate is reduired.' }}
+                  validMessage={{ required: '建立日期 is reduired.' }}
                   onInput={this.Bind_handleInputChange}
                   value={this.state.Role.createDate}
                   placeholder="createDate"
@@ -214,11 +214,11 @@ class Role_Edit_Show extends Component {
 
 
                 <TextInput name="createUser"
-                  labelName="角色名稱"
+                  labelName="建立者"
                   className=""
                   display={this.props.display_createUser}
                   required={this.props.required_createUser}
-                  validMessage={{ required: 'createUser is reduired.' }}
+                  validMessage={{ required: '建立者 is reduired.' }}
                   onInput={this.Bind_handleInputChange}
                   value={this.state.Role.createUser}
                   placeholder="createUser"
