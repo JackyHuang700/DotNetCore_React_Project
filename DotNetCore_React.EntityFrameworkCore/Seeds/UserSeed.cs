@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using DotNetCore_React.Domain.Entities;
-
+using DotNetCore_React.Utility;
 
 namespace DotNetCore_React.EntityFrameworkCore.Seeds
 {
@@ -13,24 +13,25 @@ namespace DotNetCore_React.EntityFrameworkCore.Seeds
         {
             if (!_context.Set<User>().Any())
             {
+                var roleID = _context.Set<Role>().Where(o => o.SysId == "Admin").Select(o=>o.Id.ToString()).FirstOrDefault();
                 _context.Set<User>().Add(new User
                 {
                     Id = Guid.NewGuid(),
                     UserName = "jacky@gmail.com",
-                    RoleId = Guid.NewGuid().ToString(),
-                    Password = "jacky@gmail.com",
-                    FirstName = "j",
-                    LastName = "j",
+                    RoleId = roleID,
+                    Password = HashHelper.CreateSHA256("jacky@gmail.com"),
+                    FirstName = "jacky",
+                    LastName = "87",
                     Email = "jacky@gmail.com",
-                    EmailConfirmed = false,
-                    Status = 0,
+                    EmailConfirmed = true,
+                    Status = 1,
                     CreateDate = DateTime.Now,
                     UpdateDate = DateTime.Now,
                     CreateUser = "Admin",
                     UpdateUser = "Admin",
                     FailedCount = 0,
-                    ChangedPassword = false,
-                    PasswordHash = Guid.NewGuid().ToString(),
+                    ChangedPassword = true,
+                    PasswordHash = null,
                 });
             }
         }

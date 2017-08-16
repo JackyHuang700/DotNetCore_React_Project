@@ -6,6 +6,7 @@ using DotNetCore_React.Domain.IRepositories;
 using DotNetCore_React.Domain.Entities;
 using System.Security.Cryptography;
 using System.Text;
+using DotNetCore_React.Utility;
 
 namespace DotNetCore_React.Application.UserApp
 {
@@ -22,13 +23,32 @@ namespace DotNetCore_React.Application.UserApp
 
         public Dictionary<string, object> Create_User(UserDto user)
         {
-            var myJson = new Dictionary<string, object>();
+            var myJson = new Dictionary<string, object>()
+            {
+                {"success",false },
+                {"message",null  }
+            };
+
+            //檢查是否重複
+            var checkMail = _repository_user.FirstOrDefault(o => o.Email == user.Email);
+            if (checkMail != null)
+            {
+                myJson["message"] = "郵件已存在";
+                return myJson;
+            }
+
+            var checkUserName = _repository_user.FirstOrDefault(o => o.UserName == user.UserName);
+            if (checkUserName != null)
+            {
+                myJson["message"] = "帳戶已存在";
+                return myJson;
+            }
 
             var dateTime = DateTime.Now;
             var roleDB = new User()
             {
                 Id = Guid.NewGuid(),
-                Password = this.PasswordToSHA256(user.Password),
+                Password = HashHelper.CreateSHA256(user.Password),
                 RoleId = user.RoleId,
                 UserName = user.UserName,
                 FirstName = user.FirstName,
@@ -46,10 +66,11 @@ namespace DotNetCore_React.Application.UserApp
             };
 
             //儲存資料
-            myJson = _repository_user.Create(roleDB);
+            _repository_user.Insert(roleDB);
+            var effect = _repository_user.Save();
 
-            //myJson.Add("success", true);
-            //myJson.Add("message", "");
+            myJson.Add("success", effect > 0);
+            myJson.Add("message", effect > 0 ? "操作完成" : "操作失敗");
             return myJson;
         }
 
@@ -63,10 +84,10 @@ namespace DotNetCore_React.Application.UserApp
 
 
             //刪除資料
-            myJson = _repository_user.Delete(guid);
-
-            //myJson.Add("success", true);
-            //myJson.Add("message", "");
+            _repository_user.Delete(guid);
+            var effect = _repository_user.Save();
+            myJson.Add("success", effect > 0);
+            myJson.Add("message", effect > 0 ? "操作完成" : "操作失敗");
             return myJson;
         }
 
@@ -91,80 +112,72 @@ namespace DotNetCore_React.Application.UserApp
         {
             var myJson = new Dictionary<string, object>();
             var user = _repository_user.GetUser(userName);
-            //是否登入成功
-            var is_Login_Success = false;
-
 
             if (user == null)
             {
                 myJson.Add("success", false);
-                myJson.Add("message", "登入錯誤");
+                myJson.Add("message", "登入失敗");
                 return myJson;
+            }
+
+            if (user.Password != HashHelper.CreateSHA256(password))
+            {
+                user.Status = 255;
+                user.FailedCount++;
+
+                //失敗次數是否超過系統預設值
+                var AccessFailedCount = _repository_comSystem.GetComSystem("AccessFailedCount");
+                var sysFailedCount = int.Parse(AccessFailedCount.sysValue);
+                if (user.FailedCount >= sysFailedCount)
+                {
+                    user.Status = (byte)User_Status.ERROR_COUNT;
+                }
+
+                //更新狀態
+                _repository_user.Update(user);
+                _repository_user.Save();
             }
 
             //判斷狀態
             switch (user.Status)
             {
-                case 1:
-                    is_Login_Success = true;
-                    myJson.Add("success", true);
-                    myJson.Add("message", "");
+                case (byte)User_Status.STOP:
+                    myJson.Add("success", false);
+                    myJson.Add("message", "您已被停權，請聯絡管理員。");
                     break;
-                case 2:
+                case (byte)User_Status.NORMAL:
+                    myJson.Add("success", true);
+                    myJson.Add("message", "登入成功");
+                    myJson.Add("user", Mapper.Map<UserSimpleDto>(user));
+
+                    //更新錯誤次數
+                    if (user.FailedCount > 0)
+                    {
+                        user.FailedCount = 0;
+                        _repository_user.Update(user);
+                        _repository_user.Save();
+                    }
+                    break;
+                case (byte)User_Status.EMAIL_NO_VAILD:
                     myJson.Add("success", false);
                     myJson.Add("message", "信箱未驗證，請立即驗證");
                     break;
-                case 3:
-                    is_Login_Success = true;
+                case (byte)User_Status.FIRST_PASSWORD_UNCHANGE:
                     myJson.Add("success", true);
-                    myJson.Add("message", "");
+                    myJson.Add("message", "第一次未更改密碼");
+                    myJson.Add("user", Mapper.Map<UserSimpleDto>(user));
                     break;
-                case 4:
+                case (byte)User_Status.ERROR_COUNT:
                     myJson.Add("success", false);
                     myJson.Add("message", $"錯誤次數達{user.FailedCount}次，請聯絡管理員，或按下忘記密碼");
                     break;
                 default:
                     myJson.Add("success", false);
-                    myJson.Add("message", "登入失敗");
+                    myJson.Add("message", "帳號或密碼不正確");
                     break;
             }
 
-
-            if (is_Login_Success)
-            {
-                myJson.Add("user", user);
-                user.FailedCount = 0;
-            }
-            else
-            {
-                user.FailedCount++;
-
-                //失敗次數是否超過系統預設值
-                var aa = _repository_comSystem.GetComSystem("AccessFailedCount");
-                var sysFailedCount = int.Parse(aa.sysValue);
-                if (user.FailedCount >= sysFailedCount)
-                {
-                    user.Status = 4;
-                }
-            }
-            _repository_user.Update(user);
-
             return myJson;
-        }
-
-
-        public string PasswordToSHA256(string password)
-        {
-            // SHA256 is disposable by inheritance.  
-            using (var sha256 = SHA256.Create())
-            {
-                // Send a sample text to hash.  
-                var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
-                // Get the hashed string.  
-                var hash = BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
-
-                return hash;
-            }
         }
 
         public Dictionary<string, object> Update_User(UserDto user)
@@ -172,11 +185,148 @@ namespace DotNetCore_React.Application.UserApp
             var myJson = new Dictionary<string, object>();
 
             var userDB = Mapper.Map<User>(user);
-            myJson = _repository_user.Update(userDB);
 
-            //myJson.Add("success", true);
-            //myJson.Add("message", "");
+            //回復狀態時，將錯誤次數清空
+            if (userDB.Status == (byte)User_Status.NORMAL)
+            {
+                userDB.FailedCount = 0;
+            }
+
+            _repository_user.Update(userDB);
+            var effect = _repository_user.Save();
+            myJson.Add("success", effect > 0);
+            myJson.Add("message", effect > 0 ? "操作完成" : "操作失敗");
             return myJson;
         }
+
+        public Dictionary<string, object> forgot(string userName, string email)
+        {
+            var myJson = new Dictionary<string, object>() {
+                {"success",false },
+                {"message",null }
+            };
+
+            var getUser = _repository_user.FirstOrDefault(o => o.UserName == userName && o.Email == email);
+            if (getUser == null)
+            {
+                myJson["message"] = "資料比對錯誤";
+                return myJson;
+            }
+
+            var newPasswdHash = Guid.NewGuid().ToString("N");
+            getUser.PasswordHash = newPasswdHash;
+            getUser.Status = (byte)User_Status.EMAIL_NO_VAILD;
+
+            _repository_user.Update(getUser);
+            var effect = _repository_user.Save();
+
+            //寄信API
+
+
+            myJson.Add("success", effect > 0);
+            myJson.Add("message", effect > 0 ? "已傳送密碼重置至您的信箱" : "操作失敗");
+            return myJson;
+        }
+
+        public Dictionary<string, object> forgotConfirm(string userName, string passwdhash)
+        {
+            var myJson = new Dictionary<string, object>() {
+                {"success",false },
+                {"message",null }
+            };
+
+            var getUser = _repository_user.FirstOrDefault(o => o.UserName == userName && o.PasswordHash == passwdhash);
+            if (getUser == null)
+            {
+                myJson["message"] = "資料比對錯誤";
+                return myJson;
+            }
+
+            myJson.Add("success", true);
+            myJson.Add("message", "請修改密碼。");
+            return myJson;
+        }
+
+        public Dictionary<string, object> changePassword(UserSimpleDto user, string userName, string newPassword, string passwdhash)
+        {
+            var myJson = new Dictionary<string, object>() {
+                {"success",false },
+                {"message","更新密碼失敗" }
+            };
+
+            //驗證是否為使用者本人
+            if (user == null && string.IsNullOrEmpty(passwdhash))
+            {
+                myJson["message"] = "無法驗證身分";
+                return myJson;
+            }
+
+
+            var getUser = _repository_user.FirstOrDefault(o => o.UserName == userName);
+            if (getUser == null)
+            {
+                myJson["message"] = "無法驗證身分";
+                return myJson;
+            }
+
+            if (user != null)
+            {
+                //如果使用者已經登入，允許其直接更改密碼
+                if (user.UserName == userName)
+                {
+                    UpdatePwd(newPassword, getUser);
+                    myJson["success"] = true;
+                    myJson["message"] = "操作成功";
+                }
+            }
+
+            //比對雜湊碼
+            if(getUser.PasswordHash == passwdhash)
+            {
+                UpdatePwd(newPassword, getUser);
+                myJson["success"] = true;
+                myJson["message"] = "操作成功";
+            }
+
+            return myJson;
+        }
+
+        private int UpdatePwd(string newPassword, User getUser)
+        {
+            getUser.PasswordHash = string.Empty;
+            getUser.Password = HashHelper.CreateSHA256(newPassword);
+            getUser.ChangedPassword = true;
+            getUser.Status = (byte)User_Status.NORMAL;
+            _repository_user.Update(getUser);
+            return _repository_user.Save();
+        }
+    }
+
+    public enum User_Status : byte
+    {
+        /// <summary>
+        /// 已停權
+        /// </summary>
+        STOP = 0,
+
+        /// <summary>
+        /// 正常啟用
+        /// </summary>
+        NORMAL = 1,
+
+        /// <summary>
+        /// 信箱未驗證
+        /// </summary>
+        EMAIL_NO_VAILD = 2,
+
+        /// <summary>
+        /// 第一次未更改密碼
+        /// </summary>
+        FIRST_PASSWORD_UNCHANGE = 3,
+
+        /// <summary>
+        /// 錯誤次數
+        /// </summary>
+        ERROR_COUNT = 4
     }
 }

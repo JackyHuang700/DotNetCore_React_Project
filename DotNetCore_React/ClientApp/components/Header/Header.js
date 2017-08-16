@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Dropdown, DropdownMenu, DropdownItem } from 'reactstrap';
 import {Auth} from '../../helpers/auth'
+import history from '../../history'
 
   //fix 選單被覆蓋
 const dropdownMenu_Style = {
@@ -46,9 +47,11 @@ class Header extends Component {
   }
 
   logout(e){
-    Auth.signout(()=>{
+    Auth.signout();
+  }
 
-    });
+  changePwd(e){
+    history.push('/changePwd?userName='+Auth.getUserName());
   }
 
   render() {
@@ -87,7 +90,7 @@ class Header extends Component {
                 <DropdownItem><i className="fa fa-usd"></i> Payments<span className="badge badge-default">42</span></DropdownItem>
                 <DropdownItem><i className="fa fa-file"></i> Projects<span className="badge badge-primary">42</span></DropdownItem>
                 <DropdownItem divider />
-                <DropdownItem><i className="fa fa-shield"></i> Lock Account</DropdownItem>
+                <DropdownItem onClick={this.changePwd}><i className="fa fa-shield"></i> Change Pwd</DropdownItem>
                 <DropdownItem onClick={this.logout}><i className="fa fa-lock"></i> Logout</DropdownItem>
 
               </DropdownMenu>

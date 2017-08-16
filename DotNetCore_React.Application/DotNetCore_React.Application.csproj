@@ -12,6 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DotNetCore_React.Utility\DotNetCore_React.Utility.csproj" />
     <ProjectReference Include="..\DotNetCore_React.EntityFrameworkCore\DotNetCore_React.EntityFrameworkCore.csproj" />
   </ItemGroup>
 

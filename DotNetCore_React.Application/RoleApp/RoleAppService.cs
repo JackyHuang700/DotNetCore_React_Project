@@ -48,10 +48,11 @@ namespace DotNetCore_React.Application.RoleApp
             };
 
             //儲存資料
-            myJson = _repository.Create(roleDB);
+            _repository.Insert(roleDB);
+            var effort = _repository.Save();
 
-            //myJson.Add("success", true);
-            //myJson.Add("message", "");
+            myJson.Add("success", effort > 0);
+            myJson.Add("message", effort > 0 ?"操作成功":"操作失敗");
             return myJson;
         }
 
@@ -62,9 +63,11 @@ namespace DotNetCore_React.Application.RoleApp
             var roleDB = Mapper.Map<Role>(role);
 
             //儲存資料
-            myJson = _repository.Update(roleDB);
-            //myJson.Add("success", true);
-            //myJson.Add("message", "");
+            _repository.Update(roleDB);
+            var effort = _repository.Save();
+
+            myJson.Add("success", effort > 0);
+            myJson.Add("message", effort > 0 ? "操作成功" : "操作失敗");
             return myJson;
         }
 
@@ -77,10 +80,11 @@ namespace DotNetCore_React.Application.RoleApp
             Guid.TryParse(id, out guid);
 
             //刪除資料
-            myJson = _repository.Delete(guid);
+            _repository.Delete(guid);
+            var effort = _repository.Save();
 
-            //myJson.Add("success", true);
-            //myJson.Add("message", "");
+            myJson.Add("success", effort > 0);
+            myJson.Add("message", effort > 0 ? "操作成功" : "操作失敗");
             return myJson;
         }
     }

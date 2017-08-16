@@ -31,8 +31,9 @@ class User_Create extends Component {
       }
     }).then((result) => {
       if (result.data.success) {
-        history.push('/User');
-      }
+       return history.push('/User');
+        }
+      Alert(result.data.message);
     }).catch((error) => {
       console.log(error)
     });

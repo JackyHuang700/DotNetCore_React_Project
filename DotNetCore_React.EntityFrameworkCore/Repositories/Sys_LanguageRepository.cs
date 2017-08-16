@@ -13,47 +13,6 @@ namespace DotNetCore_React.EntityFrameworkCore.Repositories
         {
         }
 
-        public Dictionary<string, object> Create(Sys_Language Sys_Language)
-        {
-            var myJson = new Dictionary<string, object>();
-            try
-            {
-                _dbContext.Add<Sys_Language>(Sys_Language);
-                _dbContext.SaveChanges();
-                myJson.Add("success", true);
-                myJson.Add("message", "");
-                myJson.Add("id", Sys_Language.Id);
-                return myJson;
-
-            }
-            catch (Exception ex)
-            {
-                myJson.Add("success", false);
-                myJson.Add("message", ex.Message);
-                return myJson;
-            }
-        }
-
-        public Dictionary<string, object> Delete(int id)
-        {
-            var myJson = new Dictionary<string, object>();
-            try
-            {
-                var Sys_Language = this.GetSingle(id);
-                _dbContext.Remove<Sys_Language>(Sys_Language);
-                _dbContext.SaveChanges();
-                myJson.Add("success", true);
-                myJson.Add("message", "動作完成");
-                return myJson;
-
-            }
-            catch (Exception ex)
-            {
-                myJson.Add("success", false);
-                myJson.Add("message", ex.Message);
-                return myJson;
-            }
-        }
 
         public List<Sys_Language> GetAll()
         {
@@ -65,27 +24,5 @@ namespace DotNetCore_React.EntityFrameworkCore.Repositories
             return _dbContext.Set<Sys_Language>().FirstOrDefault(C => C.Id == id);
         }
 
-        public Dictionary<string, object> Update(Sys_Language Sys_Language)
-        {
-            var myJson = new Dictionary<string, object>();
-            try
-            {
-                //參考 https://stackoverflow.com/questions/15336248/entity-framework-5-updating-a-record
-                _dbContext.Sys_Languages.Attach(Sys_Language);
-                _dbContext.Entry(Sys_Language).State = EntityState.Modified;
-                _dbContext.SaveChanges();
-                myJson.Add("success", true);
-                myJson.Add("message", "");
-                myJson.Add("id", Sys_Language.Id);
-                return myJson;
-
-            }
-            catch (Exception ex)
-            {
-                myJson.Add("success", false);
-                myJson.Add("message", ex.Message);
-                return myJson;
-            }
-        }
     }
 }
