@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DotNetCore_React.Domain\DotNetCore_React.Domain.csproj" />
+    <ProjectReference Include="..\DotNetCore_React.Utility\DotNetCore_React.Utility.csproj" />
   </ItemGroup>
 
   <ItemGroup>
