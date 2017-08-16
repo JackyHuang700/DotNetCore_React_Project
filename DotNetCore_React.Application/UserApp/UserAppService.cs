@@ -8,6 +8,7 @@ using DotNetCore_React.Domain.Entities;
 using System.Security.Cryptography;
 using System.Text;
 using DotNetCore_React.Utility;
+using DotNetCore_React.Utility.Services;
 
 namespace DotNetCore_React.Application.UserApp
 {
@@ -15,11 +16,13 @@ namespace DotNetCore_React.Application.UserApp
     {
         private readonly IUserRepository _repository_user;
         private readonly IComSystemRepository _repository_comSystem;
+        private readonly IMailServices _mailServices;
 
-        public UserAppService(IUserRepository repository_usr, IComSystemRepository repository_comSystem)
+        public UserAppService(IUserRepository repository_usr, IComSystemRepository repository_comSystem,IMailServices mailServices)
         {
             _repository_user = repository_usr;
             _repository_comSystem = repository_comSystem;
+            _mailServices = mailServices;
         }
 
         public Dictionary<string, object> Create_User(UserDto user)
@@ -268,7 +271,8 @@ namespace DotNetCore_React.Application.UserApp
             var effect = _repository_user.Save();
 
             //寄信API
-
+            _mailServices.AddTo(getUser.UserName, getUser.Email);
+            _mailServices.Sent("密碼重置", $"請點選 <a href='$Domain$/forgot?userName={getUser.UserName}&passwordhash={newPasswdHash}'>重置密碼</a> 進行重置密碼。");
 
             myJson.Add("success", effect > 0);
             myJson.Add("message", effect > 0 ? "已傳送密碼重置至您的信箱" : "操作失敗");
