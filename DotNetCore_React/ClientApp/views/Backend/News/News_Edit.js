@@ -125,15 +125,16 @@ class News_Edit extends Component {
 
         //語系元件
   Component_Nav() {
-    
+
         return (
           <div>
             <Nav tabs>
               {
                 this.state.Sys_Language_List.map((sys, index) => {
+                  //填入語系ID
+                  {this.state.News.new_LanList[index].languageId = sys.id}
                   return (
                     <NavItem>
-    
                       <NavLink
                         className={classnames({ active: this.state.activeTab === `${index}` })}
                         onClick={() => { this.toggle(`${index}`); }}>

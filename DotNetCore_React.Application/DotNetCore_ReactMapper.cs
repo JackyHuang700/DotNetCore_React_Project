@@ -35,10 +35,15 @@ namespace DotNetCore_React.Application
                 cfg.CreateMap<ComSystemDto, ComSystem>();
 
                 cfg.CreateMap<News, NewsDto>();
-                cfg.CreateMap<NewsDto, News>();
+                cfg.CreateMap<NewsDto, News>()
+                .ForMember(opt => opt.Id , dest => dest.Ignore())
+                .ForMember(opt => opt.CreateDate , dest => dest.Ignore())
+                .ForMember(opt => opt.CreateUser , dest => dest.Ignore());
 
                 cfg.CreateMap<News_Lan, News_LanDto>();
-                cfg.CreateMap<News_LanDto, News_Lan>();
+                cfg.CreateMap<News_LanDto, News_Lan>()
+                .ForMember(opt => opt.Id, dest => dest.Ignore())
+                .ForMember(opt => opt.NewsId, dest => dest.Ignore());
 
                 cfg.CreateMap<Sys_Language, Sys_LanguageDto>();
                 cfg.CreateMap<Sys_LanguageDto, Sys_Language>();

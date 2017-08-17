@@ -27,10 +27,10 @@ namespace DotNetCore_React.Application.NewsApp
             var a = _repository.GetAllList();
             var newsDtoList = Mapper.Map<List<NewsDto>>(a);
 
-            //­n¼´¤lªí
+            //è¦æ’ˆå­è¡¨
             foreach (var item in newsDtoList)
             {
-                //§ì¨úªşªí
+                //æŠ“å–é™„è¡¨
                 var new_lans_List = _repository_news_lan.GetAllList(c => c.NewsId == item.Id);
                 item.New_LanList = Mapper.Map<List<News_LanDto>>(new_lans_List);
             }
@@ -41,13 +41,13 @@ namespace DotNetCore_React.Application.NewsApp
         public NewsDto GetSingle(string id)
         {
 
-            //Âà´«Guid
+            //è½‰æ›Guid
             Guid guid;
             Guid.TryParse(id, out guid);
-            //§ì¨ú¥Dªí
+            //æŠ“å–ä¸»è¡¨
             var a = _repository.Get(guid);
             var newsDto = Mapper.Map<NewsDto>(a);
-            //§ì¨úªşªí
+            //æŠ“å–é™„è¡¨
             var new_lans_List = _repository_news_lan.GetAllList(c => c.NewsId == a.Id);
             newsDto.New_LanList = Mapper.Map<List<News_LanDto>>(new_lans_List);
 
@@ -64,14 +64,14 @@ namespace DotNetCore_React.Application.NewsApp
             var news_lan_idList = new List<Guid>();
             var date = DateTime.Now;
 
-            //¥Dªí
+            //ä¸»è¡¨
             var roleDB = Mapper.Map<News>(role);
             roleDB.CreateDate = date;
             roleDB.UpdateDate = date;
             _repository.Insert(roleDB);
             var aSuccess = _repository.Save() > 0;
 
-            //°Æªí
+            //å‰¯è¡¨
             if (aSuccess)
             {
                 foreach (var item in role.New_LanList)
@@ -90,17 +90,17 @@ namespace DotNetCore_React.Application.NewsApp
                 }
                 else
                 {
-                    //¦³¥¢±Ñ´N¥ş³¡§R°£
-                    //§R°£¥Dªí
+                    //æœ‰å¤±æ•—å°±å…¨éƒ¨åˆªé™¤
+                    //åˆªé™¤ä¸»è¡¨
                     _repository.Delete(roleDB);
                     _repository.Save();
 
-                    //§R°£°Æªí
+                    //åˆªé™¤å‰¯è¡¨
                     _repository_news_lan.DeleteRange(news_lan_idList);
                     _repository_news_lan.Save();
 
                     myJson_Return["success"]= false;
-                    myJson_Return["message"]= "¥¢±Ñ";
+                    myJson_Return["message"]= "å¤±æ•—";
                 }
             }
 
@@ -116,33 +116,30 @@ namespace DotNetCore_React.Application.NewsApp
                 {"message",null  }
             };
 
-            //§ó·s¥Dªí
-            var newsDB = Mapper.Map<News>(role);
+            //æ›´æ–°ä¸»è¡¨
+
+            
+            var newsDB = _repository.Get(role.Id);
+            newsDB = Mapper.Map<NewsDto, News>(role, newsDB);
+
             newsDB.UpdateDate = DateTime.Now;
             _repository.Update(newsDB);
-
-            //§ó·s°Æªí
-            //var aaDBList = _repository_news_lan.GetAllList(c => c.NewsId == newsDB.Id);
-            //foreach (var item in role.New_LanList)
-            //{
-            //    var db_signal = aaDBList.Where(c => c.Id == item.Id).FirstOrDefault();
-            //    if (db_signal != null)
-            //    {
-            //        db_signal = Mapper.Map<News_Lan>(item);
-            //    }
-            //}
-            ///
-
-            var aaDBList = Mapper.Map<List<News_Lan>>(role.New_LanList);
-            _repository_news_lan.UpdateRange(aaDBList);
-
             var news_effect = _repository.Save() > 0;
-            var aaaaa = _repository_news_lan.Save();
-            var news_lan_effect = _repository_news_lan.Save() == aaDBList.Count;
+
+            //æ›´æ–°å‰¯è¡¨
+            foreach(var newsLanDTO in role.New_LanList)
+            {
+                var getLandata = _repository_news_lan.FirstOrDefault(o => o.NewsId == newsDB.Id && o.LanguageId == newsLanDTO.LanguageId);
+                getLandata = Mapper.Map<News_LanDto, News_Lan>(newsLanDTO, getLandata,opt => opt.AfterMap((dto,dest) => { dest.NewsId = newsDB.Id; }));
+                getLandata.NewsId = newsDB.Id;
+                _repository_news_lan.InsertOrUpdate(getLandata);
+            }
+
+            var news_lan_effect = _repository_news_lan.Save() == role.New_LanList.Count;
 
             var success_effect = news_lan_effect && news_effect;
             myJson["success"] = success_effect;
-            myJson["message"] = success_effect ? "§R°£¦¨¥\" : "§R°£¥¢±Ñ";
+            myJson["message"] = success_effect ? "æ›´æ–°æˆåŠŸ" : "æ›´æ–°å¤±æ•—";
 
             return myJson;
         }
@@ -156,22 +153,22 @@ namespace DotNetCore_React.Application.NewsApp
             };
 
 
-            //Âà´«Guid
+            //è½‰æ›Guid
             Guid guid;
             Guid.TryParse(id, out guid);
 
             var news_LanList = _repository_news_lan.GetAllList(c => c.NewsId == guid);
-            //§R°£¤lªí
+            //åˆªé™¤å­è¡¨
             _repository_news_lan.DeleteRange(news_LanList);
             var news_lan_effect = _repository_news_lan.Save() == news_LanList.Count;
 
-            //§R°£¥Dªí
+            //åˆªé™¤ä¸»è¡¨
             _repository.Delete(guid);
             var news_effect = _repository.Save() > 0;
 
             var success_effect = news_lan_effect && news_effect;
             myJson["success"] = success_effect;
-            myJson["message"] = success_effect ? "§R°£¦¨¥\" : "§R°£¥¢±Ñ";
+            myJson["message"] = success_effect ? "åˆªé™¤æˆåŠŸ" : "åˆªé™¤å¤±æ•—";
 
             return myJson;
         }
