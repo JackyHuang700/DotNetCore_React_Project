@@ -71,7 +71,7 @@ class Role_Create extends Component {
               新增角色
               </div>
             <div className="card-block">
-              <form className="" onSubmit={this.submit}>
+              <form className="" onSubmit={this.Submit}>
 
                 <TextInput name="SysId"
                   labelName="系統識別碼"
