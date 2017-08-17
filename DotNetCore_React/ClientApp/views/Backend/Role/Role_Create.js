@@ -40,7 +40,6 @@ const self = this;
       }
     }).then((result) => {
       if (result.data.success) {
-        debugger;
         if (self.state.next_Button) {
           window.location.reload()
         }else{

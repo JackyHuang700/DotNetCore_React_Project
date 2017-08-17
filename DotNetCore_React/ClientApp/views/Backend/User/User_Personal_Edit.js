@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { FormGroup, Label, Input, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 import EasyForm, { Field, FieldGroup } from 'react-easyform';
+import {email_pattern} from './User_General';
 import TextInput from '../../Components/Forms/TextInput';
 
 import axios from 'axios';
@@ -119,8 +120,9 @@ class User_Personal_Edit extends Component {
                                     labelName="email"
                                     className=""
                                     display={this.props.display_email}
+                                    pattern={email_pattern}
                                     required={this.props.required_email}
-                                    validMessage={{ required: 'email is reduired.' }}
+                                    validMessage={{ required: 'email is reduired.', pattern: 'email格式錯誤' }}
                                     onInput={this.handleInputChange}
                                     value={this.state.User.email}
                                     placeholder="email" />

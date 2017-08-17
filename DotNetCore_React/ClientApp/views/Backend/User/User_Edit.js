@@ -3,6 +3,7 @@ import { Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } fr
 
 import axios from 'axios';
 import EasyForm, { Field, FieldGroup } from 'react-easyform';
+import {email_pattern} from './User_General';
 import { user_Enum } from '../../../EnumScript/GeneralEnumScript.js';
 import history from '../../../history'
 
@@ -195,8 +196,9 @@ class User_Edit_Show extends Component {
                   labelName="email"
                   className=""
                   display={this.props.display_email}
+                  pattern={email_pattern}
                   required={this.props.required_email}
-                  validMessage={{ required: 'email is reduired.' }}
+                  validMessage={{ required: 'email is reduired.', pattern: 'email格式錯誤' }}
                   onInput={this.Bind_handleInputChange}
                   value={this.state.User.email}
                   placeholder="email"

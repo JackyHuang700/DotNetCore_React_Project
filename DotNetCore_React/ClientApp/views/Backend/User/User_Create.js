@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ButtonToolbar, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import axios from 'axios';
 import EasyForm, { Field, FieldGroup } from 'react-easyform';
+import {email_pattern} from './User_General';
 import { user_Enum } from '../../../EnumScript/GeneralEnumScript.js';
 import TextInput from '../../Components/Forms/TextInput';
 import DropDownList from '../../Components/Forms/DropDownList';
@@ -144,8 +145,9 @@ const self = this;
                   labelName="email"
                   className=""
                   display={this.props.display_email}
+                  pattern={email_pattern}
                   required={this.props.required_email}
-                  validMessage={{ required: 'email is reduired.' }}
+                  validMessage={{ required: 'email is reduired.', pattern: 'email格式錯誤' }}
                   onInput={this.handleInputChange}
                   value={this.state.User.email}
                   placeholder="email" />
