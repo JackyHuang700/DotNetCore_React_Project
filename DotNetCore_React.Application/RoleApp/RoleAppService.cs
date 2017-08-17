@@ -24,7 +24,7 @@ namespace DotNetCore_React.Application.RoleApp
         }
         public RoleDto GetRole(string id)
         {
-            //³B²znullª¬ªp
+            //è™•ç†nullç‹€æ³
             Guid guid;
             Guid.TryParse(id, out guid);
             var a = _repository.Get(guid);
@@ -40,14 +40,14 @@ namespace DotNetCore_React.Application.RoleApp
             };
 
             var dateTime = DateTime.Now;
-            //§PÂ_¬O§_¦³¸s²ÕID­«½Æ
+            //åˆ¤æ–·æ˜¯å¦æœ‰ç¾¤çµ„IDé‡è¤‡
             var is_Repeat = _repository.GetAllList(c => c.SysId.Contains(role.SysId)).Count != 0;
 
 
             if (is_Repeat)
             {
                 myJson["success"] = false;
-                myJson["message"] = "ÃÑ§OÄæ¦ì­«½Æ";
+                myJson["message"] = "è­˜åˆ¥æ¬„ä½é‡è¤‡";
             }
             else {
                 var roleDB = new Role()
@@ -63,12 +63,12 @@ namespace DotNetCore_React.Application.RoleApp
                     UpdateDate = dateTime,
                 };
 
-                //Àx¦s¸ê®Æ
+                //å„²å­˜è³‡æ–™
                 _repository.Insert(roleDB);
                 var effort = _repository.Save();
 
                 myJson["success"] = effort > 0;
-                myJson["message"] = effort > 0 ? "¾Ş§@¦¨¥\" : "¾Ş§@¥¢±Ñ";
+                myJson["message"] = effort > 0 ? "æ“ä½œæˆåŠŸ" : "æ“ä½œå¤±æ•—";
             }
 
           
@@ -81,12 +81,12 @@ namespace DotNetCore_React.Application.RoleApp
 
             var roleDB = Mapper.Map<Role>(role);
 
-            //Àx¦s¸ê®Æ
+            //å„²å­˜è³‡æ–™
             _repository.Update(roleDB);
             var effort = _repository.Save();
 
             myJson.Add("success", effort > 0);
-            myJson.Add("message", effort > 0 ? "¾Ş§@¦¨¥\" : "¾Ş§@¥¢±Ñ");
+            myJson.Add("message", effort > 0 ? "æ“ä½œæˆåŠŸ" : "æ“ä½œå¤±æ•—");
             return myJson;
         }
 
@@ -94,16 +94,16 @@ namespace DotNetCore_React.Application.RoleApp
         {
             var myJson = new Dictionary<string, object>();
 
-            //Âà´«Guid
+            //è½‰æ›Guid
             Guid guid;
             Guid.TryParse(id, out guid);
 
-            //§R°£¸ê®Æ
+            //åˆªé™¤è³‡æ–™
             _repository.Delete(guid);
             var effort = _repository.Save();
 
             myJson.Add("success", effort > 0);
-            myJson.Add("message", effort > 0 ? "¾Ş§@¦¨¥\" : "¾Ş§@¥¢±Ñ");
+            myJson.Add("message", effort > 0 ? "æ“ä½œæˆåŠŸ" : "æ“ä½œå¤±æ•—");
             return myJson;
         }
     }
