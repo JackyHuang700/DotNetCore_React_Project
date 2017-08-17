@@ -30,7 +30,7 @@ class User_Personal_Edit extends Component {
         const self = this;
 
         axios({
-          url: `/api/User/Get_User_By_UserName?userName=${this.props.match.params.userName}`,
+          url: `/api/User/Get_User_By_UserName?${this.props.match.params.userName}`,
           method: 'GET',
           data: {
           }
