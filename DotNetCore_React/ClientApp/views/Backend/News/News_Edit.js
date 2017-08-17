@@ -67,6 +67,21 @@ class News_Edit extends Component {
       self.setState({
         News: result.data
       });
+
+      //觀察副表長度, 進行補償措施
+      var aa_Length = self.state.News.new_LanList.length;
+      var bb_Length = self.state.Sys_Language_List.length;
+      if (aa_Length != bb_Length) {
+        var diff = aa_Length > bb_Length ? (aa_Length - bb_Length) : (bb_Length - aa_Length);
+        for (var i=0; i<diff; i++) { 
+          var aa = Object.assign(this.state.News);
+          aa.new_LanList.push({});
+        }
+            self.setState({
+              News: aa,
+            });
+      }
+
     }).catch((error) => {
       console.log(error)
     });
@@ -97,7 +112,7 @@ class News_Edit extends Component {
         }).then((result) => {
     
           if (result.data.success) {
-            document.location.href = '/News'
+            history.push('/News');
           }
         }).catch((error) => {
           console.log(error)
@@ -132,7 +147,7 @@ class News_Edit extends Component {
             </Nav>
             <TabContent activeTab={this.state.activeTab}>
               {
-                this.state.Sys_Language_List.map((sys, index) => {
+                this.state.News.new_LanList.map((sys, index) => {
                   return (
                     <TabPane tabId={`${index}`}>
                       
@@ -249,8 +264,8 @@ class News_Edit extends Component {
 
                  <DropDownList name="status"
                   labelName="status"
-                  display={this.props.display_Status}
-                  required={this.props.required_Status} 
+                  display={this.props.display_status}
+                  required={this.props.required_status} 
                   validMessage={{required: 'Status is reduired.'}} 
                   onInput={this.handleInputChange} 
                   value={this.state.News.status}
@@ -266,6 +281,47 @@ class News_Edit extends Component {
                       }
                     ]}
                   />
+
+
+                  <TextInput name="createDate"
+                  labelName="建立時間"
+                  className=""
+                  display={this.props.display_createDate}
+                  required={this.props.required_createDate}
+                  validMessage={{ required: '建立時間 is reduired.' }}
+                  value={this.state.News.createDate}
+                  readOnly={true}
+                  placeholder="createDate"/>
+
+                <TextInput name="createUser"
+                  labelName="建立者"
+                  className=""
+                  display={this.props.display_createUser}
+                  required={this.props.required_createUser}
+                  validMessage={{ required: '建立者 is reduired.' }}
+                  value={this.state.News.createUser}
+                  readOnly={true}
+                  placeholder="createUser"/>
+
+                <TextInput name="updateDate"
+                  labelName="更新時間"
+                  className=""
+                  display={this.props.display_updateDate}
+                  required={this.props.required_updateDate}
+                  validMessage={{ required: '更新時間 is reduired.' }}
+                  value={this.state.News.updateDate}
+                  readOnly={true}
+                  placeholder="updateDate"/>
+
+                <TextInput name="updateUser"
+                  labelName="更新者"
+                  className=""
+                  display={this.props.display_updateUser}
+                  required={this.props.required_updateUser}
+                  validMessage={{ required: '更新者 is reduired.' }}
+                  value={this.state.News.updateUser}
+                  readOnly={true}
+                  placeholder="updateUser"/>
 
                   {this.Component_Nav()}
 
@@ -286,17 +342,26 @@ export default EasyForm(News_Edit, 2);
 
 
 News_Edit.defaultProps = {
-  display_listImage: true,
-  display_category: true,
+  display_listImage: false,
+  display_category: false,
   display_priority: true,
   display_startDate: true,
   display_endDate: true,
   display_status: true,
+  display_createDate: true,
+  display_createUser: true,
+  display_updateDate: true,
+  display_updateUser: true,
 
-  required_listImage:true,
+/* */
+  required_listImage:false,
   required_category:true,
   required_priority:true,
   required_startDate:true,
-  required_endDate:true,
+  required_endDate:false,
   required_status:true,
+  required_createDate:true,
+  required_createUser:true,
+  required_updateDate:true,
+  required_updateUser:true,
 }
