@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FormGroup, Label, Input, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { ButtonToolbar, FormGroup, Label, Input, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import axios from 'axios';
 import EasyForm, { Field, FieldGroup } from 'react-easyform';
 import TextInput from '../../Components/Forms/TextInput';
@@ -17,6 +17,9 @@ class Role_Create extends Component {
       Name: '',
       Priority: '1',
       Status: 1,
+
+      //是否繼續為繼續下一筆
+      next_Button: false,
     };
 
     this.Submit = this.Submit.bind(this);
@@ -24,6 +27,8 @@ class Role_Create extends Component {
   }
 
   Submit(event) {
+const self = this;
+
     axios({
       url: '/api/Role/Create',
       method: 'post',
@@ -35,7 +40,12 @@ class Role_Create extends Component {
       }
     }).then((result) => {
       if (result.data.success) {
-        history.push('/Role');
+        debugger;
+        if (self.state.next_Button) {
+          window.location.reload()
+        }else{
+          history.push('/Role');
+        }
       }
     }).catch((error) => {
       console.log(error)
@@ -52,6 +62,15 @@ class Role_Create extends Component {
     this.setState({
       [name]: value
     });
+  }
+
+  //繼續新增下一筆
+  Next_Button(event){
+    this.setState({
+      next_Button: true,
+    });
+
+    document.getElementById('btn').click();
   }
 
   render() {
@@ -124,7 +143,12 @@ class Role_Create extends Component {
                     ]}
                   />
                 <div className="form-group form-actions">
-                  <Button color="primary" disabled={$invalid ? 'disabled' : false}>確認</Button>
+
+                <ButtonToolbar>
+                  <Button color="primary" id="btn" disabled={$invalid ? 'disabled' : false}>確認</Button>
+                  <Button color="primary" onClick={this.Next_Button.bind(this)} disabled={$invalid ? 'disabled' : false}>繼續新增下一筆</Button>
+                </ButtonToolbar>
+                 
                 </div>
               </form>
             </div>
