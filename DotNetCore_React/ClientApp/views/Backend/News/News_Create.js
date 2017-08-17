@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FormGroup, Label, Input, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
+import { ButtonToolbar, FormGroup, Label, Input, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
 import axios from 'axios';
 import history from '../../../history'
 import EasyForm, { Field, FieldGroup } from 'react-easyform';
@@ -25,7 +25,10 @@ class News_Create extends Component {
         new_LanList:[],
       },
       Sys_Language_List: [],
-      activeTab: '0'
+      
+      //是否繼續為繼續下一筆
+      next_Button: false,
+      activeTab: '0',
     };
 
     this.Submit = this.Submit.bind(this);
@@ -60,7 +63,11 @@ class News_Create extends Component {
       data: this.state.News
     }).then((result) => {
       if (result.data.success) {
-        history.push('/News');
+        if (self.state.next_Button) {
+          window.location.reload()
+        }else{
+          history.push('/News');
+        }
       }
     }).catch((error) => {
       console.log(error)
@@ -70,6 +77,14 @@ class News_Create extends Component {
     return false;
   }
 
+    //繼續新增下一筆
+    Next_Button(event){
+      this.setState({
+        next_Button: true,
+      });
+  
+      document.getElementById('btn').click();
+    }
 
   //語系元件
   Component_Nav() {
@@ -249,7 +264,10 @@ class News_Create extends Component {
                 {this.Component_Nav()}
 
                 <div className="form-group form-actions">
-                  <Button color="primary" disabled={$invalid ? 'disabled' : false}>確認</Button>
+                  <ButtonToolbar>
+                  <Button color="primary" id="btn" disabled={$invalid ? 'disabled' : false}>確認</Button>
+                  <Button color="primary" onClick={this.Next_Button.bind(this)} disabled={$invalid ? 'disabled' : false}>繼續新增下一筆</Button>
+                </ButtonToolbar>
                 </div>
               </form>
             </div>
