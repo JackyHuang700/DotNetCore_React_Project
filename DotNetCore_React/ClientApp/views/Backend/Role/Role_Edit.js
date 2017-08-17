@@ -156,7 +156,7 @@ class Role_Edit_Show extends Component {
                   onInput={this.Bind_handleInputChange}
                   value={this.state.Role.sysId}
                   placeholder="sysId"
-                  readOnly={!this.state.is_Edit} />
+                  readOnly={true} />
 
                 <TextInput name="name"
                   labelName="角色名稱"
@@ -200,6 +200,28 @@ class Role_Edit_Show extends Component {
                       }
                     ]}
                   />
+
+                  <TextInput name="createDate"
+                  labelName="建立時間"
+                  className=""
+                  display={this.props.display_createDate}
+                  required={this.props.required_createDate}
+                  validMessage={{ required: '建立時間 is reduired.' }}
+                  onInput={this.Bind_handleInputChange}
+                  value={this.state.Role.createDate}
+                  placeholder="createDate"
+                  readOnly={true} />
+
+                  <TextInput name="createUser"
+                  labelName="建立帳號"
+                  className=""
+                  display={this.props.display_createUser}
+                  required={this.props.required_createUser}
+                  validMessage={{ required: '建立帳號 is reduired.' }}
+                  onInput={this.Bind_handleInputChange}
+                  value={this.state.Role.createUser}
+                  placeholder="createUser"
+                  readOnly={true} />
 
                 <div className="form-group form-actions">
                   <Button color="primary" disabled={$invalid ? 'disabled' : false}>{this.Button_Text()}</Button>

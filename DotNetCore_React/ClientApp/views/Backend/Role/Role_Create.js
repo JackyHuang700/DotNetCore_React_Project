@@ -15,7 +15,7 @@ class Role_Create extends Component {
     this.state = {
       SysId: '',
       Name: '',
-      Priority: '',
+      Priority: '1',
       Status: 1,
     };
 
