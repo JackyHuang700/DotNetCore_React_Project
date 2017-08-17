@@ -110,7 +110,11 @@ namespace DotNetCore_React.Application.NewsApp
 
         public Dictionary<string, object> Update(NewsDto role)
         {
-            var myJson = new Dictionary<string, object>();
+            var myJson = new Dictionary<string, object>()
+            {
+                {"success",false },
+                {"message",null  }
+            };
 
             //更新主表
             var newsDB = Mapper.Map<News>(role);
@@ -118,11 +122,28 @@ namespace DotNetCore_React.Application.NewsApp
             _repository.Update(newsDB);
 
             //更新副表
-            var aaList = _repository_news_lan.GetAllList(c => c.NewsId == newsDB.Id);
-            _repository_news_lan.UpdateRange(aaList);
+            //var aaDBList = _repository_news_lan.GetAllList(c => c.NewsId == newsDB.Id);
+            //foreach (var item in role.New_LanList)
+            //{
+            //    var db_signal = aaDBList.Where(c => c.Id == item.Id).FirstOrDefault();
+            //    if (db_signal != null)
+            //    {
+            //        db_signal = Mapper.Map<News_Lan>(item);
+            //    }
+            //}
+            ///
 
-            _repository.Save();
-            _repository_news_lan.Save();
+            var aaDBList = Mapper.Map<List<News_Lan>>(role.New_LanList);
+            _repository_news_lan.UpdateRange(aaDBList);
+
+            var news_effect = _repository.Save() > 0;
+            var aaaaa = _repository_news_lan.Save();
+            var news_lan_effect = _repository_news_lan.Save() == aaDBList.Count;
+
+            var success_effect = news_lan_effect && news_effect;
+            myJson["success"] = success_effect;
+            myJson["message"] = success_effect ? "刪除成功" : "刪除失敗";
+
             return myJson;
         }
 

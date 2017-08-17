@@ -157,6 +157,18 @@ namespace DotNetCore_React.EntityFrameworkCore
 
 
         /// <summary>
+        /// 删除实体
+        /// </summary>
+        /// <param name="id">实体主键</param>
+        public void DeleteRange(List<TEntity> id)
+        {
+            foreach (var i in id)
+            {
+                Delete(i);
+            }
+        }
+
+        /// <summary>
         /// 事务性保存
         /// </summary>
         public int Save()
