@@ -67,7 +67,6 @@ namespace DotNetCore_React.Application.NewsApp
                 //UpdateDate = dateTime,
             };
             _repository.Insert(roleDB);
-            var aSuccess = _repository.Save() > 0;
 
             //°Æªí
             foreach (var item in role.New_LanList)
@@ -75,6 +74,8 @@ namespace DotNetCore_React.Application.NewsApp
                 var aa = Mapper.Map<News_Lan>(item);
                 var aaa = _repository_news_lan.Insert(aa);
             }
+
+            var aSuccess = _repository.Save() > 0;
             var bSuccess = _repository_news_lan.Save() == role.New_LanList.Count;
 
             var all_Success = aSuccess && bSuccess;
