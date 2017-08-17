@@ -177,7 +177,7 @@ class User_Edit_Show extends Component {
                   onInput={this.Bind_handleInputChange}
                   value={this.state.User.userName}
                   placeholder="userName"
-                  readOnly={!this.state.is_Edit} />
+                  readOnly={true} />
 
 
                   <TextInput name="password"
@@ -185,7 +185,7 @@ class User_Edit_Show extends Component {
                   className=""
                   display={this.props.display_password}
                   required={this.props.required_password}
-                  validMessage={{ required: 'password is reduired.' }}
+                  validMessage={{ required: '密碼 is reduired.' }}
                   onInput={this.Bind_handleInputChange}
                   value={this.state.User.password}
                   placeholder="如需變更密碼"
@@ -269,6 +269,29 @@ class User_Edit_Show extends Component {
                     ]}
                 />
 
+                
+                <TextInput name="createDate"
+                  labelName="建立時間"
+                  className=""
+                  display={this.props.display_createDate}
+                  required={this.props.required_createDate}
+                  validMessage={{ required: '建立時間 is reduired.' }}
+                  onInput={this.Bind_handleInputChange}
+                  value={this.state.User.createDate}
+                  placeholder="createDate"
+                  readOnly={true} />
+
+                  <TextInput name="createUser"
+                  labelName="建立帳號"
+                  className=""
+                  display={this.props.display_createUser}
+                  required={this.props.required_createUser}
+                  validMessage={{ required: '建立帳號 is reduired.' }}
+                  onInput={this.Bind_handleInputChange}
+                  value={this.state.User.createUser}
+                  placeholder="createUser"
+                  readOnly={true} />
+
                 <div className="form-group form-actions">
                   <Button color="primary" disabled={$invalid ? 'disabled' : false} >{this.Button_Text()}</Button>
                 </div>
@@ -290,15 +313,15 @@ User_Edit_Show.defaultProps = {
   display_password: true,
   display_roleId: true,
   display_email: true,
-  display_firstName: true,
-  display_lastName: true,
+  display_firstName: false,
+  display_lastName: false,
   display_status     : true,
 
   required_userName: true,
-  required_password: false,
+  required_password: true,
   required_roleId: true,
   required_email: true,
-  required_firstName: true,
-  required_lastName: true,
+  required_firstName: false,
+  required_lastName: false,
   required_status     : true,
 }
