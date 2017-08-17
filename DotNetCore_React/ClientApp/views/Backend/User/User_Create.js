@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { ButtonToolbar, Button, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import axios from 'axios';
 import EasyForm, { Field, FieldGroup } from 'react-easyform';
 import { user_Enum } from '../../../EnumScript/GeneralEnumScript.js';
@@ -15,6 +15,8 @@ class User_Create extends Component {
     this.state = {
       User: {},
       RoleList: [],
+      //是否繼續為繼續下一筆
+      next_Button: false,
     };
 
     this.Submit = this.Submit.bind(this);
@@ -51,13 +53,19 @@ GetData(){
 }
 
   Submit(event) {
+const self = this;
+
     axios({
       url: '/api/User/Create',
       method: 'post',
       data: this.state.User,
     }).then((result) => {
-      if (result.data.success) {
-       return history.push('/User');
+        if (result.data.success) {
+          if (self.state.next_Button) {
+            window.location.reload()
+          }else{
+            history.push('/User');
+          }
         }
       alert(result.data.message);
     }).catch((error) => {
@@ -79,6 +87,17 @@ GetData(){
       User: new_User,
     });
   }
+
+
+  //繼續新增下一筆
+  Next_Button(event){
+    this.setState({
+      next_Button: true,
+    });
+
+    document.getElementById('btn').click();
+  }
+
 
   render() {
     // 经过EasyForm包装的组件，props里会有一个params属性，包含所有的表单项值
@@ -257,7 +276,10 @@ GetData(){
 
 
                 <div className="form-group form-actions">
-                  <Button color="primary" disabled={$invalid ? 'disabled' : false}>確認</Button>
+                  <ButtonToolbar>
+                  <Button color="primary" id="btn" disabled={$invalid ? 'disabled' : false}>確認</Button>
+                  <Button color="primary" onClick={this.Next_Button.bind(this)} disabled={$invalid ? 'disabled' : false}>繼續新增下一筆</Button>
+                </ButtonToolbar>
                 </div>
               </form>
             </div>
