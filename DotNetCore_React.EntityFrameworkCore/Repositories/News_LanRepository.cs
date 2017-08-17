@@ -12,12 +12,5 @@ namespace DotNetCore_React.EntityFrameworkCore.Repositories
         public News_LanRepository(DotNetCore_ReactDBContext dbcontext) : base(dbcontext)
         {
         }
-
-       
-
-        public List<News_Lan> Getall_By_NewsId(Guid newsId)
-        {
-            return _dbContext.Set<News_Lan>().Where(c => c.NewsId == newsId).ToList();
-        }
     }
 }

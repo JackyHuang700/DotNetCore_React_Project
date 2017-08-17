@@ -31,7 +31,7 @@ namespace DotNetCore_React.Application.NewsApp
             foreach (var item in newsDtoList)
             {
                 //抓取附表
-                var new_lans_List = _repository_news_lan.Getall_By_NewsId(item.Id);
+                var new_lans_List = _repository_news_lan.GetAllList(c => c.NewsId == item.Id);
                 item.New_LanList = Mapper.Map<List<News_LanDto>>(new_lans_List);
             }
 
@@ -56,7 +56,11 @@ namespace DotNetCore_React.Application.NewsApp
 
         public Dictionary<string, object> Create(NewsDto role)
         {
-            var myJson_Return = new Dictionary<string, object>();
+            var myJson_Return = new Dictionary<string, object>()
+            {
+                {"success",false },
+                {"message",null  }
+            };
             var news_lan_idList = new List<Guid>();
             var date = DateTime.Now;
 
@@ -81,8 +85,8 @@ namespace DotNetCore_React.Application.NewsApp
 
                 if (bSuccess)
                 {
-                    myJson_Return.Add("success", true);
-                    myJson_Return.Add("message", "");
+                    myJson_Return["success"]=true;
+                    myJson_Return["message"]= "";
                 }
                 else
                 {
@@ -95,8 +99,8 @@ namespace DotNetCore_React.Application.NewsApp
                     _repository_news_lan.DeleteRange(news_lan_idList);
                     _repository_news_lan.Save();
 
-                    myJson_Return.Add("success", false);
-                    myJson_Return.Add("message", "失敗");
+                    myJson_Return["success"]= false;
+                    myJson_Return["message"]= "失敗";
                 }
             }
 
@@ -114,7 +118,7 @@ namespace DotNetCore_React.Application.NewsApp
             _repository.Update(newsDB);
 
             //更新副表
-            var aaList = _repository_news_lan.Getall_By_NewsId(newsDB.Id);
+            var aaList = _repository_news_lan.GetAllList(c => c.NewsId == newsDB.Id);
             _repository_news_lan.UpdateRange(aaList);
 
             _repository.Save();
@@ -124,21 +128,29 @@ namespace DotNetCore_React.Application.NewsApp
 
         public Dictionary<string, object> Delete(string id)
         {
-            var myJson = new Dictionary<string, object>();
-            
+            var myJson = new Dictionary<string, object>()
+            {
+                {"success",false },
+                {"message",null  }
+            };
+
+
             //轉換Guid
             Guid guid;
             Guid.TryParse(id, out guid);
 
+            var news_LanList = _repository_news_lan.GetAllList(c => c.NewsId == guid);
+            //刪除子表
+            _repository_news_lan.DeleteRange(news_LanList);
+            var news_lan_effect = _repository_news_lan.Save() == news_LanList.Count;
+
             //刪除主表
             _repository.Delete(guid);
-            _repository.Save();
+            var news_effect = _repository.Save() > 0;
 
-            //刪除副表
-            var news_LanList = _repository_news_lan.Getall_By_NewsId((Guid)myJson["id"]);
-
-            //_repository_news_lan.DeleteRange(news_LanList.Select(o => o.Id).ToList());
-            _repository_news_lan.Save();
+            var success_effect = news_lan_effect && news_effect;
+            myJson["success"] = success_effect;
+            myJson["message"] = success_effect ? "刪除成功" : "刪除失敗";
 
             return myJson;
         }

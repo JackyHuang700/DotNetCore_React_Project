@@ -84,15 +84,17 @@ class News_Delete extends Component {
 
 
   Button_Submit(event) {
-    event.preventDefault();
     axios.post(`/api/News/Delete/${this.state.News.id}`, {
     }).then((result) => {
-        if (result.data.success) {
-          history.push('/News');
-        }
-      }).catch((error) => {
-        console.log(error)
-      });
+      if (result.data.success) {
+        history.push('/News');
+      }
+    }).catch((error) => {
+      console.log(error)
+    });
+
+    
+    event.preventDefault();
     return false;
   }
 
