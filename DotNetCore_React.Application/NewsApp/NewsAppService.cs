@@ -58,46 +58,47 @@ namespace DotNetCore_React.Application.NewsApp
         {
             var myJson_Return = new Dictionary<string, object>();
             var news_lan_idList = new List<Guid>();
+            var date = DateTime.Now;
 
             //主表
-            var roleDB = new News()
-            {
-                //Id = Guid.NewGuid(),
-                //CreateDate = dateTime,
-                //UpdateDate = dateTime,
-            };
+            var roleDB = Mapper.Map<News>(role);
+            roleDB.CreateDate = date;
+            roleDB.UpdateDate = date;
             _repository.Insert(roleDB);
+            var aSuccess = _repository.Save() > 0;
 
             //副表
-            foreach (var item in role.New_LanList)
+            if (aSuccess)
             {
-                var aa = Mapper.Map<News_Lan>(item);
-                var aaa = _repository_news_lan.Insert(aa);
+                foreach (var item in role.New_LanList)
+                {
+                    var aa = Mapper.Map<News_Lan>(item);
+                    aa.NewsId = roleDB.Id;
+                    var aaa = _repository_news_lan.Insert(aa);
+                }
+
+                var bSuccess = _repository_news_lan.Save() == role.New_LanList.Count;
+
+                if (bSuccess)
+                {
+                    myJson_Return.Add("success", true);
+                    myJson_Return.Add("message", "");
+                }
+                else
+                {
+                    //有失敗就全部刪除
+                    //刪除主表
+                    _repository.Delete(roleDB);
+                    _repository.Save();
+
+                    //刪除副表
+                    _repository_news_lan.DeleteRange(news_lan_idList);
+                    _repository_news_lan.Save();
+
+                    myJson_Return.Add("success", false);
+                    myJson_Return.Add("message", "失敗");
+                }
             }
-
-            var aSuccess = _repository.Save() > 0;
-            var bSuccess = _repository_news_lan.Save() == role.New_LanList.Count;
-
-            var all_Success = aSuccess && bSuccess;
-            //有失敗就全部刪除
-            if (!all_Success)
-            {
-                myJson_Return.Add("success", true);
-                myJson_Return.Add("message", "");
-            }
-            else {
-                //刪除主表
-                _repository.Delete(roleDB);
-                _repository.Save();
-
-                //刪除副表
-                //_repository_news_lan.DeleteRange(news_lan_idList);
-                _repository_news_lan.Save();
-
-                myJson_Return.Add("success", false);
-                myJson_Return.Add("message", "失敗");
-            }
-
 
             return myJson_Return;
         }
@@ -109,6 +110,7 @@ namespace DotNetCore_React.Application.NewsApp
 
             //更新主表
             var newsDB = Mapper.Map<News>(role);
+            newsDB.UpdateDate = DateTime.Now;
             _repository.Update(newsDB);
 
             //更新副表

@@ -21,6 +21,7 @@ class News_Create extends Component {
     super(props);
     this.state = {
       News: {
+        priority: '1',
         new_LanList:[],
       },
       Sys_Language_List: [],
@@ -28,7 +29,6 @@ class News_Create extends Component {
     };
 
     this.Submit = this.Submit.bind(this);
-    this.Button_Submit = this.Button_Submit.bind(this);
     this.toggle = this.toggle.bind(this);
 
     //Import
@@ -54,27 +54,10 @@ class News_Create extends Component {
 
   Submit(event) {
     const self = this;
-    event.preventDefault();
     axios({
       url: '/api/News/Create',
       method: 'post',
-      data: {
-        self
-      }
-    }).then((result) => {
-      if (result.data.success) {
-        history.push('/News/View');
-      }
-    }).catch((error) => {
-      console.log(error)
-    });
-    return false;
-  }
-
-
-  Button_Submit(event) {
-    event.preventDefault();
-    axios.post(`/api/News/Delete/${this.state.News.id}`, {
+      data: this.state.News
     }).then((result) => {
       if (result.data.success) {
         history.push('/News');
@@ -83,9 +66,10 @@ class News_Create extends Component {
       console.log(error)
     });
 
-
+    event.preventDefault();
     return false;
   }
+
 
   //語系元件
   Component_Nav() {
@@ -112,6 +96,10 @@ class News_Create extends Component {
         <TabContent activeTab={this.state.activeTab}>
           {
             this.state.Sys_Language_List.map((sys, index) => {
+
+//填入語系ID
+{this.state.News.new_LanList[index].languageId = sys.id}
+
               return (
                 <TabPane tabId={`${index}`}>
                   
@@ -284,10 +272,10 @@ News_Create.defaultProps = {
   display_status: true,
 
   /* */
-  required_listImage: true,
-  required_category: true,
+  required_listImage: false,
+  required_category: false,
   required_priority: true,
   required_startDate: true,
-  required_endDate: true,
+  required_endDate: false,
   required_status: true,
 }

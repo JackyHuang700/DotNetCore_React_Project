@@ -43,6 +43,11 @@ namespace DotNetCore_React.Controllers
 
         public ActionResult Create([FromBody] NewsDto news)
         {
+            //登記操作者
+            news.CreateUser = _currentUser.UserName;
+            news.UpdateUser = _currentUser.UserName;
+
+            //
             var myJson = _service.Create(news);
             return Json(myJson);
         }
@@ -51,6 +56,9 @@ namespace DotNetCore_React.Controllers
 
         public ActionResult Edit([FromBody] NewsDto news)
         {
+            //登記操作者
+            news.UpdateUser = _currentUser.UserName;
+
             var myJson = _service.Update(news);
             return Json(myJson);
         }
