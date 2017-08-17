@@ -1,5 +1,7 @@
 ﻿using DotNetCore_React.Application.RoleApp;
 using DotNetCore_React.Application.RoleApp.Dtos;
+using DotNetCore_React.Application.UserApp.Dtos;
+using DotNetCore_React.Utility;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -43,9 +45,16 @@ namespace DotNetCore_React.Controllers
 
         public ActionResult Create([FromBody] RoleDto role)
         {
-            //寫入目前登入帳號
-            //role.CreateUser = "";
-            //role.UpdateUser = "";
+            byte[] userObject = null;
+            HttpContext.Session.TryGetValue("CurrentUser", out userObject);
+            UserSimpleDto UserName = null;
+            if (userObject != null)
+            {
+                UserName = ByteConvertHelper.Bytes2Object<UserSimpleDto>(userObject);
+                //寫入目前登入帳號
+                role.CreateUser = UserName.UserName;
+                role.UpdateUser = UserName.UserName;
+            }
 
             var myJson = _service.Create_Role(role);
             return Json(myJson);

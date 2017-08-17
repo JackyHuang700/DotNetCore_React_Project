@@ -33,26 +33,45 @@ namespace DotNetCore_React.Application.RoleApp
 
         public Dictionary<string, object> Create_Role(RoleDto role)
         {
-            var myJson = new Dictionary<string, object>();
-
-            var dateTime = DateTime.Now;
-            var roleDB = new Role() {
-                Id= Guid.NewGuid(),
-                Name = role.Name,
-                Priority = role.Priority,
-                Status = role.Status,
-                SysId = role.SysId,
-
-                CreateDate = dateTime,
-                UpdateDate = dateTime,
+            var myJson = new Dictionary<string, object>()
+            {
+                {"success",false },
+                {"message",null  }
             };
 
-            //儲存資料
-            _repository.Insert(roleDB);
-            var effort = _repository.Save();
+            var dateTime = DateTime.Now;
+            //判斷是否有群組ID重複
+            var is_Repeat = _repository.GetAllList(c => c.SysId.Contains(role.SysId)).Count != 0;
 
-            myJson.Add("success", effort > 0);
-            myJson.Add("message", effort > 0 ?"操作成功":"操作失敗");
+
+            if (is_Repeat)
+            {
+                myJson["success"] = false;
+                myJson["message"] = "識別欄位重複";
+            }
+            else {
+                var roleDB = new Role()
+                {
+                    Id = Guid.NewGuid(),
+                    Name = role.Name,
+                    Priority = role.Priority,
+                    Status = role.Status,
+                    SysId = role.SysId,
+                    CreateUser = role.CreateUser,
+                    CreateDate = dateTime,
+                    UpdateUser = role.UpdateUser,
+                    UpdateDate = dateTime,
+                };
+
+                //儲存資料
+                _repository.Insert(roleDB);
+                var effort = _repository.Save();
+
+                myJson["success"] = effort > 0;
+                myJson["message"] = effort > 0 ? "操作成功" : "操作失敗";
+            }
+
+          
             return myJson;
         }
 
